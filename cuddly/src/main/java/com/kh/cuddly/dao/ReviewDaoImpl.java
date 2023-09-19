@@ -19,7 +19,7 @@ public class ReviewDaoImpl implements ReviewDao{
 		
 		String sql = "insert into review"
 				+ "(review_no,product_no,member_id,review_grade,review_content,review_date) "
-				+ "values(review_seq.val(),?,?,?,?,?)";
+				+ "values(review_seq.nextval,?,?,?,?,?)";
 		
 		Object[] data= {
 				reviewDto.getProductNo(),reviewDto.getMemberId(),reviewDto.getReviewGrade(),
