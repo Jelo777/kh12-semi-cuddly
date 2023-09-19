@@ -10,7 +10,7 @@ import com.kh.cuddly.dto.ProductDto;
 public class ProductDaoImpl implements ProductDao{
 	
 	@Autowired
-	JdbcTemplate jdbcTemplate;
+	private JdbcTemplate jdbcTemplate;
 	
 	@Override
 	public int sequence() {
@@ -21,12 +21,12 @@ public class ProductDaoImpl implements ProductDao{
 	@Override
 	public void insert(ProductDto productDto) {
 		String sql = "insert into product("
-						+ "product_no, product_name, product_price, product_date"
+						+ "product_no, product_name, product_price"
 						+ ")"
-					+ "values(?,?,?,?)";
+					+ "values(?,?,?)";
 		Object[] data = {
 							productDto.getProductNo(), productDto.getProductName(),
-							productDto.getProductPrice(), productDto.getProductDate()
+							productDto.getProductPrice()
 						};
 		jdbcTemplate.update(sql, data);
 	}
