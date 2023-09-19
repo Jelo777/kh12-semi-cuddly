@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import com.kh.cuddly.dto.MemberDto;
 import com.kh.cuddly.dto.OrdersDto;
 
 @Repository
@@ -11,8 +12,6 @@ public class OrdersDaoImpl implements OrdersDao{
 
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
-	
-
 	
 	
 	
@@ -25,15 +24,16 @@ public class OrdersDaoImpl implements OrdersDao{
 	@Override
 	public void insert(OrdersDto ordersDto) {
 		String sql = "insert into orders("
-				+ "orders_no, orders_price, orders_payment, orders_date"
-				+ ") values(?, ?, ?, ?)";
+				+ "orders_no, member_id, address_no, orders_price, orders_payment "
+				+ ") values (?, ?, ?, ?, ?)";
 		Object[] data = {
-				ordersDto.getOrdersNo(), ordersDto.getOrdersPrice(), 
-				ordersDto.getOrdersPayment(), ordersDto.getOrdersDate()
+				ordersDto.getOrdersNo(), ordersDto.getMemberId(),
+				ordersDto.getAddressNo(), ordersDto.getOrdersPrice(), 
+				ordersDto.getOrdersPayment()
 		};
 		jdbcTemplate.update(sql, data);
 	}
 		
-	}
+}
 
 
