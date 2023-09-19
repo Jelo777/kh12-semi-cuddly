@@ -23,7 +23,7 @@ public class MemberDaoImpl implements MemberDao{
 	public void insert(MemberDto memberDto) {
 		String sql="insert into member("
 					+ "member_id, member_name, member_pw, "
-					+ "member_contact, member_email, memer_birth) "
+					+ "member_contact, member_email, member_birth) "
 					+ "values(?, ?, ? ,?, ?, ?)";
 		Object[] data= {
 				memberDto.getMemberId(),memberDto.getMemberName(), 
@@ -31,7 +31,7 @@ public class MemberDaoImpl implements MemberDao{
 				memberDto.getMemberEmail(), memberDto.getMemberBirth()
 				
 		};
-		
+		jdbcTemplate.update(sql,data);
 	}
 
 	@Override
