@@ -1,14 +1,36 @@
 package com.kh.cuddly.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.kh.cuddly.dao.OrdersDao;
+import com.kh.cuddly.dto.OrdersDto;
 
-import lombok.extern.slf4j.Slf4j;
 
-@Slf4j
+
+
 @Controller
-@RequestMapping("/")
+@RequestMapping("/cuddly/orders")
 public class OrdersController {
-
+	
+	@Autowired
+	OrdersDao ordersDao;
+	
+	@GetMapping("/insert")
+	public String insert() {
+		return "/WEB-INF/views/orders/insert.jsp";
+	}
+	
+	@PostMapping("/insert")
+	public String insert(OrdersDto ordersDto) {
+		int ordersNo = ordersDao.sequence();
+		ordersDto.setOrdersNo(ordersNo);
+		ordersDao.insert(ordersDto);
+		return "redirect:주문관리페이지";
+		
+		
+	}
 }
