@@ -19,7 +19,7 @@ public class FaqMapper implements RowMapper<FaqDto>{
 		faqDto.setFaqDate(rs.getDate("faq_date"));
 		faqDto.setFaqNo(rs.getInt("faq_no"));
 		faqDto.setFaqTitle(rs.getString("faq_title"));
-		faqDto.setMemberId(rs.getString("faq_id"));
+		faqDto.setFaqId(rs.getString("faq_id"));
 		
 		
 		return faqDto;

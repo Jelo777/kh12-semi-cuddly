@@ -7,7 +7,7 @@ import lombok.Data;
 @Data
 public class FaqDto {
 	private int faqNo;
-	private String memberId;
+	private String faqId;
 	private String faqTitle;
 	private String faqContent;
 	private Date faqDate;
