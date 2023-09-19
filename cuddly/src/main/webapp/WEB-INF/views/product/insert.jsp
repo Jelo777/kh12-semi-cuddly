@@ -4,9 +4,14 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>상품등록</title>
 </head>
 <body>
-	<h1>insert</h1>
+<form action="insert" method="post">
+	<h1>상품등록</h1>
+	상품명<input name="productName"><br><br>
+	판매가<input type="number" name="productPrice"><br><br>
+	<button>상품등록</button>
+</form>
 </body>
 </html>
