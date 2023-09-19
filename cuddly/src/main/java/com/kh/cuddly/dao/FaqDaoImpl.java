@@ -17,10 +17,10 @@ public class FaqDaoImpl implements FaqDao{
 	public void insert(FaqDto faqDto) {
 		
 		String sql = "insert into faq"
-				+ "(faq_no,faq_id,faq_title,faq_content,faq_date,faq_category) "
-				+ "values(?,?,?,?,?,?)";
+				+ "(faq_no,faq_id,faq_title,faq_content,faq_category) "
+				+ "values(?,?,?,?,?)";
 		
-		Object[] data = {faqDto.getFaqNo(),faqDto.getMemberId(),faqDto.getFaqTitle(),faqDto.getFaqContent(),faqDto.getFaqDate(),faqDto.getFaqCategory()};
+		Object[] data = {faqDto.getFaqNo(),faqDto.getFaqId(),faqDto.getFaqTitle(),faqDto.getFaqContent(),faqDto.getFaqCategory()};
 		
 		jdbcTemplate.update(sql,data);
 	}
