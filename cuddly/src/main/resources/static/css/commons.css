@@ -146,6 +146,8 @@ textarea.form-input.fixed {
     background-color: white;
     color: #2d3436;
     cursor: pointer;
+    border-radius: 50px;
+    
 }
 .btn:hover { /*마우스가 버튼에 올라가면 배경을 조금 더 어둡게*/
     filter:brightness(98%);
@@ -158,8 +160,8 @@ textarea.form-input.fixed {
     - 부정버튼 - 페이지의 목적을 달성할 수 없도록 하는 버튼
 */
 .btn.btn-positive {
-    border-color: #0984e3;
-    background-color: #0984e3;
+    border-color: #BEADFA;
+    background-color: #BEADFA;
     color: white;
 }
 .btn.btn-negative {
@@ -464,11 +466,11 @@ textarea.form-input.fixed {
         ul.menu,
         ul.menu ul{
             font-size:24px;
-            background-color: #2d3436;
+            background-color: white;
         }
         ul.menu li{
-            color:white;
-            background-color: #2d3436;
+            color:black;
+            background-color: white;
             width: 150px;
 
         }

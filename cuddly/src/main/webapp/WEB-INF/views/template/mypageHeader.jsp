@@ -23,17 +23,10 @@
 	rel="stylesheet">
 
 <link rel="stylesheet" type="text/css" href="/css/reset.css">
-<link rel="stylesheet" type="text/css" href="/css/layout.css">
+<link rel="stylesheet" type="text/css" href="/css/layout-sidebar.css">
 <link rel="stylesheet" type="text/css" href="/css/commons.css">
 <!-- <link rel="stylesheet" type="text/css" href="/css/test.css"> -->
-<style>
-	hr{
-	background:#F3F0FE;
-	height:3px;
-	border:0;
-	}
-
-</style>
+<style></style>
 
 <!-- jquery cdn -->
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
@@ -73,6 +66,48 @@
 			<li><a href="#">엑세서리</a></li>
 		</ul>
 	</nav>
-	
-	<hr>
 	<section>
+		<aside>
+             <div class="flex-container vertical center">
+             
+		     	<div class="row left mv-30">
+					<h1>마이페이지</h1>
+				</div>
+				
+				<div>
+					<hr>
+				</div>
+				
+				<div class="row left">
+					<h3><a class="link" href="#">구매내역</a></h3>
+				</div>
+				<div class="row left">
+					<h3><a class="link" href="#">나의 리뷰</a></h3>
+				</div>
+				<div class="row left">
+					<h3><a class="link" href="#">관심상품</a></h3>
+				</div>
+				<div class="row left">
+					<h3><a class="link" href="#">상품문의</a></h3>
+				</div>
+				
+				<div>
+					<hr>
+				</div>
+				
+				<div class="row left">
+					<h3><a class="link" href="#">개인정보수정</a></h3>
+				</div>
+				<div class="row left">
+					<h3><a class="link" href="#">비밀번호 변경</a></h3>
+				</div>
+				<div class="row left">
+					<h3><a class="link" href="#">배송지 관리</a></h3>
+				</div>
+				<div class="row left">
+					<h3><a class="link" href="#">로그아웃</a></h3>
+				</div>
+				
+             </div>
+		</aside>
+        <article>
