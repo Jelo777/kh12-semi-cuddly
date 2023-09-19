@@ -10,7 +10,7 @@ import com.kh.cuddly.dto.ProductDto;
 public class ProductDaoImpl implements ProductDao{
 	
 	@Autowired
-	JdbcTemplate jdbcTemplate;
+	private JdbcTemplate jdbcTemplate;
 	
 	@Override
 	public int sequence() {
