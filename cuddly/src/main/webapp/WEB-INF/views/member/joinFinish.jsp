@@ -6,7 +6,7 @@
 			<h1>회원가입 완료</h1>
 		</div>
 		<div>
-			<a class="link" href="/cuddly/login">
+			<a class="link" href="/cuddly/member/login">
 			<button class="btn btn-positive w-100">로그인 하러 가기</button>
 			</a>
 		</div>
