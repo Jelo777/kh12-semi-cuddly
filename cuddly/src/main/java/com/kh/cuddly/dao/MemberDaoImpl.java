@@ -71,6 +71,13 @@ public class MemberDaoImpl implements MemberDao{
 		Object[] data= {memberId};
 		return jdbcTemplate.update(sql,data)>0;
 	}
+	@Override
+	public MemberDto selectOneByEmail(String memberEmail) {
+		String sql="select * from member where member_email=?";
+		Object[] data= {memberEmail};
+		List<MemberDto> list=jdbcTemplate.query(sql, memberMapper,data);
+		return list.isEmpty() ? null : list.get(0);
+	}
 
 	
 }

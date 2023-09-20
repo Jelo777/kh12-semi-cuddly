@@ -18,8 +18,16 @@
 		<div class="row">
 			<button type="submit" class="btn btn-positive w-100">로그인</button>
 		</div>
-		<div class="row left">
-			<a class="link" href="/cuddly/member/join">회원가입</a>
+		<div class="row flex-container">
+			<div class="w-100 left">
+				<a class="link" href="/cuddly/member/join">회원가입</a>
+			</div>
+			<div class="w-100 right">
+				<a class="link" href="/cuddly/member/findId">아이디찾기</a>
+			</div>
+			<div class="w-100 right">
+				<a class="link" href="/cuddly/member/findPw">비밀번호찾기</a>
+			</div>
 		</div>
 	</div>
 </form>
