@@ -39,6 +39,18 @@ public class ProductDaoImpl implements ProductDao{
 	}
 	
 	@Override
+	public void connectMain(int productNo, int attachNo) {
+		String sql = "insert into product_main_image values(?, ?)";
+		Object[] data = {attachNo, productNo};
+		jdbcTemplate.update(sql, data);	
+	}
+
+	@Override
+	public void connectDetail(int productNo, int attachNo) {
+		String sql = "insert into product_detail_image values(?, ?)";
+		Object[] data = {attachNo, productNo};
+		jdbcTemplate.update(sql, data);			
+	}
 	public ProductDto selectOne(int productNo) {
 		String sql = "select * from product where product_no = ?";
 		Object[] data = {productNo};
@@ -82,5 +94,4 @@ public class ProductDaoImpl implements ProductDao{
 			Object[] data = {vo.getStartRow(), vo.getFinishRow()};
 			return jdbcTemplate.query(sql, productMapper, data);
 		}
-	}
 }
