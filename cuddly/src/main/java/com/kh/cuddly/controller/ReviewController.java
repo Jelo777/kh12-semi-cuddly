@@ -35,6 +35,7 @@ public class ReviewController {
 		
 		reviewDao.insert(reviewDto);
 		
+		
 		return "redirect:/cuddly/review/write";
 
 	}
