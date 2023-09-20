@@ -4,5 +4,7 @@ import com.kh.cuddly.dto.ProductOptionDto;
 
 public interface ProductOptionDao {
 	
+	int sequence();
 	void insert(ProductOptionDto productOptionDto);
+	
 }

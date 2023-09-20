@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
+ <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
+ 
 <!DOCTYPE html>
 <html>
 <head>
@@ -24,6 +27,7 @@
 		
 		<input type="file" name="attachMain" accept="image/*" placeholder="대표이미지"> <br><br>
 		<input type="file" name="attachDetail" accept="image/*" placeholder="상세이미지"> <br><br>
+		
 		<button>상품등록</button>
 	</form>
 </body>
