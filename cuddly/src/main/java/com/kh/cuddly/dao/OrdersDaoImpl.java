@@ -41,12 +41,17 @@ public class OrdersDaoImpl implements OrdersDao{
 	}
 
 	@Override
-	public OrdersDto selectOne(int ordersNo) {
-		String sql = "select * from orders where orders_no = ?";
-		Object[] data = {ordersNo};
-		List<OrdersDto> list = jdbcTemplate.query(sql, ordersMapper, data);
-		return list.isEmpty() ? null : list.get(0);
+	public OrdersDto selectOne(int memberId) {
+	    String sql =  "SELECT m.member_name, m.member_contact, m.member_email " +
+                "FROM orders o " +
+                "JOIN member m ON o.member_id = m.member_id " +
+                "WHERE o.orders_no = ?";
+	    Object[] data = {memberId};
+	    List<OrdersDto> list = jdbcTemplate.query(sql, ordersMapper, data);
+	    return list.isEmpty() ? null : list.get(0);
 	}
+
+
 
 	@Override
 	public List<OrdersDto> selectList() {
