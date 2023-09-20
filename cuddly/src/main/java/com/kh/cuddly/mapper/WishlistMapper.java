@@ -4,9 +4,11 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.stereotype.Component;
 
 import com.kh.cuddly.dto.WishlistDto;
 
+@Component
 public class WishlistMapper implements RowMapper<WishlistDto>{
 
 	@Override
