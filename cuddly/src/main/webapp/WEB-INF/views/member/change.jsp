@@ -32,14 +32,17 @@
                 <div class="fail-feedback">잘못된 날짜를 선택하셨습니다</div>
             </div>
             
-<!--             <div class="row left"> -->
-<!--             	<input type="text" name="memberPw"  -->
-<!--             </div> -->
-            
-
+            <div class="row left">
+            	<input type="text" name="memberPw" class="form-input w-100" placeholder="비밀번호 확인">
+            </div>
             <div class="row">
                 <button type="submit" class="btn btn-positive w-100">변경하기</button>
             </div>
+			<c:if test="${param.error != null}">
+		        <div class="row red">
+					<h3>입력하신 비밀번호가 일치하지 않습니다</h3>
+				</div>
+			</c:if>
 
 
         </div>

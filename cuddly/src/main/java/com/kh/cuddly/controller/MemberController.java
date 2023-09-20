@@ -113,7 +113,20 @@ public class MemberController {
 		model.addAttribute("memberDto", memberDto);
 		return "/WEB-INF/views/member/change.jsp";
 	}
-	
+	@PostMapping("/change")
+	public String change(@ModelAttribute MemberDto inputDto, 
+									HttpSession session) {
+		String memberId=(String)session.getAttribute("name");
+		MemberDto findDto =memberDao.selectOne(memberId);
+		if(inputDto.getMemberPw().equals(findDto.getMemberPw())) {
+			inputDto.setMemberId(memberId);
+			memberDao.updateMemberInfo(inputDto);
+			return "redirect:mypage";
+		}
+		else {
+			return "redirect:change?error";
+		}
+	}
 	
 	
 	
