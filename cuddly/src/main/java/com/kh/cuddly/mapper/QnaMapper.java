@@ -4,9 +4,10 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.stereotype.Component;
 
 import com.kh.cuddly.dto.QnaDto;
-
+@Component
 public class QnaMapper implements RowMapper<QnaDto>{
 
 	@Override
@@ -19,11 +20,8 @@ public class QnaMapper implements RowMapper<QnaDto>{
 		qnaDto.setQnaContent(rs.getString("qna_content"));
 		qnaDto.setQnaDate(rs.getDate("qna_date"));
 		qnaDto.setQnaNo(rs.getInt("qna_no"));
-		
-		
-		
-		
-		return null;
+
+		return qnaDto;
 	}
 
 }
