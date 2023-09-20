@@ -6,4 +6,5 @@ import com.kh.cuddly.dto.WishlistDto;
 public interface CartDao {
 	int sequence();
 	void insert(CartDto CartDto);
+	CartDto selectOne(int cartNo);
 }
