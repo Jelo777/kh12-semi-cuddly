@@ -136,6 +136,24 @@ public class MemberController {
 	public String exit() {
 		return "/WEB-INF/views/member/exit.jsp";
 	}
+	@PostMapping("/exit")
+	public String exit(HttpSession session, @RequestParam String memberPw) {
+		String memberId=(String)session.getAttribute("name");
+		MemberDto memberDto =memberDao.selectOne(memberId);
+		if(memberDto.getMemberPw().equals(memberPw)) {
+			
+			memberDao.delete(memberId);
+			session.removeAttribute("name");
+			return "redirect:exitFinish";
+		}
+		else {
+			return "redirect:exit?error";
+		}
+	}
+	@RequestMapping("/exitFinish")
+	public String exitFinish() {
+		return "/WEB-INF/views/member/exitFinish.jsp";
+	}
 	
 	
 	
