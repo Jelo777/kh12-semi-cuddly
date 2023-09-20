@@ -44,7 +44,9 @@
             
             <div class="w-100 center">
             	<div class="">
-            	<img src="/images/cuddlyb.png" width="230" height="50"><br>
+	               	<a href="/cuddly">
+	            		<img src="/images/cuddlyb.png" width="230" height="50"><br>
+	            	</a>
 					<input class="form-input w-100 mb-20"> 
 				</div>
             </div>
@@ -53,7 +55,9 @@
 		        <div class="etc mt-20">
 					<i class="fa-brands fa-gratipay fa-2x"></i>
 					<i class="fa-solid fa-cart-shopping fa-2x"></i>
+					<a class="link" href="/cuddly/member/mypage">
 					<i class="fa-solid fa-circle-user fa-2x"></i>
+					</a>
 				</div>
             </div>
         
@@ -96,17 +100,21 @@
 				</div>
 				
 				<div class="row left">
-					<h3><a class="link" href="#">개인정보수정</a></h3>
+					<h3><a class="link" href="/cuddly/member/change">개인정보수정</a></h3>
 				</div>
 				<div class="row left">
-					<h3><a class="link" href="#">비밀번호 변경</a></h3>
+					<h3><a class="link" href="/cuddly/member/password">비밀번호 변경</a></h3>
 				</div>
 				<div class="row left">
 					<h3><a class="link" href="#">배송지 관리</a></h3>
 				</div>
 				<div class="row left">
-					<h3><a class="link" href="#">로그아웃</a></h3>
+					<h3><a class="link" href="/cuddly/member/logout">로그아웃</a></h3>
 				</div>
+				<div class="row left">
+					<h3><a class="link" href="/cuddly/member/exit">탈퇴</a></h3>
+				</div>
+				
 				
              </div>
 		</aside>
