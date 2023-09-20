@@ -32,6 +32,10 @@
                 <div class="fail-feedback">잘못된 날짜를 선택하셨습니다</div>
             </div>
             
+<!--             <div class="row left"> -->
+<!--             	<input type="text" name="memberPw"  -->
+<!--             </div> -->
+            
 
             <div class="row">
                 <button type="submit" class="btn btn-positive w-100">변경하기</button>

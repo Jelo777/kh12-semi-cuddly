@@ -51,7 +51,9 @@
             
             <div class="w-100 center">
             	<div class="">
+            	<a href="/cuddly">
             	<img src="/images/cuddlyb.png" width="230" height="50"><br>
+            	</a>
 					<input class="form-input w-100 mb-20"> 
 				</div>
             </div>
@@ -60,7 +62,9 @@
 		        <div class="etc mt-20">
 					<i class="fa-brands fa-gratipay fa-2x"></i>
 					<i class="fa-solid fa-cart-shopping fa-2x"></i>
+					<a class="link" href="/cuddly/member/mypage">
 					<i class="fa-solid fa-circle-user fa-2x"></i>
+					</a>
 				</div>
             </div>
         
