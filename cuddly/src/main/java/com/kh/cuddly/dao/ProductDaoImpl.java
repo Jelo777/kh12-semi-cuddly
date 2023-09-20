@@ -28,12 +28,12 @@ public class ProductDaoImpl implements ProductDao{
 	@Override
 	public void insert(ProductDto productDto) {
 		String sql = "insert into product("
-						+ "product_no, product_name, product_price"
+						+ "product_no, product_name, product_price, product_item"
 						+ ")"
-					+ "values(?,?,?)";
+					+ "values(?,?,?, ?)";
 		Object[] data = {
 							productDto.getProductNo(), productDto.getProductName(),
-							productDto.getProductPrice()
+							productDto.getProductPrice(), productDto.getProductItem()
 						};
 		jdbcTemplate.update(sql, data);
 	}
