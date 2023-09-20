@@ -10,9 +10,12 @@ import com.kh.cuddly.dto.MemberDto;
 import com.kh.cuddly.dto.OrdersDto;
 import com.kh.cuddly.mapper.OrdersMapper;
 
+
 @Repository
 public class OrdersDaoImpl implements OrdersDao{
 
+	
+	
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
 	

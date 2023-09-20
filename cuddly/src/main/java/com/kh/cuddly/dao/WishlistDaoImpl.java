@@ -2,9 +2,11 @@ package com.kh.cuddly.dao;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.stereotype.Repository;
 
 import com.kh.cuddly.dto.WishlistDto;
 
+@Repository
 public class WishlistDaoImpl implements WishlistDao {
 	
 	@Autowired
