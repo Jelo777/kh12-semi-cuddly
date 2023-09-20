@@ -121,11 +121,20 @@ public class MemberController {
 		if(inputDto.getMemberPw().equals(findDto.getMemberPw())) {
 			inputDto.setMemberId(memberId);
 			memberDao.updateMemberInfo(inputDto);
-			return "redirect:mypage";
+			return "redirect:changeFinish";
 		}
 		else {
 			return "redirect:change?error";
 		}
+	}
+	@RequestMapping("/changeFinish")
+	public String changeFinish() {
+		return "/WEB-INF/views/member/changeFinish.jsp";
+	}
+	
+	@GetMapping("/exit")
+	public String exit() {
+		return "/WEB-INF/views/member/exit.jsp";
 	}
 	
 	
