@@ -11,15 +11,12 @@
 <body>
     <h1>주문 정보 입력</h1>
     
-    <form action="#" method="post">
+    <form action="insert" method="post">
     
     
     <br><br>
     <h4>주문자정보</h4>
-     
-        
-        <label for="memberId">회원아이디 : </label>
-        <input type="text" name="memberId" required> <br>
+     <br>
         
         <label for="addressNo">배송지번호 : </label>
         <input type="text" name="addressNo" required> <br>
