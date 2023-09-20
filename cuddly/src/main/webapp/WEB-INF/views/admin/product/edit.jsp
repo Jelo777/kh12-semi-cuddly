@@ -13,6 +13,5 @@
 <body>
 	<h1>상품수정</h1>
 	${productDto.productName}
-	
 </body>
 </html>

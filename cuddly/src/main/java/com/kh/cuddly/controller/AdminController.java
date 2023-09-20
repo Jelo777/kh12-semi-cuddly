@@ -109,6 +109,7 @@ public class AdminController {
 		ProductDto productDto = productDao.selectOne(productNo);
 		model.addAttribute("productDto", productDto);
 		return "/WEB-INF/views/admin/product/edit.jsp";
+		
 	}
 	
 	
