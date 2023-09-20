@@ -21,7 +21,7 @@ public class ReviewMapper implements RowMapper<ReviewDto>{
 		reviewDto.setReviewDate(rs.getDate("review_date"));
 		reviewDto.setReviewGrade(rs.getInt("review_grade"));
 		reviewDto.setReviewNo(rs.getInt("review_no"));
-		
+		reviewDto.setImage(rs.getObject("attach_no")!=null);
 		return reviewDto;
 		
 	}

@@ -13,5 +13,6 @@ public class ReviewDto {
 	private int reviewGrade;
 	private String reviewContent;
 	private Date reviewDate;
+	private boolean image;//이미지유무 = DB 미포함
 	
 }

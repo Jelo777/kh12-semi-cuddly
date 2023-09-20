@@ -6,7 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import com.kh.cuddly.dto.AttachDto;
 import com.kh.cuddly.dto.QnaDto;
+import com.kh.cuddly.mapper.AttachMapper;
 import com.kh.cuddly.mapper.QnaMapper;
 
 @Repository
@@ -17,6 +19,9 @@ public class QnaDaoImpl implements QnaDao{
 	
 	@Autowired
 	private QnaMapper qnaMapper;
+	
+	@Autowired
+	private AttachMapper attachMapper;
 	
 	@Override
 	public int sequence() {
@@ -65,6 +70,46 @@ public class QnaDaoImpl implements QnaDao{
 		
 		return list.isEmpty() ? null : list.get(0);
 	}
+
+	@Override
+	public List<QnaDto> selectList() {
+		
+		String sql = "select * from qna order by qna_no asc";
+		
+		List<QnaDto> list = jdbcTemplate.query(sql, qnaMapper);
+		
+		
+		return list;
+	}
+	
+//	@Override
+//	public List<QnaDto> selectList() {
+//		
+//		String sql = "select q.*, pam.attach_no from qna q "
+//				+ "left outer join product_main_image pam "
+//				+ "on q.product_no=pam.product_no";
+//		
+//		List<QnaDto> list = jdbcTemplate.query(sql, qnaMapper);
+//		
+//		
+//		return list;
+//	}
+	
+	@Override
+	public AttachDto findImage(int productNo) {
+		
+		String sql = "select * from attach "
+				+ "where attach_no = ("
+				+ "select attach_no from product_main_image "
+				+ "where product_no=?)";
+		
+		Object[] data = {productNo};
+		
+		List<AttachDto> list = jdbcTemplate.query(sql, attachMapper,data);
+		return list.isEmpty() ? null : list.get(0);
+	}
+	
+	
 	
 	
 	
