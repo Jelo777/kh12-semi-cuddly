@@ -15,9 +15,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.kh.cuddly.dao.CartDao;
+import com.kh.cuddly.dao.MemberDao;
 import com.kh.cuddly.dao.OrdersDao;
 import com.kh.cuddly.dao.OrdersDetailDao;
 import com.kh.cuddly.dto.CartDto;
+import com.kh.cuddly.dto.MemberDto;
 import com.kh.cuddly.dto.OrdersDetailDto;
 import com.kh.cuddly.dto.OrdersDto;
 
@@ -38,6 +40,9 @@ public class OrdersController {
 	@Autowired
 	CartDao cartDao;
 	
+	@Autowired
+	MemberDao memberDao;
+	
 	
 	
 	@GetMapping("/insert")
@@ -53,12 +58,18 @@ public class OrdersController {
 		return "redirect:주문관리페이지";
 	}
 	
+	
+
 	@RequestMapping("/detail")
-	public String ordersDetail(@RequestParam int ordersDetailNo, Model model) {
-		OrdersDetailDto ordersDetailDto = ordersDetailDao.selectOne(ordersDetailNo);
-		model.addAttribute("ordersDetailDto", ordersDetailDto);
+	public String ordersDetail(@RequestParam("ordersNo") int ordersNo, Model model) {
+		OrdersDto ordersDto = ordersDao.selectOne(ordersNo);
+		model.addAttribute("ordersDto", ordersDto);
+		
+		MemberDto memberDto = memberDao.selectOne(ordersDto.getMemberId());
+		model.addAttribute("memberDto", memberDto);
+		
 		return "/WEB-INF/views/orders/detail.jsp";
-}
+	}
 	
 	@RequestMapping("/cartlist")
 	public String list(Model model) {
@@ -66,6 +77,4 @@ public class OrdersController {
 		model.addAttribute("cartList", cartList);
 		return "/WEB-INF/views/orders/cartlist.jsp";
 	}
-	
-	
 }

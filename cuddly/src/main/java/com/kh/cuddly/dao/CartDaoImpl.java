@@ -47,14 +47,5 @@ public class CartDaoImpl implements CartDao {
 	        return jdbcTemplate.query(sql, cartMapper);
 	    }
 	
-	
-	//조인없이 장바구니만 조회하는 구문
-//	@Override
-//    public List<CartDto> selectCartList() {
-//        String sql = "select * from cart order by cart_no asc";
-//        return jdbcTemplate.query(sql, cartMapper);
-//    }
-
 }
-
 
