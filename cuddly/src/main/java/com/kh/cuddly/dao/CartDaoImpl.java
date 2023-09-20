@@ -38,12 +38,22 @@ public class CartDaoImpl implements CartDao {
 		jdbcTemplate.update(sql,data);
 	}
 
-	@Override
-	public List<CartDto> selectCartList() {
-		String sql = "select * from cart order by cart_no asc";
-		return jdbcTemplate.query(sql, cartMapper);
-	}
+	 @Override
+	    public List<CartDto> selectCartList() {
+	        String sql = "SELECT c.*, p.product_name " +
+	                     "FROM cart c " +
+	                     "JOIN product_option po ON c.option_no = po.product_option_no " +
+	                     "JOIN product p ON po.product_no = p.product_no";
+	        return jdbcTemplate.query(sql, cartMapper);
+	    }
 	
+	
+	//조인없이 장바구니만 조회하는 구문
+//	@Override
+//    public List<CartDto> selectCartList() {
+//        String sql = "select * from cart order by cart_no asc";
+//        return jdbcTemplate.query(sql, cartMapper);
+//    }
 
 }
 

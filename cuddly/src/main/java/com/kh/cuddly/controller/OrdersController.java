@@ -60,11 +60,11 @@ public class OrdersController {
 		return "/WEB-INF/views/orders/detail.jsp";
 }
 	
-	@GetMapping("/list")
+	@RequestMapping("/cartlist")
 	public String list(Model model) {
 		List<CartDto> cartList = cartDao.selectCartList();
 		model.addAttribute("cartList", cartList);
-		return "/WEB-INF/views/cart/list.jsp";
+		return "/WEB-INF/views/orders/cartlist.jsp";
 	}
 	
 	
