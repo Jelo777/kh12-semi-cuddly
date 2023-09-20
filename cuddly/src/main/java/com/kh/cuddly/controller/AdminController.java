@@ -5,6 +5,7 @@ import java.io.IOException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -64,8 +65,7 @@ public class AdminController {
 		else {//이미 있다면
 			
 		}
-		
-		
+
 		
 		if(!attachMain.isEmpty()) {			
 		int attachNo = attachDao.sequence();
@@ -106,8 +106,22 @@ public class AdminController {
 			attachDao.insert(attachDto);
 		
 			productDao.connectDetail(productNo, attachNo);
-			
 			}
+
 		return "redirect:insert";
 	}
+	
+	@GetMapping("/product/edit")
+	public String edit(
+									@RequestParam int productNo,
+									@ModelAttribute AttachDto attachDto,
+									Model model
+									) {
+		ProductDto productDto = productDao.selectOne(productNo);
+		model.addAttribute("productDto", productDto);
+		return "/WEB-INF/views/admin/product/edit.jsp";
+		
+	}
+	
+	
 }

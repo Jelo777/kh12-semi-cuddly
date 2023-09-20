@@ -12,7 +12,7 @@
     <table border="1">
         <tr>
             <th>주문 상세 번호</th>
-            <th>주문 번호</th>
+            <th>주문 번호</th> 
             <th>옵션 번호</th>
             <th>상품 번호</th>
             <th>주문 수량</th>

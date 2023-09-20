@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 
 <body>
@@ -39,6 +40,7 @@
 		<div class="row">
 			<button class="btn btn-positive w-100">상품등록</button>
 		</div>
+
 	</form>
 	</div>
 	
