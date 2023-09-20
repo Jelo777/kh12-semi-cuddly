@@ -50,13 +50,13 @@ public class OrdersController {
 		return "/WEB-INF/views/orders/insert.jsp";
 	}
 	
-	@PostMapping("/insert")
-	public String insert(OrdersDto ordersDto) {
-		int ordersNo = ordersDao.sequence();
-		ordersDto.setOrdersNo(ordersNo);
-		ordersDao.insert(ordersDto);
-		return "redirect:주문관리페이지";
-	}
+//	@PostMapping("/insert")
+//	public String insert(ProductDto productDto) {
+//		int productNo = productDao.sequence();
+//		ordersDto.setOrdersNo(ordersNo);
+//		ordersDao.insert(ordersDto);
+//		return "redirect:주문관리페이지";
+//	}
 	
 	
 
