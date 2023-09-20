@@ -11,5 +11,7 @@ public interface ProductDao {
 	ProductDto selectOne(int productNo);
 	List<ProductDto> selectList(PaginationVO vo);
 	
+	
+	
 	int countList(PaginationVO vo);
 }
