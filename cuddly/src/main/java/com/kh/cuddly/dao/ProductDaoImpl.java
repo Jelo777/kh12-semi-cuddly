@@ -94,4 +94,5 @@ public class ProductDaoImpl implements ProductDao{
 			Object[] data = {vo.getStartRow(), vo.getFinishRow()};
 			return jdbcTemplate.query(sql, productMapper, data);
 		}
+	}
 }
