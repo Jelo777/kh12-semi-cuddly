@@ -14,10 +14,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.kh.cuddly.dao.AttachDao;
-import com.kh.cuddly.dao.CategoryDao;
+import com.kh.cuddly.dao.CreatorDao;
 import com.kh.cuddly.dao.ProductDao;
 import com.kh.cuddly.dto.AttachDto;
-import com.kh.cuddly.dto.CategoryDto;
+import com.kh.cuddly.dto.CreatorDto;
 import com.kh.cuddly.dto.ProductDto;
 
 @Controller
@@ -25,7 +25,7 @@ import com.kh.cuddly.dto.ProductDto;
 public class AdminController {
 
 	@Autowired
-	private CategoryDao categoryDao;
+	private CreatorDao creatorDao;
 	
 	@Autowired
 	private ProductDao productDao;
@@ -42,19 +42,30 @@ public class AdminController {
 	@PostMapping("/product/insert")
 	public String insert(
 								@ModelAttribute ProductDto productDto, 
-								@ModelAttribute CategoryDto categoryDto,
+								@RequestParam String creatorName,
 								@RequestParam MultipartFile attachMain,
 								@RequestParam MultipartFile attachDetail
 									) throws IllegalStateException, IOException {
 
-		int categoryNo = categoryDao.sequence();		
-		categoryDto.setCategoryNo(categoryNo);
-		categoryDao.insert(categoryDto);
-		
 		int productNo = productDao.sequence();
 		productDto.setProductNo(productNo);
 		productDao.insert(productDto);
-	
+		
+		//입력창에 받은 크리에이터가 이미 존재하는지 확인
+		boolean isNewCreator = creatorDao.isNewCreator(creatorName);
+		
+		if(isNewCreator) {//새로운 크리에이터면 insert
+			CreatorDto creatorDto = new CreatorDto();
+			int creatorNo = creatorDao.sequence();		
+			creatorDto.setCreatorNo(creatorNo);
+			creatorDto.setProductNo(productNo);
+			creatorDto.setCreatorName(creatorName);
+			creatorDao.insert(creatorDto);
+		}
+		else {//이미 있다면
+			
+		}
+
 		
 		if(!attachMain.isEmpty()) {			
 		int attachNo = attachDao.sequence();

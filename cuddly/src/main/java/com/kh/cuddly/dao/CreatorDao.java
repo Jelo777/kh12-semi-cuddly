@@ -5,4 +5,5 @@ import com.kh.cuddly.dto.CreatorDto;
 public interface CreatorDao {
 	int sequence();
 	void insert(CreatorDto creatorDto);
+	boolean isNewCreator(String creatorName);
 }
