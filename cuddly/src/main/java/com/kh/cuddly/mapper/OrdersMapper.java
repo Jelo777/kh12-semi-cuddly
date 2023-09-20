@@ -16,6 +16,8 @@ public class OrdersMapper implements RowMapper<OrdersDto>{
 	public OrdersDto mapRow(ResultSet rs, int rowNum) throws SQLException {
 		OrdersDto ordersDto = new OrdersDto();
 		ordersDto.setOrdersNo(rs.getInt("orders_no"));
+		ordersDto.setMemberId(rs.getString("member_id"));
+		ordersDto.setAddressNo(rs.getInt("address_no"));
 		ordersDto.setOrdersPrice(rs.getInt("orders_price"));
 		ordersDto.setOrdersPayment(rs.getString("orders_payment"));
 		ordersDto.setOrdersDate(rs.getDate("orders_date"));

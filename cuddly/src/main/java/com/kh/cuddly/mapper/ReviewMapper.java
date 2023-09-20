@@ -4,9 +4,11 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.stereotype.Component;
 
 import com.kh.cuddly.dto.ReviewDto;
 
+@Component
 public class ReviewMapper implements RowMapper<ReviewDto>{
 
 	@Override
@@ -19,7 +21,7 @@ public class ReviewMapper implements RowMapper<ReviewDto>{
 		reviewDto.setReviewDate(rs.getDate("review_date"));
 		reviewDto.setReviewGrade(rs.getInt("review_grade"));
 		reviewDto.setReviewNo(rs.getInt("review_no"));
-		
+		reviewDto.setImage(rs.getObject("attach_no")!=null);
 		return reviewDto;
 		
 	}

@@ -1,16 +1,17 @@
 package com.kh.cuddly.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
+import com.kh.cuddly.VO.PaginationVO;
 import com.kh.cuddly.dao.ProductDao;
-import com.kh.cuddly.dao.ProductOptionDao;
 import com.kh.cuddly.dto.ProductDto;
-import com.kh.cuddly.dto.ProductOptionDto;
 
 @Controller
 @RequestMapping("/cuddly/product")
@@ -18,27 +19,30 @@ public class ProductController {
 	
 	@Autowired
 	ProductDao productDao;
-	@Autowired
-	ProductOptionDao productOptionDao;
 	
-	@GetMapping("/insert")
-	public String insert() {
-		return "/WEB-INF/views/product/insert.jsp";
+	@RequestMapping("/list")
+	public String list(@ModelAttribute(name = "vo") PaginationVO vo, Model model) {
+		int count = productDao.countList(vo);
+		vo.setCount(count);
+		vo.setSize(8);
+		
+		List<ProductDto> list = productDao.selectList(vo);
+		model.addAttribute("list", list);
+		
+		return "/WEB-INF/views/product/list.jsp";
 	}
-	@PostMapping("/insert")
-	public String insert(
-						@ModelAttribute ProductDto productDto,
-						@ModelAttribute ProductOptionDto productOptionDto
-						) {
-		int productNo = productDao.sequence();
-
-		productOptionDto.setProductNo(productNo);
-		productDto.setProductNo(productNo);
+	
+	@RequestMapping("/detail")
+	public String detail(@RequestParam int productNo, Model model) {
+		ProductDto productDto = productDao.selectOne(productNo);
+		float reviewAvg = 4.9F;
 		
 		
-		productDao.insert(productDto);
-		productOptionDao.insert(productOptionDto);
-		return "redirect:상품관리페이지";
+		
+		model.addAttribute("productDto", productDto);
+		model.addAttribute("reviewAvg", reviewAvg);
+		
+		return "/WEB-INF/views/product/detail.jsp";
 	}
 	
 }
