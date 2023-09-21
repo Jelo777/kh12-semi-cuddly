@@ -13,14 +13,10 @@ public class OrdersProductMapper implements RowMapper<OrdersProductDto>{
 
 	@Override
 	public OrdersProductDto mapRow(ResultSet rs, int rowNum) throws SQLException {
-//		productName;
-//		private int productPrice;
-//		private String productOprionName;
-//		private int productOptionStock;
-//		private String creatorName;
 		
 		OrdersProductDto ordersProductDto = new OrdersProductDto();
 		
+		ordersProductDto.setProductNo(rs.getInt("product_no"));
 		ordersProductDto.setProductOptionNo(rs.getInt("product_option_no"));
 		ordersProductDto.setProductName(rs.getString("product_name"));
 		ordersProductDto.setProductPrice(rs.getInt("product_price"));
