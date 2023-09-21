@@ -35,15 +35,19 @@ public class AddressController {
 		addressDto.setAddressNo(addressNo);
 		addressDto.setMemberId(memberId);
 		
-		if(addressDto.getAddressDefault().equals("Y")) {
-			addressDao.changeDefault();
+		//여기서addressDto는 내가 배송지 추가 페이지에서 입력한 값 + 시퀀스로 받아온 배송지번호,세션으로 가져온 멤버 아이디
+		
+		if(addressDto.getAddressDefault().equals("Y")) {//이 계정의 기본배송지가
+			addressDao.changeDefault(memberId);
 		}
+		
 		addressDao.insert(addressDto);
 		return "redirect:/cuddly"; //일단 리스트가 없어서 메인으로
 	}
 
 	@RequestMapping("/list")
 	public String list(Model model) {
+		
 		List<AddressDto> list=addressDao.selectList();
 		model.addAttribute("list", list);
 		

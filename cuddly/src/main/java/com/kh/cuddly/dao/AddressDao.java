@@ -9,5 +9,5 @@ public interface AddressDao {
 	void insert(AddressDto addressDto);
 	AddressDto selectOne(String memberId);
 	List<AddressDto>selectList();
-	void changeDefault();
+	void changeDefault(String memberId);
 }
