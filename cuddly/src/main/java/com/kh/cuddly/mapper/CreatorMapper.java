@@ -15,7 +15,6 @@ public class CreatorMapper implements RowMapper<CreatorDto>{
 	public CreatorDto mapRow(ResultSet rs, int rowNum) throws SQLException {
 		CreatorDto creatorDto = new CreatorDto();
 		creatorDto.setCreatorNo(rs.getInt("creator_no"));
-		creatorDto.setProductNo(rs.getInt("product_no"));
 		creatorDto.setCreatorName(rs.getString("creator_name"));
 		return creatorDto;
 	}

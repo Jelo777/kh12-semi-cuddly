@@ -27,9 +27,9 @@ public class CreatorDaoImpl implements CreatorDao{
 	
 	@Override
 	public void insert(CreatorDto creatorDto) {
-		String sql = "insert into creator(creator_no, product_no, creator_name)"
-					+ "values(?, ?, ?)";
-		Object[] data = {creatorDto.getCreatorNo(), creatorDto.getProductNo(), creatorDto.getCreatorName()};
+		String sql = "insert into creator(creator_no, creator_name)"
+					+ "values(?, ?)";
+		Object[] data = {creatorDto.getCreatorNo(),creatorDto.getCreatorName()};
 		jdbcTemplate.update(sql, data);
 	}
 	
@@ -50,5 +50,13 @@ public class CreatorDaoImpl implements CreatorDao{
 		Object[] data = {productNo};
 		List<CreatorDto> list = jdbcTemplate.query(sql,  creatorMapper, data);
 		return list.isEmpty() ? null : list.get(0);
+	}
+	
+	@Override
+	public CreatorDto selectOneByName(String creatorName) {
+		String sql = "select * from creator where creator_name = ?";
+		Object[] data = {creatorName};
+		List<CreatorDto> list = jdbcTemplate.query(sql, creatorMapper, data);
+		return list.isEmpty()?null : list.get(0);
 	}
 }

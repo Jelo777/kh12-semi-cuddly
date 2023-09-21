@@ -8,4 +8,5 @@ public interface CreatorDao {
 	boolean isNewCreator(String creatorName);
 	
 	CreatorDto selectOne(int productNo);
+	CreatorDto selectOneByName(String creatorName);
 }
