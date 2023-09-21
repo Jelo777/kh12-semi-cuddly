@@ -686,7 +686,7 @@ textarea.form-input.fixed {
 .success {
     /* important는 우선순위를 최상위로 올린다 */
     border-color: #00b894 !important;
-    background-image: url("/images/success.png");
+/*    background-image: url("/images/success.png");*/
     background-repeat: no-repeat;
     background-position-x: right;
     background-position-y: center;
@@ -696,7 +696,7 @@ textarea.form-input.fixed {
 .fail2
 {
     border-color: #d63031 !important;
-    background-image: url("/images/fail.png");
+/*    background-image: url("/images/fail.png");*/
     background-repeat: no-repeat;
     background-position-x: right;
     background-position-y: center;

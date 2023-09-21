@@ -77,7 +77,7 @@ public class MemberController {
 	}
 	@RequestMapping("/mypage")
 	public String mypage(HttpSession session, Model model) {
-		//[1]세션에서 아이디 가져오기
+		//[1]세션에서 아이디, 등급 가져오기
 		String memberId =(String)session.getAttribute("name");
 		if(memberId ==null) {
 			return "redirect:login";
