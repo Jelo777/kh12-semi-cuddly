@@ -15,6 +15,7 @@ public interface ProductDao {
 
 	ProductDto selectOne(int productNo);
 	List<ProductDto> selectList(PaginationVO vo);
+	List<ProductDto> selectListByCreator(String creatorName);
 	
 	AttachDto findImage(int productNo);//상품수정 페이지에 찍어줄 이미지 찾기
 	

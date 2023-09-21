@@ -89,6 +89,18 @@ public class ProductDaoImpl implements ProductDao{
 			Object[] data = {vo.getKeyword(), vo.getStartRow(), vo.getFinishRow()};
 			return jdbcTemplate.query(sql, productMapper, data);
 		}
+		else if(vo.isSearchByCreatorName()) {
+			String sql = "select * from ("
+							+ "select rownum rn, TMP.* from ("
+								+ "select product.* from product inner join creator_product "
+								+ "on creator_product.product_no = product.product_no "
+								+ "LEFT OUTER JOIN creator ON creator_product.creator_no = creator.creator_no "
+								+ "WHERE creator.creator_name = ?"
+							+ ")TMP"
+						+ ") where rn between ? and ?";
+			Object[] data = {vo.getCreatorName(), vo.getStartRow(), vo.getFinishRow()}; 
+			return jdbcTemplate.query(sql, productMapper, data);
+		}
 		else {
 			String sql = "select * from ("
 					+ "select rownum rn, TMP.* from ("
@@ -110,5 +122,17 @@ public class ProductDaoImpl implements ProductDao{
 		Object[] data = {productNo};
 		List<AttachDto> list = jdbcTemplate.query(sql, attachMapper, data);
 		return list.isEmpty() ? null : list.get(0);
+	}
+	
+	@Override
+	public List<ProductDto> selectListByCreator(String creatorName) {
+		String sql = "select product.* "
+					+ "from product inner join creator_product "
+					+ "on creator_product.product_no = product.product_no "
+					+ "left outer join creator "
+					+ "on creator_product.creator_no = creator.creator_no "
+					+ "where creator.creator_name = ?";
+		Object[] data = {creatorName};
+		return jdbcTemplate.query(sql, productMapper, data);
 	}
 }

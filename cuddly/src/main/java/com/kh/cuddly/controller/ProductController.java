@@ -36,13 +36,12 @@ public class ProductController {
 	public String detail(@RequestParam int productNo, Model model) {
 		ProductDto productDto = productDao.selectOne(productNo);
 		float reviewAvg = 4.9F;
-		
-		
-		
+				
 		model.addAttribute("productDto", productDto);
 		model.addAttribute("reviewAvg", reviewAvg);
 		
 		return "/WEB-INF/views/product/detail.jsp";
 	}
+	
 	
 }
