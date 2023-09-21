@@ -1,5 +1,7 @@
 package com.kh.cuddly.dao;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
@@ -31,14 +33,32 @@ public class AddressDaoImpl implements AddressDao{
 		String sql="insert into address("
 				+ "address_no, member_id, address_name, "
 				+ "address_contact, address_post, address_addr1, "
-				+ "address_addr2, address_coment) "
-				+ "values(?, ?, ?, ?, ?, ?, ?, ?)";
+				+ "address_addr2, address_coment, address_default) "
+				+ "values(?, ?, ?, ?, ?, ?, ?, ?, ?)";
 		Object[] data = {addressDto.getAddressNo(), addressDto.getMemberId(), 
 				addressDto.getAddressName(), addressDto.getAddressContact(), 
 				addressDto.getAddressPost(), addressDto.getAddressAddr1(), 
-				addressDto.getAddressAddr2(),addressDto.getAddressComent()
+				addressDto.getAddressAddr2(),addressDto.getAddressComent(),
+				addressDto.getAddressDefault() //!= null ? "Y" : "N"
 		};
 		jdbcTemplate.update(sql,data);
 	}
 
+	@Override
+	public AddressDto selectOne(String memberId) {
+		String sql="select * from address where member_id=? and address_default='Y'";
+		Object[] data= {memberId};
+		List<AddressDto>list=jdbcTemplate.query(sql, addressMapper,data);
+		return list.isEmpty() ? null : list.get(0);
+	}
+	@Override
+	public List<AddressDto> selectList() {
+		String sql="select * from address order by address_default desc, address_no asc";
+		return jdbcTemplate.query(sql, addressMapper);
+	}
+	@Override
+	public void changeDefault() {
+		String sql="update address set address_default ='N' where address_default='Y'";
+		 jdbcTemplate.update(sql);
+	}
 }
