@@ -5,5 +5,5 @@ import com.kh.cuddly.dto.CreatorProductDto;
 
 public interface CreatorProductDao {
 	void insert(CreatorProductDto creatorProductDto);
-	
+	CreatorProductDto selectOne(int productNo);
 }

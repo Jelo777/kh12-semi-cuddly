@@ -70,6 +70,18 @@
 	<div class="row">
 		평점 : ${reviewAvg}
 	</div>
+	<div class="row">
+		${creatorName}
+	</div>
+	<div class="row">
+		<select class="form-input">
+			<option>옵션 선택</option>
+			<c:forEach var="optionList" items="${optionList}">
+				<option>${optionList.productOptionName}</option>
+			</c:forEach>
+		</select>
+		<button class="btn">옵션추가</button>
+	</div>
 </div>
 
 

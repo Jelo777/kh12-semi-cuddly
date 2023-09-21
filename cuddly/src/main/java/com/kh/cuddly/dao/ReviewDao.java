@@ -12,5 +12,6 @@ public interface ReviewDao {
 	void connect(int reviewNo, int attachNo);
 	AttachDto findImage(int reviewNo);
 	List<ReviewDto> selectList();
+	float reviewAvg (int productNo);
 
 }

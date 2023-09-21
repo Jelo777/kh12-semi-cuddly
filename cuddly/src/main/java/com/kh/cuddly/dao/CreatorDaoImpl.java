@@ -42,7 +42,7 @@ public class CreatorDaoImpl implements CreatorDao{
 	}
 
 	@Override
-	public CreatorDto selectOne(int productNo) {
+	public CreatorDto selectOneByProductNo(int productNo) {
 		String sql = "select * from product p "
 								+ "inner join creator_product cp on cp.product_no = p.product_no "
 								+ "inner join creator c on c.creator_no = cp.creator_no "
@@ -53,13 +53,22 @@ public class CreatorDaoImpl implements CreatorDao{
 	}
 	
 	@Override
-	public CreatorDto selectOneByName(String creatorName) {
+	public CreatorDto selectOne(String creatorName) {
 		String sql = "select * from creator where creator_name = ?";
 		Object[] data = {creatorName};
 		List<CreatorDto> list = jdbcTemplate.query(sql, creatorMapper, data);
 		return list.isEmpty()?null : list.get(0);
 	}
 
+	@Override
+	public CreatorDto selectOne(int creatorNo) {
+		String sql = "select * from creator where creator_no = ?";
+		Object[] data = {creatorNo};
+		List<CreatorDto> list = jdbcTemplate.query(sql, creatorMapper, data);
+		return list.isEmpty()?null : list.get(0);
+	}
+	
+	
 	@Override
 	public List<CreatorDto> selectList() {
 		String sql = "select * from creator";

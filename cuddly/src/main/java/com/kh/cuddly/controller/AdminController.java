@@ -69,7 +69,7 @@ public class AdminController {
 		productDao.insert(productDto);
 		
 		//입력한 크리에이터 이름으로 크리에이터 조회
-		CreatorDto findCreatorDto = creatorDao.selectOneByName(creatorName);
+		CreatorDto findCreatorDto = creatorDao.selectOne(creatorName);
 		CreatorProductDto creatorProductDto = new CreatorProductDto();
 		
 		
@@ -169,7 +169,7 @@ public class AdminController {
 		ProductDto productDto = productDao.selectOne(productNo);
 		model.addAttribute("productDto", productDto);
 		
-		CreatorDto creatorDto = creatorDao.selectOne(productNo);
+		CreatorDto creatorDto = creatorDao.selectOneByProductNo(productNo);
 		model.addAttribute("creatorDto", creatorDto);
 		
 		return "/WEB-INF/views/admin/product/edit.jsp";

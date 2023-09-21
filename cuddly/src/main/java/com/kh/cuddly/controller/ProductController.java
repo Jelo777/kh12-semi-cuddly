@@ -11,9 +11,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.kh.cuddly.VO.PaginationVO;
 import com.kh.cuddly.dao.CreatorDao;
+import com.kh.cuddly.dao.CreatorProductDao;
 import com.kh.cuddly.dao.ProductDao;
+import com.kh.cuddly.dao.ProductOptionDao;
+import com.kh.cuddly.dao.ReviewDao;
 import com.kh.cuddly.dto.CreatorDto;
 import com.kh.cuddly.dto.ProductDto;
+import com.kh.cuddly.dto.ProductOptionDto;
 
 @Controller
 @RequestMapping("/cuddly/product")
@@ -23,6 +27,12 @@ public class ProductController {
 	ProductDao productDao;
 	@Autowired
 	CreatorDao creatorDao;
+	@Autowired
+	CreatorProductDao creatorProductDao;
+	@Autowired
+	ProductOptionDao productOptionDao;
+	@Autowired
+	ReviewDao reviewDao;
 	
 	@RequestMapping("/list")
 	public String list(@ModelAttribute(name = "vo") PaginationVO vo, Model model) {
@@ -39,8 +49,13 @@ public class ProductController {
 	@RequestMapping("/detail")
 	public String detail(@RequestParam int productNo, Model model) {
 		ProductDto productDto = productDao.selectOne(productNo);
-		float reviewAvg = 4.9F;
-				
+		CreatorDto creatorDto = creatorDao.selectOneByProductNo(productNo);
+		String creatorName = creatorDto.getCreatorName();
+		List<ProductOptionDto> optionList = productOptionDao.selectListByProductNo(productNo); 
+		
+		float reviewAvg = reviewDao.reviewAvg(productNo);
+		model.addAttribute("optionList", optionList);
+		model.addAttribute("creatorName", creatorName);
 		model.addAttribute("productDto", productDto);
 		model.addAttribute("reviewAvg", reviewAvg);
 		
