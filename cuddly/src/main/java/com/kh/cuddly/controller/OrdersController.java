@@ -17,13 +17,17 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.kh.cuddly.dao.AddressDao;
 import com.kh.cuddly.dao.CartDao;
+import com.kh.cuddly.dao.MemberDao;
 import com.kh.cuddly.dao.OrdersDao;
 import com.kh.cuddly.dao.OrdersDetailDao;
 import com.kh.cuddly.dao.ProductDao;
 import com.kh.cuddly.dto.CartDto;
+import com.kh.cuddly.dto.MemberDto;
 import com.kh.cuddly.dto.OrdersDetailDto;
 import com.kh.cuddly.dto.OrdersDto;
+import com.kh.cuddly.dto.ProductDto;
 
 
 
@@ -46,10 +50,32 @@ public class OrdersController {
 	@Autowired
 	OrdersDao ordersDao;
 	
+	@Autowired
+	MemberDao memberDao;
+	
+	@Autowired
+	AddressDao addressDao;
+	
 	
 	
 	@GetMapping("/insert")
-	public String insert() {
+	public String insert(HttpSession session, Model model, @RequestParam int productNo) {
+		
+		String memberId = (String) session.getAttribute("name");
+		
+		MemberDto memberDto = memberDao.selectOne(memberId);
+		
+//		AddressDto addressDto = addressDao.selectOne(memberId);
+		
+		model.addAttribute("memberDto", memberDto);
+//		model.addAttribute("addressDto", addressDto);
+		
+		ProductDto productDto = productDao.selectOne(productNo);
+		
+		model.addAttribute("productDto", productDto);
+		
+		
+		
 		return "/WEB-INF/views/orders/insert.jsp";
 	}
 	
@@ -62,6 +88,7 @@ public class OrdersController {
 		ordersDto.setOrdersNo(ordersNo);
 		ordersDto.setMemberId(memberId);
 		ordersDao.insert(ordersDto);
+		
 		return "redirect:주문관리페이지";
 	}
 	

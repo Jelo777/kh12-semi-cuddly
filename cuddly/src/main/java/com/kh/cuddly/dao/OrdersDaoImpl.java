@@ -58,6 +58,15 @@ public class OrdersDaoImpl implements OrdersDao{
 		String sql = "select * from orders_list order by orders_detail_no desc";
 		return jdbcTemplate.query(sql, ordersMapper);
 	}
+	
+//	@Override
+//	public List<> 
+	
+	
+	
+	
+	
+	
 }
 
 
