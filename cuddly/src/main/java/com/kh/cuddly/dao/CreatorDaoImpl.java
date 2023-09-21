@@ -43,10 +43,10 @@ public class CreatorDaoImpl implements CreatorDao{
 
 	@Override
 	public CreatorDto selectOne(int productNo) {
-		String sql = "select * from creator "
-								+ "inner join product "
-								+ "on creator.product_no = product.product_no "
-							+ "where product.product_no = ?";
+		String sql = "select * from product p "
+								+ "inner join creator_product cp on cp.product_no = p.product_no "
+								+ "inner join creator c on c.creator_no = cp.creator_no "
+							+ "where p.product_no = ?";
 		Object[] data = {productNo};
 		List<CreatorDto> list = jdbcTemplate.query(sql,  creatorMapper, data);
 		return list.isEmpty() ? null : list.get(0);
