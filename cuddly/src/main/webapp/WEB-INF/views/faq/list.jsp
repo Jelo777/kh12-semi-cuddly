@@ -1,3 +1,4 @@
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
@@ -10,16 +11,23 @@
 
 
 <table border="1" width="1000">
+<div class="row">
+		<table class="table table-border">
 	<thead>
 		 <tr>
-                <th width="10%">no </th>
-                <th width="10%">title </th>
-                <th width="10%">id </th>
-                <th width="20%">date </th>
-                <th width="10%">category </th>
+                <th>no </th>
+                <th>title </th>
+                <th>id </th>
+                <th>date </th>
+                <th>category </th>
              </tr>
              
 	</thead>
+	</table>
+	
+	</div>
+	<div class="row">
+		<table class="table table-border">
 	<tbody align="center">
 		<c:forEach var="faqDto" items="${list}">
 		<tr>
@@ -35,6 +43,10 @@
 			<td>${faqDto.faqDate}</td>
 			<td>${faqDto.faqCategory}</td>
 		</tr>
+
 		</c:forEach>
 	</tbody>
 </table>
+</div>
+
+<a href="write">작성하기</a>

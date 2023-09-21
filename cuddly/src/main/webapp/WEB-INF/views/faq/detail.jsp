@@ -1,56 +1,54 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="UTF-8">
-    <title>Faq Detail</title>
-</head>
-<body>
-    <h1>Faq Detail</h1>
-    
-        <table border="1" width="1000">
-        	<thead>
-           	 <tr>
-                <th width="10%">no </th>
-                <th width="10%">category </th>
-                <th width="10%">title </th>
-                <th width="20%">content </th>
-                <th width="10%">date </th>
-             </tr>
-                
-                <td>${faqDto.faqNo}</td>
-                <td>${faqDto.faqCategory}</td>
-                <td>${faqDto.faqTitle}</td>
-                <td>${faqDto.faqContent}</td>
-                <td>${faqDto.faqDate}</td>
-        </table>
-        
-        
-   
-    <c:if test="${not empty idDto}">
-        <h2>Author Information</h2>
-        <table border="1">
-            <tr>
-                <th>Member ID</th>
-                <td>${idDto.memberId}</td>
-            </tr>
-            <tr>
-                <th>Member Name</th>
-                <td>${idDto.memberName}</td>
-            </tr>
-            <tr>
-                <th>Member Contact</th>
-                <td>${idDto.memberContact}</td>
-            </tr>
-            <tr>
-                <th>Member Email</th>
-                <td>${idDto.memberEmail}</td>
-             
-            </tr>
-        </table>
-    </c:if>
-    
- 
-</body>
-</html>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+
+<jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
+
+<div class="container w-800">
+	<div class="row">
+		<h2>${faqDto.faqNo}번게시글</h2>
+	</div>
+	<div class="row">
+		<table class="table table-border">
+			<thead>
+				<tr>
+					<td>${faqDto.faqNo}</td>
+					<td>${faqDto.faqCategory}</td>
+					<td>${faqDto.faqTitle}</td>
+					<td>${faqDto.faqDate}</td>
+				</tr>
+		</table>
+	</div>
+
+	<div class="row">
+		<table class="table table-border">
+			<tr>
+				<th width="25%">작성자</th>
+				<td>${faqDto.faqId}</td>
+			</tr>
+			<tr>
+				<th>제목</th>
+				<td>${faqDto.faqTitle}</td>
+			</tr>
+	
+			<tr height="150">
+				<th>내용</th>
+				<td>${faqDto.faqContent}</td>
+			</tr>
+			
+			<tr>
+				<th>작성일</th>
+				<td>${faqDto.faqDate}</td>
+			</tr>
+			
+			<a href="write">작성하기</a>
+			<br>
+			<a href="list">목록으로</a>
+			<br>
+			<a href="edit">수정하기</a>
+			
+			
+		</table>
+	</div>
+	</div>

@@ -15,6 +15,7 @@ import com.kh.cuddly.dao.FaqDao;
 import com.kh.cuddly.dao.MemberDao;
 import com.kh.cuddly.dto.FaqDto;
 import com.kh.cuddly.dto.MemberDto;
+import com.kh.cuddly.error.NoResultException;
 
 @Controller
 @RequestMapping("/cuddly/faq")
@@ -24,8 +25,6 @@ public class FaqController {
 	private FaqDao faqDao;
 	
 
-	
-	
 	// 작성
 	@GetMapping("/write")
 	private String write() {
@@ -66,6 +65,25 @@ public class FaqController {
 		}
 		else {
 			return "redirect:에러";
+		}
+	}
+	
+	
+	@GetMapping("/edit")
+	public String edit(@RequestParam int faqNo, Model model) {
+		FaqDto faqDto = faqDao.selectOne(faqNo);
+		model.addAttribute("faqDto", faqDto);
+		return "/WEB-INF/views/faq/edit.jsp";
+	}
+	
+	@PostMapping("/edit")
+	public String edit(@ModelAttribute FaqDto faqDto) {
+		boolean result = faqDao.update(faqDto);
+		if(result) {
+			return "redirect:detail?faqNo=" + faqDto.getFaqNo();
+		}
+		else {
+			throw new NoResultException("존재하지 않는 글");
 		}
 	}
 }
