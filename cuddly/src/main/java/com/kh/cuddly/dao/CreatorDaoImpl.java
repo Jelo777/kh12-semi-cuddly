@@ -59,4 +59,10 @@ public class CreatorDaoImpl implements CreatorDao{
 		List<CreatorDto> list = jdbcTemplate.query(sql, creatorMapper, data);
 		return list.isEmpty()?null : list.get(0);
 	}
+
+	@Override
+	public List<CreatorDto> selectList() {
+		String sql = "select * from creator";
+		return jdbcTemplate.query(sql, creatorMapper);
+	}
 }

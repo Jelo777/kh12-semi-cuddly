@@ -50,11 +50,16 @@
             </div>
             
             <div class="w-100 center">
-            	<div class="">
+            	<div class="row">
             	<a href="/cuddly">
             	<img src="/images/cuddlyb.png" width="230" height="50"><br>
             	</a>
-					<input class="form-input w-100 mb-20"> 
+            	</div>
+            	<div>
+            		<form action="list">
+						<input class="form-input" name="keyword">
+						<button class="btn">검색</button>
+					</form>
 				</div>
             </div>
             
@@ -71,7 +76,7 @@
 	</header>
 	<nav>
 		<ul class="menu">
-			<li><a href="#">크리에이터 패션의류</a></li>
+			<li><a href="/cuddly/product/creator">크리에이터</a></li>
 			<li><a href="#">굿즈</a></li>
 			<li><a href="#">문구</a></li>
 			<li><a href="#">엑세서리</a></li>

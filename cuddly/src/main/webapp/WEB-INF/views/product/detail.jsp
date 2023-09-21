@@ -7,7 +7,7 @@
 <div class="container w-1000">
 	
 	<div class="row">
-		<img src="https://picsum.photos/id/4/300/300" width="200" height="200">
+		<img src="localhost:8080/cuddly/admin/image?productNo=${productDto.productNo}" width="200" height="200">
 	</div>
 	<div class="row">
 		<h2>${productDto.productName}</h2>
