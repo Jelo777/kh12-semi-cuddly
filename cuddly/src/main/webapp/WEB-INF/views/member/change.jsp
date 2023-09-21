@@ -38,15 +38,15 @@
             <div class="row">
                 <button type="submit" class="btn btn-positive w-100">변경하기</button>
             </div>
-			<c:if test="${param.error != null}">
-		        <div class="row red">
-					<h3>입력하신 비밀번호가 일치하지 않습니다</h3>
-				</div>
-			</c:if>
 
 
         </div>
 
     </form>
+			<c:if test="${param.error != null}">
+		        <div class="row important">
+					<h3>입력하신 비밀번호가 일치하지 않습니다</h3>
+				</div>
+			</c:if>
 
 <jsp:include page="/WEB-INF/views/template/mypageFooter.jsp"></jsp:include>

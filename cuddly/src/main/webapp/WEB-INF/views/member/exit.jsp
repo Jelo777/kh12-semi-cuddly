@@ -16,6 +16,9 @@
 			<input class="form-input w-100" type="text" name="memberPw" placeholder="비밀번호 입력">
 			
 		</div>
+		<div class="row">
+			<button type="submit" class="btn btn-positive w-100">탈퇴하기</button>
+		</div>
 		<c:if  test="${param.error !=null }">
 			<div class="row important">
 			<h1>비밀번호 다시 입력하세요</h1>

@@ -3,6 +3,8 @@ package com.kh.cuddly.controller;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,6 +23,9 @@ public class MemberController {
 	@Autowired
 	private MemberDao memberDao;
 	
+	//이메일로 아이디,비밀번호 찾기
+	@Autowired
+	private JavaMailSender sender;
 	
 	@GetMapping("/join")
 	public String join() {
@@ -155,10 +160,56 @@ public class MemberController {
 		return "/WEB-INF/views/member/exitFinish.jsp";
 	}
 	
+	@GetMapping("/findId")
+	public String findId() {
+		return "/WEB-INF/views/member/findId.jsp";
+	}
+	
+	@PostMapping("/findId")
+	public String findId(@RequestParam String memberEmail) {
+		MemberDto memberDto =memberDao.selectOneByEmail(memberEmail);
+		if(memberDto !=null) {
+			SimpleMailMessage message =new SimpleMailMessage();
+			message.setTo(memberEmail);
+			message.setSubject("아이디 찾기 결과");
+			message.setText("아이디는 [" + memberDto.getMemberId() +"] 입니다~ 네 찾아드렸어요");
+			sender.send(message);
+			return "redirect:findIdFinish";
+		}
+		else {
+			return "redirect:findId?error";
+		}
+	}
+	@RequestMapping("/findIdFinish")
+	public String findIdFinish() {
+		return "/WEB-INF/views/member/findIdFinish.jsp";
+	}
 	
 	
-	
-	
+	@GetMapping("/findPw")
+	public String findPw() {
+		return "/WEB-INF/views/member/findPw.jsp";
+	}
+	@PostMapping("/findPw")
+	public String findPw(@RequestParam String memberEmail) {
+		MemberDto memberDto =memberDao.selectOneByEmail(memberEmail);
+		if(memberDto !=null) {
+			SimpleMailMessage message =new SimpleMailMessage();
+			message.setTo(memberEmail);
+			message.setSubject("비밀번호 찾기 결과");
+			message.setText("비밀번호는 [" + memberDto.getMemberPw() +"] 입니다~ 네 찾아드렸어요");
+			sender.send(message);
+			return "redirect:findPwFinish";
+		}
+		else {
+			return "redirect:findPw?error";
+		}
+		
+	}
+	@RequestMapping("/findPwFinish")
+	public String findPwFinish() {
+		return "/WEB-INF/views/member/findPwFinish.jsp";
+	}
 	
 	
 	
