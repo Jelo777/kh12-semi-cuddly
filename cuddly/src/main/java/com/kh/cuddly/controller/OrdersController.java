@@ -6,7 +6,6 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
-
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -33,10 +32,10 @@ import com.kh.cuddly.dao.OrdersDao;
 import com.kh.cuddly.dao.OrdersDetailDao;
 import com.kh.cuddly.dao.ProductDao;
 import com.kh.cuddly.dao.QnaDao;
+import com.kh.cuddly.dto.AddressDto;
 import com.kh.cuddly.dto.AttachDto;
 import com.kh.cuddly.dto.CartDto;
 import com.kh.cuddly.dto.MemberDto;
-import com.kh.cuddly.dto.OrdersDetailDto;
 import com.kh.cuddly.dto.OrdersDto;
 import com.kh.cuddly.dto.OrdersProductDto;
 
@@ -98,8 +97,8 @@ public class OrdersController {
 	        dtoList.add(ordersProductDto); 
 	    }
 
-//		AddressDto addressDto = addressDao.selectOne(memberId);
-//		model.addAttribute("addressDto", addressDto);
+		AddressDto addressDto = addressDao.selectOne(memberId);
+		model.addAttribute("addressDto", addressDto);
 	    
 	    model.addAttribute("ordersProductDto", dtoList);
 	    model.addAttribute("total", total);
