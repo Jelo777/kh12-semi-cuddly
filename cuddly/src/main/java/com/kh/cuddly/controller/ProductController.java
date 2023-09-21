@@ -10,7 +10,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.kh.cuddly.VO.PaginationVO;
+import com.kh.cuddly.dao.CreatorDao;
 import com.kh.cuddly.dao.ProductDao;
+import com.kh.cuddly.dto.CreatorDto;
 import com.kh.cuddly.dto.ProductDto;
 
 @Controller
@@ -19,6 +21,8 @@ public class ProductController {
 	
 	@Autowired
 	ProductDao productDao;
+	@Autowired
+	CreatorDao creatorDao;
 	
 	@RequestMapping("/list")
 	public String list(@ModelAttribute(name = "vo") PaginationVO vo, Model model) {
@@ -36,13 +40,20 @@ public class ProductController {
 	public String detail(@RequestParam int productNo, Model model) {
 		ProductDto productDto = productDao.selectOne(productNo);
 		float reviewAvg = 4.9F;
-		
-		
-		
+				
 		model.addAttribute("productDto", productDto);
 		model.addAttribute("reviewAvg", reviewAvg);
 		
 		return "/WEB-INF/views/product/detail.jsp";
 	}
+	
+	@RequestMapping("/creator")
+	public String creators(Model model) {
+		List<CreatorDto> list = creatorDao.selectList();
+		model.addAttribute("list", list);
+		
+		return "/WEB-INF/views/product/creator.jsp";
+	}
+	
 	
 }

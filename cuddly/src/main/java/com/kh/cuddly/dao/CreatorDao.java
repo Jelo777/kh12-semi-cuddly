@@ -1,5 +1,7 @@
 package com.kh.cuddly.dao;
 
+import java.util.List;
+
 import com.kh.cuddly.dto.CreatorDto;
 
 public interface CreatorDao {
@@ -8,4 +10,7 @@ public interface CreatorDao {
 	boolean isNewCreator(String creatorName);
 	
 	CreatorDto selectOne(int productNo);
+	CreatorDto selectOneByName(String creatorName);
+	
+	List<CreatorDto> selectList();
 }

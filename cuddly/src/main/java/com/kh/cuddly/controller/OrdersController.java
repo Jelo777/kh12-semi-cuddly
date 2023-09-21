@@ -1,5 +1,9 @@
 package com.kh.cuddly.controller;
 
+
+
+import java.util.ArrayList;
+
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -13,6 +17,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.kh.cuddly.dao.AddressDao;
 import com.kh.cuddly.dao.CartDao;
 import com.kh.cuddly.dao.MemberDao;
 import com.kh.cuddly.dao.OrdersDao;
@@ -22,6 +27,7 @@ import com.kh.cuddly.dto.CartDto;
 import com.kh.cuddly.dto.MemberDto;
 import com.kh.cuddly.dto.OrdersDetailDto;
 import com.kh.cuddly.dto.OrdersDto;
+import com.kh.cuddly.dto.OrdersProductDto;
 
 
 
@@ -47,13 +53,34 @@ public class OrdersController {
 	@Autowired
 	MemberDao memberdao;
 	
+  @Autowired
+	MemberDao memberDao;
 	
+	@Autowired
+	AddressDao addressDao;
+	
+
+
 	
 	
 	@GetMapping("/insert")
-	public String insert() {
-		return "/WEB-INF/views/orders/insert.jsp";
+	public String insert(HttpSession session, Model model, @RequestParam int[] ordersNo) {
+	    String memberId = (String) session.getAttribute("name");
+	    MemberDto memberDto = memberDao.selectOne(memberId);
+	    model.addAttribute("memberDto", memberDto);
+
+	    List<OrdersProductDto> dtoList = new ArrayList<>();
+
+	    for (int orderNo : ordersNo) {
+	        OrdersProductDto ordersProductDto = ordersDao.viewProduct(orderNo);
+	        dtoList.add(ordersProductDto); 
+	    }
+
+	    model.addAttribute("ordersProductDto", dtoList);
+
+	    return "/WEB-INF/views/orders/insert.jsp";
 	}
+
 	
 	
 	@PostMapping("/insert")
@@ -65,6 +92,7 @@ public class OrdersController {
 		ordersDto.setOrdersNo(ordersNo);
 		ordersDto.setMemberId(memberId);
 		ordersDao.insert(ordersDto);
+		
 		return "redirect:주문관리페이지";
 	}
 	
