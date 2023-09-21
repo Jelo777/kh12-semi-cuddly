@@ -8,12 +8,6 @@
 	<div class="row">
 		<h1>상품목록</h1>
 	</div>
-	<div class="row">
-		<form action="list">
-			<input class="form-input" name="keyword" placeholder="상품검색">
-			<button class="btn">검색</button>
-		</form>
-	</div>
 	<c:forEach var="productListDto" items="${list}">
 		<a class="link" href="detail?productNo=${productListDto.productNo}">
 			<div class="inline-flex-container allow-wrap left">

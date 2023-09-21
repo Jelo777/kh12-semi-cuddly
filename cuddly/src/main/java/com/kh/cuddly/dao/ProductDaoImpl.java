@@ -124,15 +124,4 @@ public class ProductDaoImpl implements ProductDao{
 		return list.isEmpty() ? null : list.get(0);
 	}
 	
-	@Override
-	public List<ProductDto> selectListByCreator(String creatorName) {
-		String sql = "select product.* "
-					+ "from product inner join creator_product "
-					+ "on creator_product.product_no = product.product_no "
-					+ "left outer join creator "
-					+ "on creator_product.creator_no = creator.creator_no "
-					+ "where creator.creator_name = ?";
-		Object[] data = {creatorName};
-		return jdbcTemplate.query(sql, productMapper, data);
-	}
 }
