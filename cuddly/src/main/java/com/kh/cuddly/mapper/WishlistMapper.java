@@ -15,6 +15,8 @@ public class WishlistMapper implements RowMapper<WishlistDto>{
 	public WishlistDto mapRow(ResultSet rs, int rowNum) throws SQLException {
 		WishlistDto wishlistDto = new WishlistDto();
 		wishlistDto.setWishlistNo(rs.getInt("wishlist_no"));
+		wishlistDto.setProductNo(rs.getInt("product_no"));
+		wishlistDto.setMemberId(rs.getString("member_id"));
 		wishlistDto.setWishlistDate(rs.getDate("wishlist_date"));
 		return wishlistDto;
 	}
