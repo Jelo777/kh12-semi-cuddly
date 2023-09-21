@@ -46,7 +46,7 @@
 			<br>
 			<a href="list">목록으로</a>
 			<br>
-			<a href="edit">수정하기</a>
+			<a href="edit?faqNo=${faqDto.faqNo}">수정하기</a>
 			
 			
 		</table>
