@@ -27,6 +27,7 @@ import com.kh.cuddly.dto.CartDto;
 import com.kh.cuddly.dto.MemberDto;
 import com.kh.cuddly.dto.OrdersDetailDto;
 import com.kh.cuddly.dto.OrdersDto;
+import com.kh.cuddly.dto.OrdersProductDto;
 import com.kh.cuddly.dto.ProductDto;
 
 
@@ -56,10 +57,12 @@ public class OrdersController {
 	@Autowired
 	AddressDao addressDao;
 	
+
+	
 	
 	
 	@GetMapping("/insert")
-	public String insert(HttpSession session, Model model, @RequestParam int productNo) {
+	public String insert(HttpSession session, Model model,@RequestParam int ordersNo) {
 		
 		String memberId = (String) session.getAttribute("name");
 		
@@ -70,9 +73,10 @@ public class OrdersController {
 		model.addAttribute("memberDto", memberDto);
 //		model.addAttribute("addressDto", addressDto);
 		
-		ProductDto productDto = productDao.selectOne(productNo);
+
 		
-		model.addAttribute("productDto", productDto);
+		OrdersProductDto ordersProductDto = ordersDao.viewProduct(ordersNo);
+		model.addAttribute("ordersProductDto", ordersProductDto);
 		
 		
 		

@@ -76,23 +76,23 @@
     	<h1>주문할 상품 정보</h1>
     	
     	<div class="row">
-    	<label>상품 이름:</label>${productDto.productName}
+    	<label>상품 이름:</label>${ordersProductDto.productName}
     	</div>
     	
     	<div class="row">
-    	<label>크리에이터:</label>${creatorDto.creatorName}
+    	<label>크리에이터:</label>${ordersProductDto.creatorName}
     	</div>
     	
     	<div class="row">
-    	<label>상품 가격:</label>${productDto.productPrice}
+    	<label>상품 가격:</label>${ordersProductDto.productPrice}
     	</div>
     	
     	<div class="row">
-    	<label>옵션:</label>${productOptionDto.productOptionName}
+    	<label>옵션:</label>${ordersProductDto.productOptionName}
     	</div>
     	
     	<div class="row">
-    	<label>수량:</label>${productOptionDto.productOptionStock}
+    	<label>수량:</label>${ordersProductDto.productOptionStock}
     	</div>
     	
     	

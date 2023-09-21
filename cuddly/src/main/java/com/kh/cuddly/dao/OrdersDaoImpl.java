@@ -7,7 +7,9 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.kh.cuddly.dto.OrdersDto;
+import com.kh.cuddly.dto.OrdersProductDto;
 import com.kh.cuddly.mapper.OrdersMapper;
+import com.kh.cuddly.mapper.OrdersProductMapper;
 
 
 @Repository
@@ -20,6 +22,9 @@ public class OrdersDaoImpl implements OrdersDao{
 	
 	@Autowired
 	private OrdersMapper ordersMapper;
+	
+	@Autowired
+	private OrdersProductMapper ordersProductMapper;
 	
 	
 	@Override
@@ -59,8 +64,20 @@ public class OrdersDaoImpl implements OrdersDao{
 		return jdbcTemplate.query(sql, ordersMapper);
 	}
 	
-//	@Override
-//	public List<> 
+	@Override
+	public OrdersProductDto viewProduct(int ordersNo) {
+		
+		String sql = "select * from three_join where product_option_no = ?";
+		
+		Object[] data= {ordersNo};
+		
+		List<OrdersProductDto> list = jdbcTemplate.query(sql, ordersProductMapper, data);
+	    return list.isEmpty() ? null : list.get(0);
+		
+	
+		
+		
+	}
 	
 	
 	
