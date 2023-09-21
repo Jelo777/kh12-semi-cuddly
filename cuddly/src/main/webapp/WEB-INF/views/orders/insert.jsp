@@ -78,6 +78,10 @@
 
 <c:forEach var="product" items="${ordersProductDto}">
 
+	<div class="row">
+   <img src="image?productNo=${product.productNo}" width="200" height="200">
+  </div>
+
   <div class="row">
     <label>상품 이름:</label>${product.productName}
   </div>
@@ -100,6 +104,10 @@
   <br><br>
 </c:forEach>
 
+	
+<div class="row">
+    <label>총가격:</label>${total}
+  </div>
     	
     	
     	
