@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.kh.cuddly.dao.MemberDao;
+import com.kh.cuddly.dao.WishlistDao;
 import com.kh.cuddly.dto.MemberDto;
 
 @Controller
@@ -26,6 +27,9 @@ public class MemberController {
 	//이메일로 아이디,비밀번호 찾기
 	@Autowired
 	private JavaMailSender sender;
+	
+	@Autowired
+	private WishlistDao wishlistDao;//관심상품 목록
 	
 	@GetMapping("/join")
 	public String join() {
@@ -83,7 +87,6 @@ public class MemberController {
 		//[3] 조회한 정보를 모델에 첨부한다
 		model.addAttribute("memberDto",memberDto);
 		return "/WEB-INF/views/member/mypage.jsp";
-		
 	}
 	@GetMapping("/password")
 	public String password() {
@@ -212,8 +215,12 @@ public class MemberController {
 	}
 	
 	
-	
-	
+	@RequestMapping("/mypage/wishlist")
+	public String wishlist(HttpSession session, Model model) {
+		String memberId = (String) session.getAttribute("name");
+		model.addAttribute("wishlistList", wishlistDao.findByMemberId(memberId));
+		return "/WEB-INF/views/member/wishlist.jsp";
+	}
 	
 	
 	

@@ -41,7 +41,7 @@ public class WishlistDaoImpl implements WishlistDao {
 	@Override
 	public boolean check(WishlistDto wishlistDto) {
 		String sql = "select * from wishlist "
-					+ "where member_id = ? and prpduct_no = ?";
+					+ "where member_id = ? and product_no = ?";
 		Object[] data = {wishlistDto.getMemberId(), wishlistDto.getProductNo()};
 		List<WishlistDto> list = jdbcTemplate.query(sql, wishlistMapper, data);
 		return list.isEmpty() ? false : true;
