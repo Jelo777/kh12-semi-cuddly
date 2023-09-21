@@ -3,6 +3,7 @@ package com.kh.cuddly.controller;
 import java.io.File;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
+import java.util.List;
 
 import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -56,7 +57,7 @@ public class AdminController {
 		return "/WEB-INF/views/admin/product/insert.jsp";
 	}
 	
-	@PostMapping("/product/insert")
+	@PostMapping("/product/insert")//상품등록
 	public String insert(
 								@ModelAttribute ProductDto productDto, 
 								@RequestParam String creatorName,
@@ -92,28 +93,28 @@ public class AdminController {
 			creatorProductDao.insert(creatorProductDto);
 		}
 		
-		if(!attachMain.isEmpty()) {			
-		int attachNo = attachDao.sequence();
+		if(!attachMain.isEmpty()) {//등록파일이 있을때만
+			int attachNo = attachDao.sequence();
 		
-		String home = System.getProperty("user.home");
-		File dir = new File(home, "upload");
-		dir.mkdirs();
+			String home = System.getProperty("user.home");
+			File dir = new File(home, "upload");
+			dir.mkdirs();
 		
-		File target = new File(dir, String.valueOf(attachNo));
-		attachMain.transferTo(target);
+			File target = new File(dir, String.valueOf(attachNo));
+			attachMain.transferTo(target);
 		
-		AttachDto attachDto = new AttachDto();
-		attachDto.setAttachNo(attachNo);
-		attachDto.setAttachName(attachMain.getOriginalFilename());
-		attachDto.setAttachSize(attachMain.getSize());
-		attachDto.setAttachType(attachMain.getContentType());
-		attachDao.insert(attachDto);
+			AttachDto attachDto = new AttachDto();
+			attachDto.setAttachNo(attachNo);
+			attachDto.setAttachName(attachMain.getOriginalFilename());
+			attachDto.setAttachSize(attachMain.getSize());
+			attachDto.setAttachType(attachMain.getContentType());
+			attachDao.insert(attachDto);
 		
-		productDao.connectMain(productNo, attachNo);
+			productDao.connectMain(productNo, attachNo);//대표이미지 등록
 		
 		}
 		
-		if(!attachDetail.isEmpty()) {			
+		if(!attachDetail.isEmpty()) {//등록파일이 있을때만
 			int attachNo = attachDao.sequence();
 			
 			String home = System.getProperty("user.home");
@@ -130,14 +131,14 @@ public class AdminController {
 			attachDto.setAttachType(attachDetail.getContentType());
 			attachDao.insert(attachDto);
 		
-			productDao.connectDetail(productNo, attachNo);
+			productDao.connectDetail(productNo, attachNo);//상세이미지 등록
 			}
 
 		return "redirect:insert";
 	}
 	
 	@ResponseBody
-	@RequestMapping("/image")
+	@RequestMapping("/image")//파일 다운로드
 	public ResponseEntity<ByteArrayResource> image(@RequestParam int productNo) throws IOException{
 		
 		AttachDto attachDto = productDao.findImage(productNo);
@@ -169,26 +170,47 @@ public class AdminController {
 		ProductDto productDto = productDao.selectOne(productNo);
 		model.addAttribute("productDto", productDto);
 		
-		CreatorDto creatorDto = creatorDao.selectOneByProductNo(productNo);
+		CreatorDto creatorDto = creatorDao.selectOneByProductNo(productNo);//상품과 연결된 크리에이터 검색
 		model.addAttribute("creatorDto", creatorDto);
+		
+		List<ProductOptionDto> list = productOptionDao.selectListByProductNo(productNo);//상품과 연결된 옵션 검색
+		model.addAttribute("list", list);
 		
 		return "/WEB-INF/views/admin/product/edit.jsp";
 	}
 	
-	@PostMapping("/product/edit")
-	public String edit(@ModelAttribute ProductOptionDto productOptionDto,
-									@RequestParam int productNo
-									) {
+
+	@PostMapping("/product/editUpdate")//옵션수정
+	public String editUpdate(@ModelAttribute ProductOptionDto productOptionDto,
+			@RequestParam int productNo) {
 		
-		int productOptionNo = productOptionDao.sequence();
-		
-		productOptionDto.setProductOptionNo(productOptionNo);
-		productOptionDto.setProductNo(productNo);
-//		productOptionDto.setProductOptionName(productOptionName);
-//		productOptionDto.setProductOptionStock(productOptionStock);
-		productOptionDao.insert(productOptionDto);
+		productOptionDao.update(productOptionDto);
 		
 		return "redirect:edit?productNo="+productNo;
+	}
+	
+	@PostMapping("/product/edit")//옵션추가
+	@ResponseBody
+	public String edit(@ModelAttribute ProductOptionDto productOptionDto,
+									@RequestParam int productNo) {
+
+		if(productOptionDto.getProductOptionName().equals("")){//옵션명 입력창이 비었으면
+			return "null";
+		}
+		
+		boolean findName = productOptionDao.findOptionName(productOptionDto);//옵션입력창에 값이 이미 있으면
+		if(findName) {
+ 			return "fail";
+		}
+		
+		int productOptionNo = productOptionDao.sequence();
+
+		productOptionDto.setProductOptionNo(productOptionNo);
+		productOptionDto.setProductNo(productNo);
+		productOptionDao.insert(productOptionDto);
+		
+		return "success";
+		
 	}
 	
 	

@@ -10,7 +10,7 @@ public interface CreatorDao {
 	boolean isNewCreator(String creatorName);
 	
 	
-	CreatorDto selectOneByProductNo(int productNo);
+	CreatorDto selectOneByProductNo(int productNo);//상품과 연결된 크리에이터 검색
 	CreatorDto selectOne(String creatorName);
 	CreatorDto selectOne(int creatorNo);
 	List<CreatorDto> selectList();
