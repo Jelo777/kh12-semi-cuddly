@@ -4,6 +4,7 @@ package com.kh.cuddly.controller;
 
 
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -28,7 +29,6 @@ import com.kh.cuddly.dto.MemberDto;
 import com.kh.cuddly.dto.OrdersDetailDto;
 import com.kh.cuddly.dto.OrdersDto;
 import com.kh.cuddly.dto.OrdersProductDto;
-import com.kh.cuddly.dto.ProductDto;
 
 
 
@@ -62,26 +62,23 @@ public class OrdersController {
 	
 	
 	@GetMapping("/insert")
-	public String insert(HttpSession session, Model model,@RequestParam int ordersNo) {
-		
-		String memberId = (String) session.getAttribute("name");
-		
-		MemberDto memberDto = memberDao.selectOne(memberId);
-		
-//		AddressDto addressDto = addressDao.selectOne(memberId);
-		
-		model.addAttribute("memberDto", memberDto);
-//		model.addAttribute("addressDto", addressDto);
-		
+	public String insert(HttpSession session, Model model, @RequestParam int[] ordersNo) {
+	    String memberId = (String) session.getAttribute("name");
+	    MemberDto memberDto = memberDao.selectOne(memberId);
+	    model.addAttribute("memberDto", memberDto);
 
-		
-		OrdersProductDto ordersProductDto = ordersDao.viewProduct(ordersNo);
-		model.addAttribute("ordersProductDto", ordersProductDto);
-		
-		
-		
-		return "/WEB-INF/views/orders/insert.jsp";
+	    List<OrdersProductDto> dtoList = new ArrayList<>();
+
+	    for (int orderNo : ordersNo) {
+	        OrdersProductDto ordersProductDto = ordersDao.viewProduct(orderNo);
+	        dtoList.add(ordersProductDto); 
+	    }
+
+	    model.addAttribute("ordersProductDto", dtoList);
+
+	    return "/WEB-INF/views/orders/insert.jsp";
 	}
+
 	
 	
 	@PostMapping("/insert")

@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <!DOCTYPE html>
 <html>
@@ -74,26 +75,31 @@
         
     
     	<h1>주문할 상품 정보</h1>
-    	
-    	<div class="row">
-    	<label>상품 이름:</label>${ordersProductDto.productName}
-    	</div>
-    	
-    	<div class="row">
-    	<label>크리에이터:</label>${ordersProductDto.creatorName}
-    	</div>
-    	
-    	<div class="row">
-    	<label>상품 가격:</label>${ordersProductDto.productPrice}
-    	</div>
-    	
-    	<div class="row">
-    	<label>옵션:</label>${ordersProductDto.productOptionName}
-    	</div>
-    	
-    	<div class="row">
-    	<label>수량:</label>${ordersProductDto.productOptionStock}
-    	</div>
+
+<c:forEach var="product" items="${ordersProductDto}">
+
+  <div class="row">
+    <label>상품 이름:</label>${product.productName}
+  </div>
+  
+  <div class="row">
+    <label>크리에이터:</label>${product.creatorName}
+  </div>
+  
+  <div class="row">
+    <label>상품 가격:</label>${product.productPrice}
+  </div>
+  
+  <div class="row">
+    <label>옵션:</label>${product.productOptionName}
+  </div>
+  
+  <div class="row">
+    <label>수량:</label>${product.productOptionStock}
+  </div>
+  <br><br>
+</c:forEach>
+
     	
     	
     	
