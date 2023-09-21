@@ -7,7 +7,9 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.kh.cuddly.VO.PaginationVO;
+import com.kh.cuddly.dto.AttachDto;
 import com.kh.cuddly.dto.ProductDto;
+import com.kh.cuddly.mapper.AttachMapper;
 import com.kh.cuddly.mapper.ProductMapper;
 
 @Repository
@@ -18,6 +20,9 @@ public class ProductDaoImpl implements ProductDao{
 	
 	@Autowired
 	private ProductMapper productMapper;
+	
+	@Autowired
+	private AttachMapper attachMapper;
 	
 	@Override
 	public int sequence() {
@@ -94,5 +99,16 @@ public class ProductDaoImpl implements ProductDao{
 			Object[] data = {vo.getStartRow(), vo.getFinishRow()};
 			return jdbcTemplate.query(sql, productMapper, data);
 		}
+	}
+	
+	@Override
+	public AttachDto findImage(int productNo) {
+		String sql = "select * from attach where attach_no = ("
+				+ "select attach_no from product_main_image "
+				+ "where product_no=?"
+				+ ")";
+		Object[] data = {productNo};
+		List<AttachDto> list = jdbcTemplate.query(sql, attachMapper, data);
+		return list.isEmpty() ? null : list.get(0);
 	}
 }

@@ -6,4 +6,6 @@ public interface CreatorDao {
 	int sequence();
 	void insert(CreatorDto creatorDto);
 	boolean isNewCreator(String creatorName);
+	
+	CreatorDto selectOne(int productNo);
 }

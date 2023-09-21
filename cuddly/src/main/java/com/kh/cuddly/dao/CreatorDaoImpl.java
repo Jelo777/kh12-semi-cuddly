@@ -17,6 +17,7 @@ public class CreatorDaoImpl implements CreatorDao{
 	
 	@Autowired
 	CreatorMapper creatorMapper;
+		
 	
 	@Override
 	public int sequence() {
@@ -38,5 +39,16 @@ public class CreatorDaoImpl implements CreatorDao{
 		Object[] data = {creatorName};
 		List<CreatorDto> list = jdbcTemplate.query(sql, creatorMapper, data); 
 		return list.isEmpty() ? true : false;
+	}
+
+	@Override
+	public CreatorDto selectOne(int productNo) {
+		String sql = "select * from creator "
+								+ "inner join product "
+								+ "on creator.product_no = product.product_no "
+							+ "where product.product_no = ?";
+		Object[] data = {productNo};
+		List<CreatorDto> list = jdbcTemplate.query(sql,  creatorMapper, data);
+		return list.isEmpty() ? null : list.get(0);
 	}
 }
