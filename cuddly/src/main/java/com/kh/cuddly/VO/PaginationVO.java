@@ -8,6 +8,7 @@ import lombok.Data;
 @Data
 public class PaginationVO {
 	private String keyword;	//검색 분류 및 키워드
+	private String creatorName;
 	private int page = 1;//현재 페이지 번호(기본:1)
 	private int size = 10;//보여줄 게시판의 글 수(기본:10)
 	private int count;//전체 글 수
@@ -16,6 +17,11 @@ public class PaginationVO {
 	public boolean isSearch() {
 		return keyword != null;
 	}
+	public boolean isSearchByCreatorName() {
+		return creatorName != null;
+	}
+	
+	
 	public int getBegin() {
 		return (page-1) / navigatorSize * navigatorSize + 1;
 	}
@@ -39,6 +45,9 @@ public class PaginationVO {
 		if(isSearch()) {//검색
 			return "page="+(getBegin()-1)+"&size="+size+"&keyword="+keyword;
 		}
+		else if(isSearchByCreatorName()) {
+			return "page="+(getBegin()-1)+"&size="+size+"&creatorName="+creatorName;
+		}
 		else {//목록
 			return "page="+(getBegin()-1)+"&size="+size;
 		}
@@ -48,6 +57,9 @@ public class PaginationVO {
 		if(isSearch()) {//검색
 			return "page="+(getEnd()+1)+"&size="+size+"&keyword="+keyword;
 		}
+		else if(isSearchByCreatorName()) {
+			return "page="+(getBegin()+1)+"&size="+size+"&creatorName="+creatorName;
+		}
 		else {//목록
 			return "page="+(getEnd()+1)+"&size="+size;
 		}
@@ -56,6 +68,9 @@ public class PaginationVO {
 	public String getQueryString(int page) {
 		if(isSearch()) {//검색
 			return "page="+page+"&size="+size+ "&keyword=" + keyword;
+		}
+		else if(isSearchByCreatorName()) {
+			return "page="+page+"&size="+size+"&creatorName="+creatorName;
 		}
 		else {//목록
 			return "page="+page+"&size="+size;

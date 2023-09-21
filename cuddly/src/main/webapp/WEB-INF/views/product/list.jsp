@@ -8,18 +8,12 @@
 	<div class="row">
 		<h1>상품목록</h1>
 	</div>
-	<div class="row">
-		<form action="list">
-			<input class="form-input" name="keyword" placeholder="상품검색">
-			<button class="btn">검색</button>
-		</form>
-	</div>
 	<c:forEach var="productListDto" items="${list}">
 		<a class="link" href="detail?productNo=${productListDto.productNo}">
 			<div class="inline-flex-container allow-wrap left">
 				<table class="">
 					<tr>
-						<td><img src="https://picsum.photos/id/4/300/300" width="200"
+						<td><img src="/cuddly/admin/image?productNo=${productListDto.productNo}" width="200"
 							height="200"></td>
 					</tr>
 					<tr>

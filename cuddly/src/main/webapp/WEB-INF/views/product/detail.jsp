@@ -2,16 +2,64 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>    
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
-
+<script>
+	$(function(){
+		var params = new URLSearchParams(location.search);
+		var productNo = params.get("productNo");
+		
+		$.ajax({
+			url:"/cuddly/rest/wishlist/check",
+			method:"post",
+			data:{productNo:productNo},
+			success:function(response){
+				if(response.check==true){
+					$(".fa-heart").removeClass("fa-solid fa-regular")
+					.addClass("fa-solid");
+				}
+				else{
+					$(".fa-heart").removeClass("fa-solid fa-regular")
+					.addClass("fa-regular");
+				}
+				//전달받은 좋아요 개수를 하트뒤의 span에 출력
+				$(".fa-heart").next("span").text(response.count);
+			}
+		});
+		
+		$(".fa-heart").click(function(){
+			$.ajax({
+				url:"/cuddly/rest/wishlist/action",
+				method:"post",
+				data:{productNo:productNo},
+				success:function(response){
+					if(response.check==true){
+						$(".fa-heart").removeClass("fa-solid fa-regular")
+						.addClass("fa-solid");
+					}
+					else{
+						$(".fa-heart").removeClass("fa-solid fa-regular")
+						.addClass("fa-regular");
+					}
+					//전달받은 좋아요 개수를 하트뒤의 span에 출력
+					$(".fa-heart").next("span").text(response.count);
+				}
+			});
+		});
+		
+	});
+</script>
 
 <div class="container w-1000">
 	
 	<div class="row">
-		<img src="https://picsum.photos/id/4/300/300" width="200" height="200">
+		<img src="/cuddly/admin/image?productNo=${productDto.productNo}" width="200" height="200">
 	</div>
 	<div class="row">
 		<h2>${productDto.productName}</h2>
 		상품번호 : ${productDto.productNo}
+	</div>
+	<div class="row">
+		<i class="fa-solid fa-heart red"></i> 
+		<span>좋아요 개수</span>
 	</div>
 	<div class="row">
 		<h2>가격 : ${productDto.productPrice}</h2>
