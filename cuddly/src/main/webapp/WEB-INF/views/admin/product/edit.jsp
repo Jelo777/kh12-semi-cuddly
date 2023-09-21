@@ -1,16 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
     
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>상품 수정</title>
-</head>
-<body>
+<script src="/js/adminOptionCount.js"></script>
 
 <form action="edit" method="post" enctype="multipart/form-data">
 	<div class="container w-600">
@@ -27,19 +21,50 @@
 			<h3>${creatorDto.creatorName}</h3><br>
 			<h3>${productDto.productPrice}</h3><br>
 		</div> 
-		<div class="row left">
-		<h2>옵션</h2><br>
-		<select class="form-input w-50">
-			<option>옵션1</option>
-			<option>옵션2</option>
-			<option>옵션3</option>
-			<option>옵션4</option>
-		</select>
-		</div>
 		
+		<div class="flex-container w-500">
+        	<div class="w-100 left">
+            	<select class="form-input w-100">
+                	<option>옵션선택</option>
+            	</select>
+        	</div>
+        	
+        	<div class="w-100 right">
+            	<button type="button" class="editMinus">-</button>
+            	<input type="text" class="editNumBox" min="0" value="0" size="1em">
+            	<button type="button" class="editPlus">+</button>
+        	</div>
+        	
+        	<div class="w-100 right">
+            	<button class="btn btn-positive" type="button">옵션수정</button>
+        	</div>	
+        </div>
+        
+	<div class="flex-container w-500">    
+        <div class="row">
+            <input class="form-input" type="text" name="productOptionName" placeholder="옵션입력">
+        </div>
+        
+        <div class="row">
+            <button type="button" class="insertMinus">-</button>
+            <input type="text" class="insertNumBox" name="productOptionStock" min="0" value="0" size="1em">
+            <button type="button" class="insertPlus">+</button>
+        </div>
+        
+        <div class="row">
+            <button class="btn btn-positive" type="submit">옵션추가</button>
+        </div>
+ 	</div>
 		
+<!-- 		<div class="row"> -->
+				<input type="hidden" name="productNo" value="${productDto.productNo}">
+<!-- 			<input type="text" name="productOptionName" placeholder="옵션입력"> -->
+<!-- 			<input type="number" name="productOptionStock"> -->
+<!-- 			<button type="submit">옵션등록</button> -->
+<!-- 		</div> -->
+		
+
 	</div>
 </form>
-	
-</body>
-</html>
+
+<jsp:include page="/WEB-INF/views/template/mypageFooter.jsp"></jsp:include>

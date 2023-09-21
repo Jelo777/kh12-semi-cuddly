@@ -24,10 +24,12 @@ import com.kh.cuddly.dao.AttachDao;
 import com.kh.cuddly.dao.CreatorDao;
 import com.kh.cuddly.dao.CreatorProductDao;
 import com.kh.cuddly.dao.ProductDao;
+import com.kh.cuddly.dao.ProductOptionDao;
 import com.kh.cuddly.dto.AttachDto;
 import com.kh.cuddly.dto.CreatorDto;
 import com.kh.cuddly.dto.CreatorProductDto;
 import com.kh.cuddly.dto.ProductDto;
+import com.kh.cuddly.dto.ProductOptionDto;
 
 @Controller
 @RequestMapping("/cuddly/admin")
@@ -44,6 +46,9 @@ public class AdminController {
 	
 	@Autowired
 	private CreatorProductDao creatorProductDao;
+	
+	@Autowired
+	private ProductOptionDao productOptionDao;
 	
 	
 	@GetMapping("/product/insert")
@@ -160,7 +165,7 @@ public class AdminController {
 	}
 	
 	@GetMapping("/product/edit")
-	public String edit(@RequestParam int productNo,Model model) {
+	public String edit(@RequestParam int productNo, Model model) {
 		ProductDto productDto = productDao.selectOne(productNo);
 		model.addAttribute("productDto", productDto);
 		
@@ -169,6 +174,23 @@ public class AdminController {
 		
 		return "/WEB-INF/views/admin/product/edit.jsp";
 	}
+	
+	@PostMapping("/product/edit")
+	public String edit(@ModelAttribute ProductOptionDto productOptionDto,
+									@RequestParam int productNo
+									) {
+		
+		int productOptionNo = productOptionDao.sequence();
+		
+		productOptionDto.setProductOptionNo(productOptionNo);
+		productOptionDto.setProductNo(productNo);
+//		productOptionDto.setProductOptionName(productOptionName);
+//		productOptionDto.setProductOptionStock(productOptionStock);
+		productOptionDao.insert(productOptionDto);
+		
+		return "redirect:edit?productNo="+productNo;
+	}
+	
 	
 	
 }
