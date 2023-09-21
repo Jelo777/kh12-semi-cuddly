@@ -64,7 +64,7 @@
 	</header>
 	<nav>
 		<ul class="menu">
-			<li><a href="#">크리에이터 패션의류</a></li>
+			<li><a href="/cuddly/product/creator">크리에이터</a></li>
 			<li><a href="#">굿즈</a></li>
 			<li><a href="#">문구</a></li>
 			<li><a href="#">엑세서리</a></li>
@@ -89,7 +89,7 @@
 					<h3><a class="link" href="#">나의 리뷰</a></h3>
 				</div>
 				<div class="row left">
-					<h3><a class="link" href="#">관심상품</a></h3>
+					<h3><a class="link" href="/cuddly/member/mypage/wishlist">관심상품</a></h3>
 				</div>
 				<div class="row left">
 					<h3><a class="link" href="#">상품문의</a></h3>

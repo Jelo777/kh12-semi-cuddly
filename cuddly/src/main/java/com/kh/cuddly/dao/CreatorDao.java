@@ -9,8 +9,9 @@ public interface CreatorDao {
 	void insert(CreatorDto creatorDto);
 	boolean isNewCreator(String creatorName);
 	
-	CreatorDto selectOne(int productNo);
-	CreatorDto selectOneByName(String creatorName);
 	
+	CreatorDto selectOneByProductNo(int productNo);
+	CreatorDto selectOne(String creatorName);
+	CreatorDto selectOne(int creatorNo);
 	List<CreatorDto> selectList();
 }

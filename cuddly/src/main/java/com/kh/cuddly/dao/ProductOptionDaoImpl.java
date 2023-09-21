@@ -1,16 +1,21 @@
 package com.kh.cuddly.dao;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.kh.cuddly.dto.ProductOptionDto;
+import com.kh.cuddly.mapper.ProductOptionMapper;
 
 @Repository
 public class ProductOptionDaoImpl implements ProductOptionDao{
 	
 	@Autowired
 	JdbcTemplate jdbcTemplate;
+	@Autowired
+	ProductOptionMapper productOptionMapper;
 	
 	@Override
 	public int sequence() {
@@ -30,6 +35,12 @@ public class ProductOptionDaoImpl implements ProductOptionDao{
 									};
 		jdbcTemplate.update(sql, data);
 	}
-
+	
+	@Override
+	public List<ProductOptionDto> selectListByProductNo(int productNo) {
+		String sql = "select * from product_option where product_no = ?";
+		Object[] data = {productNo};
+		return jdbcTemplate.query(sql, productOptionMapper, data);
+	}
 	
 }
