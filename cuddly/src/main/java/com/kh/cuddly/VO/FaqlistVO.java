@@ -11,14 +11,14 @@ public class FaqlistVO {
 	private int count;//전체 글 수
 	private int navigatorSize = 10;//하단 네비게이터 표시 개수(기본:10)
 	
-	public boolean isCategory() {
-		return category != null;
+	public boolean isCategory() { // 카테고리 값이 있 / 없 
+		return category != null; // 값이 없으면 
 	}
-	public int getBegin() {
-		return (page-1) / navigatorSize * navigatorSize + 1;
+	public int getBegin() { // 시작 
+		return (page-1) / navigatorSize * navigatorSize + 1; // ex) 
 	}
-	public int getEnd() {
-		int end = getBegin() + navigatorSize - 1;
+	public int getEnd() { // 끝 
+		int end = getBegin() + navigatorSize - 1;  // ex) 
 		return Math.min(getPageCount(), end); 
 	}
 	public boolean isFirst() {

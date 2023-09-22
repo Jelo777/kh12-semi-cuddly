@@ -57,6 +57,7 @@ public class FaqController {
 	}
 	
 	
+	
 	// 상세 
 	@RequestMapping("/detail")
 	public String detail(@RequestParam int faqNo, Model model) {
@@ -86,6 +87,7 @@ public class FaqController {
 		model.addAttribute("faqDto", faqDto);
 		return "/WEB-INF/views/faq/edit.jsp";
 	}
+	
 	
 	@PostMapping("/edit")
 	public String edit(@ModelAttribute FaqDto faqDto) {

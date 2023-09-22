@@ -78,9 +78,9 @@ public class FaqDaoImpl implements FaqDao{
 
 
 	@Override
-	public List<FaqDto> selectList(String type, String keyword) {
+	public List<FaqDto> selectList(String category, String keyword) {
 		String sql = "select * from faq "
-				+ "where instr("+type+", ?) > 0 "
+				+ "where instr("+category+", ?) > 0 "
 				+ "order by faq_no desc";
 	Object[] data = {keyword};
 	return jdbcTemplate.query(sql, faqListMapper, data);
@@ -93,6 +93,7 @@ public class FaqDaoImpl implements FaqDao{
 		Object[] data = {faqCategory};
 		return jdbcTemplate.query(sql, faqMapper, data);
 	}
+	
 
 
 	@Override

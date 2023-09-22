@@ -17,7 +17,7 @@ public interface FaqDao {
 	List<FaqDto> selectList();
 	boolean update(FaqDto faqDto);
 	boolean delete(int faqNo);
-	List<FaqDto> selectList(String type, String keyword);
+	List<FaqDto> selectList(String category, String keyword);
 	List<FaqDto> selectCategory(String category);
 	int countList(FaqlistVO vo);
 	List<FaqDto> selectListByPage(FaqlistVO vo);
