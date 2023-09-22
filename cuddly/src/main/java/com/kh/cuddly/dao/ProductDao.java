@@ -16,8 +16,8 @@ public interface ProductDao {
 	ProductDto selectOne(int productNo);
 	List<ProductDto> selectList(PaginationVO vo);
 	
-	AttachDto findImage(int productNo);//상품수정 페이지에 찍어줄 이미지 찾기
-	
+	AttachDto findProductMainImage(int productNo);//상품 메인 이미지 찾기
+	AttachDto findProductDetailImage(int productNo);//상품 상세 이미지 찾기
 	
 	
 	

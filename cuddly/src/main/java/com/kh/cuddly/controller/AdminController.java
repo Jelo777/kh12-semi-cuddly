@@ -137,34 +137,6 @@ public class AdminController {
 		return "redirect:insert";
 	}
 	
-	@ResponseBody
-	@RequestMapping("/image")//파일 다운로드
-	public ResponseEntity<ByteArrayResource> image(@RequestParam int productNo) throws IOException{
-		
-		AttachDto attachDto = productDao.findImage(productNo);
-		if(attachDto == null) {
-			return ResponseEntity.notFound().build();
-		}
-		
-		String home = System.getProperty("user.home");
-		File dir = new File(home, "upload");
-		File target = new File(dir, String.valueOf(attachDto.getAttachNo()));
-		
-		byte[] data = FileUtils.readFileToByteArray(target);
-		ByteArrayResource resource = new ByteArrayResource(data);
-		
-		return ResponseEntity.ok()
-				.header(HttpHeaders.CONTENT_ENCODING, StandardCharsets.UTF_8.name())
-				.contentLength(attachDto.getAttachSize())
-				.header(HttpHeaders.CONTENT_DISPOSITION, 
-						ContentDisposition.attachment()
-							.filename(attachDto.getAttachName(), StandardCharsets.UTF_8)
-							.build().toString()
-						)
-			.body(resource);
-		
-	}
-	
 	@GetMapping("/product/edit")
 	public String edit(@RequestParam int productNo, Model model) {
 		ProductDto productDto = productDao.selectOne(productNo);
