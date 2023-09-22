@@ -42,7 +42,7 @@ public class CreatorDaoImpl implements CreatorDao{
 	}
 
 	@Override
-	public CreatorDto selectOneByProductNo(int productNo) {
+	public CreatorDto selectOneByProductNo(int productNo) {//상품과 연결된 크리에이터 검색
 		String sql = "select * from product p "
 								+ "inner join creator_product cp on cp.product_no = p.product_no "
 								+ "inner join creator c on c.creator_no = cp.creator_no "
@@ -67,7 +67,6 @@ public class CreatorDaoImpl implements CreatorDao{
 		List<CreatorDto> list = jdbcTemplate.query(sql, creatorMapper, data);
 		return list.isEmpty()?null : list.get(0);
 	}
-	
 	
 	@Override
 	public List<CreatorDto> selectList() {

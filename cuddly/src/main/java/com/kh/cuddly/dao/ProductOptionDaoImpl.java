@@ -37,10 +37,34 @@ public class ProductOptionDaoImpl implements ProductOptionDao{
 	}
 	
 	@Override
-	public List<ProductOptionDto> selectListByProductNo(int productNo) {
+	public List<ProductOptionDto> selectListByProductNo(int productNo) {//상품과 연결된 옵션 검색
 		String sql = "select * from product_option where product_no = ?";
 		Object[] data = {productNo};
 		return jdbcTemplate.query(sql, productOptionMapper, data);
+	}
+
+	@Override
+	public int update(ProductOptionDto productOptionDto) {//옵션수정
+		String sql = "update product_option set "
+								+ "product_option_stock = ? "
+							+ "where product_option_no = ?";
+		Object[] data = {productOptionDto.getProductOptionStock(), productOptionDto.getProductOptionNo()};
+		
+		return jdbcTemplate.update(sql, data);
+	}
+
+	@Override
+	public boolean findOptionName(ProductOptionDto productOptionDto) {//옵션추가에 중복확인
+		String sql = "select * from product_option where product_option_name = ? and product_no = ?";
+		Object[] data = {productOptionDto.getProductOptionName(), productOptionDto.getProductNo()};
+		
+		List<ProductOptionDto> list = jdbcTemplate.query(sql, productOptionMapper, data);
+		if(list == null || list.size() == 0) {
+			return false;
+		}else {
+			return true;
+		}
+		
 	}
 	
 }
