@@ -222,7 +222,10 @@ public class MemberController {
 		return "/WEB-INF/views/member/wishlist.jsp";
 	}
 	
-	
+	@RequestMapping("/address/list")
+	public String addressList() {
+		return "/WEB-INF/views/member/addressList.jsp";
+	}
 	
 	
 	
