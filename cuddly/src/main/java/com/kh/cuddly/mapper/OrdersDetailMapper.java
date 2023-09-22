@@ -20,6 +20,7 @@ public class OrdersDetailMapper implements RowMapper<OrdersDetailDto>{
 		ordersDetailDto.setProductNo(rs.getInt("product_no"));
 		ordersDetailDto.setOrdersDetailCount(rs.getInt("orders_detail_count"));
 		ordersDetailDto.setOrdersDetailPrice(rs.getInt("orders_detail_price"));
+		
 		return ordersDetailDto;
 	}
 }

@@ -10,7 +10,7 @@ public class OrdersProductDto {
 	private String productName;
 	private int productPrice;
 	private String productOptionName;
-	private int productOptionStock;
+	private int cartCount;
 	private String creatorName;
 	
 
