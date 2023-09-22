@@ -125,16 +125,6 @@ public class ProductDaoImpl implements ProductDao{
 		return list.isEmpty() ? null : list.get(0);
 	}
 	
-	@Override
-	public AttachDto findProductDetailImage(int productNo) {
-		String sql = "select * from attach where attach_no = ("
-						+ "select attach_no from product_detail_image "
-						+ "where product_no=?"
-					+ ")";
-		Object[] data = {productNo};
-		List<AttachDto> list = jdbcTemplate.query(sql, attachMapper, data);
-		return list.isEmpty() ? null : list.get(0);
-	}
 	
 	@Override
 	public AttachDto findProductDetailImage(int productNo) {
