@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import com.kh.cuddly.VO.PaginationVO;
 import com.kh.cuddly.dto.CreatorDto;
 import com.kh.cuddly.mapper.CreatorMapper;
 
@@ -70,7 +71,14 @@ public class CreatorDaoImpl implements CreatorDao{
 	
 	@Override
 	public List<CreatorDto> selectList() {
-		String sql = "select * from creator";
-		return jdbcTemplate.query(sql, creatorMapper);
+			String sql = "select * from creator";
+			return jdbcTemplate.query(sql, creatorMapper);
+	}
+	
+	@Override
+	public List<CreatorDto> selectList(String creatorName) {
+		String sql = "select * from creator where instr(creator_name, ? )>0";
+		Object[] data = {creatorName};
+		return jdbcTemplate.query(sql, creatorMapper, data);
 	}
 }
