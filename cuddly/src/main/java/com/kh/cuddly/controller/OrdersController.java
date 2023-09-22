@@ -36,6 +36,7 @@ import com.kh.cuddly.dto.AddressDto;
 import com.kh.cuddly.dto.AttachDto;
 import com.kh.cuddly.dto.CartDto;
 import com.kh.cuddly.dto.MemberDto;
+import com.kh.cuddly.dto.OrdersDetailDto;
 import com.kh.cuddly.dto.OrdersDto;
 import com.kh.cuddly.dto.OrdersProductDto;
 
@@ -70,6 +71,8 @@ public class OrdersController {
 	AddressDao addressDao;
 	
 	@Autowired QnaDao qnaDao;
+	
+	
 	
 
 
@@ -114,13 +117,17 @@ public class OrdersController {
 	public String insert(@ModelAttribute OrdersDto ordersDto,
 			HttpSession session) {
 		int ordersNo = ordersDao.sequence();
+		int ordersDetailNo = ordersDetailDao.sequence();
+		
+		OrdersDetailDto ordersDetailDto;
+		
 		String memberId = (String) session.getAttribute("name");
-	
 		ordersDto.setOrdersNo(ordersNo);
 		ordersDto.setMemberId(memberId);
 		ordersDao.insert(ordersDto);
 		
-		return "redirect:주문관리페이지";
+		
+		return "redirect:/cuddly";
 	}
 	
 	
@@ -144,6 +151,34 @@ public class OrdersController {
 		List<CartDto> cartList = cartDao.selectCartList();
 		model.addAttribute("cartList", cartList);
 		return "/WEB-INF/views/orders/cartlist.jsp";
+	}
+	
+	
+	@GetMapping("/addrInsert")
+	public String insert() {
+		
+		return "/WEB-INF/views/orders/addrInsert.jsp";
+	}
+	@PostMapping("/addrInsert")
+	public String insert(@ModelAttribute AddressDto addressDto, 
+			HttpSession session) {
+		String memberId=(String)session.getAttribute("name");
+		int addressNo = addressDao.sequence();
+		addressDto.setAddressNo(addressNo);
+		addressDto.setMemberId(memberId);
+		
+		//여기서addressDto는 내가 배송지 추가 페이지에서 입력한 값 + 시퀀스로 받아온 배송지번호,세션으로 가져온 멤버 아이디
+		
+		if(addressDto.getAddressDefault().equals("Y")) {//이 계정의 기본배송지가
+			addressDao.changeDefault(memberId);
+		}
+		
+		addressDao.insert(addressDto);
+		
+		
+		return "redirect:/cuddly"; 
+		
+		
 	}
 	
 	
