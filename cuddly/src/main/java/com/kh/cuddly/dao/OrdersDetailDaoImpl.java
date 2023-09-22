@@ -36,14 +36,17 @@ public class OrdersDetailDaoImpl implements OrdersDetailDao{
 	public void insert(OrdersDetailDto ordersDetailDto) {
 		String sql = "insert into orders_detail("
 				+ "orders_detail_no, orders_no, option_no, product_no, orders_detail_count, orders_detail_price"
-				+ ") values(orders_detail_seq.nextval, ?, ?, ?, ?, ?)";
+				+ ") values(?, ?, ?, ?, ?, ?)";
+		
 		Object[] data = {
+				ordersDetailDto.getOrdersDetailNo(),
 				 ordersDetailDto.getOrdersNo(),
 		            ordersDetailDto.getOptionNo(),
 		            ordersDetailDto.getProductNo(),
 		            ordersDetailDto.getOrdersDetailCount(),
 		            ordersDetailDto.getOrdersDetailPrice()
 		};
+		
 		jdbcTemplate.update(sql, data);
 		}
 

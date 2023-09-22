@@ -35,6 +35,8 @@
      
     <h1>배송지 정보</h1><br><br>
      	
+     	<div><a href="/cuddly/orders/addrInsert"><button>배송지 목록</button></a></div>
+     	
         <div class="row">
         <label>수령인 : </label>
         ${addressDto.addressName}
@@ -108,13 +110,26 @@
 <div class="row">
     <label>총가격:</label>${total}
   </div>
-    	
+  
+  <div class="row"><h1>결제 정보</h1></div>
+  <form action="insert" method="post">
+  <input type="hidden" name="addressNo" value="${addressDto.addressNo}">
+  <input type="hidden" name="ordersPrice" value="${total}">결제 금액:${total}
+  
+  <div class="row">
+  <input type="checkbox" name="ordersPayment" value="네이버페이">네이버 페이
+  <input type="checkbox" name="ordersPayment" value="카카오페이">카카오 페이
+  <input type="checkbox" name="ordersPayment" value="무통장입금">무통장 페이
+  </div>
+  
+  
+        <button>주문하기</button>
+    	</form>
     	
     	
     	
         
        
-        <button>주문하기</button>
    
     
     
