@@ -37,6 +37,10 @@ public class HomeController {
 		vo.setSize(8);
 		List<ProductDto> productList = productDao.selectList(vo);
 		List<CreatorDto> creatorList = creatorDao.selectList(keyword);
+		
+		if(productList.size()==0) productList = null;
+		if(creatorList.size()==0) creatorList = null;
+		
 		model.addAttribute("keyword", keyword);
 		model.addAttribute("productList", productList);
 		model.addAttribute("creatorList", creatorList);

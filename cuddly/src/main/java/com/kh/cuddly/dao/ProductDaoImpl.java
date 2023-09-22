@@ -95,7 +95,8 @@ public class ProductDaoImpl implements ProductDao{
 								+ "select product.* from product inner join creator_product "
 								+ "on creator_product.product_no = product.product_no "
 								+ "LEFT OUTER JOIN creator ON creator_product.creator_no = creator.creator_no "
-								+ "WHERE creator.creator_name = ?"
+								+ "WHERE creator.creator_name = ? "
+								+ "order by product.product_no desc "
 							+ ")TMP"
 						+ ") where rn between ? and ?";
 			Object[] data = {vo.getCreatorName(), vo.getStartRow(), vo.getFinishRow()}; 
