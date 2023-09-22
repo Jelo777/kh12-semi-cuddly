@@ -73,4 +73,22 @@ public class FaqDaoImpl implements FaqDao{
 		Object[] data = {faqNo};
 		return jdbcTemplate.update(sql, data) > 0;
 	}
+
+
+	@Override
+	public List<FaqDto> selectList(String type, String keyword) {
+		String sql = "select * from faq "
+				+ "where instr("+type+", ?) > 0 "
+				+ "order by faq_no desc";
+	Object[] data = {keyword};
+	return jdbcTemplate.query(sql, faqListMapper, data);
+	}
+
+
+	@Override
+	public List<FaqDto> selectCategory(String faqCategory) {
+		String sql = "select * from faq where faq_category = ?";
+		Object[] data = {faqCategory};
+		return jdbcTemplate.query(sql, faqMapper, data);
+	}
 }

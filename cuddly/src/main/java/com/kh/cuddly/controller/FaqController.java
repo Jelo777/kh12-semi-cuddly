@@ -1,5 +1,7 @@
 package com.kh.cuddly.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,9 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.kh.cuddly.dao.FaqDao;
-import com.kh.cuddly.dao.MemberDao;
 import com.kh.cuddly.dto.FaqDto;
-import com.kh.cuddly.dto.MemberDto;
 import com.kh.cuddly.error.NoResultException;
 
 @Controller
@@ -43,11 +43,25 @@ public class FaqController {
 	
 	// 목록 
 	@RequestMapping("/list")
-	public String list(Model model) {
-		model.addAttribute("list", faqDao.selectList());
-		return "/WEB-INF/views/faq/list.jsp";
-	}
+	public String list(Model model, 
+						@RequestParam(required = false) String type,
+						@RequestParam(required = false) String keyword) {
+		boolean isSearch = type != null && keyword != null;
+		
+		
+		if(isSearch) {
+			List<FaqDto> list = faqDao.selectList(type, keyword);
+			model.addAttribute("list", list);
+			model.addAttribute("isSearch", true);
+		}
 	
+		else {
+			List<FaqDto> list = faqDao.selectList();
+			model.addAttribute("list", list);
+			model.addAttribute("isSearch", false);
+		}
+			return "/WEB-INF/views/faq/list.jsp";
+	}
 	
 	// 상세 
 	@RequestMapping("/detail")
