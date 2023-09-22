@@ -28,12 +28,12 @@ public class CartDaoImpl implements CartDao {
 	}
 
 	@Override
-	public void insert(CartDto CartDto) {
+	public void insert(CartDto cartDto) {
 		String sql = "insert into cart("
-				+ "cart_no, cart_count, cart_price, cart_date"
-				+  ") values(?, ?, ?, ?)";
+				+ "cart_no,member_id,option_no,cart_count,cart_price"
+				+  ") values(?, ?, ?, ?, ?)";
 		Object[] data = {
-				CartDto.getCartNo(), CartDto.getCartCount(), CartDto.getCartPrice(), CartDto.getCartDate()
+				cartDto.getCartNo(),cartDto.getMemberId(),cartDto.getOptionNo(),cartDto.getCartCount(),cartDto.getCartPrice()
 		};
 		jdbcTemplate.update(sql,data);
 	}

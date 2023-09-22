@@ -142,6 +142,7 @@ public class AdminController {
 		return "/WEB-INF/views/admin/product/insert.jsp";
 	}
 	
+
 	@ResponseBody
 	@RequestMapping("/product/main") // 상품 메인 이미지
 	public ResponseEntity<ByteArrayResource> productMainImage(@RequestParam int productNo) throws IOException {
@@ -164,6 +165,7 @@ public class AdminController {
 				.body(resource);
 	}
 	
+
 	@GetMapping("/product/edit")
 	public String edit(@RequestParam int productNo, Model model) {
 		ProductDto productDto = productDao.selectOne(productNo);

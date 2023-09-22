@@ -25,7 +25,10 @@
 <link rel="stylesheet" type="text/css" href="/css/reset.css">
 <link rel="stylesheet" type="text/css" href="/css/layout.css">
 <link rel="stylesheet" type="text/css" href="/css/commons.css">
+
 <!-- <link rel="stylesheet" type="text/css" href="/css/test.css"> -->
+
+
 <style>
 	hr{
 	background:#F3F0FE;
@@ -56,7 +59,7 @@
             	</a>
             	</div>
             	<div>
-            		<form action="list">
+            		<form action="/cuddly/search">
 						<input class="form-input" name="keyword">
 						<button class="btn">검색</button>
 					</form>

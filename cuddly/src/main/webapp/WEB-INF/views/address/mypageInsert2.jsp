@@ -1,9 +1,37 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
- 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>CUDDLY</title>
+
+<!-- favicon 설정 -->
+<link rel="shortcut icon" href="/images/favicon.ico">
+
+<!-- css 파일을 불러오는 코드 -->
+<!-- 아이콘 사용을 위한 Font Awesome 6 CDN -->
+<link rel="stylesheet" type="text/css"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+
+<!-- 구글 웹 폰트 사용을 위한 CDN -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link
+	href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap"
+	rel="stylesheet">
+
+<link rel="stylesheet" type="text/css" href="/css/reset.css">
+<link rel="stylesheet" type="text/css" href="/css/layout-sidebar.css">
+<link rel="stylesheet" type="text/css" href="/css/commons.css">
+<!-- <link rel="stylesheet" type="text/css" href="/css/test.css"> -->
+<style></style>
+
+<!-- jquery cdn -->
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
  <script src="/js/address.js"></script>
- <script src="/js/addressOrdersInsert.js"></script>
+ <script src="/js/addressMypageInsert.js"></script>
  
  <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
  
@@ -19,7 +47,10 @@
 		});
 	});
 </script>
- 
+
+</head>
+<body class="center">
+
  
      <form class="address-insert-form" action="insert" method="post" autocomplete="off">
 
@@ -54,16 +85,12 @@
                         name="addressAddr2" placeholder="상세주소">
                 <div class="fail-feedback">모든 주소를 작성하세요</div>
             </div>
-
-            <div class="row">
-                <textarea class="form-input w-100" name="addressComent" 
-                            placeholder="요청사항" style="resize: none;" rows="5"></textarea>
-                <div class="fail-feedback">요청사항은 100자 이내로 작성해주세요</div>
-            </div>
 			<div>
 				<label>기본배송지로 설정</label><input class="checkbox" type="checkbox" checked>
 				<input type="hidden" name="addressDefault" value="Y">
 			</div>
+			
+	
             <div class="row">
                 <button type="submit" class="btn btn-positive w-100">등록하기</button>
             </div>
@@ -71,5 +98,5 @@
 
     </form>
  
- 
-<jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
+</body>
+</html>

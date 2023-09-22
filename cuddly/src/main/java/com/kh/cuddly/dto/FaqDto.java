@@ -12,5 +12,8 @@ public class FaqDto {
 	private String faqContent;
 	private Date faqDate;
 	private String faqCategory;
+	private int faqGroup;
+	private Integer faqParent;
+	private int faqDepth;
 	
 }

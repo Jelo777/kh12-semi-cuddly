@@ -4,11 +4,10 @@ import java.sql.Date;
 
 import lombok.Data;
 
-public class FaqListDto {
-
 
 @Data
-public class FaqDto {
+public class FaqListDto {
+	private String memberNickname;
 	private int faqNo;
 	private String faqId;
 	private String faqTitle;
@@ -16,4 +15,3 @@ public class FaqDto {
 	private Date faqDate;
 	private String faqCategory;
 	}
-}

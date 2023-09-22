@@ -8,6 +8,6 @@ public interface AddressDao {
 	int sequence();
 	void insert(AddressDto addressDto);
 	AddressDto selectOne(String memberId);
-	List<AddressDto>selectList();
+	List<AddressDto>selectList(String memberId);
 	void changeDefault(String memberId);
 }

@@ -20,8 +20,6 @@ public class FaqListMapper implements RowMapper<FaqDto>{
 		faqDto.setFaqNo(rs.getInt("faq_no"));
 		faqDto.setFaqTitle(rs.getString("faq_title"));
 		faqDto.setFaqId(rs.getString("faq_id"));
-		
-		
 		return faqDto;
 	}
 

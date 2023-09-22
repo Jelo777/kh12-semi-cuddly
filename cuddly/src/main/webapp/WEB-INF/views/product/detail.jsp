@@ -51,7 +51,7 @@
 <div class="container w-1000">
 	
 	<div class="row">
-		<img src="/cuddly/admin/image?productNo=${productDto.productNo}" width="200" height="200">
+		<img src="/cuddly/image/product/main?productNo=${productDto.productNo}" width="200" height="200">
 	</div>
 	<div class="row">
 		<h2>${productDto.productName}</h2>
@@ -74,13 +74,32 @@
 		${creatorName}
 	</div>
 	<div class="row">
-		<select class="form-input">
+	
+	<form action="cartInsert">
+	
+	<input type="hidden" name = "productNo" value="${productDto.productNo}">
+	
+		<select name="optionNo" class="form-input">
 			<option>옵션 선택</option>
 			<c:forEach var="optionList" items="${optionList}">
-				<option>${optionList.productOptionName}</option>
+			<option value="${optionList.productOptionNo}">${optionList.productOptionName}</option>
 			</c:forEach>
 		</select>
-		<button class="btn">옵션추가</button>
+		
+		<div class="row">
+		수량<input name="cartCount">
+		</div>
+		
+		<div class="row">
+		<button class="btn" type="submit">옵션 선택</button>
+		</div>
+		
+		
+		</form>
+	</div>
+	<div class="row">
+		디테일이미지
+		<img src="/cuddly/image/product/detail?productNo=${productDto.productNo}" width="200" height="200">
 	</div>
 </div>
 

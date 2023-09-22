@@ -52,9 +52,10 @@ public class AddressDaoImpl implements AddressDao{
 		return list.isEmpty() ? null : list.get(0);
 	}
 	@Override
-	public List<AddressDto> selectList() {
-		String sql="select * from address order by address_default desc, address_no asc";
-		return jdbcTemplate.query(sql, addressMapper);
+	public List<AddressDto> selectList(String memberId) {
+		String sql="select * from address where member_id=? order by address_default desc, address_no asc";
+		Object[]data= {memberId};
+		return jdbcTemplate.query(sql, addressMapper, data);
 	}
 	@Override
 	public void changeDefault(String memberId) {

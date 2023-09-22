@@ -2,6 +2,8 @@ package com.kh.cuddly.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -10,11 +12,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.kh.cuddly.VO.PaginationVO;
+import com.kh.cuddly.dao.CartDao;
 import com.kh.cuddly.dao.CreatorDao;
 import com.kh.cuddly.dao.CreatorProductDao;
 import com.kh.cuddly.dao.ProductDao;
 import com.kh.cuddly.dao.ProductOptionDao;
 import com.kh.cuddly.dao.ReviewDao;
+import com.kh.cuddly.dto.CartDto;
 import com.kh.cuddly.dto.CreatorDto;
 import com.kh.cuddly.dto.ProductDto;
 import com.kh.cuddly.dto.ProductOptionDto;
@@ -33,6 +37,8 @@ public class ProductController {
 	ProductOptionDao productOptionDao;
 	@Autowired
 	ReviewDao reviewDao;
+	@Autowired
+	CartDao cartDao;
 	
 	@RequestMapping("/list")
 	public String list(@ModelAttribute(name = "vo") PaginationVO vo, Model model) {
@@ -52,8 +58,9 @@ public class ProductController {
 		CreatorDto creatorDto = creatorDao.selectOneByProductNo(productNo);
 		String creatorName = creatorDto.getCreatorName();
 		List<ProductOptionDto> optionList = productOptionDao.selectListByProductNo(productNo); 
-		
 		float reviewAvg = reviewDao.reviewAvg(productNo);
+		
+		
 		model.addAttribute("optionList", optionList);
 		model.addAttribute("creatorName", creatorName);
 		model.addAttribute("productDto", productDto);
@@ -61,6 +68,30 @@ public class ProductController {
 		
 		return "/WEB-INF/views/product/detail.jsp";
 	}
+	
+	@RequestMapping("/cartInsert")
+	public String cartInsert(@ModelAttribute CartDto cartDto, HttpSession session, int productNo) {
+		
+		String memberId = (String) session.getAttribute("name");
+		int cartNo = cartDao.sequence();
+		cartDto.setCartNo(cartNo);
+		cartDto.setMemberId(memberId);
+		
+		ProductDto productDto=productDao.selectOne(productNo);
+		
+		int price=  productDto.getProductPrice();
+		
+		int totalPrice = cartDto.getCartCount() * price;
+		
+		cartDto.setCartPrice(totalPrice);
+		
+		cartDao.insert(cartDto);
+		
+		return "redirect:/cuddly/orders/insert?cartNo="+cartDto.getCartNo();
+		
+		
+	}
+	
 	
 	@RequestMapping("/creator")
 	public String creators(Model model) {
