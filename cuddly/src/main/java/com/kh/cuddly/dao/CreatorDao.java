@@ -14,4 +14,5 @@ public interface CreatorDao {
 	CreatorDto selectOne(String creatorName);
 	CreatorDto selectOne(int creatorNo);
 	List<CreatorDto> selectList();
+	List<CreatorDto> selectList(String creatorName);
 }

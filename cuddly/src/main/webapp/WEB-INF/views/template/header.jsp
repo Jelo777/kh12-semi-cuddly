@@ -56,7 +56,7 @@
             	</a>
             	</div>
             	<div>
-            		<form action="list">
+            		<form action="/cuddly/search">
 						<input class="form-input" name="keyword">
 						<button class="btn">검색</button>
 					</form>
