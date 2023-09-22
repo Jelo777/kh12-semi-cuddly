@@ -70,15 +70,25 @@ public class ProductController {
 	}
 	
 	@RequestMapping("/cartInsert")
-	public String cartInsert(@ModelAttribute CartDto cartDto, HttpSession session) {
+	public String cartInsert(@ModelAttribute CartDto cartDto, HttpSession session, int productNo) {
 		
 		String memberId = (String) session.getAttribute("name");
 		int cartNo = cartDao.sequence();
 		cartDto.setCartNo(cartNo);
 		cartDto.setMemberId(memberId);
+		
+		ProductDto productDto=productDao.selectOne(productNo);
+		
+		int price=  productDto.getProductPrice();
+		
+		int totalPrice = cartDto.getCartCount() * price;
+		
+		cartDto.setCartPrice(totalPrice);
+		
 		cartDao.insert(cartDto);
 		
-		return "redirect:/cuddly/";
+		return "redirect:/cuddly/orders/insert?cartNo="+cartDto.getCartNo();
+		
 		
 	}
 	

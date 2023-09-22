@@ -2,20 +2,12 @@ package com.kh.cuddly.controller;
 
 
 
-import java.io.File;
-import java.io.IOException;
-import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
-import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.ByteArrayResource;
-import org.springframework.http.ContentDisposition;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,7 +15,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.kh.cuddly.dao.AddressDao;
 import com.kh.cuddly.dao.CartDao;
@@ -33,7 +24,6 @@ import com.kh.cuddly.dao.OrdersDetailDao;
 import com.kh.cuddly.dao.ProductDao;
 import com.kh.cuddly.dao.QnaDao;
 import com.kh.cuddly.dto.AddressDto;
-import com.kh.cuddly.dto.AttachDto;
 import com.kh.cuddly.dto.CartDto;
 import com.kh.cuddly.dto.MemberDto;
 import com.kh.cuddly.dto.OrdersDetailDto;
@@ -79,7 +69,7 @@ public class OrdersController {
 	
 	
 	@GetMapping("/insert")
-	public String insert(HttpSession session, Model model, @RequestParam int[] ordersNo) {
+	public String insert(HttpSession session, Model model, @RequestParam int[] cartNo) {
 	    String memberId = (String) session.getAttribute("name");
 	    MemberDto memberDto = memberDao.selectOne(memberId);
 	    model.addAttribute("memberDto", memberDto);
@@ -88,14 +78,15 @@ public class OrdersController {
 	    
 	    int total = 0;
 
-	    for (int orderNo : ordersNo) {
-	        OrdersProductDto ordersProductDto = ordersDao.viewProduct(orderNo);
+	    for (int No : cartNo) {
+	        OrdersProductDto ordersProductDto = ordersDao.viewProduct(No);
+	        
 	        
 	        int price = ordersProductDto.getProductPrice();
-	        int count = ordersProductDto.getProductOptionStock();
+	        int count = ordersProductDto.getCartCount();
 	        
-	        int productTotal = price * count; // 상품별 가격
-	        total += productTotal; // 총 가격 누적
+	        int productTotal = price * count; 
+	        total += productTotal; 
 	        
 	        dtoList.add(ordersProductDto); 
 	    }
@@ -115,34 +106,44 @@ public class OrdersController {
 	
 	@PostMapping("/insert")
 	public String insert(@ModelAttribute OrdersDto ordersDto,
-			HttpSession session) {
+			HttpSession session,@ModelAttribute OrdersDetailDto ordersDetailDto, 
+			@RequestParam int productNo, @RequestParam int[] optionNo) {
+		
 		int ordersNo = ordersDao.sequence();
 		int ordersDetailNo = ordersDetailDao.sequence();
-		
-		OrdersDetailDto ordersDetailDto;
+
+	
 		
 		String memberId = (String) session.getAttribute("name");
 		ordersDto.setOrdersNo(ordersNo);
 		ordersDto.setMemberId(memberId);
+		
 		ordersDao.insert(ordersDto);
 		
+		ordersDetailDto.setOrdersDetailNo(ordersDetailNo);
+		ordersDetailDto.setOrdersNo(ordersNo);
+		ordersDetailDto.setOptionNo(optionNo[0]);
+		ordersDetailDto.setProductNo(productNo);
+		ordersDetailDao.insert(ordersDetailDto);
 		
-		return "redirect:/cuddly";
+		
+		return "redirect:/cuddly/orders/detail?ordersDetailNo="+ordersDetailNo;
 	}
 	
+
 	
 	
-	@GetMapping("/list")
-	public String list() {
-		return "/WEB-INF/views/orders/list.jsp";
-	}
-	
-	
-	@PostMapping("/list")
-	public String list(@ModelAttribute OrdersDto ordersDto, HttpSession session) {
-	    String memberId = (String) session.getAttribute("name");
-	    ordersDto.setMemberId(memberId);
-	    return "redirect:/cuddly";
+	@RequestMapping("/detail")
+	public String list(HttpSession session,int ordersDetailNo, Model model) {
+	    
+	    OrdersDetailDto ordersDetailDto = ordersDetailDao.selectOne(ordersDetailNo);
+	    
+	    model.addAttribute("ordersDetailDto", ordersDetailDto);
+	    
+	    
+	    
+	    
+	    return "/WEB-INF/views/orders/detail.jsp";
 	}
 
 	

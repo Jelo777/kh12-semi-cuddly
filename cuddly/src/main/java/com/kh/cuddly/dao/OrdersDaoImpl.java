@@ -65,11 +65,11 @@ public class OrdersDaoImpl implements OrdersDao{
 	}
 	
 	@Override
-	public OrdersProductDto viewProduct(int ordersNo) {
+	public OrdersProductDto viewProduct(int cartNo) {
 		
-		String sql = "select * from three_join where product_option_no = ?";
+		String sql = "select * from three_join where cart_no = ?";
 		
-		Object[] data= {ordersNo};
+		Object[] data= {cartNo};
 		
 		List<OrdersProductDto> list = jdbcTemplate.query(sql, ordersProductMapper, data);
 	    return list.isEmpty() ? null : list.get(0);

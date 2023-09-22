@@ -75,13 +75,17 @@
          <br><br>
          
         
+  <form action="insert" method="post">
     
     	<h1>주문할 상품 정보</h1>
 
 <c:forEach var="product" items="${ordersProductDto}">
 
+	<input type="hidden" name="optionNo" value="${product.productOptionNo}">
+
 	<div class="row">
-   <img src="image?productNo=${product.productNo}" width="200" height="200">
+   <img src="/cuddly/image/product/main?productNo=${product.productNo}" width="200" height="200">
+   <input type="hidden" name="productNo" value="${product.productNo}">
   </div>
 
   <div class="row">
@@ -101,7 +105,8 @@
   </div>
   
   <div class="row">
-    <label>수량:</label>${product.productOptionStock}
+    <label>수량:</label>${product.cartCount}
+    <input type="hidden" name="ordersDetailCount" value="${product.cartCount}">
   </div>
   <br><br>
 </c:forEach>
@@ -112,9 +117,12 @@
   </div>
   
   <div class="row"><h1>결제 정보</h1></div>
-  <form action="insert" method="post">
+  
+  <input type="hidden" name="ordersDetailPrice" value="${total}">
   <input type="hidden" name="addressNo" value="${addressDto.addressNo}">
   <input type="hidden" name="ordersPrice" value="${total}">결제 금액:${total}
+  
+  
   
   <div class="row">
   <input type="checkbox" name="ordersPayment" value="네이버페이">네이버 페이

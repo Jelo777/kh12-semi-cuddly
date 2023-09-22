@@ -2,9 +2,11 @@ package com.kh.cuddly.dao;
 
 import java.util.List;
 
-import org.springframework.stereotype.Repository;
-
+import com.kh.cuddly.VO.FaqlistVO;
 import com.kh.cuddly.dto.FaqDto;
+
+
+
 
 
 public interface FaqDao {
@@ -15,4 +17,9 @@ public interface FaqDao {
 	List<FaqDto> selectList();
 	boolean update(FaqDto faqDto);
 	boolean delete(int faqNo);
+	List<FaqDto> selectList(String category, String keyword);
+	List<FaqDto> selectCategory(String category);
+	int countList(FaqlistVO vo);
+	List<FaqDto> selectListByPage(FaqlistVO vo);
+	
 }
