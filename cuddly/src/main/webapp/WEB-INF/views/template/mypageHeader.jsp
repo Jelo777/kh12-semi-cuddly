@@ -30,6 +30,8 @@
 
 <!-- jquery cdn -->
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<!-- 주소 가져오기 툴 -->
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 
 </head>
 <body class="center">
@@ -106,7 +108,7 @@
 					<h3><a class="link" href="/cuddly/member/password">비밀번호 변경</a></h3>
 				</div>
 				<div class="row left">
-					<h3><a class="link" href="/cuddly/address/list">배송지 관리</a></h3>
+					<h3><a class="link" href="/cuddly/member/address/list">배송지 관리</a></h3>
 				</div>
 				<div class="row left">
 					<h3><a class="link" href="/cuddly/member/logout">로그아웃</a></h3>

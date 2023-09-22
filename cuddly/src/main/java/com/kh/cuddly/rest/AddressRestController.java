@@ -1,34 +1,30 @@
-package com.kh.cuddly.controller;
+package com.kh.cuddly.rest;
 
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.kh.cuddly.dao.AddressDao;
 import com.kh.cuddly.dto.AddressDto;
 
-@Controller
-@RequestMapping("/cuddly/address")
-public class AddressController {
-	
+@CrossOrigin
+@RestController
+@RequestMapping("/cuddly/rest/address")
+public class AddressRestController {
+
 	@Autowired
-	AddressDao addressDao;
+	private AddressDao addressDao;
 	
-	@GetMapping("/insert")
-	public String insert() {
-		
-		return "/WEB-INF/views/address/mypageInsert2.jsp";
-	}
 	@PostMapping("/insert")
-	public String insert(@ModelAttribute AddressDto addressDto, 
+	public void insert(@ModelAttribute AddressDto addressDto, 
 			HttpSession session) {
 		String memberId=(String)session.getAttribute("name");
 		int addressNo = addressDao.sequence();
@@ -41,19 +37,16 @@ public class AddressController {
 			addressDao.changeDefault(memberId);
 		}
 		
-		addressDao.insert(addressDto);
-		return "redirect:/cuddly/address/list"; //일단 리스트가 없어서 메인으로
+		addressDao.insert(addressDto); 
 	}
-
-	@RequestMapping("/list")
-	public String list(Model model, HttpSession session) {
+	@PostMapping("/list")
+	public List<AddressDto> list(HttpSession session) {
 		String memberId=(String)session.getAttribute("name");
 		
 		List<AddressDto> list=addressDao.selectList(memberId);
-		model.addAttribute("list", list);
-		
-		return "/WEB-INF/views/address/list.jsp";
+		return list;
 	}
+	
 	
 	
 }

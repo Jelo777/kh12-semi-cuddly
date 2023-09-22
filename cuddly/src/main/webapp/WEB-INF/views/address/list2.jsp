@@ -49,9 +49,7 @@
 		</c:forEach>
 			
 			<div class="row">
-				<a href="/cuddly/address/insert">
-					<button type ="button"  class="btn btn-positive w-300">등록하러 가기</button>
-				</a>
+					<button type ="button"  class="btn btn-positive w-300 insert-address">등록하러 가기</button>
 			</div>
 			
 	</div>
