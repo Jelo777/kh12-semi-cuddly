@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import com.kh.cuddly.VO.FaqlistVO;
 import com.kh.cuddly.dto.FaqDto;
 import com.kh.cuddly.mapper.FaqListMapper;
 import com.kh.cuddly.mapper.FaqMapper;
@@ -95,12 +96,42 @@ public class FaqDaoImpl implements FaqDao{
 
 
 	@Override
-	public int countList(String type, String keyword) {
-		String sql = "select count(*) from faq "
-				+ "where instr("+type+", ?) > 0";
-		Object[] data = {keyword};
-		return jdbcTemplate.queryForObject(sql, int.class, data);
+	public int countList(FaqlistVO vo) {
+		if(vo.isCategory()) {
+			String sql = "select count(*) from faq "
+					+ "where faq_category = ?";
+			Object[] data = {vo.getCategory()};
+			return jdbcTemplate.queryForObject(sql, int.class, data);
+		}
+		else {
+			String sql = "select count(*) from faq";
+			return jdbcTemplate.queryForObject(sql, int.class);
+		}
 	}
+
+
+	@Override
+	public List<FaqDto> selectListByPage(FaqlistVO vo) {
+		if(vo.isCategory()) {
+			String sql = "select * from ("
+								+ "select rownum rn, TMP.* from ("
+								+ "select * from faq where =? "
+								+ ")TMP"
+							+ ") where rn between ? and ?";
+			Object[] data = {vo.getCategory(), vo.getStartRow(), vo.getFinishRow()};
+			return jdbcTemplate.query(sql, faqListMapper, data);
+		}
+		else {
+			String sql = "select * from ("
+							+ "select rownum rn, TMP.* from ("
+							+ "select * from faq "
+							+ ")TMP"
+						+ ") where rn between ? and ?";
+			Object[] data = {vo.getStartRow(), vo.getFinishRow()};
+			return jdbcTemplate.query(sql, faqListMapper, data);
+		}
+	}
+	
 
 
 

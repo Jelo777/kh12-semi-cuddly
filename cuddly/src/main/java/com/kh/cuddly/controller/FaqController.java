@@ -2,8 +2,6 @@ package com.kh.cuddly.controller;
 
 import java.util.List;
 
-
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,6 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.kh.cuddly.VO.FaqlistVO;
 import com.kh.cuddly.dao.FaqDao;
 import com.kh.cuddly.dto.FaqDto;
 import com.kh.cuddly.error.NoResultException;
@@ -45,13 +44,17 @@ public class FaqController {
 
 	
 
-	// 목록 
 	@RequestMapping("/list")
-	public String list(Model model) {
-		model.addAttribute("list", faqDao.selectList());
+	public String list(@ModelAttribute(name = "vo") FaqlistVO vo,
+									Model model) {
+		int count = faqDao.countList(vo);
+		vo.setCount(count);
+
+		List<FaqDto> list = faqDao.selectListByPage(vo);
+		model.addAttribute("list", list);
+		
 		return "/WEB-INF/views/faq/list.jsp";
 	}
-	
 	
 	
 	// 상세 

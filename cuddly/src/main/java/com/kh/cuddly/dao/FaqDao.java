@@ -2,7 +2,7 @@ package com.kh.cuddly.dao;
 
 import java.util.List;
 
-
+import com.kh.cuddly.VO.FaqlistVO;
 import com.kh.cuddly.dto.FaqDto;
 
 
@@ -19,6 +19,7 @@ public interface FaqDao {
 	boolean delete(int faqNo);
 	List<FaqDto> selectList(String type, String keyword);
 	List<FaqDto> selectCategory(String category);
-	int countList(String type, String keyword);
+	int countList(FaqlistVO vo);
+	List<FaqDto> selectListByPage(FaqlistVO vo);
 	
 }

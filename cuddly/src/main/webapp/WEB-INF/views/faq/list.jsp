@@ -10,8 +10,6 @@
 <br><br><br>
 
 
-<table border="1" width="1000">
-<div class="row">
 		<table class="table table-border">
 	<thead>
 		 <tr>
@@ -48,8 +46,8 @@
 </table>
 
 <!-- 검색창 -->
-<form action="list" method="get">
-	<select name="type" required>
+<!-- <form action="list" method="get">
+	<select name="category" required>
 		<option value="faq_title">제목</option>
 		<option value="faq_id">아이디</option>
 		<option value="faq_category">카테고리</option>
@@ -57,7 +55,7 @@
 	<input type="search" name="keyword" 
 				placeholder="검색어 입력" required>
 	<button>검색</button>
-</form>
+</form> -->
 
 </div>
 <a href="list">목록으로</a>
