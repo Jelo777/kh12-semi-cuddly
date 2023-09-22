@@ -12,6 +12,5 @@ public interface QnaDao {
 	boolean update(QnaDto qnaDto);
 	QnaDto selectOne(int qnaNo);
 	List<QnaDto> selectList();
-	AttachDto findImage(int productNo);
 	
 }

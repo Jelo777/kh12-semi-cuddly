@@ -146,54 +146,5 @@ public class OrdersController {
 		return "/WEB-INF/views/orders/cartlist.jsp";
 	}
 	
-	@ResponseBody
-	@RequestMapping("/image")
-	public ResponseEntity<ByteArrayResource> 
-							image(@RequestParam int productNo) throws IOException {
-		//[1] 포켓몬 번호로 파일 번호를 찾아야 한다
-		//[2] 파일 번호로 파일 정보를 불러와야 한다
-		//[3] 실제 파일을 불러와야 한다
-		//[4] 앞에서 불러온 모든 정보로 ResponseEntity를 생성한다
-		//[5] 사용자한테 준다
-		
-		//1,2
-		AttachDto attachDto = qnaDao.findImage(productNo);
-		
-		if(attachDto == null) {
-//			throw new NoTargetException("파일 없음");
-			//내가 만든 예외로 통합
-			
-			return ResponseEntity.notFound().build();
-			//404로 반환
-			
-		}
-		
-		//3
-		String home = System.getProperty("user.home");
-		File dir = new File(home,"upload");
-		File target = new File(dir, String.valueOf(attachDto.getAttachNo()));
-		
-		byte[] data = FileUtils.readFileToByteArray(target);// 실제파일정보 불러오기
-		ByteArrayResource resource = new ByteArrayResource(data);
-		
-		//4,5 - header(정보), body(내용)
-		return ResponseEntity.ok()
-//				.header("Content-Encoding","UTF-8")
-				.header(HttpHeaders.CONTENT_ENCODING, StandardCharsets.UTF_8.name())
-//				.header("Content-Length",String.valueOf(attachDto.getAttachSize()))
-				.contentLength(attachDto.getAttachSize())
-//				.header("Content-Type",attachDto.getAttachType())//저장된 유형
-				.header(HttpHeaders.CONTENT_TYPE,attachDto.getAttachType())
-//				.header("Content-Type","application/octet-stream")//무조건 다운로드
-//				.contentType(MediaType.APPLICATION_OCTET_STREAM)
-//				.header("Content-Disposition","attachment; filename="+attachDto.getAttachName())
-				.header(HttpHeaders.CONTENT_DISPOSITION,
-					ContentDisposition.attachment().filename(attachDto.getAttachName(),StandardCharsets.UTF_8)
-					.build().toString()
-						)
-				
-			.body(resource);	
-	}
-	
 	
 }
