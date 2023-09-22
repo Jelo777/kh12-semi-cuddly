@@ -20,9 +20,6 @@ public class QnaDaoImpl implements QnaDao{
 	@Autowired
 	private QnaMapper qnaMapper;
 	
-	@Autowired
-	private AttachMapper attachMapper;
-	
 	@Override
 	public int sequence() {
 		
@@ -94,27 +91,5 @@ public class QnaDaoImpl implements QnaDao{
 //		
 //		return list;
 //	}
-	
-	@Override
-	public AttachDto findImage(int productNo) {
-		
-		String sql = "select * from attach "
-				+ "where attach_no = ("
-				+ "select attach_no from product_main_image "
-				+ "where product_no=?)";
-		
-		Object[] data = {productNo};
-		
-		List<AttachDto> list = jdbcTemplate.query(sql, attachMapper,data);
-		return list.isEmpty() ? null : list.get(0);
-	}
-	
-	
-	
-	
-	
-	
-	
-	
 	
 }

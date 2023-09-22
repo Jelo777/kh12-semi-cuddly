@@ -21,7 +21,7 @@
 </script>
  
  
-     <form class="address-insert-form" action="insert" method="post" autocomplete="off">
+     <form class="address-insert-form" action="addrInsert" method="post" autocomplete="off">
 
         <div class="container w-400">
 
@@ -65,7 +65,7 @@
 				<input type="hidden" name="addressDefault" value="Y">
 			</div>
             <div class="row">
-                <button type="submit" class="btn btn-positive w-100">등록하기</button>
+                <button class="btn btn-positive w-100">등록하기</button>
             </div>
         </div>
 

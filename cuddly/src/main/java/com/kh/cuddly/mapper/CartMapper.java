@@ -15,9 +15,11 @@ public class CartMapper implements RowMapper<CartDto>{
 	public CartDto mapRow(ResultSet rs, int rowNum) throws SQLException {
 		CartDto cartDto = new CartDto();
 		cartDto.setCartNo(rs.getInt("cart_no"));
+		cartDto.setMemberId(rs.getString("member_id"));
+		cartDto.setOptionNo(rs.getInt("option_no"));
 		cartDto.setCartCount(rs.getInt("cart_count"));
 		cartDto.setCartPrice(rs.getInt("cart_price"));
-		cartDto.setCartDate(rs.getDate("cart_date"));
+		
 		return cartDto;
 	}
 }

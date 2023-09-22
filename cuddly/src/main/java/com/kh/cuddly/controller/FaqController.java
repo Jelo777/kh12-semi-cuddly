@@ -109,4 +109,3 @@ public class FaqController {
 			throw new NoResultException("존재하지 않는 글");
 		}
 	}
-}
