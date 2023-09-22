@@ -127,22 +127,23 @@ public class OrdersController {
 		ordersDetailDao.insert(ordersDetailDto);
 		
 		
-		return "redirect:/cuddly";
+		return "redirect:/cuddly/orders/detail?ordersDetailNo="+ordersDetailNo;
 	}
 	
+
 	
 	
-	@GetMapping("/list")
-	public String list() {
-		return "/WEB-INF/views/orders/list.jsp";
-	}
-	
-	
-	@PostMapping("/list")
-	public String list(@ModelAttribute OrdersDto ordersDto, HttpSession session) {
-	    String memberId = (String) session.getAttribute("name");
-	    ordersDto.setMemberId(memberId);
-	    return "redirect:/cuddly";
+	@RequestMapping("/detail")
+	public String list(HttpSession session,int ordersDetailNo, Model model) {
+	    
+	    OrdersDetailDto ordersDetailDto = ordersDetailDao.selectOne(ordersDetailNo);
+	    
+	    model.addAttribute("ordersDetailDto", ordersDetailDto);
+	    
+	    
+	    
+	    
+	    return "/WEB-INF/views/orders/detail.jsp";
 	}
 
 	
