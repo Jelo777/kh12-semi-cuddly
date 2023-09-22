@@ -57,8 +57,10 @@ public class AddressDaoImpl implements AddressDao{
 		return jdbcTemplate.query(sql, addressMapper);
 	}
 	@Override
-	public void changeDefault() {
-		String sql="update address set address_default ='N' where address_default='Y'";
-		 jdbcTemplate.update(sql);
+	public void changeDefault(String memberId) {
+		String sql="update address set address_default ='N' where address_default='Y' and member_id=?";
+		Object[]data= {memberId};
+		
+		jdbcTemplate.update(sql,data);
 	}
 }

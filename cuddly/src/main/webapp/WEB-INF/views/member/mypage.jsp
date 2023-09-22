@@ -7,7 +7,6 @@
             /* border:1px solid; */
             box-shadow: 0 0 0 1px #2d3436;
 	}
-/* 	.w-66 {width:66%;} */
 </style>
 
 	<div class="container w-700">

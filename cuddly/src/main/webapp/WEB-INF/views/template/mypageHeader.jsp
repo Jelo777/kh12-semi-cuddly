@@ -106,7 +106,7 @@
 					<h3><a class="link" href="/cuddly/member/password">비밀번호 변경</a></h3>
 				</div>
 				<div class="row left">
-					<h3><a class="link" href="#">배송지 관리</a></h3>
+					<h3><a class="link" href="/cuddly/address/list">배송지 관리</a></h3>
 				</div>
 				<div class="row left">
 					<h3><a class="link" href="/cuddly/member/logout">로그아웃</a></h3>
