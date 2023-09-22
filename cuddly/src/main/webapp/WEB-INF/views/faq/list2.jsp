@@ -82,7 +82,7 @@
 		<option value="faq_id">아이디</option>
 		<option value="faq_category">카테고리</option>
 	</select>
-	<input type="search" name="keyword" 
+	<input type="search" name="category" 
 				placeholder="검색어 입력" required>
 	<button>검색</button>
 </form>

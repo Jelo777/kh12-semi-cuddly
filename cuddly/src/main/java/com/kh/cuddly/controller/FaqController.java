@@ -41,21 +41,29 @@ public class FaqController {
 		faqDao.insert(faqDto);
 		return "redirect:detail?faqNo="+faqNo;
 	}
+	
 
 	
+
 
 	@RequestMapping("/list")
 	public String list(@ModelAttribute(name = "vo") FaqlistVO vo,
-									Model model) {
-		int count = faqDao.countList(vo);
-		vo.setCount(count);
+	                    Model model,
+	                    @RequestParam(required = false) String category) {
+	    if (category != null) {
+	        vo.setCategory(category);
+	    }
 
-		List<FaqDto> list = faqDao.selectListByPage(vo);
-		model.addAttribute("list", list);
-		
-		return "/WEB-INF/views/faq/list.jsp";
+	    int count = faqDao.countList(vo);
+	    vo.setCount(count);
+
+	    List<FaqDto> list = faqDao.selectListByPage(vo);
+	    model.addAttribute("list", list);
+
+	    return "/WEB-INF/views/faq/list.jsp";
 	}
-	
+
+
 	
 	
 	// 상세 
@@ -81,6 +89,7 @@ public class FaqController {
 	}
 	
 	
+	
 	@GetMapping("/edit")
 	public String edit(@RequestParam int faqNo, Model model) {
 		FaqDto faqDto = faqDao.selectOne(faqNo);
@@ -99,7 +108,4 @@ public class FaqController {
 			throw new NoResultException("존재하지 않는 글");
 		}
 	}
-	
-	
-	
 }
