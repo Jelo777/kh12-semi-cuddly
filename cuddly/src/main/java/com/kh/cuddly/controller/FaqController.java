@@ -2,7 +2,7 @@ package com.kh.cuddly.controller;
 
 import java.util.List;
 
-import javax.servlet.http.HttpSession;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.kh.cuddly.dao.FaqDao;
 import com.kh.cuddly.dto.FaqDto;
 import com.kh.cuddly.error.NoResultException;
+
+
 
 @Controller
 @RequestMapping("/cuddly/faq")
@@ -35,33 +37,22 @@ public class FaqController {
 	private String write(@ModelAttribute FaqDto faqDto) {
 		int faqNo = faqDao.sequence();
 		faqDto.setFaqNo(faqNo);
+		
+		
 		faqDao.insert(faqDto);
 		return "redirect:detail?faqNo="+faqNo;
 	}
+
 	
-	
-	
+
 	// 목록 
 	@RequestMapping("/list")
-	public String list(Model model, 
-						@RequestParam(required = false) String type,
-						@RequestParam(required = false) String keyword) {
-		boolean isSearch = type != null && keyword != null;
-		
-		
-		if(isSearch) {
-			List<FaqDto> list = faqDao.selectList(type, keyword);
-			model.addAttribute("list", list);
-			model.addAttribute("isSearch", true);
-		}
-	
-		else {
-			List<FaqDto> list = faqDao.selectList();
-			model.addAttribute("list", list);
-			model.addAttribute("isSearch", false);
-		}
-			return "/WEB-INF/views/faq/list.jsp";
+	public String list(Model model) {
+		model.addAttribute("list", faqDao.selectList());
+		return "/WEB-INF/views/faq/list.jsp";
 	}
+	
+	
 	
 	// 상세 
 	@RequestMapping("/detail")
@@ -70,6 +61,9 @@ public class FaqController {
 		model.addAttribute("faqDto", faqDto);
 		return "/WEB-INF/views/faq/detail.jsp";
 	}
+	
+	
+	
 	
 	@RequestMapping("/delete")
 	public String delete(@RequestParam int faqNo) {

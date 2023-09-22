@@ -6,7 +6,7 @@
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 
 <br><br>
-<h2>관리자 상세 page</h2>
+<h2> FAQ 상세 page</h2>
 <br><br><br>
 
 
@@ -60,5 +60,5 @@
 </form>
 
 </div>
+<a href="list">목록으로</a>
 
-<a href="write">작성하기</a>

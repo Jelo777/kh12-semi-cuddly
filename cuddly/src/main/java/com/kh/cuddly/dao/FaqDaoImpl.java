@@ -7,7 +7,6 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.kh.cuddly.dto.FaqDto;
-import com.kh.cuddly.dto.FaqListDto;
 import com.kh.cuddly.mapper.FaqListMapper;
 import com.kh.cuddly.mapper.FaqMapper;
 
@@ -22,6 +21,8 @@ public class FaqDaoImpl implements FaqDao{
 	
 	@Autowired
 	private FaqMapper faqMapper;
+	
+	
 	
 	@Override
 	public void insert(FaqDto faqDto) {
@@ -91,4 +92,17 @@ public class FaqDaoImpl implements FaqDao{
 		Object[] data = {faqCategory};
 		return jdbcTemplate.query(sql, faqMapper, data);
 	}
+
+
+	@Override
+	public int countList(String type, String keyword) {
+		String sql = "select count(*) from faq "
+				+ "where instr("+type+", ?) > 0";
+		Object[] data = {keyword};
+		return jdbcTemplate.queryForObject(sql, int.class, data);
+	}
+
+
+
 }
+	
