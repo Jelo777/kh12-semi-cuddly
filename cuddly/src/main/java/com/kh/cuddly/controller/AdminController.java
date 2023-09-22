@@ -21,9 +21,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.kh.cuddly.VO.PaginationVO;
 import com.kh.cuddly.dao.AttachDao;
 import com.kh.cuddly.dao.CreatorDao;
 import com.kh.cuddly.dao.CreatorProductDao;
+import com.kh.cuddly.dao.MemberDao;
 import com.kh.cuddly.dao.ProductDao;
 import com.kh.cuddly.dao.ProductOptionDao;
 import com.kh.cuddly.dto.AttachDto;
@@ -50,6 +52,9 @@ public class AdminController {
 	
 	@Autowired
 	private ProductOptionDao productOptionDao;
+	
+	@Autowired
+	private MemberDao memberDao;
 	
 	
 	@GetMapping("/product/insert")
@@ -134,9 +139,33 @@ public class AdminController {
 			productDao.connectDetail(productNo, attachNo);//상세이미지 등록
 			}
 
-		return "redirect:insert";
+		return "/WEB-INF/views/admin/product/insert.jsp";
 	}
 	
+
+	@ResponseBody
+	@RequestMapping("/product/main") // 상품 메인 이미지
+	public ResponseEntity<ByteArrayResource> productMainImage(@RequestParam int productNo) throws IOException {
+
+		AttachDto attachDto = productDao.findProductMainImage(productNo);
+		if (attachDto == null) {
+			return ResponseEntity.notFound().build();
+		}
+
+		String home = System.getProperty("user.home");
+		File dir = new File(home, "upload");
+		File target = new File(dir, String.valueOf(attachDto.getAttachNo()));
+
+		byte[] data = FileUtils.readFileToByteArray(target);
+		ByteArrayResource resource = new ByteArrayResource(data);
+
+		return ResponseEntity.ok().header(HttpHeaders.CONTENT_ENCODING, StandardCharsets.UTF_8.name())
+				.contentLength(attachDto.getAttachSize()).header(HttpHeaders.CONTENT_DISPOSITION, ContentDisposition
+						.attachment().filename(attachDto.getAttachName(), StandardCharsets.UTF_8).build().toString())
+				.body(resource);
+	}
+	
+
 	@GetMapping("/product/edit")
 	public String edit(@RequestParam int productNo, Model model) {
 		ProductDto productDto = productDao.selectOne(productNo);
@@ -185,6 +214,32 @@ public class AdminController {
 		
 	}
 	
+	
+	@RequestMapping("/product/list")//관리자페이지 상품목록
+	public String list(@ModelAttribute(name = "vo") PaginationVO vo, Model model) {
+		
+		int count = productDao.countList(vo);
+		vo.setCount(count);
+		vo.setSize(8);
+		
+		List<ProductDto> list = productDao.selectList(vo);
+		model.addAttribute("list", list);
+		
+		return "/WEB-INF/views/admin/product/list.jsp";		
+	}
+	
+	@RequestMapping("/member/list")//회원목록조회
+	public String memberList(@ModelAttribute PaginationVO vo, Model model) {
+		vo.setSize(15);
+		
+		int count = memberDao.countList(vo);
+		vo.setCount(count);
+		model.addAttribute("vo", vo);
+		
+		return "/WEB-INF/views/admin/member/list.jsp";
+		
+		
+	}
 	
 	
 }

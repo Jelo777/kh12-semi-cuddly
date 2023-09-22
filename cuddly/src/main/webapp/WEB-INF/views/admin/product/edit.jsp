@@ -28,7 +28,7 @@ function addOption(){
 	
 	$.ajax({
         url:'edit',
-        type : 'POST', 
+        method : 'POST', 
         data : formData, 
         dataType: 'text',
         success: function (data) {
@@ -55,7 +55,7 @@ function addOption(){
 		</div>
 		
 		<div class="row">
-			<img src="/cuddly/admin/image?productNo=${productDto.productNo}" width="200" height="200"><br><br>
+			<img src="/cuddly/admin/product/main?productNo=${productDto.productNo}" width="200" height="200"><br><br>
 		</div>
 		
 		<div class="row">

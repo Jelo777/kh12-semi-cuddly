@@ -6,7 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import com.kh.cuddly.VO.PaginationVO;
 import com.kh.cuddly.dto.MemberDto;
+import com.kh.cuddly.dto.MemberListDto;
+import com.kh.cuddly.mapper.MemberListMapper;
 import com.kh.cuddly.mapper.MemberMapper;
 
 @Repository
@@ -18,6 +21,8 @@ public class MemberDaoImpl implements MemberDao{
 	@Autowired
 	private MemberMapper memberMapper;
 
+	@Autowired
+	private MemberListMapper memberListMapper;
 
 	@Override
 	public void insert(MemberDto memberDto) {
@@ -77,6 +82,25 @@ public class MemberDaoImpl implements MemberDao{
 		Object[] data= {memberEmail};
 		List<MemberDto> list=jdbcTemplate.query(sql, memberMapper,data);
 		return list.isEmpty() ? null : list.get(0);
+	}
+
+	@Override
+	public List<MemberListDto> selectList() {//관리자용 회원리스트 조회
+		String sql = "select * from member order by member_join desc";
+		return jdbcTemplate.query(sql, memberListMapper);
+	}
+	
+	@Override
+	public List<MemberListDto> selectListBySearch(String type, String keyword) {//회원리스트 검색일때 리스트
+		String sql = "select * from member where instr("+type+", ?) > 0 order by member_join desc";
+		Object[] data = {keyword};
+		return jdbcTemplate.query(sql, memberListMapper, data);
+	}
+
+	@Override
+	public int countList(PaginationVO vo) {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 	
