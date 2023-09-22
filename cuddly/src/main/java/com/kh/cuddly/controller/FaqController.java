@@ -49,7 +49,8 @@ public class FaqController {
 	@RequestMapping("/list")
 	public String list(@ModelAttribute(name = "vo") FaqlistVO vo,
 	                    Model model,
-	                    @RequestParam(required = false) String category) {
+	                    @RequestParam(required = false) String category,
+	                    @RequestParam(required = false) String keyword) {
 	    if (category != null) {
 	        vo.setCategory(category);
 	    }
