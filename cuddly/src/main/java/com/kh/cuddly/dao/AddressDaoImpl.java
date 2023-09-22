@@ -64,4 +64,11 @@ public class AddressDaoImpl implements AddressDao{
 		
 		jdbcTemplate.update(sql,data);
 	}
+	
+	@Override
+	public boolean delete(int addressNo) {
+		String sql="delete address where address_no = ?";
+		Object[] data= {addressNo};
+		return jdbcTemplate.update(sql,data)>0;
+	}
 }

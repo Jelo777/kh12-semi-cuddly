@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.kh.cuddly.dao.AddressDao;
@@ -46,7 +47,10 @@ public class AddressRestController {
 		List<AddressDto> list=addressDao.selectList(memberId);
 		return list;
 	}
-	
+	@PostMapping("/delete")
+	public void delete(@RequestParam int addressNo) {
+		addressDao.delete(addressNo);
+	}
 	
 	
 }

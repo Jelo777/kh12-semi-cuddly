@@ -14,27 +14,41 @@
  <script>
 	$(function(){
  <!--배송지 등록할 때 체크박스 하면 Y 아니면 N 가지는 구문  -->
-// 		$(".checkbox").change(function(){
-// 			if($(this).prop("checked")){
-// 				$("[name=addressDefault]").prop("value","Y");
-// 			}
-// 			else{
-// 				$("[name=addressDefault]").prop("value","N");
-// 			}
-// 		});
-// 	$(".address-insert-form").submit(function(e){
+		$(".checkbox").change(function(){
+			if($(this).prop("checked")){
+				$("[name=addressDefault]").prop("value","Y");
+			}
+			else{
+				$("[name=addressDefault]").prop("value","N");
+			}
+		});
 		
-// 		e.preventDefault();
+	$(".address-insert-form").submit(function(e){
+		//this == e.target == 폼(form)
 		
-// 		$.ajax({
-// 			url:"/cuddly/rest/address/insert",
-// 			method:"post",
-// 			data :$(e.target).serialize(),
-// 			$("[name=addressName]").val("");//초기화
-// 			loadList();
-// 		});
 		
-// 	});
+		//기본 이벤트 차단
+		e.preventDefault();
+		
+		$.ajax({
+			url:"/cuddly/rest/address/insert",
+			method:"post",
+			data :$(e.target).serialize(),
+			success:function(response){
+			$("[name=addressName]").val("");//초기화
+			$("[name=addressContact]").val("");//초기화
+			$("[name=addressPost]").val("");//초기화
+			$("[name=addressAddr1]").val("");//초기화
+			$("[name=addressAddr2]").val("");//초기화
+			$("[name=addressDefault]").val("Y");//초기화 얘는 원래 Y였으니깐
+			loadList();
+			}
+		});
+		
+	});
+
+
+
 	loadList();
 	
 	function loadList(){
@@ -48,7 +62,7 @@
 			
 			url:"/cuddly/rest/address/list",
 			method:"post",
-			data:{memberId:memberId},
+// 			data:{memberId:memberId},//필요없는거같은디
 			success:function(response){
 				console.log(response);
 				
@@ -72,14 +86,53 @@
 					$(htmlTemplate).find(".addressAddr2").text(address.addressAddr2);
 					$(htmlTemplate).find(".addressContact").text(address.addressContact);
 					$(htmlTemplate).find(".addressComent").text(address.addressComent || "");
-							$(".address-list").append(htmlTemplate);
+					
+					$(htmlTemplate).find(".btn-delete").attr("data-address-no",address.addressNo);
+					$(htmlTemplate).find(".btn-delete").click(function(e){
+						
+						var addressNo = $(e.target).attr("data-address-no");
+						$.ajax({
+							url:"/cuddly/rest/address/delete",
+							method:"post",
+							data:{addressNo : addressNo},
+							success:function(response){
+								loadList();
+							},
+							
+						});
+						
+					});
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					$(".address-list").append(htmlTemplate);
 						}
 					},
 
 			
-		});
+			});
 		
-	}
+		}
 	
 	
 	});
@@ -113,7 +166,8 @@
 <div class="w-25 mt-20">
 	<div class="row right me-30">
 		<h5>
-			<button type ="button"  style="width:150px; font-size:16px;"class="btn btn-positive">수정하기</button>
+			<button type ="button" style="width:150px; font-size:16px;" class="btn btn-positive">수정하기</button>
+			<button type ="button" style="width:150px; font-size:16px;" class="btn btn-negative btn-delete">삭제하기</button>
 		</h5>
 	</div>
 </div>
@@ -122,6 +176,63 @@
 </script>
 
 <div class="container w-600">
+	<div class="row">
+		 <form class="address-insert-form" autocomplete="off">
+
+	        <div class="container w-400">
+	
+	            <div class="row">
+	                <h1>배송지 등록</h1>
+	            </div>
+	
+	            <div class="row">
+	                <input type="text" class="form-input w-100" name="addressName" 
+	                        placeholder="수령인">
+	                <div class="fail-feedback">이름 형식이 올바르지 않습니다</div>
+	            </div>
+	
+	            <div class="row">
+	                <input type="text" class="form-input w-100" name="addressContact" 
+	                        placeholder="전화번호">
+	                <div class="fail-feedback">전화번호 형식이 올바르지 않습니다</div>
+	            </div>
+	
+	            <div class="row left">
+	                <input type="text" class="form-input post-search" name="addressPost" 
+	                        placeholder="우편번호" size="6" maxlength="6" readonly>
+	                <button type="button" class="btn post-search">
+	                    <i class="fa-solid fa-magnifying-glass"></i>
+	                </button>
+	                <input type="text" class="form-input w-100 mt-10 post-search" 
+	                         name="addressAddr1" placeholder="기본주소" readonly>
+	                
+	                <input type="text" class="form-input w-100 mt-10" 
+	                        name="addressAddr2" placeholder="상세주소">
+	                <div class="fail-feedback">모든 주소를 작성하세요</div>
+	            </div>
+				<div>
+					<label>기본배송지로 설정</label><input class="checkbox" type="checkbox" checked>
+					<input type="hidden" name="addressDefault" value="Y">
+				</div>
+				
+		
+	            <div class="row">
+	                <button type="submit" class="btn btn-positive w-100">등록하기</button>
+	            </div>
+	        </div>
+
+    	</form>
+	
+	
+	</div>
+
+
+
+
+
+
+
+
 	<div class="row">
 		<div class="row address-list"></div>
 	</div>
