@@ -87,12 +87,12 @@ public class ReviewDaoImpl implements ReviewDao{
 	public float reviewAvg(int productNo) {
 		String sql = "select avg(review_grade) from review where product_no = ?";
 		Object[] data = {productNo};
-		return jdbcTemplate.queryForObject(sql, float.class, data);
+		boolean isNull = jdbcTemplate.queryForObject(sql, float.class, data)==null;
+		if(isNull) {
+			return 0;
+		}
+		else {
+			return jdbcTemplate.queryForObject(sql, float.class, data);
+		}
 	}
-	
-	
-	
-	
-	
-
 }

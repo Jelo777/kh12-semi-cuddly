@@ -52,8 +52,9 @@ public class ProductController {
 		CreatorDto creatorDto = creatorDao.selectOneByProductNo(productNo);
 		String creatorName = creatorDto.getCreatorName();
 		List<ProductOptionDto> optionList = productOptionDao.selectListByProductNo(productNo); 
-		
 		float reviewAvg = reviewDao.reviewAvg(productNo);
+		
+		
 		model.addAttribute("optionList", optionList);
 		model.addAttribute("creatorName", creatorName);
 		model.addAttribute("productDto", productDto);

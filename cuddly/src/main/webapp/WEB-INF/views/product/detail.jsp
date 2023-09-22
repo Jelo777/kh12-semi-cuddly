@@ -51,7 +51,7 @@
 <div class="container w-1000">
 	
 	<div class="row">
-		<img src="/cuddly/admin/image?productNo=${productDto.productNo}" width="200" height="200">
+		<img src="/cuddly/image/product/main?productNo=${productDto.productNo}" width="200" height="200">
 	</div>
 	<div class="row">
 		<h2>${productDto.productName}</h2>
@@ -81,6 +81,10 @@
 			</c:forEach>
 		</select>
 		<button class="btn">옵션추가</button>
+	</div>
+	<div class="row">
+		디테일이미지
+		<img src="/cuddly/image/product/detail?productNo=${productDto.productNo}" width="200" height="200">
 	</div>
 </div>
 
