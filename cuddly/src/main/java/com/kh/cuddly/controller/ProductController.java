@@ -46,6 +46,10 @@ public class ProductController {
 		vo.setCount(count);
 		vo.setSize(8);
 		
+		if(vo.getCreatorName() != null) {
+			model.addAttribute("creator",vo.getCreatorName());
+		}
+		
 		List<ProductDto> list = productDao.selectList(vo);
 		model.addAttribute("list", list);
 		
@@ -95,7 +99,7 @@ public class ProductController {
 	
 	@RequestMapping("/creator")
 	public String creators(Model model) {
-		List<CreatorDto> list = creatorDao.selectList();
+		List<CreatorDto> list = creatorDao.selectListJoinImage();
 		model.addAttribute("list", list);
 		
 		return "/WEB-INF/views/product/creator.jsp";

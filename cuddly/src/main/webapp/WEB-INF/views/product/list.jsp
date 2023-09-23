@@ -5,9 +5,11 @@
 <style>
 </style>
 <div class="container w-1000">
+	<c:if test="${creator!=null}">
 	<div class="row">
-		<h1>상품목록</h1>
+		<h1>${creator}</h1>
 	</div>
+	</c:if>
 	<c:forEach var="productListDto" items="${list}">
 		<a class="link" href="detail?productNo=${productListDto.productNo}">
 			<div class="inline-flex-container allow-wrap left">
