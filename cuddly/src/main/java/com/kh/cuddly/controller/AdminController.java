@@ -254,6 +254,7 @@ public class AdminController {
 							@RequestParam MultipartFile attach) throws IllegalStateException, IOException {
 		
 		if(!attach.isEmpty()) {//등록파일이 있을때만
+			creatorDao.deleteConnect(creatorNo);
 			int attachNo = attachDao.sequence();
 		
 			String home = System.getProperty("user.home");

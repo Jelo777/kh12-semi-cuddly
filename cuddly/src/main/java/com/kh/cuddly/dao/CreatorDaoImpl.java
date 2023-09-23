@@ -96,6 +96,14 @@ public class CreatorDaoImpl implements CreatorDao{
 	}
 	
 	@Override
+	public boolean deleteConnect(int creatorNo) {
+		String sql = "delete creator_image where creator_no = ?";
+		Object[] data = {creatorNo};
+		return jdbcTemplate.update(sql, data) > 0;
+	}
+	
+	
+	@Override
 	public AttachDto findCreatorImage(int creatorNo) {
 		String sql = "select * from attach where attach_no = ("
 						+ "select attach_no from creator_image "
@@ -103,5 +111,14 @@ public class CreatorDaoImpl implements CreatorDao{
 		Object[] data = {creatorNo}; 
 		List<AttachDto> list = jdbcTemplate.query(sql, attachMapper, data);
 		return list.isEmpty() ? null : list.get(0);
+	}
+	
+	@Override
+	public List<CreatorDto> selectListJoinImage() {
+		String sql = "SELECT * FROM creator c "
+					+ "LEFT outer JOIN CREATOR_IMAGE ci ON c.CREATOR_NO = ci.creator_no "
+					+ "LEFT outer JOIN attach a ON ci.attach_no = a.ATTACH_NO "
+					+ "ORDER BY c.CREATOR_NO asc";
+		return jdbcTemplate.query(sql, creatorMapper);
 	}
 }

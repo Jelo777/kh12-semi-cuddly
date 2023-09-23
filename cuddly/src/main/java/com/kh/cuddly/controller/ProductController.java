@@ -99,7 +99,7 @@ public class ProductController {
 	
 	@RequestMapping("/creator")
 	public String creators(Model model) {
-		List<CreatorDto> list = creatorDao.selectList();
+		List<CreatorDto> list = creatorDao.selectListJoinImage();
 		model.addAttribute("list", list);
 		
 		return "/WEB-INF/views/product/creator.jsp";
