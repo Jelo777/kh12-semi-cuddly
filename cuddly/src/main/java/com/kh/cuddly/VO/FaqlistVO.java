@@ -5,12 +5,16 @@ import lombok.Data;
 @Data
 public class FaqlistVO {
 
-	private String category;//카테고리 검색용
+	private String keyword, category;//카테고리 검색용
 	private int page = 1;//현재 페이지 번호(기본:1)
 	private int size = 10;//보여줄 게시판의 글 수(기본:10)
 	private int count;//전체 글 수
 	private int navigatorSize = 10;//하단 네비게이터 표시 개수(기본:10)
 	
+	
+	public boolean isSearch() {
+		return keyword != null;
+	}
 	public boolean isCategory() { // 카테고리 값이 있 / 없 
 		return category != null; // 값이 없으면 
 	}
