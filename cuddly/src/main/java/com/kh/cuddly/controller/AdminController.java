@@ -237,9 +237,43 @@ public class AdminController {
 		model.addAttribute("vo", vo);
 		
 		return "/WEB-INF/views/admin/member/list.jsp";
-		
-		
 	}
 	
+	@GetMapping("/creator/edit")
+	public String creatorEdit(@RequestParam int creatorNo, Model model) {
+		
+		CreatorDto creatorDto = creatorDao.selectOne(creatorNo);
+		model.addAttribute("creatorDto", creatorDto);
+		
+		return "/WEB-INF/views/admin/creator/edit.jsp";
+	}
+	
+	
+	@PostMapping("/creator/edit")
+	public String creatorEdit(@RequestParam int creatorNo,
+							@RequestParam MultipartFile attach) throws IllegalStateException, IOException {
+		
+		if(!attach.isEmpty()) {//등록파일이 있을때만
+			creatorDao.deleteConnect(creatorNo);
+			int attachNo = attachDao.sequence();
+		
+			String home = System.getProperty("user.home");
+			File dir = new File(home, "upload");
+			dir.mkdirs();
+		
+			File target = new File(dir, String.valueOf(attachNo));
+			attach.transferTo(target);
+		
+			AttachDto attachDto = new AttachDto();
+			attachDto.setAttachNo(attachNo);
+			attachDto.setAttachName(attach.getOriginalFilename());
+			attachDto.setAttachSize(attach.getSize());
+			attachDto.setAttachType(attach.getContentType());
+			attachDao.insert(attachDto);
+		
+			creatorDao.connect(attachNo, creatorNo);//크리에이터_이미지
+		}
+		return "redirect:/cuddly/product/creator";
+	}
 	
 }
