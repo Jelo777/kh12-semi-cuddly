@@ -6,8 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
-import com.kh.cuddly.VO.PaginationVO;
+import com.kh.cuddly.dto.AttachDto;
 import com.kh.cuddly.dto.CreatorDto;
+import com.kh.cuddly.mapper.AttachMapper;
 import com.kh.cuddly.mapper.CreatorMapper;
 
 @Repository
@@ -18,6 +19,9 @@ public class CreatorDaoImpl implements CreatorDao{
 	
 	@Autowired
 	CreatorMapper creatorMapper;
+	
+	@Autowired
+	AttachMapper attachMapper;
 		
 	
 	@Override
@@ -80,5 +84,24 @@ public class CreatorDaoImpl implements CreatorDao{
 		String sql = "select * from creator where instr(creator_name, ? )>0";
 		Object[] data = {creatorName};
 		return jdbcTemplate.query(sql, creatorMapper, data);
+	}
+	
+	@Override
+	public void connect(int attachNo, int creatorNo) {
+		String sql = "insert into creator_image("
+						+ "attach_no, creator_no)"
+					+ "values(?,?)";
+		Object[] data = {attachNo, creatorNo};
+		jdbcTemplate.update(sql, data);
+	}
+	
+	@Override
+	public AttachDto findCreatorImage(int creatorNo) {
+		String sql = "select * from attach where attach_no = ("
+						+ "select attach_no from creator_image "
+						+ "where creator_no = ?)";
+		Object[] data = {creatorNo}; 
+		List<AttachDto> list = jdbcTemplate.query(sql, attachMapper, data);
+		return list.isEmpty() ? null : list.get(0);
 	}
 }

@@ -46,6 +46,10 @@ public class ProductController {
 		vo.setCount(count);
 		vo.setSize(8);
 		
+		if(vo.getCreatorName() != null) {
+			model.addAttribute("creator",vo.getCreatorName());
+		}
+		
 		List<ProductDto> list = productDao.selectList(vo);
 		model.addAttribute("list", list);
 		
