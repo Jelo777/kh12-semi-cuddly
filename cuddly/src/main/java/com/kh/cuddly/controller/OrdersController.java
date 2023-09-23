@@ -24,8 +24,9 @@ import com.kh.cuddly.dao.OrdersDetailDao;
 import com.kh.cuddly.dao.ProductDao;
 import com.kh.cuddly.dao.QnaDao;
 import com.kh.cuddly.dto.AddressDto;
-import com.kh.cuddly.dto.CartDto;
 import com.kh.cuddly.dto.MemberDto;
+import com.kh.cuddly.dto.MultiOrders;
+import com.kh.cuddly.dto.OrderDetailJoinDto;
 import com.kh.cuddly.dto.OrdersDetailDto;
 import com.kh.cuddly.dto.OrdersDto;
 import com.kh.cuddly.dto.OrdersProductDto;
@@ -44,6 +45,7 @@ public class OrdersController {
 	
 	@Autowired
 	OrdersDetailDao ordersDetailDao;
+	
 	
 	@Autowired
 	CartDao cartDao;
@@ -81,7 +83,6 @@ public class OrdersController {
 	    for (int No : cartNo) {
 	        OrdersProductDto ordersProductDto = ordersDao.viewProduct(No);
 	        
-	        
 	        int price = ordersProductDto.getProductPrice();
 	        int count = ordersProductDto.getCartCount();
 	        
@@ -104,55 +105,126 @@ public class OrdersController {
 
 	
 	
+//	@PostMapping("/insert")
+//	public String insert(@ModelAttribute OrdersDto ordersDto,
+//			HttpSession session,
+//			@ModelAttribute MultiOrders details) {
+//		
+//		int ordersNo = ordersDao.sequence();
+//		String memberId = (String) session.getAttribute("name");
+//		ordersDto.setOrdersNo(ordersNo);
+//		ordersDto.setMemberId(memberId);
+//		
+//		ordersDao.insert(ordersDto);
+//		
+//		
+//		
+//		List<OrdersDetailDto> list = details.getDetails();
+//
+//		ordersDetailDao.insert(list.get(0));
+//		
+////		for(OrdersDetailDto detail : ordersDetailDtoList) {
+////			
+////			
+////		int ordersDetailNo = ordersDetailDao.sequence();
+////		detail.setOrdersDetailNo(ordersDetailNo);
+////		detail.setOrdersNo(ordersNo);
+////		
+////		int price = cartDao.price(detail.getOptionNo());
+////		int count = detail.getOrdersDetailCount();
+////		
+////		int total = price * count;
+////		
+////		detail.setOrdersDetailPrice(total);
+////		
+////		ordersDetailDao.insert(detail);
+////		
+////		}
+//		
+//		
+//		return "redirect:/cuddly/orders/detail?ordersNo="+ordersNo;
+//	}
+	
 	@PostMapping("/insert")
 	public String insert(@ModelAttribute OrdersDto ordersDto,
-			HttpSession session,@ModelAttribute OrdersDetailDto ordersDetailDto, 
-			@RequestParam int productNo, @RequestParam int[] optionNo) {
-		
-		int ordersNo = ordersDao.sequence();
-		int ordersDetailNo = ordersDetailDao.sequence();
+	        HttpSession session,
+	        @ModelAttribute MultiOrders details,
+	        @RequestParam int[] cartNo) {
 
-	
+	    int ordersNo = ordersDao.sequence();
+	    String memberId = (String) session.getAttribute("name");
+	    ordersDto.setOrdersNo(ordersNo);
+	    ordersDto.setMemberId(memberId);
+
+	    ordersDao.insert(ordersDto);
+
+	    List<OrdersDetailDto> list = details.getDetails();
+
+	    for (OrdersDetailDto detail : list) {
+	        int ordersDetailNo = ordersDetailDao.sequence();
+	        detail.setOrdersDetailNo(ordersDetailNo);
+	        detail.setOrdersNo(ordersNo);
+	        
+		int price = cartDao.price(detail.getOptionNo());
+		int count = detail.getOrdersDetailCount();
 		
-		String memberId = (String) session.getAttribute("name");
-		ordersDto.setOrdersNo(ordersNo);
-		ordersDto.setMemberId(memberId);
+		int total = price * count;
 		
-		ordersDao.insert(ordersDto);
-		
-		ordersDetailDto.setOrdersDetailNo(ordersDetailNo);
-		ordersDetailDto.setOrdersNo(ordersNo);
-		ordersDetailDto.setOptionNo(optionNo[0]);
-		ordersDetailDto.setProductNo(productNo);
-		ordersDetailDao.insert(ordersDetailDto);
-		
-		
-		return "redirect:/cuddly/orders/detail?ordersDetailNo="+ordersDetailNo;
+		detail.setOrdersDetailPrice(total);
+	        
+	        
+	        ordersDetailDao.insert(detail);	    
+	    }
+	    
+	    for(int deleteNo : cartNo) {
+	    	
+	    	cartDao.cartDelete(deleteNo);
+	    	
+	    }
+	    
+	    
+	    
+
+	    return "redirect:/cuddly/orders/detail?ordersNo=" + ordersNo;
 	}
+
 	
 
 	
 	
 	@RequestMapping("/detail")
-	public String list(HttpSession session,int ordersDetailNo, Model model) {
+	public String list(HttpSession session,int ordersNo, Model model) {
 	    
-	    OrdersDetailDto ordersDetailDto = ordersDetailDao.selectOne(ordersDetailNo);
+	    List<OrderDetailJoinDto> list  = ordersDetailDao.detailList(ordersNo);
 	    
-	    model.addAttribute("ordersDetailDto", ordersDetailDto);
+	    model.addAttribute("ordersDetailDto", list);
 	    
-	    
-	    
-	    
+    
 	    return "/WEB-INF/views/orders/detail.jsp";
 	}
 
 	
-	@RequestMapping("/cartlist")
-	public String list(Model model) {
-		List<CartDto> cartList = cartDao.selectCartList();
+	@RequestMapping("/cartList")
+	public String cartList(Model model,HttpSession session) {
+		
+		String memberId = (String) session.getAttribute("name");
+		
+		List<OrdersProductDto> cartList = cartDao.selectCartList(memberId);
 		model.addAttribute("cartList", cartList);
-		return "/WEB-INF/views/orders/cartlist.jsp";
+		return "/WEB-INF/views/cart/list.jsp";
 	}
+	
+	
+	@RequestMapping("/list")
+	public String orderList(Model model,String memberId) {
+		
+		List<OrderDetailJoinDto> list = ordersDetailDao.memberOrdersList(memberId);
+			
+		model.addAttribute("list", list);
+		
+		return "/WEB-INF/views/orders/list.jsp";
+	}
+	
 	
 	
 	@GetMapping("/addrInsert")

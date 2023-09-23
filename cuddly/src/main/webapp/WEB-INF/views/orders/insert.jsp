@@ -79,37 +79,37 @@
     
     	<h1>주문할 상품 정보</h1>
 
-<c:forEach var="product" items="${ordersProductDto}">
+	<c:forEach var="product" items="${ordersProductDto}" varStatus="loop">
+    <input type="hidden" name="details[${loop.index}].optionNo" value="${product.productOptionNo}">
+	<input type="hidden" name="cartNo" value="${product.cartNo}">
+    <div class="row">
+       <img src="/cuddly/image/product/main?productNo=${product.productNo}" width="200" height="200">
+       <input type="hidden" name="details[${loop.index}].productNo" value="${product.productNo}">
+    </div>
 
-	<input type="hidden" name="optionNo" value="${product.productOptionNo}">
+    <div class="row">
+        <label>상품 이름:</label>${product.productName}
+    </div>
 
-	<div class="row">
-   <img src="/cuddly/image/product/main?productNo=${product.productNo}" width="200" height="200">
-   <input type="hidden" name="productNo" value="${product.productNo}">
-  </div>
+    <div class="row">
+        <label>크리에이터:</label>${product.creatorName}
+    </div>
 
-  <div class="row">
-    <label>상품 이름:</label>${product.productName}
-  </div>
-  
-  <div class="row">
-    <label>크리에이터:</label>${product.creatorName}
-  </div>
-  
-  <div class="row">
-    <label>상품 가격:</label>${product.productPrice}
-  </div>
-  
-  <div class="row">
-    <label>옵션:</label>${product.productOptionName}
-  </div>
-  
-  <div class="row">
-    <label>수량:</label>${product.cartCount}
-    <input type="hidden" name="ordersDetailCount" value="${product.cartCount}">
-  </div>
-  <br><br>
+    <div class="row">
+        <label>상품 가격:</label>${product.productPrice}
+    </div>
+
+    <div class="row">
+        <label>옵션:</label>${product.productOptionName}
+    </div>
+
+    <div class="row">
+        <label>수량:</label>${product.cartCount}
+        <input type="hidden" name="details[${loop.index}].ordersDetailCount" value="${product.cartCount}">
+    </div>
+    <br><br>
 </c:forEach>
+
 
 	
 <div class="row">
@@ -118,7 +118,6 @@
   
   <div class="row"><h1>결제 정보</h1></div>
   
-  <input type="hidden" name="ordersDetailPrice" value="${total}">
   <input type="hidden" name="addressNo" value="${addressDto.addressNo}">
   <input type="hidden" name="ordersPrice" value="${total}">결제 금액:${total}
   

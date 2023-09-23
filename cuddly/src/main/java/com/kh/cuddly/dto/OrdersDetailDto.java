@@ -1,9 +1,13 @@
 package com.kh.cuddly.dto;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class OrdersDetailDto {
 	private int ordersDetailNo;
     private int ordersNo;

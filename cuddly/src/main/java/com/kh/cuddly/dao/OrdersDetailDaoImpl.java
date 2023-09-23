@@ -8,7 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import com.kh.cuddly.dto.OrderDetailJoinDto;
 import com.kh.cuddly.dto.OrdersDetailDto;
+import com.kh.cuddly.mapper.OrderDetailJoinMapper;
 import com.kh.cuddly.mapper.OrdersDetailMapper;
 
 
@@ -22,6 +24,9 @@ public class OrdersDetailDaoImpl implements OrdersDetailDao{
 	
 	@Autowired
 	private OrdersDetailMapper ordersDetailMapper;
+	
+	@Autowired
+	private OrderDetailJoinMapper orderDetailjoinMapper;
 	
 	
 	
@@ -52,18 +57,24 @@ public class OrdersDetailDaoImpl implements OrdersDetailDao{
 
 
 	@Override
-	public OrdersDetailDto selectOne(int ordersDetailNo) {
-		String sql = "select * from orders_detail where orders_detail_no = ?";
-		Object[] data = {ordersDetailNo};
-		List<OrdersDetailDto> list = jdbcTemplate.query(sql, ordersDetailMapper, data);
-		return list.isEmpty() ? null : list.get(0);
+	public List<OrderDetailJoinDto> detailList(int ordersNo) {
+		String sql = "select * from detail_order where orders_no=?";
+		
+		Object[] data = {ordersNo};
+		
+	    return jdbcTemplate.query(sql, orderDetailjoinMapper, data);
 		}
 
 
 	@Override
-	public List<OrdersDetailDto> selectList() {
-		String sql = "select * from orders_detail_list order by orders_detail_no desc";
-		return jdbcTemplate.query(sql, ordersDetailMapper);
+	public List<OrderDetailJoinDto> memberOrdersList(String memberId) {
+		
+		String sql = "select * from detail_order where member_id=?";
+		
+		Object[] data = {memberId};
+		
+		return jdbcTemplate.query(sql, orderDetailjoinMapper,data);
+		
 	}	
 	}
 

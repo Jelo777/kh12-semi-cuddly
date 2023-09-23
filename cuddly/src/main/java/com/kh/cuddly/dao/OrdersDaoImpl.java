@@ -67,7 +67,7 @@ public class OrdersDaoImpl implements OrdersDao{
 	@Override
 	public OrdersProductDto viewProduct(int cartNo) {
 		
-		String sql = "select * from three_join where cart_no = ?";
+		String sql = "select * from ordered_product where cart_no = ?";
 		
 		Object[] data= {cartNo};
 		
