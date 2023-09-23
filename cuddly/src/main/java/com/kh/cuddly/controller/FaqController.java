@@ -45,22 +45,16 @@ public class FaqController {
 
 	
 
-
 	@RequestMapping("/list")
 	public String list(@ModelAttribute(name = "vo") FaqlistVO vo,
-	                    Model model,
-	                    @RequestParam(required = false) String category,
-	                    @RequestParam(required = false) String keyword) {
-	    if (category != null) {
-	        vo.setCategory(category);
-	    }
+	                    Model model) {
 
-	    int count = faqDao.countList(vo);
-	    vo.setCount(count);
-
+		int count = faqDao.countList(vo);
+		vo.setCount(count);	    
 	    List<FaqDto> list = faqDao.selectListByPage(vo);
+	//    List<FaqDto> contentlist = faqDao.countList(FaqListVO vo);
 	    model.addAttribute("list", list);
-
+	    
 	    return "/WEB-INF/views/faq/list.jsp";
 	}
 

@@ -10,6 +10,9 @@
 <br><br><br>
 
 
+
+
+
 		<table class="table table-border">
 	<thead>
 		 <tr>
@@ -23,6 +26,12 @@
 	</thead>
 	</table>
 	
+	
+	<h3><a href="list?category=공지사항">공지사항</a></h3>
+	<h3><a href="list?category=주문결제">주문결제</a></h3>
+	<h3><a href="list?category=회원정보">회원정보</a></h3>
+	<h3><a href="list?category=기타">기타</a></h3>
+
 	
 	<div class="row">
 		<table class="table table-border">
@@ -71,21 +80,14 @@
 	<a href="list?${vo.nextQueryString}">&gt;</a>
 </c:if>
 
-
-</h3>
-
-
 <!-- 검색창 -->
- <form action="category" method="#">
-	<select name="category" required>
-		<option value="faq_title">제목</option>
-		<option value="faq_id">아이디</option>
-		<option value="faq_category">카테고리</option>
-	</select>
-	<input type="search" name="category" 
+<form action="list">
+	<input type="search" name="keyword" 
 				placeholder="검색어 입력" required>
 	<button>검색</button>
 </form>
+
+
 
 </div>
 <a href="write">작성하기</a>

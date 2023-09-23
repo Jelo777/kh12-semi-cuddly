@@ -79,9 +79,9 @@ public class FaqDaoImpl implements FaqDao{
 
 	@Override
 	public List<FaqDto> selectList(String category, String keyword) {
-		String sql = "select * from faq "
-				+ "where instr("+category+", ?) > 0 "
-				+ "order by faq_no desc";
+	String sql = "select * from faq "
+			+ "where instr(faq_category, ?) > 0 "
+			+ "order by faq_no desc";		
 	Object[] data = {keyword};
 	return jdbcTemplate.query(sql, faqListMapper, data);
 	}
@@ -94,21 +94,31 @@ public class FaqDaoImpl implements FaqDao{
 		return jdbcTemplate.query(sql, faqMapper, data);
 	}
 	
-
-
 	@Override
 	public int countList(FaqlistVO vo) {
-		if(vo.isCategory()) {
-			String sql = "select count(*) from faq "
-					+ "where faq_category = ?";
-			Object[] data = {vo.getCategory()};
-			return jdbcTemplate.queryForObject(sql, int.class, data);
-		}
-		else {
-			String sql = "select count(*) from faq";
-			return jdbcTemplate.queryForObject(sql, int.class);
-		}
+	    if (vo.isCategory()) {
+	        String sql = "select count(*) from faq where faq_category = ?";
+	        Object[] data = {vo.getCategory()};
+	        return jdbcTemplate.queryForObject(sql, int.class, data);
+	        
+	    } else if (vo.isSearch()) {
+	        String sql = "select count(*) from ("
+	                   + "select rownum rn, TMP.* from ("
+	                   + "SELECT * FROM faq WHERE instr(faq_content, ?) > 0 "
+	                   + "ORDER BY faq_no DESC"
+	                   + ")TMP"
+	                   + ") where rn between ? and ?";
+	        Object[] data = { vo.getKeyword(), vo.getStartRow(), vo.getFinishRow() };
+	        return jdbcTemplate.queryForObject(sql, int.class, data);
+	        
+	    } else {
+	        String sql = "select count(*) from faq";
+	        return jdbcTemplate.queryForObject(sql, int.class);
+	    }
 	}
+
+
+	
 
 
 	@Override
@@ -116,7 +126,7 @@ public class FaqDaoImpl implements FaqDao{
 		if(vo.isCategory()) {
 			String sql = "select * from ("
 								+ "select rownum rn, TMP.* from ("
-								+ "select * from faq where =? "
+								+ "select * from faq where faq_category =? "
 								+ ")TMP"
 							+ ") where rn between ? and ?";
 			Object[] data = {vo.getCategory(), vo.getStartRow(), vo.getFinishRow()};
