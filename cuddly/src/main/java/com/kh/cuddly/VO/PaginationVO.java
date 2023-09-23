@@ -8,6 +8,7 @@ import lombok.Data;
 @Data
 public class PaginationVO {
 	private String keyword;	//검색 분류 및 키워드
+	private String type;//회원 검색할때 쓸 타입 추가
 	private String creatorName;
 	private int page = 1;//현재 페이지 번호(기본:1)
 	private int size = 10;//보여줄 게시판의 글 수(기본:10)
@@ -19,6 +20,9 @@ public class PaginationVO {
 	}
 	public boolean isSearchByCreatorName() {
 		return creatorName != null;
+	}
+	public boolean isSearchByMember() {//회원 검색용
+		return type != null && keyword != null;
 	}
 	
 	
@@ -48,6 +52,9 @@ public class PaginationVO {
 		else if(isSearchByCreatorName()) {
 			return "page="+(getBegin()-1)+"&size="+size+"&creatorName="+creatorName;
 		}
+		else if(isSearchByMember()) {//회원 검색용
+			return "page="+(getBegin()-1)+"&type="+type+"&keyword="+keyword;
+		}
 		else {//목록
 			return "page="+(getBegin()-1)+"&size="+size;
 		}
@@ -60,6 +67,9 @@ public class PaginationVO {
 		else if(isSearchByCreatorName()) {
 			return "page="+(getBegin()+1)+"&size="+size+"&creatorName="+creatorName;
 		}
+		else if(isSearchByMember()) {//회원검색용
+			return "page="+(getEnd()+1)+"&size="+size+"&type="+type+"&keyword="+keyword;
+		}
 		else {//목록
 			return "page="+(getEnd()+1)+"&size="+size;
 		}
@@ -71,6 +81,9 @@ public class PaginationVO {
 		}
 		else if(isSearchByCreatorName()) {
 			return "page="+page+"&size="+size+"&creatorName="+creatorName;
+		}
+		else if(isSearchByMember()) {//회원검색용
+			return "page="+page+"&size="+size+"&type="+type+"&keyword="+keyword;
 		}
 		else {//목록
 			return "page="+page+"&size="+size;

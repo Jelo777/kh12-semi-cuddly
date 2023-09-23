@@ -26,13 +26,18 @@ import com.kh.cuddly.dao.AttachDao;
 import com.kh.cuddly.dao.CreatorDao;
 import com.kh.cuddly.dao.CreatorProductDao;
 import com.kh.cuddly.dao.MemberDao;
+import com.kh.cuddly.dao.OrdersDao;
 import com.kh.cuddly.dao.ProductDao;
 import com.kh.cuddly.dao.ProductOptionDao;
 import com.kh.cuddly.dto.AttachDto;
 import com.kh.cuddly.dto.CreatorDto;
 import com.kh.cuddly.dto.CreatorProductDto;
+import com.kh.cuddly.dto.MemberDto;
+import com.kh.cuddly.dto.MemberListDto;
+import com.kh.cuddly.dto.OrdersDto;
 import com.kh.cuddly.dto.ProductDto;
 import com.kh.cuddly.dto.ProductOptionDto;
+import com.kh.springhome.error.NoTargetException;
 
 @Controller
 @RequestMapping("/cuddly/admin")
@@ -56,6 +61,13 @@ public class AdminController {
 	@Autowired
 	private MemberDao memberDao;
 	
+	@Autowired
+	private OrdersDao ordersDao;
+	
+	@RequestMapping("/home")
+	public String home() {
+		return "/WEB-INF/views/admin/home.jsp";
+	}
 	
 	@GetMapping("/product/insert")
 	public String insert() {
@@ -230,15 +242,42 @@ public class AdminController {
 	
 	@RequestMapping("/member/list")//회원목록조회
 	public String memberList(@ModelAttribute PaginationVO vo, Model model) {
+		
 		vo.setSize(15);
 		
 		int count = memberDao.countList(vo);
 		vo.setCount(count);
 		model.addAttribute("vo", vo);
 		
+		List<MemberListDto> list = memberDao.selectByPage(vo);
+		model.addAttribute("list", list);
+		
 		return "/WEB-INF/views/admin/member/list.jsp";
+	}
+	
+	@GetMapping("/member/edit")//회원등급수정
+	public String memberDetail(@RequestParam String memberId, Model model) {
 		
+		MemberDto memberDto = memberDao.selectOne(memberId);
+		model.addAttribute("memberDto", memberDto);
 		
+		//이 회원이 구매한 내역 첨부
+		List<OrdersDto> ordersList = ordersDao.selectOneByMemberOrders(memberId);
+		model.addAttribute("ordersList", ordersList);
+		
+		return "/WEB-INF/views/admin/member/edit.jsp";
+	}
+	
+	@PostMapping("/member/edit")//회원등급수정
+	public String memberEdit(@ModelAttribute MemberDto memberDto) {
+		
+		boolean result = memberDao.updateMemberLevel(memberDto);
+		if(result) {
+			return "redirect:edit?memberId="+memberDto.getMemberId();
+		}
+		else {
+			return "redirect:error";
+		}
 	}
 	
 	

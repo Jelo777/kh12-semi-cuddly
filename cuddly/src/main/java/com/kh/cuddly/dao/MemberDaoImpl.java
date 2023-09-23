@@ -71,6 +71,15 @@ public class MemberDaoImpl implements MemberDao{
 	}
 	
 	@Override
+	public boolean updateMemberLevel(MemberDto memberDto) {
+		String sql = "update member set member_level = ? where member_id =?";
+		Object[] data = {memberDto.getMemberLevel(), memberDto.getMemberId()};
+		
+		return jdbcTemplate.update(sql, data) > 0;
+	}
+	
+	
+	@Override
 	public boolean delete(String memberId) {
 		String sql="delete member where member_id =?";
 		Object[] data= {memberId};
@@ -83,25 +92,47 @@ public class MemberDaoImpl implements MemberDao{
 		List<MemberDto> list=jdbcTemplate.query(sql, memberMapper,data);
 		return list.isEmpty() ? null : list.get(0);
 	}
-
-	@Override
-	public List<MemberListDto> selectList() {//관리자용 회원리스트 조회
-		String sql = "select * from member order by member_join desc";
-		return jdbcTemplate.query(sql, memberListMapper);
-	}
 	
-	@Override
-	public List<MemberListDto> selectListBySearch(String type, String keyword) {//회원리스트 검색일때 리스트
-		String sql = "select * from member where instr("+type+", ?) > 0 order by member_join desc";
-		Object[] data = {keyword};
-		return jdbcTemplate.query(sql, memberListMapper, data);
-	}
-
+	//회원수 카운트
 	@Override
 	public int countList(PaginationVO vo) {
-		// TODO Auto-generated method stub
-		return 0;
+		if(vo.isSearchByMember()) {//회원검색이면
+			String sql = "select count(*) from member where instr("+vo.getType()+", ?) > 0";
+			Object[] data = {vo.getKeyword()};
+			return jdbcTemplate.queryForObject(sql, int.class, data);
+		}
+		else {
+			String sql = "select count(*) from member";
+			return jdbcTemplate.queryForObject(sql, int.class);
+		}
 	}
 
+	//한페이지당 회원 리스트 구하기
+	@Override
+	public List<MemberListDto> selectByPage(PaginationVO vo) {
+		if(vo.isSearchByMember()) {//회원검색이면
+			String sql = "select * from("
+									+ "select rownum rn, TMP.* from("
+										+ "select * from member "
+										+ "where instr("+vo.getType()+", ?) > 0 "
+										+ "order by "+vo.getType()+" asc"
+									+ ") TMP"
+								+ ") where rn between ? and ?";
+			Object[] data = {vo.getKeyword(), vo.getStartRow(), vo.getFinishRow()};
+			return jdbcTemplate.query(sql, memberListMapper, data);
+		}
+		else {//검색이 아니면
+			String sql = "select * from ("
+									+ "select rownum rn, TMP.* from("
+										+ "select * from member "
+										+ "order by member_join desc"
+									+ ") TMP"
+								+ ") where rn between ? and ?";
+			Object[] data = {vo.getStartRow(), vo.getFinishRow()};
+			return jdbcTemplate.query(sql, memberListMapper, data);
+		}
+	}
+
+	
 	
 }

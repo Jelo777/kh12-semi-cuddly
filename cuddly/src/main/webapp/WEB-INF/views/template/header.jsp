@@ -83,6 +83,11 @@
 			<li><a href="#">굿즈</a></li>
 			<li><a href="#">문구</a></li>
 			<li><a href="#">엑세서리</a></li>
+			
+			<%-- 관리자인 경우 추가 메뉴 출력 --%>
+			<c:if test="${sessionScope.level == '관리자'}">
+				<li><a href="/cuddly/admin/home">관리자메뉴</a></li>
+			</c:if>
 		</ul>
 	</nav>
 	

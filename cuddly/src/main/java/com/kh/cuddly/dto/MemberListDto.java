@@ -8,6 +8,7 @@ import lombok.Data;
 public class MemberListDto {
 	
 	private String memberId;
+	private String memberName;
 	private String memberContact;
 	private String memberEmail;
 	private String memberLevel;
