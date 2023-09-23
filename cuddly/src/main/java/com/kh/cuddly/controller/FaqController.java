@@ -48,7 +48,7 @@ public class FaqController {
 	@RequestMapping("/list")
 	public String list(@ModelAttribute(name = "vo") FaqlistVO vo,
 	                    Model model) {
-
+    
 		int count = faqDao.countList(vo);
 		vo.setCount(count);	    
 	    List<FaqDto> list = faqDao.selectListByPage(vo);

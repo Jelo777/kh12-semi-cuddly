@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import com.kh.cuddly.dto.AttachDto;
 import com.kh.cuddly.dto.ProductOptionDto;
 import com.kh.cuddly.mapper.ProductOptionMapper;
 
@@ -55,7 +56,9 @@ public class ProductOptionDaoImpl implements ProductOptionDao{
 
 	@Override
 	public boolean findOptionName(ProductOptionDto productOptionDto) {//옵션추가에 중복확인
-		String sql = "select * from product_option where product_option_name = ? and product_no = ?";
+		String sql = "select * from product_option "
+					+ "where product_option_name = ? "
+					+ "and product_no = ?";
 		Object[] data = {productOptionDto.getProductOptionName(), productOptionDto.getProductNo()};
 		
 		List<ProductOptionDto> list = jdbcTemplate.query(sql, productOptionMapper, data);
@@ -64,7 +67,5 @@ public class ProductOptionDaoImpl implements ProductOptionDao{
 		}else {
 			return true;
 		}
-		
 	}
-	
 }
