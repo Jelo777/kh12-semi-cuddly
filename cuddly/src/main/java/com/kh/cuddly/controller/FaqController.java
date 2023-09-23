@@ -53,7 +53,7 @@ public class FaqController {
 	                    @RequestParam(required = false) String keyword) {
 	    if (category != null) {
 	        vo.setCategory(category);
-	    }
+	    }	    
 
 	    int count = faqDao.countList(vo);
 	    vo.setCount(count);
