@@ -10,5 +10,6 @@ public interface AddressDao {
 	AddressDto selectOne(String memberId);
 	List<AddressDto>selectList(String memberId);
 	void changeDefault(String memberId);
-	boolean delete (int addressNo);
+	boolean delete(int addressNo);
+	boolean update(AddressDto addressDto);
 }
