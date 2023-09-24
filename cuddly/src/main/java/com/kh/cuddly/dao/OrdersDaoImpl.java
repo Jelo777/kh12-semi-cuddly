@@ -46,7 +46,7 @@ public class OrdersDaoImpl implements OrdersDao{
 	}
 
 	@Override
-	public OrdersDto selectOne(int memberId) {
+	public OrdersDto selectOne(String memberId) {
 	    String sql =  "SELECT m.member_name, m.member_contact, m.member_email " +
                 "FROM orders o " +
                 "JOIN member m ON o.member_id = m.member_id " +
@@ -73,14 +73,19 @@ public class OrdersDaoImpl implements OrdersDao{
 		
 		List<OrdersProductDto> list = jdbcTemplate.query(sql, ordersProductMapper, data);
 	    return list.isEmpty() ? null : list.get(0);
-		
-	
-		
-		
 	}
 	
 	
-	
+	@Override
+	public List<OrdersDto> selectOneByMemberOrders(String memberId) {//회원별 구매내역
+		String sql = "select * from orders "
+				+ "inner join member on orders.member_id = member.member_id "
+				+ "where orders.member_id = ?";
+		Object[] data = {memberId};
+		
+		List<OrdersDto> list = jdbcTemplate.query(sql, ordersMapper, data);
+		return list;
+	}
 	
 	
 	

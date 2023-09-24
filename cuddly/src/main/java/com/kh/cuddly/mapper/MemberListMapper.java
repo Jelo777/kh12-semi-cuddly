@@ -15,7 +15,8 @@ public class MemberListMapper implements RowMapper<MemberListDto>{
 	public MemberListDto mapRow(ResultSet rs, int rowNum) throws SQLException {
 		MemberListDto memberListDto = new MemberListDto();
 		memberListDto.setMemberId(rs.getString("member_id"));
-		memberListDto.setMemberContact(rs.getString("member_contant"));
+		memberListDto.setMemberName(rs.getString("member_name"));
+		memberListDto.setMemberContact(rs.getString("member_contact"));
 		memberListDto.setMemberEmail(rs.getString("member_email"));
 		memberListDto.setMemberLevel(rs.getString("member_level"));
 		memberListDto.setMemberTotalprice(rs.getInt("member_totalprice"));

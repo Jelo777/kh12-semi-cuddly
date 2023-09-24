@@ -23,20 +23,27 @@
 	rel="stylesheet">
 
 <link rel="stylesheet" type="text/css" href="/css/reset.css">
-<link rel="stylesheet" type="text/css" href="/css/layout-sidebar.css">
+<link rel="stylesheet" type="text/css" href="/css/layout.css">
 <link rel="stylesheet" type="text/css" href="/css/commons.css">
+<link rel="stylesheet" type="text/css" href="/css/layout-sidebar.css">
 <!-- <link rel="stylesheet" type="text/css" href="/css/test.css"> -->
-<style></style>
+
+<style>
+	hr{
+	background:#F3F0FE;
+	height:3px;
+	border:0;
+	}
+
+</style>
 
 <!-- jquery cdn -->
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-<!-- 주소 가져오기 툴 -->
-<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 
 </head>
 <body class="center">
 	<main>
-	<header class="mt-40">
+		<header class="mt-40">
          
             <div class="w-100 left">
                 <div class="logo mt-20 ms-30">
@@ -45,11 +52,16 @@
             </div>
             
             <div class="w-100 center">
-            	<div class="">
-	               	<a href="/cuddly">
-	            		<img src="/images/cuddlyb.png" width="230" height="50"><br>
-	            	</a>
-					<input class="form-input w-100 mb-20"> 
+            	<div class="row">
+            	<a href="/cuddly">
+            	<img src="/images/cuddlyb.png" width="230" height="50"><br>
+            	</a>
+            	</div>
+            	<div>
+            		<form action="/cuddly/search">
+						<input class="form-input" name="keyword">
+						<button class="btn">검색</button>
+					</form>
 				</div>
             </div>
             
@@ -70,60 +82,40 @@
 			<li><a href="#">굿즈</a></li>
 			<li><a href="#">문구</a></li>
 			<li><a href="#">엑세서리</a></li>
-			
+	
 			<%-- 관리자인 경우 추가 메뉴 출력 --%>
 			<c:if test="${sessionScope.level == '관리자'}">
 				<li><a href="/cuddly/admin/home">관리자메뉴</a></li>
 			</c:if>
-			
 		</ul>
 	</nav>
+	
+	<hr>
+	
 	<section>
 		<aside>
-             <div class="flex-container vertical center">
-             
-		     	<div class="row left mv-30">
-					<h1>마이페이지</h1>
+			<div class="flex-container vertical center w-200">
+				<div class="row mv-30">
+					<h2>관리자 페이지</h2>
 				</div>
 				
-				<div>
-					<hr>
+				<div class="row">
+				<hr>
 				</div>
 				
-				<div class="row left">
-					<h3><a class="link" href="#">구매내역</a></h3>
+				<div class="row">
+					<h3><a href="/cuddly/admin/product/list" class="link">상품관리</a></h3>
 				</div>
-				<div class="row left">
-					<h3><a class="link" href="#">나의 리뷰</a></h3>
+				<div class="row">
+					<h3><a href="#" class="link">상품문의</a></h3>
 				</div>
-				<div class="row left">
-					<h3><a class="link" href="/cuddly/member/mypage/wishlist">관심상품</a></h3>
+				<div class="row">
+					<h3><a href="#" class="link">FAQ관리</a></h3>
 				</div>
-				<div class="row left">
-					<h3><a class="link" href="#">상품문의</a></h3>
-				</div>
-				
-				<div>
-					<hr>
+				<div class="row">
+					<h3><a href="/cuddly/admin/member/list" class="link">회원관리</a></h3>
 				</div>
 				
-				<div class="row left">
-					<h3><a class="link" href="/cuddly/member/change">개인정보수정</a></h3>
-				</div>
-				<div class="row left">
-					<h3><a class="link" href="/cuddly/member/password">비밀번호 변경</a></h3>
-				</div>
-				<div class="row left">
-					<h3><a class="link" href="/cuddly/member/address/list">배송지 관리</a></h3>
-				</div>
-				<div class="row left">
-					<h3><a class="link" href="/cuddly/member/logout">로그아웃</a></h3>
-				</div>
-				<div class="row left">
-					<h3><a class="link" href="/cuddly/member/exit">탈퇴</a></h3>
-				</div>
-				
-				
-             </div>
+			</div>
 		</aside>
-        <article>
+		<article>
