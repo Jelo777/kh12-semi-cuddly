@@ -26,7 +26,45 @@
 <link rel="stylesheet" type="text/css" href="/css/layout-sidebar.css">
 <link rel="stylesheet" type="text/css" href="/css/commons.css">
 <!-- <link rel="stylesheet" type="text/css" href="/css/test.css"> -->
-<style></style>
+<style>
+	hr{
+	background:#F3F0FE;
+	height:3px;
+	border:0;
+	}
+
+
+	.sidebar{
+	
+		position: absolute;
+		top : 100px;
+		bottom :100px;
+		z-index: 99999;
+		width :250px;
+		height : 500px;
+		background: white;
+		box-shadow: 0 0 0 1px #2d3436;
+		
+		
+	}
+	#sidebar-toggle + .sidebar{
+	
+		display:none;
+	}
+	#sidebar-toggle:checked +.sidebar{
+/* 		left:200px; */
+		display:block;
+	
+	}
+
+
+
+
+
+
+
+
+</style>
 
 <!-- jquery cdn -->
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
@@ -37,10 +75,46 @@
 <body class="center">
 	<main>
 	<header class="mt-40">
+	
+	         <div class="row">
+        		<input type="checkbox" style="display:none;" id="sidebar-toggle">
+        		<div class="sidebar">
+        		<div class="row">
+	            	<img src="/images/cuddlys.png" width="200" height="50"><br>
+            	</div>
+        			
+        			<div class="row left ms-30 mt-30">
+	        			<c:if test="${sessionScope.name==null}">
+	        				<h5><a class="link" href="/cuddly/member/login">로그인이 필요해요!</a></h5>
+	        			</c:if>
+        			</div>
+        			
+        			
+        			
+        			
+        			
+        			
+        			
+        			
+        			
+        			
+        			
+        			
+        			
+        			
+        			
+        			
+        			
+        			
+        		</div>
+         	
+         	</div>
          
             <div class="w-100 left">
                 <div class="logo mt-20 ms-30">
-					<i class="fa-solid fa-bars fa-2x"></i>
+                	<label for ="sidebar-toggle" class="sidebar-menu">
+						<i class="fa-solid fa-bars fa-2x"></i>
+					</label>
 				</div>
             </div>
             
@@ -78,6 +152,7 @@
 			
 		</ul>
 	</nav>
+	<hr>
 	<section>
 		<aside>
              <div class="flex-container vertical center">

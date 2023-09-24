@@ -133,6 +133,18 @@ public class MemberDaoImpl implements MemberDao{
 		}
 	}
 
+	@Override
+	public boolean updateMemberLv() {
+		String sql="update member set member_level = "
+				+ "case "
+				+ "when member_totalprice >=100000 "
+				+ "and member_level <> '관리자' then '골드' "
+				+ "when member_totalprice >=50000 "
+				+ "and member_level <> '관리자' then '실버' "
+				+ "else member_level "
+				+ "end";
+		return jdbcTemplate.update(sql)>0;
+	}
 	
 	
 }
