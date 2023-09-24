@@ -54,6 +54,15 @@ public class QnaDaoImpl implements QnaDao{
 		
 		return jdbcTemplate.update(sql,data)>0;
 	}
+	
+	@Override
+	public boolean updateByAnswer(QnaDto qnaDto) {//상품문의 답변용
+		String sql = "update qna set qna_answer = ? where qna_no = ?";
+		Object[] data = {qnaDto.getQnaAnswer(), qnaDto.getQnaNo()};
+		
+		return jdbcTemplate.update(sql, data) > 0;
+	}
+	
 
 	@Override
 	public QnaDto selectOne(int qnaNo) {
