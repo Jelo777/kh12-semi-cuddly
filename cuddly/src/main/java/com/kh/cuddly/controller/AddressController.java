@@ -25,7 +25,7 @@ public class AddressController {
 	@GetMapping("/insert")
 	public String insert() {
 		
-		return "/WEB-INF/views/address/mypageInsert2.jsp";
+		return "/WEB-INF/views/address/mypageInsert.jsp";
 	}
 	@PostMapping("/insert")
 	public String insert(@ModelAttribute AddressDto addressDto, 

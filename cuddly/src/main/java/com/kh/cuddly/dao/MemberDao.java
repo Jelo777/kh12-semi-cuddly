@@ -18,4 +18,6 @@ public interface MemberDao {
 	int countList(PaginationVO vo);
 	List<MemberListDto> selectByPage(PaginationVO vo);//관리자용 회원리스트 조회
 	
+	boolean updateMemberLv();
+	
 }
