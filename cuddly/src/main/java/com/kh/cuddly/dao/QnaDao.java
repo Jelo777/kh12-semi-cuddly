@@ -10,6 +10,7 @@ public interface QnaDao {
 	void insert(QnaDto qnaDto);
 	int sequence();
 	boolean update(QnaDto qnaDto);
+	boolean updateByAnswer(QnaDto qnaDto);//상품문의 답변용
 	QnaDto selectOne(int qnaNo);
 	List<QnaDto> selectList();
 	
