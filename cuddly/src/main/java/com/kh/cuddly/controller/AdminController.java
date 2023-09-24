@@ -279,6 +279,7 @@ public class AdminController {
 		else {
 			return "redirect:error";
 		}
+	}	
 
 	@GetMapping("/creator/edit")
 	public String creatorEdit(@RequestParam int creatorNo, Model model) {
@@ -286,8 +287,9 @@ public class AdminController {
 		CreatorDto creatorDto = creatorDao.selectOne(creatorNo);
 		model.addAttribute("creatorDto", creatorDto);
 		
-		return "/WEB-INF/views/admin/creator/edit.jsp";	
-	
+		return "/WEB-INF/views/admin/creator/edit.jsp";
+	}
+		
 	@PostMapping("/creator/edit")
 	public String creatorEdit(@RequestParam int creatorNo,
 							@RequestParam MultipartFile attach) throws IllegalStateException, IOException {
