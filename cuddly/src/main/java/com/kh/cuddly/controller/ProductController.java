@@ -73,26 +73,7 @@ public class ProductController {
 		return "/WEB-INF/views/product/detail.jsp";
 	}
 	
-	@RequestMapping("/cartInsert")
-	public String cartInsert(@ModelAttribute CartDto cartDto, HttpSession session) {
-		
-		String memberId = (String) session.getAttribute("name");
-		int cartNo = cartDao.sequence();
-		cartDto.setCartNo(cartNo);
-		cartDto.setMemberId(memberId);
-
-		int price=  cartDao.price(cartDto.getOptionNo());
-		
-		int totalPrice = cartDto.getCartCount() * price;
-		
-		cartDto.setCartPrice(totalPrice);
-		
-		cartDao.insert(cartDto);
-		
-		return "redirect:/cuddly/orders/insert?cartNo="+cartDto.getCartNo();
-		
-		
-	}
+	
 	
 	
 	@RequestMapping("/creator")

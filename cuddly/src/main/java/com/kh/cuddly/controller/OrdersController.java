@@ -24,7 +24,9 @@ import com.kh.cuddly.dao.OrdersDetailDao;
 import com.kh.cuddly.dao.ProductDao;
 import com.kh.cuddly.dao.QnaDao;
 import com.kh.cuddly.dto.AddressDto;
+import com.kh.cuddly.dto.CartDto;
 import com.kh.cuddly.dto.MemberDto;
+import com.kh.cuddly.dto.MultiCartInsert;
 import com.kh.cuddly.dto.MultiOrders;
 import com.kh.cuddly.dto.OrderDetailJoinDto;
 import com.kh.cuddly.dto.OrdersDetailDto;
@@ -187,6 +189,41 @@ public class OrdersController {
 
 	    return "redirect:/cuddly/orders/detail?ordersNo=" + ordersNo;
 	}
+	
+	@RequestMapping("/cartInsert")
+	public String cartInsert(HttpSession session,
+	        @ModelAttribute MultiCartInsert cartList,
+	        @RequestParam(name = "action", required = false) String action) {
+
+	    List<CartDto> list = cartList.getCartList();
+	    String memberId = (String) session.getAttribute("name");
+	    StringBuilder cartNoParams = new StringBuilder();
+
+	    for (CartDto insert : list) {
+	        int cartNo = cartDao.sequence();
+	        insert.setCartNo(cartNo);
+	        insert.setMemberId(memberId);
+
+	        int price = cartDao.price(insert.getOptionNo());
+
+	        int totalPrice = insert.getCartCount() * price;
+
+	        insert.setCartPrice(totalPrice);
+
+	        cartDao.insert(insert);
+
+	        cartNoParams.append("cartNo=").append(cartNo).append("&");
+	    }
+
+	    if ("order".equals(action)) {
+	        return "redirect:/cuddly/orders/insert?" + cartNoParams.toString();
+	    } else if ("cart".equals(action)) {
+	        return "redirect:/cuddly/orders/cartList?memberId="+memberId;
+	    } else {
+	        return "redirect:/cuddly/orders/insert?" + cartNoParams.toString();
+	    }
+	}
+
 
 	
 
@@ -232,6 +269,7 @@ public class OrdersController {
 		
 		return "/WEB-INF/views/orders/addrInsert.jsp";
 	}
+	
 	@PostMapping("/addrInsert")
 	public String insert(@ModelAttribute AddressDto addressDto, 
 			HttpSession session) {
