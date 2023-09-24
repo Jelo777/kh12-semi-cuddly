@@ -74,16 +74,14 @@ public class ProductController {
 	}
 	
 	@RequestMapping("/cartInsert")
-	public String cartInsert(@ModelAttribute CartDto cartDto, HttpSession session, int productNo) {
+	public String cartInsert(@ModelAttribute CartDto cartDto, HttpSession session) {
 		
 		String memberId = (String) session.getAttribute("name");
 		int cartNo = cartDao.sequence();
 		cartDto.setCartNo(cartNo);
 		cartDto.setMemberId(memberId);
-		
-		ProductDto productDto=productDao.selectOne(productNo);
-		
-		int price=  productDto.getProductPrice();
+
+		int price=  cartDao.price(cartDto.getOptionNo());
 		
 		int totalPrice = cartDto.getCartCount() * price;
 		

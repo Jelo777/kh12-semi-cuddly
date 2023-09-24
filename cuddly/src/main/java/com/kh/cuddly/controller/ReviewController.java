@@ -41,16 +41,22 @@ public class ReviewController {
 	AttachDao attachDao;
 	
 	@GetMapping("/write")
-	public String write() {
+	public String write(int productNo,Model model) {
+		
+		model.addAttribute("productNo", productNo);
 		
 		return "/WEB-INF/views/review/insert.jsp";
 	}
 	
 	@PostMapping("/write")
 	public String write(@ModelAttribute ReviewDto reviewDto,
-			HttpSession session,@RequestParam MultipartFile attach) throws IllegalStateException, IOException {
+			HttpSession session,@RequestParam MultipartFile attach
+			) throws IllegalStateException, IOException {
+		
+		String memberId = (String) session.getAttribute("name");
 		
 		int reviewNo = reviewDao.sequence();
+		reviewDto.setMemberId(memberId);
 		reviewDto.setReviewNo(reviewNo);
 		reviewDao.insert(reviewDto);
 		
