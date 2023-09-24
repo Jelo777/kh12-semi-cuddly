@@ -29,6 +29,7 @@ import com.kh.cuddly.dao.MemberDao;
 import com.kh.cuddly.dao.OrdersDao;
 import com.kh.cuddly.dao.ProductDao;
 import com.kh.cuddly.dao.ProductOptionDao;
+import com.kh.cuddly.dao.QnaDao;
 import com.kh.cuddly.dto.AttachDto;
 import com.kh.cuddly.dto.CreatorDto;
 import com.kh.cuddly.dto.CreatorProductDto;
@@ -37,7 +38,7 @@ import com.kh.cuddly.dto.MemberListDto;
 import com.kh.cuddly.dto.OrdersDto;
 import com.kh.cuddly.dto.ProductDto;
 import com.kh.cuddly.dto.ProductOptionDto;
-import com.kh.springhome.error.NoTargetException;
+import com.kh.cuddly.dto.QnaDto;
 
 @Controller
 @RequestMapping("/cuddly/admin")
@@ -63,6 +64,9 @@ public class AdminController {
 	
 	@Autowired
 	private OrdersDao ordersDao;
+	
+	@Autowired
+	private QnaDao qnaDao;
 	
 	@RequestMapping("/home")
 	public String home() {
@@ -316,5 +320,17 @@ public class AdminController {
 		}
 		return "redirect:/cuddly/product/creator";
 	}
+	
+	
+	@PostMapping("qna/list")
+	public String qnaList(Model model) {
+		List<QnaDto> list = qnaDao.selectList();
+		model.addAttribute("list", list);
+		
+		return "/WEB-INF/views/admin/qna/list.jsp";
+	}
+	
+	
+	
 	
 }

@@ -117,18 +117,18 @@
 
 	<h1>구매내역</h1>
 
-	<div class="container w-500">
-		<div class="row flex-container align-center card">
-			<c:forEach var="ordersDto" items="${ordersList}">
-				<div class="row">
-					<span>${ordersDto.ordersDate}</span>
-						<div class="row">
-							<span>${ordersDto.orders}</span>
-						</div>
-				</div>
+<!-- 	<div class="container w-500"> -->
+<!-- 		<div class="row flex-container align-center card"> -->
+<%-- 			<c:forEach var="ordersDto" items="${ordersList}"> --%>
+<!-- 				<div class="row"> -->
+<%-- 					<span>${ordersDto.ordersDate}</span> --%>
+<!-- 						<div class="row"> -->
+<%-- 							<span>${ordersDto.orders}</span> --%>
+<!-- 						</div> -->
+<!-- 				</div> -->
 				
-			</c:forEach>
-		</div>
-	</div>
+<%-- 			</c:forEach> --%>
+<!-- 		</div> -->
+<!-- 	</div> -->
 
 <jsp:include page="/WEB-INF/views/template/adminFooter.jsp"></jsp:include>
