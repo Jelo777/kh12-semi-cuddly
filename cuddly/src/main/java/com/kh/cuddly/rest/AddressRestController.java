@@ -5,7 +5,6 @@ import java.util.List;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -34,7 +33,7 @@ public class AddressRestController {
 		
 		//여기서addressDto는 내가 배송지 추가 페이지에서 입력한 값 + 시퀀스로 받아온 배송지번호,세션으로 가져온 멤버 아이디
 		
-		if(addressDto.getAddressDefault().equals("Y")) {//이 계정의 기본배송지가
+		if(addressDto.getAddressDefault().equals("Y")) {//addressDto의 default값이 Y면
 			addressDao.changeDefault(memberId);
 		}
 		
@@ -52,5 +51,15 @@ public class AddressRestController {
 		addressDao.delete(addressNo);
 	}
 	
+	@PostMapping("/edit")
+	public void edit(@ModelAttribute AddressDto addressDto, 
+					HttpSession sesstion) {
+		String memberId=(String)sesstion.getAttribute("name");
+		if(addressDto.getAddressDefault().equals("Y")) {//addressDto의 default값이 Y면
+			addressDao.changeDefault(memberId);
+		}
+		addressDao.update(addressDto);
+
+	}
 	
 }
