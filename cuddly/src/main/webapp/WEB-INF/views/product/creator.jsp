@@ -7,27 +7,23 @@
 	<div class="row">
 		<h1>크리에이터 목록</h1>
 	</div>
-	<c:forEach var="creatorListDto" items="${list}">
-		<c:choose>
-			<c:when test="${creatorListDto.attachNo != null}">
-				<div class="row">
-					<img
-						src="/cuddly/image/creator?creatorNo=${creatorListDto.creatorNo}"
-						width="200" height="200">
+	<div class="flex-container allow-wrap">
+		<c:forEach var="creatorListDto" items="${list}">
+			<a class="link" href="list?creatorName=${creatorListDto.creatorName}">
+				<div claa="col-4">
+					<div class="row">
+						<img class="image image-circle"
+							src="/cuddly/image/creator?creatorNo=${creatorListDto.creatorNo}"
+							onerror="this.src='https://dummyimage.com/200x200/000/fff;'"
+							width="200" height="200" />
+					</div>
+					<div class="row">
+						<h2>${creatorListDto.creatorName}</h2>
+					</div>
 				</div>
-			</c:when>
-			<c:otherwise>
-				<div class="row">
-					<h3>이미지가 존재하지 않습니다</h3>
-				</div>
-			</c:otherwise>
-		</c:choose>
-
-		<div class="row">
-			<a href="list?creatorName=${creatorListDto.creatorName}"> <label
-				class="btn">${creatorListDto.creatorName}</label></a>
-		</div>
-	</c:forEach>
+			</a>
+		</c:forEach>
+	</div>
 </div>
 
 
