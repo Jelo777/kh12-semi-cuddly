@@ -13,7 +13,7 @@
 			<span>주문상세번호 : ${ordersDetailDto.ordersDetailNo}</span>
 		</div>
 		<div class="row">
-			<img src="/cuddly/image/product/main?productNo=${ordersDto.productNo}"  width="100" height="100">
+			<img src="/cuddly/image/product/main?productNo=${ordersDetailDto.productNo}"  width="100" height="100">
 		</div>
 		<div class="row">
 			<span>상품명 : ${ordersDetailDto.productName}</span>
@@ -29,8 +29,8 @@
 			<span>구매금액 : ${ordersDetailDto.ordersDetailPrice}</span>
 		</div>		
 	
-	<a href="edit?memberId=${ordersDetailDto.memberId}"><button>돌아가기</button></a>
 	</c:forEach>
+	<a href="javascript:history.back();"><button>돌아가기</button></a>
 	
 </div>
 
