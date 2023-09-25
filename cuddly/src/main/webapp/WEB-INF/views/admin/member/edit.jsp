@@ -4,6 +4,26 @@
   
 <jsp:include page="/WEB-INF/views/template/adminHeader.jsp"></jsp:include>
 
+<script>
+$(function(){
+	$(".popUpOpen").click(function(e){
+		e.preventDefault();
+		//클릭하면 모달이 보이도록 설정
+		$("#modal").show();
+	});
+	
+	//확인버튼 클릭시 모달버튼 숨김
+	$(".popUpClose").click(function(){
+		$("#modal").hide();
+	});
+	
+	//모달 확인 버튼 클릭 시 폼을 제출
+	$(".popUpConfirm").click(function(){
+		//폼을 선택하고 제출
+		$("form").submit();
+	});
+});
+</script>
 <div class="container w-400">
 	<div class="row">
 		<h2>${memberDto.memberId}님의 회원정보</h2>
@@ -85,7 +105,7 @@
 								</c:when>						
 							</c:choose>
 					</td>
-							<td><button>수정</button><td>
+							<td><button class="popUpOpen">수정</button><td>
 					</form>
 				</tr>
 			
@@ -120,14 +140,15 @@
 		<div class="row">
 			<h1>구매내역</h1>
 		</div>
-		
-	<c:forEach var="ordersDto" items="${ordersList}">
-		<div class="float-container card">
+			
+<c:choose>
+	<c:when test="${not empty ordersList}">
+		<c:forEach var="ordersDto" items="${ordersList}">
+			<div class="float-container card">
 		
 				<div class="row left">
 					<span>주문일 : ${ordersDto.ordersDate}</span>
 					<span>(주문번호 : ${ordersDto.ordersNo})</span>
-					<span>(상세주문번호 : ${ordersDto.ordersDetailNo})</span>
 				</div>
 				
 				<div class="float-left w-25">
@@ -158,10 +179,40 @@
 				
 			</div>
 		</c:forEach>
+	</c:when>
+	
+	<c:otherwise>
+		<div class="row">
+			<span>구매한 목록이 없습니다.</span>
+		</div>
+	</c:otherwise>
+	
+</c:choose>
 		
 		</div>
 				
 		</div>
 	</div>
+	
+<div id="modal" class="backdrop">
+	<div class="modal-container w-300">
+		<div class="popUp-title">
+			<i class="fa-solid fa-x popUpClose" style="float:right"></i>
+			<h2 style="float:left">수정완료</h2>
+		</div>
+		
+		<hr>
+		
+		<div class="popUp-content center">
+		 	<br><br><br>
+			<h4>등급 수정이 완료되었습니다.</h4> 
+			<br><br><br>
+		</div>
+		
+		<div class="row">
+			<button class="btn btn-positive w-100 popUpClose popUpConfirm">확인</button>
+		</div>
+	</div>
+</div>
 
 <jsp:include page="/WEB-INF/views/template/adminFooter.jsp"></jsp:include>

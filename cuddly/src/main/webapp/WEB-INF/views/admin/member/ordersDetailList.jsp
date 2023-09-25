@@ -6,7 +6,7 @@
 
 <div class="container w-400">
 	<h1>상세주문목록</h1>
-	
+
 	<c:forEach var="ordersDetailDto" items="${ordersDetailList}">
 	
 		<div class="float-container card">
