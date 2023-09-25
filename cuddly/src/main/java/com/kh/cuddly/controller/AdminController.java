@@ -28,6 +28,7 @@ import com.kh.cuddly.dao.CreatorProductDao;
 import com.kh.cuddly.dao.MemberDao;
 import com.kh.cuddly.dao.OrdersAdminDao;
 import com.kh.cuddly.dao.OrdersDao;
+import com.kh.cuddly.dao.OrdersDetailDao;
 import com.kh.cuddly.dao.ProductDao;
 import com.kh.cuddly.dao.ProductOptionDao;
 import com.kh.cuddly.dao.QnaDao;
@@ -36,7 +37,8 @@ import com.kh.cuddly.dto.CreatorDto;
 import com.kh.cuddly.dto.CreatorProductDto;
 import com.kh.cuddly.dto.MemberDto;
 import com.kh.cuddly.dto.MemberListDto;
-import com.kh.cuddly.dto.OrdersAdminDto;
+import com.kh.cuddly.dto.OrderDetailJoinDto;
+import com.kh.cuddly.dto.OrdersDto;
 import com.kh.cuddly.dto.ProductDto;
 import com.kh.cuddly.dto.ProductOptionDto;
 import com.kh.cuddly.dto.QnaDto;
@@ -68,6 +70,9 @@ public class AdminController {
 	
 	@Autowired
 	private QnaDao qnaDao;
+	
+	@Autowired
+	private OrdersDetailDao OrdersDetailDao;
 	
 	@Autowired
 	private OrdersAdminDao ordersAdminDao;
@@ -271,8 +276,8 @@ public class AdminController {
 		model.addAttribute("memberDto", memberDto);
 		
 		//이 회원이 구매한 내역 첨부
-		List<OrdersAdminDto> getOrders =  ordersAdminDao.selectList(memberId);
-		model.addAttribute("getOrders", getOrders);	
+		List<OrderDetailJoinDto> ordersList =  ordersDao.selectListOrders(memberId);
+		model.addAttribute("ordersList", ordersList);	
 		
 		return "/WEB-INF/views/admin/member/edit.jsp";
 	}
@@ -288,6 +293,17 @@ public class AdminController {
 			return "redirect:error";
 		}
 	}	
+	
+	
+	@RequestMapping("/member/ordersDetailList")//회원이 구매한 내역의 상세구매내역
+	public String ordersDetailList(@RequestParam int ordersNo, Model model) {
+		
+		List<OrderDetailJoinDto> ordersDetailList = OrdersDetailDao.detailList(ordersNo);
+		model.addAttribute("ordersDetailList", ordersDetailList);
+		
+		return "/WEB-INF/views/admin/member/ordersDetailList.jsp";
+	}
+	
 
 	@GetMapping("/creator/edit")
 	public String creatorEdit(@RequestParam int creatorNo, Model model) {
