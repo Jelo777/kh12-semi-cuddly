@@ -71,6 +71,14 @@ public class ProductDaoImpl implements ProductDao{
 			Object[] data = {vo.getKeyword()};
 			return jdbcTemplate.queryForObject(sql, int.class, data);
 		}
+		else if(vo.isSearchByCreatorName()) {
+			String sql= "select count(*) from product inner join creator_product "
+							+ "on creator_product.product_no = product.product_no "
+							+ "LEFT OUTER JOIN creator ON creator_product.creator_no = creator.creator_no "
+						+ "WHERE creator.creator_name = ? ";
+			Object[] data = {vo.getCreatorName()};
+			return jdbcTemplate.queryForObject(sql, int.class, data);
+		}
 		else {
 			String sql = "select count(*) from product";
 			return jdbcTemplate.queryForObject(sql, int.class);
