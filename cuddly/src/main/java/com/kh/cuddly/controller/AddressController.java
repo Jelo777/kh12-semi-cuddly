@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.kh.cuddly.dao.AddressDao;
 import com.kh.cuddly.dto.AddressDto;
@@ -53,6 +54,22 @@ public class AddressController {
 		model.addAttribute("list", list);
 		
 		return "/WEB-INF/views/address/list.jsp";
+	}
+	@GetMapping("/update")
+	public String update(@RequestParam int addressNo, Model model) {
+		AddressDto addressDto = addressDao.selectOneByNo(addressNo);
+		model.addAttribute("addressDto", addressDto);
+		return "/WEB-INF/views/address/update.jsp";
+	}
+	@PostMapping("/update")
+	public String edit(AddressDto addressDto,HttpSession session) {
+		String memberId=(String)session.getAttribute("name");
+		addressDto.setMemberId(memberId);//필요한가? 모르면 넣어
+		if(addressDto.getAddressDefault().equals("Y")) {//이 계정의 기본배송지가
+			addressDao.changeDefault(memberId);
+		}
+		addressDao.update(addressDto);
+		return "redirect:list";
 	}
 	
 	

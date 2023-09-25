@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
  
- <script src="/js/address.js"></script>
+<!--  <script src="/js/address.js"></script> -->
  <script src="/js/addressMypageInsert.js"></script>
  
  <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
@@ -54,7 +54,7 @@
                 <div class="fail-feedback">모든 주소를 작성하세요</div>
             </div>
 			<div>
-				<label>기본배송지로 설정</label><input class="checkbox" type="checkbox" checked>
+				<label>기본배송지로 설정</label><input class="checkbox" type="checkbox" checked 	>
 				<input type="hidden" name="addressDefault" value="Y">
 			</div>
 			

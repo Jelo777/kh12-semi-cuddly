@@ -12,7 +12,6 @@ $(function(){
     };
 
 
-
    
 
     $("[name=addressName]").blur(function(){

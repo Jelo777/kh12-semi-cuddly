@@ -170,8 +170,10 @@ public class MemberController {
 	
 	@PostMapping("/findId")
 	public String findId(@RequestParam String memberEmail) {
+		//사용자가 입력한 memberEmail로 selectOneByEmail메소드를 사용해 memberDto 불러오기
+		
 		MemberDto memberDto =memberDao.selectOneByEmail(memberEmail);
-		if(memberDto !=null) {
+		if(memberDto !=null) {//이메일로 찾은 memberDto가 null이 아니면=있으면
 			SimpleMailMessage message =new SimpleMailMessage();
 			message.setTo(memberEmail);
 			message.setSubject("아이디 찾기 결과");

@@ -84,11 +84,16 @@
 	            	<img src="/images/cuddlys.png" width="200" height="50"><br>
             	</div>
         			
-        			<div class="row left ms-30 mt-30">
-	        			<c:if test="${sessionScope.name==null}">
-	        				<h5><a class="link" href="/cuddly/member/login">로그인이 필요해요!</a></h5>
-	        			</c:if>
-        			</div>
+        			<div class="row left ms-20 mt-30">
+        			<c:choose>
+	        			<c:when test="${sessionScope.name==null}">
+	        				<h3><a class="link" href="/cuddly/member/login">로그인이 필요해요!</a></h3>
+	        			</c:when>
+						<c:otherwise>
+							<h3>${sessionScope.name}님 환영해요!</h3>
+						</c:otherwise>
+					</c:choose>
+        			</div>	
         			
         			
         			

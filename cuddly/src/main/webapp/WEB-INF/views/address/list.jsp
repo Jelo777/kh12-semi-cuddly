@@ -38,7 +38,7 @@
 				<div class="w-25 mt-20">
 					<div class="row right me-30">
 						<h5>
-						<a  href="#">
+						<a  href="/cuddly/address/update?addressNo=${addressDto.addressNo}">
 							<button type ="button"  style="width:150px; font-size:16px;"class="btn btn-positive">수정하기</button>
 						</a>
 						</h5>	

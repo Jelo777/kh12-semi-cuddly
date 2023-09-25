@@ -85,7 +85,7 @@
         			
         			<div class="row left ms-30 mt-30">
 	        			<c:if test="${sessionScope.name==null}">
-	        				<h5><a class="link" href="/cuddly/member/login">로그인이 필요해요!</a></h5>
+	        				<h3><a class="link" href="/cuddly/member/login">로그인이 필요해요!</a></h3>
 	        			</c:if>
         			</div>
         			
