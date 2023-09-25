@@ -8,8 +8,6 @@
 <meta charset="UTF-8">
 <title>장바구니 목록</title>
 </head>
-<body>
-
 <style>
 
 	.card {
@@ -27,6 +25,8 @@
         
 
 </style>
+<body>
+
 
 
 	<script>

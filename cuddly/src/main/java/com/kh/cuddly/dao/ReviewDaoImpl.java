@@ -8,7 +8,9 @@ import org.springframework.stereotype.Repository;
 
 import com.kh.cuddly.dto.AttachDto;
 import com.kh.cuddly.dto.ReviewDto;
+import com.kh.cuddly.dto.ReviewInfoDto;
 import com.kh.cuddly.mapper.AttachMapper;
+import com.kh.cuddly.mapper.ReviewInfoMapper;
 import com.kh.cuddly.mapper.ReviewMapper;
 
 @Repository
@@ -19,6 +21,9 @@ public class ReviewDaoImpl implements ReviewDao{
 	
 	@Autowired
 	ReviewMapper reviewMapper;
+	
+	@Autowired
+	ReviewInfoMapper reviewInfoMapper;
 	
 	@Autowired
 	AttachMapper attachMapper;
@@ -73,14 +78,18 @@ public class ReviewDaoImpl implements ReviewDao{
 	}
 	
 	@Override
-	public List<ReviewDto> selectList() {
+	public List<ReviewInfoDto> selectMemberList(String memberId) {
 		
-		String sql = "select r.*,rm.attach_no from "
-				+ "review r left outer join "
-				+ "review_image rm on r.review_no = rm.review_no"
-				+ " order by r.review_no asc";
+//		String sql = "select r.*,rm.attach_no from "
+//				+ "review r left outer join "
+//				+ "review_image rm on r.review_no = rm.review_no"
+//				+ " order by r.review_no asc";
 		
-		return jdbcTemplate.query(sql, reviewMapper);
+		String sql = "select * from review_info where member_id= ? order by review_date desc";
+		
+		Object[] data= {memberId};
+		
+		return jdbcTemplate.query(sql, reviewInfoMapper,data);
 	}
 	
 	@Override

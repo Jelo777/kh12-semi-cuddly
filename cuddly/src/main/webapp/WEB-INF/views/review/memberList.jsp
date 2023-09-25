@@ -18,7 +18,12 @@
 	<br><br>리뷰 내용 : ${reviewDto.reviewContent}
 	<br><br>
 	<a href="/cuddly/product/detail?productNo=${reviewDto.productNo}"><img src="/cuddly/image/product/main?productNo=${reviewDto.productNo}" width="100" height="100"></a>
-	
+	<br><br>
+	상품명:${reviewDto.productName}
+	<br><br>
+	크리에이터:${reviewDto.creatorName}
+	<br><br>
+	상품 가격 : ${reviewDto.productPrice}
 	
 	
 	<hr>
