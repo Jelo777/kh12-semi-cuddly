@@ -255,7 +255,7 @@ public class OrdersController {
 	@RequestMapping("/list")
 	public String orderList(Model model,String memberId) {
 		
-		List<OrderDetailJoinDto> list = ordersDetailDao.memberOrdersList(memberId);
+		List<OrderDetailJoinDto> list = ordersDao.selectListOrders(memberId);
 			
 		model.addAttribute("list", list);
 		

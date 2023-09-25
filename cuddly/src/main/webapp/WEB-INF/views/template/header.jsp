@@ -137,7 +137,7 @@
             <div class="w-100 right">
 		        <div class="etc mt-20">
 					<i class="fa-brands fa-gratipay fa-2x"></i>
-					<i class="fa-solid fa-cart-shopping fa-2x"></i>
+					<a href="/cuddly/orders/cartList?memberId=${sessionScope.name}"><i class="fa-solid fa-cart-shopping fa-2x"></i></a>
 					<a class="link" href="/cuddly/member/mypage">
 					<i class="fa-solid fa-circle-user fa-2x"></i>
 					</a>

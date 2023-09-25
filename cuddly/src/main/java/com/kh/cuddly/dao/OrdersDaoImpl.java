@@ -6,8 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import com.kh.cuddly.dto.OrderDetailJoinDto;
 import com.kh.cuddly.dto.OrdersDto;
 import com.kh.cuddly.dto.OrdersProductDto;
+import com.kh.cuddly.mapper.OrderDetailJoinMapper;
 import com.kh.cuddly.mapper.OrdersMapper;
 import com.kh.cuddly.mapper.OrdersProductMapper;
 
@@ -25,6 +27,9 @@ public class OrdersDaoImpl implements OrdersDao{
 	
 	@Autowired
 	private OrdersProductMapper ordersProductMapper;
+	
+	@Autowired
+	private OrderDetailJoinMapper orderDetailjoinMapper;
 	
 	
 	@Override
@@ -85,6 +90,17 @@ public class OrdersDaoImpl implements OrdersDao{
 		
 		List<OrdersDto> list = jdbcTemplate.query(sql, ordersMapper, data);
 		return list;
+	}
+	
+	@Override
+	public List<OrderDetailJoinDto> selectListOrders(String memberId){	//주문 목록
+		
+		String sql = "select * from orders_detail_list where member_id=? order by orders_no desc";
+		
+		Object[] data = {memberId};
+		
+		return jdbcTemplate.query(sql, orderDetailjoinMapper, data);
+		
 	}
 	
 	

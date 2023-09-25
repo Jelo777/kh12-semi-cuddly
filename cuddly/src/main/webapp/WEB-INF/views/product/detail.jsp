@@ -112,20 +112,15 @@ function addSelectedOption() {
     
        	
        
-            // "action"이라는 이름을 가진 버튼 클릭 이벤트 처리
-            $("[name='action']").click(function(e){
+            $(".btn.btn-cart").click(function(e){
+            	
                 var userConfirmed = confirm("장바구니로 이동하시겠습니까?");
                 
-                if (userConfirmed) {
+                if (!userConfirmed) {
 	
-                	
-                
-                
-                } else {
-
                 e.preventDefault();
                 
-                }
+                } 
            
         });
 
@@ -194,7 +189,7 @@ function addSelectedOption() {
 		    </div>
 		     <div class="row"><button class="btn" type="submit" name="action" value="order">주문</button>
 		    <a href="/cuddly/orders/cartList?memberId=${sessionScope.name}">
-    	<button class="btn" type="submit" name="action" value="cart">장바구니</button>
+    	<button class="btn btn-cart" type="submit" name="action" value="cart">장바구니</button>
 			</a></div>
  
 		       
