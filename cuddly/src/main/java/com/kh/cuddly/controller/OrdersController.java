@@ -223,7 +223,23 @@ public class OrdersController {
 	        return "redirect:/cuddly/orders/insert?" + cartNoParams.toString();
 	    }
 	}
-
+	
+	
+	@RequestMapping("/delete")
+	public String cartDelete(int[] cartNo,HttpSession session){
+		
+		String memberId = (String) session.getAttribute("name");
+		
+		for(int deleteNo : cartNo) {
+		
+		
+		cartDao.cartDelete(deleteNo);
+		
+		}
+		
+		 return "redirect:/cuddly/orders/cartList?memberId"+memberId;
+	}
+	
 
 	
 
