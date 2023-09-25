@@ -21,6 +21,7 @@ public class OrdersAdminDaoImpl implements OrdersAdminDao{
 	@Override
 	public List<OrdersAdminDto> selectList(String memberId) {
 		String sql = "select  "
+				+"p.product_no, "
 				+ "o.orders_date, "
 				+ "p.product_name, "
 				+ "p.product_price, "

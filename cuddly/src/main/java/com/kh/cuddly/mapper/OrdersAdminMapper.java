@@ -14,6 +14,7 @@ public class OrdersAdminMapper implements RowMapper<OrdersAdminDto>{
 	@Override
 	public OrdersAdminDto mapRow(ResultSet rs, int rowNum) throws SQLException {
 		OrdersAdminDto ordersAdminDto = new OrdersAdminDto();
+		ordersAdminDto.setProductNo(rs.getInt("product_no"));
 		ordersAdminDto.setOrdersDate(rs.getDate("orders_date"));
 		ordersAdminDto.setProductName(rs.getString("product_name"));
 		ordersAdminDto.setProductPrice(rs.getInt("product_price"));
