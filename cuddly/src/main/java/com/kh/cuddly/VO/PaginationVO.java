@@ -21,19 +21,19 @@ public class PaginationVO {
 	public boolean isSearch() {
 		return keyword != null;
 	}
-	public boolean isSearchByCreatorName() {
+	public boolean isSearchByCreatorName() {//크리에이터별 상품
 		return creatorName != null;
 	}
 	public boolean isSearchByMember() {//회원 검색용
 		return type != null && keyword != null;
 	}
-	public boolean isSearchByProductItem() {
+	public boolean isSearchByProductItem() {//항목별 상품
 		return productItem != null;
 	}
-	public boolean isSort() {
+	public boolean isSort() {//정렬
 		return type != null && sort != null;
 	}
-	public boolean isSortByWishlist() {
+	public boolean isSortByWishlist() {//관심순
 		return sortByWish != null;
 	}
 	

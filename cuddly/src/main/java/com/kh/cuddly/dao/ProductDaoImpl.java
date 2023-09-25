@@ -122,8 +122,8 @@ public class ProductDaoImpl implements ProductDao{
 							+ "ORDER BY product_no DESC"
 						+ ")TMP"
 					+ ") where rn between ? and ?";
-Object[] data = {vo.getProductItem(), vo.getStartRow(), vo.getFinishRow()};
-return jdbcTemplate.query(sql, productMapper, data);
+		Object[] data = {vo.getProductItem(), vo.getStartRow(), vo.getFinishRow()};
+		return jdbcTemplate.query(sql, productMapper, data);
 		}
 		else if(vo.isSort()) {
 			String sql = "select * from( "
