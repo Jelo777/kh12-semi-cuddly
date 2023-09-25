@@ -130,7 +130,7 @@
             <div class="w-100 right">
 		        <div class="etc mt-20">
 					<i class="fa-brands fa-gratipay fa-2x"></i>
-					<i class="fa-solid fa-cart-shopping fa-2x"></i>
+					<a href="/cuddly/orders/cartList?memberId=${sessionScope.name}"><i class="fa-solid fa-cart-shopping fa-2x"></i></a>
 					<a class="link" href="/cuddly/member/mypage">
 					<i class="fa-solid fa-circle-user fa-2x"></i>
 					</a>
@@ -166,16 +166,16 @@
 				</div>
 				
 				<div class="row left">
-					<h3><a class="link" href="#">구매내역</a></h3>
+					<h3><a class="link" href="/cuddly/orders/list?memberId=${sessionScope.name}">구매내역</a></h3>
 				</div>
 				<div class="row left">
-					<h3><a class="link" href="#">나의 리뷰</a></h3>
+					<h3><a class="link" href="/cuddly/review/memberList?memberId=${sessionScope.name}">나의 리뷰</a></h3>
 				</div>
 				<div class="row left">
 					<h3><a class="link" href="/cuddly/member/mypage/wishlist">관심상품</a></h3>
 				</div>
 				<div class="row left">
-					<h3><a class="link" href="#">상품문의</a></h3>
+					<h3><a class="link" href="/cuddly/qna/memberList?memberId=${sessionScope.name}">상품문의</a></h3>
 				</div>
 				
 				<div>

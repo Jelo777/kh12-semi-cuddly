@@ -84,6 +84,19 @@ public class ReviewDaoImpl implements ReviewDao{
 	}
 	
 	@Override
+	public List<ReviewDto> memberList(String memberId) {
+		
+		String sql = "select r.*,rm.attach_no from "
+				+ "review r left outer join "
+				+ "review_image rm on r.review_no = rm.review_no"
+				+ " where member_id=? order by r.review_no asc";
+		
+		Object[] data = {memberId};
+		
+		return jdbcTemplate.query(sql, reviewMapper,data);
+	}
+	
+	@Override
 	public float reviewAvg(int productNo) {
 		String sql = "select avg(review_grade) from review where product_no = ?";
 		Object[] data = {productNo};

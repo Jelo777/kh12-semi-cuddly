@@ -3,7 +3,7 @@
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>  
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 
-<h1>전체 리뷰</h1>
+<h1>나의 리뷰</h1>
 <c:forEach var="reviewDto" items="${list}">
 <div>
 	작성자 : ${reviewDto.memberId} / 별점 : ${reviewDto.reviewGrade} <br><br>

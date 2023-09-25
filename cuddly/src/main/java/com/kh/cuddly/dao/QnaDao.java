@@ -13,5 +13,6 @@ public interface QnaDao {
 	boolean updateByAnswer(QnaDto qnaDto);//상품문의 답변용
 	QnaDto selectOne(int qnaNo);
 	List<QnaDto> selectList();
+	List<QnaDto> selectList(String memberId);
 	
 }
