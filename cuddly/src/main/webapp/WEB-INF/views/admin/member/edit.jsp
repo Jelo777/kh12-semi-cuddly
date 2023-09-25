@@ -115,22 +115,47 @@
 </div>		
 
 
-	<h1>구매내역</h1>
 
 	<div class="container w-500">
-		<div class="row flex-container align-center card">
-			<c:forEach var="ordersAdminDto" items="${getOrders}">
-				<div class="row">
-						<span>${ordersAdminDto.ordersDate}</span>
-						<span>${ordersAdminDto.productName}</span>
-						<span>${ordersAdminDto.productPrice}</span>
-						<span>${ordersAdminDto.productOptionName}</span>
-						<span>${ordersAdminDto.ordersDetailCount}</span>
-						<span>${ordersAdminDto.creatorName}</span>
-						<span>${ordersAdminDto.ordersDetailNo}</span>
+		<div class="row">
+			<h1>구매내역</h1>
+		</div>
+		
+	<c:forEach var="ordersAdminDto" items="${getOrders}">
+		<div class="float-container card">
+		
+				<div class="row left">
+					<span>주문일 : ${ordersAdminDto.ordersDate}</span>
 				</div>
 				
-			</c:forEach>
+				<div class="float-left w-25">
+					<img src="/cuddly/image/product/main?productNo=${ordersAdminDto.productNo}"  width="100" height="100">
+				</div>	
+				
+				<div class="row left">
+					<span>상품명 : ${ordersAdminDto.productName}</span>
+				</div>
+				
+				<div class="row float-container">
+					<div class="float-left">
+						<span>크리에이터 : ${ordersAdminDto.creatorName}</span>
+					</div>
+					<div class="float-right">
+						<span>수량 : ${ordersAdminDto.ordersDetailCount}</span>
+						<span>옵션 : ${ordersAdminDto.productOptionName}</span>
+					</div>
+				</div>
+				
+				<div class="row left">
+					<span>개당 : ${ordersAdminDto.productPrice}</span>
+					<span>가격 : ${ordersAdminDto.productPrice * ordersAdminDto.ordersDetailCount}</span>
+				</div>			
+				
+			</div>
+		</c:forEach>
+		
+		</div>
+				
 		</div>
 	</div>
 
