@@ -5,19 +5,6 @@
 <style>
 </style>
 <div class="container w-1000">
-	<c:if test="${creator!=null}">
-	<div class="row">
-		<h1>${creator}</h1>
-	</div>
-	</c:if>
-	
-	<div class="row">
-		<a class="link" href="list?page=1&size8&type=product_price&sort=asc">낮은가격순</a>
-		<a class="link" href="list?page=1&size8&type=product_price&sort=desc">높은가격순</a>
-		<a class="link" href="list?page=1&size8&type=product_date&sort=desc">새로나온순</a>
-		<a class="link" href="list?page=1&size8&sortByWish=desc">인기많은순</a>
-	</div>
-	
 	<c:forEach var="productListDto" items="${list}">
 		<a class="link" href="detail?productNo=${productListDto.productNo}">
 			<div class="inline-flex-container allow-wrap left">

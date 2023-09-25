@@ -2,8 +2,6 @@ package com.kh.cuddly.controller;
 
 import java.util.List;
 
-import javax.servlet.http.HttpSession;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,7 +16,6 @@ import com.kh.cuddly.dao.CreatorProductDao;
 import com.kh.cuddly.dao.ProductDao;
 import com.kh.cuddly.dao.ProductOptionDao;
 import com.kh.cuddly.dao.ReviewDao;
-import com.kh.cuddly.dto.CartDto;
 import com.kh.cuddly.dto.CreatorDto;
 import com.kh.cuddly.dto.ProductDto;
 import com.kh.cuddly.dto.ProductOptionDto;
@@ -73,6 +70,15 @@ public class ProductController {
 		return "/WEB-INF/views/product/detail.jsp";
 	}
 	
+	
+	@RequestMapping("/list2")
+	public String list2(String type, String sort, Model model) {
+		
+		List<ProductDto> list = productDao.selectList(type, sort);
+		model.addAttribute("list", list);
+		
+		return "/WEB-INF/views/product/list2.jsp";
+	}
 	
 	
 	

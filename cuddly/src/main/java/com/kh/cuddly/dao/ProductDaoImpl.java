@@ -102,6 +102,26 @@ public class ProductDaoImpl implements ProductDao{
 			Object[] data = {vo.getCreatorName(), vo.getStartRow(), vo.getFinishRow()}; 
 			return jdbcTemplate.query(sql, productMapper, data);
 		}
+		else if(vo.isSort()) {
+			String sql = "select * from( "
+							+ "select rownum rn, TMP.* from( "
+							+ "select * from product order by " + vo.getType() + " " + vo.getSort()
+							+")TMP"
+						+ ") where rn between ? and ?";
+			Object[] data = {vo.getStartRow(), vo.getFinishRow()};
+			return jdbcTemplate.query(sql, productMapper, data);
+		}
+		else if(vo.isSortByWishlist()) {
+			String sql = "select * from( "
+					+ "select rownum rn, TMP.* from( "
+					+ "SELECT p.*, (SELECT COUNT(*) FROM wishlist w WHERE w.product_no = p.product_no) AS wishlist_count "
+					+ "FROM product p "
+					+ "ORDER BY wishlist_count " + vo.getSortByWish()
+					+")TMP"
+				+ ") where rn between ? and ?";
+			Object[] data = {vo.getStartRow(), vo.getFinishRow()};
+			return jdbcTemplate.query(sql, productMapper, data);
+		}
 		else {
 			String sql = "select * from ("
 					+ "select rownum rn, TMP.* from ("
@@ -135,5 +155,12 @@ public class ProductDaoImpl implements ProductDao{
 		Object[] data = {productNo};
 		List<AttachDto> list = jdbcTemplate.query(sql, attachMapper, data);
 		return list.isEmpty() ? null : list.get(0);
+	}
+	
+	@Override
+	public List<ProductDto> selectList(String type, String sort) {
+		String sql = "select * from product order by " + type + " " + sort ;
+		
+		return jdbcTemplate.query(sql, productMapper);
 	}
 }
