@@ -20,12 +20,20 @@
 				<h2>크리에이터</h2>
 			</div>
 			<c:forEach var="creatorListDto" items="${creatorList}">
-				<div class="row">
-					<a href="product/list?creatorName=${creatorListDto.creatorName}">
-						<label class="btn">${creatorListDto.creatorName}</label>
-					</a>
+			<a class="link" href="product/list?creatorName=${creatorListDto.creatorName}">
+				<div claa="col-4">
+					<div class="row">
+						<img class="image image-circle"
+							src="/cuddly/image/creator?creatorNo=${creatorListDto.creatorNo}"
+							onerror="this.src='https://dummyimage.com/200x200/000/fff;'"
+							width="200" height="200" />
+					</div>
+					<div class="row">
+						<h2>${creatorListDto.creatorName}</h2>
+					</div>
 				</div>
-			</c:forEach>
+			</a>
+		</c:forEach>
 			<div class="row left">
 				<h2>상품</h2>
 			</div>
@@ -37,6 +45,7 @@
 							<tr>
 								<td><img
 									src="/cuddly/image/product/main?productNo=${productListDto.productNo}"
+									onerror="this.src='https://dummyimage.com/200x200/000/fff;'"
 									width="200" height="200"></td>
 							</tr>
 							<tr>

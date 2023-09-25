@@ -10,6 +10,8 @@ public class PaginationVO {
 	private String keyword;	//검색 분류 및 키워드
 	private String type;//회원 검색할때 쓸 타입 추가
 	private String creatorName;
+	private String sort;//상품 정렬때매
+	private String sortByWish;//찜하기 개수로 정렬
 	private int page = 1;//현재 페이지 번호(기본:1)
 	private int size = 10;//보여줄 게시판의 글 수(기본:10)
 	private int count;//전체 글 수
@@ -23,6 +25,12 @@ public class PaginationVO {
 	}
 	public boolean isSearchByMember() {//회원 검색용
 		return type != null && keyword != null;
+	}
+	public boolean isSort() {
+		return type != null && sort != null;
+	}
+	public boolean isSortByWishlist() {
+		return sortByWish != null;
 	}
 	
 	
@@ -53,7 +61,13 @@ public class PaginationVO {
 			return "page="+(getBegin()-1)+"&size="+size+"&creatorName="+creatorName;
 		}
 		else if(isSearchByMember()) {//회원 검색용
-			return "page="+(getBegin()-1)+"&type="+type+"&keyword="+keyword;
+			return "page="+(getBegin()-1)+"&size="+size+"&type="+type+"&keyword="+keyword;
+		}
+		else if(isSort()){
+			return "page="+(getBegin()-1)+"&size="+size+"&type="+type+"&sort="+sort;
+		}
+		else if(isSortByWishlist()) {
+			return "page="+(getBegin()-1)+"&size="+size+"&type="+type+"&sortByWish="+sortByWish;
 		}
 		else {//목록
 			return "page="+(getBegin()-1)+"&size="+size;
@@ -65,10 +79,16 @@ public class PaginationVO {
 			return "page="+(getEnd()+1)+"&size="+size+"&keyword="+keyword;
 		}
 		else if(isSearchByCreatorName()) {
-			return "page="+(getBegin()+1)+"&size="+size+"&creatorName="+creatorName;
+			return "page="+(getEnd()+1)+"&size="+size+"&creatorName="+creatorName;
 		}
 		else if(isSearchByMember()) {//회원검색용
 			return "page="+(getEnd()+1)+"&size="+size+"&type="+type+"&keyword="+keyword;
+		}
+		else if(isSort()){
+			return "page="+(getEnd()+1)+"&size="+size+"&type="+type+"&sort="+sort;
+		}
+		else if(isSortByWishlist()) {
+			return "page="+(getEnd()+1)+"&size="+size+"&sortByWish="+sortByWish;
 		}
 		else {//목록
 			return "page="+(getEnd()+1)+"&size="+size;
@@ -84,6 +104,12 @@ public class PaginationVO {
 		}
 		else if(isSearchByMember()) {//회원검색용
 			return "page="+page+"&size="+size+"&type="+type+"&keyword="+keyword;
+		}
+		else if(isSort()){
+			return "page="+page+"&size"+size+"&type="+type+"&sort="+sort;
+		}
+		else if(isSortByWishlist()) {
+			return "page="+page+"&size="+size+"&sortByWish="+sortByWish;
 		}
 		else {//목록
 			return "page="+page+"&size="+size;

@@ -10,13 +10,22 @@
 		<h1>${creator}</h1>
 	</div>
 	</c:if>
+	
+	<div class="row">
+		<a class="link" href="list?page=1&size8&type=product_price&sort=asc">낮은가격순</a>
+		<a class="link" href="list?page=1&size8&type=product_price&sort=desc">높은가격순</a>
+		<a class="link" href="list?page=1&size8&type=product_date&sort=desc">새로나온순</a>
+		<a class="link" href="list?page=1&size8&sortByWish=desc">인기많은순</a>
+	</div>
+	
 	<c:forEach var="productListDto" items="${list}">
 		<a class="link" href="detail?productNo=${productListDto.productNo}">
 			<div class="inline-flex-container allow-wrap left">
 				<table class="">
 					<tr>
-						<td><img src="/cuddly/image/product/main?productNo=${productListDto.productNo}" width="200"
-							height="200"></td>
+						<td><img src="/cuddly/image/product/main?productNo=${productListDto.productNo}"
+						onerror="this.src='https://dummyimage.com/200x200/000/fff;'" 
+						width="200"	height="200"></td>
 					</tr>
 					<tr>
 						<td>${productListDto.productNo}</td>
