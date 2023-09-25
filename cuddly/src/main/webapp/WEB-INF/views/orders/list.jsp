@@ -15,7 +15,7 @@
 	 
           <div class="row">   <img src="/cuddly/image/product/main?productNo=${detail.productNo}" width="200" height="200">
           
-          	상품 번호 : ${detail.ordersNo}
+          	주문 번호 : ${detail.ordersNo}
            상품 이름: ${detail.productName}
            크리에이터: ${detail.creatorName}
           옵션 이름: ${detail.productOptionName}

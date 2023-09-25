@@ -55,7 +55,7 @@ public class CartDaoImpl implements CartDao {
 	 @Override
 		public List<OrdersProductDto> selectCartList(String memberId) {
 			
-			String sql = "select * from ordered_product where member_id = ?";
+			String sql = "select * from ordered_product where member_id = ? order by cart_date desc";
 			
 			Object[] data= {memberId};
 			
@@ -79,6 +79,7 @@ public class CartDaoImpl implements CartDao {
 		 
 		 return jdbcTemplate.queryForObject(sql, int.class,data);	 
 	 }
+	 
 	 
 	 public boolean cartDelete(int cartNo) {
 		 

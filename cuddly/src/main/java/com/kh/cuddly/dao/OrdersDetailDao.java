@@ -10,6 +10,5 @@ public interface OrdersDetailDao {
 	int sequence();
 	void insert(OrdersDetailDto ordersDetailDto);
 	List<OrderDetailJoinDto> detailList (int ordersNo);
-	List<OrderDetailJoinDto> memberOrdersList(String memberId);
 	}
 

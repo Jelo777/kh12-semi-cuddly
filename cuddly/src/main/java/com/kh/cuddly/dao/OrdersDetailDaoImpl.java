@@ -66,16 +66,9 @@ public class OrdersDetailDaoImpl implements OrdersDetailDao{
 		}
 
 
-	@Override
-	public List<OrderDetailJoinDto> memberOrdersList(String memberId) {
-		
-		String sql = "select * from detail_order where member_id=? order by orders_date desc";
-		
-		Object[] data = {memberId};
-		
-		return jdbcTemplate.query(sql, orderDetailjoinMapper,data);
-		
-	}	
+
+	
+	
 	}
 
 
