@@ -24,7 +24,17 @@ public class HomeController {
 	CreatorDao creatorDao;
 	
 	@RequestMapping("")
-	public String home() {
+	public String home(Model model,@ModelAttribute(name = "vo") PaginationVO vo,
+					@ModelAttribute(name = "vo2") PaginationVO vo2
+					) {
+		vo2.setSortByWish("desc");
+		vo.setType("product_date");
+		vo.setSort("desc");
+		
+		List<ProductDto> sortByNew = productDao.selectList(vo);
+		List<ProductDto> sortByBest = productDao.selectList(vo2);
+		model.addAttribute("sortByNew", sortByNew);
+		model.addAttribute("sortByBest", sortByBest);
 		return "/WEB-INF/views/home.jsp";
 	}
 	

@@ -71,17 +71,6 @@ public class ProductController {
 	}
 	
 	
-	@RequestMapping("/list2")
-	public String list2(String type, String sort, Model model) {
-		
-		List<ProductDto> list = productDao.selectList(type, sort);
-		model.addAttribute("list", list);
-		
-		return "/WEB-INF/views/product/list2.jsp";
-	}
-	
-	
-	
 	@RequestMapping("/creator")
 	public String creators(Model model) {
 		List<CreatorDto> list = creatorDao.selectListJoinImage();

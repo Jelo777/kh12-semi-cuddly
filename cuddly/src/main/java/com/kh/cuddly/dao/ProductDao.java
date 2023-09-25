@@ -15,7 +15,6 @@ public interface ProductDao {
 
 	ProductDto selectOne(int productNo);
 	List<ProductDto> selectList(PaginationVO vo);
-	List<ProductDto> selectList(String type, String sort);
 	
 	AttachDto findProductMainImage(int productNo);//상품 메인 이미지 찾기
 	AttachDto findProductDetailImage(int productNo);//상품 상세 이미지 찾기

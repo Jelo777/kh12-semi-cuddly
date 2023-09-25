@@ -157,10 +157,4 @@ public class ProductDaoImpl implements ProductDao{
 		return list.isEmpty() ? null : list.get(0);
 	}
 	
-	@Override
-	public List<ProductDto> selectList(String type, String sort) {
-		String sql = "select * from product order by " + type + " " + sort ;
-		
-		return jdbcTemplate.query(sql, productMapper);
-	}
 }
