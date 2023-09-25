@@ -23,8 +23,9 @@
 			<div class="inline-flex-container allow-wrap left">
 				<table class="">
 					<tr>
-						<td><img src="/cuddly/image/product/main?productNo=${productListDto.productNo}" width="200"
-							height="200"></td>
+						<td><img src="/cuddly/image/product/main?productNo=${productListDto.productNo}"
+						onerror="this.src='https://dummyimage.com/200x200/000/fff;'" 
+						width="200"	height="200"></td>
 					</tr>
 					<tr>
 						<td>${productListDto.productNo}</td>

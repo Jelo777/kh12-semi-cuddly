@@ -40,7 +40,7 @@
 			},
 
 			//이펙트(전환효과) 설정
-			effect : "coverflow",//(slide/fade/cube/coverflow/flip/creative/cards)
+			effect : "slide",//(slide/fade/cube/coverflow/flip/creative/cards)
 		});
 	});
 </script>
@@ -85,12 +85,13 @@
 		<h2>신상품</h2>
 	</div>
 	<c:forEach var="productListDto" items="${sortByNew}" end="3">
-		<a class="link" href="detail?productNo=${productListDto.productNo}">
+		<a class="link" href="cuddly/product/detail?productNo=${productListDto.productNo}">
 			<div class="inline-flex-container allow-wrap left">
 				<table class="">
 					<tr>
 						<td><img
 							src="/cuddly/image/product/main?productNo=${productListDto.productNo}"
+							onerror="this.src='https://dummyimage.com/200x200/000/fff;'"
 							width="200" height="200"></td>
 					</tr>
 					<tr>
@@ -120,12 +121,13 @@
 		<h2>베스트상품</h2>
 	</div>
 	<c:forEach var="productListDto" items="${sortByBest}" end="3">
-		<a class="link" href="detail?productNo=${productListDto.productNo}">
+		<a class="link" href="cuddly/product/detail?productNo=${productListDto.productNo}">
 			<div class="inline-flex-container allow-wrap left">
 				<table class="">
 					<tr>
 						<td><img
 							src="/cuddly/image/product/main?productNo=${productListDto.productNo}"
+							onerror="this.src='https://dummyimage.com/200x200/000/fff;'"
 							width="200" height="200"></td>
 					</tr>
 					<tr>
