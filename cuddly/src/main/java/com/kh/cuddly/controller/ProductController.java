@@ -2,6 +2,8 @@ package com.kh.cuddly.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,6 +21,7 @@ import com.kh.cuddly.dao.ReviewDao;
 import com.kh.cuddly.dto.CreatorDto;
 import com.kh.cuddly.dto.ProductDto;
 import com.kh.cuddly.dto.ProductOptionDto;
+import com.kh.cuddly.dto.AttachDto;
 
 @Controller
 @RequestMapping("/cuddly/product")
@@ -38,18 +41,24 @@ public class ProductController {
 	CartDao cartDao;
 	
 	@RequestMapping("/list")
-	public String list(@ModelAttribute(name = "vo") PaginationVO vo, Model model) {
+	public String list(@ModelAttribute(name = "vo") PaginationVO vo, Model model,
+						HttpServletRequest request) {
 		int count = productDao.countList(vo);
 		vo.setCount(count);
 		vo.setSize(8);
 		
+		int paramSize = request.getParameterMap().size();
+		
 		if(vo.getCreatorName() != null) {
-			model.addAttribute("creator",vo.getCreatorName());
+			CreatorDto creatorDto = creatorDao.selectOne(vo.getCreatorName());
+			AttachDto attachDto = creatorDao.findCreatorImage(creatorDto.getCreatorNo());
+			model.addAttribute("creatorDto",creatorDto);
+			model.addAttribute("attachDto", attachDto);
 		}
 		
 		List<ProductDto> list = productDao.selectList(vo);
 		model.addAttribute("list", list);
-		
+		model.addAttribute("paramSize", paramSize);
 		return "/WEB-INF/views/product/list.jsp";
 	}
 	

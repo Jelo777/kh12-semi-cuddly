@@ -164,7 +164,8 @@
 					</div>
 					<div class="row ms-20">
 						<button class="btn w-100" type="submit" name="action" value="order">주문</button>
-						
+					</div>	
+					<div class="row ms-20">
 						<a href="/cuddly/orders/cartList?memberId=${sessionScope.name}">
 							<button class="btn btn-positive btn-cart w-100" type="submit" name="action"
 								value="cart">장바구니</button>
