@@ -13,5 +13,6 @@ public interface ReviewDao {
 	AttachDto findImage(int reviewNo);
 	List<ReviewDto> selectList();
 	float reviewAvg (int productNo);
+	List<ReviewDto> memberList(String memberId);
 
 }

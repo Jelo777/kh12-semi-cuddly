@@ -8,6 +8,10 @@
 
 var count = 0;
 
+
+
+
+
 function addSelectedOption() {
     var optionSelect = $("#optionSelect");
     var cartCount = $("#cartCount");
@@ -59,6 +63,10 @@ function addSelectedOption() {
 }
 
 
+
+
+
+
     $(function(){
         var params = new URLSearchParams(location.search);
         var productNo = params.get("productNo");
@@ -100,10 +108,42 @@ function addSelectedOption() {
                 }
             });
         });
+        
+    
+       	
+       
+            // "action"이라는 이름을 가진 버튼 클릭 이벤트 처리
+            $("[name='action']").click(function(e){
+                var userConfirmed = confirm("장바구니로 이동하시겠습니까?");
+                
+                if (userConfirmed) {
+	
+                	
+                
+                
+                } else {
+
+                e.preventDefault();
+                
+                }
+           
+        });
+
+        
+       	
+       	
+       });
+        
+        
+        
+        
 
         
        
-    });
+    
+    
+    
+    
 
 </script>
 

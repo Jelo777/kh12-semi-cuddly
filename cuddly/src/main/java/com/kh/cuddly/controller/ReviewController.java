@@ -97,6 +97,16 @@ public class ReviewController {
 		
 	}
 	
+	@RequestMapping("/memberList")
+	public String list(Model model,String memberId) {
+		List<ReviewDto> list = reviewDao.memberList(memberId);
+		
+		model.addAttribute("list",list);
+		
+		return "/WEB-INF/views/review/memberList.jsp";
+		
+	}
+	
 	
 
 }

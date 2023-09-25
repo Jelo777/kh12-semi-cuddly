@@ -88,6 +88,19 @@ public class QnaDaoImpl implements QnaDao{
 		return list;
 	}
 	
+	@Override
+	public List<QnaDto> selectList(String memberId) {
+		
+		String sql = "select * from qna where member_id=? order by qna_no asc";
+		
+		Object[] data = {memberId};
+		
+		List<QnaDto> list = jdbcTemplate.query(sql, qnaMapper, data);
+		
+		
+		return list;
+	}
+	
 //	@Override
 //	public List<QnaDto> selectList() {
 //		

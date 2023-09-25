@@ -64,13 +64,23 @@ public class QnaController {
 		
 	}
 	
-	@RequestMapping("/list")
+	@RequestMapping("/adminList")
 	public String list(Model model) {
 		List<QnaDto> list = qnaDao.selectList();
 		
 		model.addAttribute("list",list);
 		
 		return "/WEB-INF/views/qna/list.jsp";
+		
+	}
+	
+	@RequestMapping("/memberList")
+	public String memberList(Model model,String memberId) {
+		List<QnaDto> list = qnaDao.selectList();
+		
+		model.addAttribute("list",list);
+		
+		return "/WEB-INF/views/qna/memberList.jsp";
 		
 	}
 	
