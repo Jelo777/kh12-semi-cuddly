@@ -1,6 +1,10 @@
 package com.kh.cuddly.rest;
 
+import java.text.DecimalFormat;
+import java.util.Random;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -24,6 +28,13 @@ public class CertRestController {
 	@PostMapping("/send")
 	public void send(@RequestParam String certEmail) {
 		
+		//[1] 인증번호 생성
+		Random r= new Random();
+		int number =r.nextInt(1000000);
+		DecimalFormat fm = new DecimalFormat("000000");
+		String certNumber =fm.format(number);
+		//[2] 이메일 발송
+		SimpleMailMessage message =new SimpleMailMessage();
 	}
 	
 	

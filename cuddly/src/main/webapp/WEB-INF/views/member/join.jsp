@@ -54,6 +54,7 @@
             <input type="text" name="memberEmail" 
                     placeholder="test@kh.com" class="form-input w-100">
             <div class="fail-feedback">이메일 형식이 잘못되었습니다</div>
+            <div class="fail2-feedback">이미 이 이메일로 아이디를 만드셨습니다</div>
             </div>
             <div class="row left">
                 <label>생년월일</label>

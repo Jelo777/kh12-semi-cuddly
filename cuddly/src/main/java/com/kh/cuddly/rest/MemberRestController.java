@@ -28,5 +28,17 @@ public class MemberRestController {
 			return "N";
 		}
 	}
+	@PostMapping("emailCheck")
+	public String emailCheck(@RequestParam String memberEmail) {
+		MemberDto memberDto =memberDao.selectOneByEmail(memberEmail);
+		if(memberDto ==null) {
+			return "Y";
+		}
+		else {
+			return "N";
+		}
+	}
+	
+	
 
 }
