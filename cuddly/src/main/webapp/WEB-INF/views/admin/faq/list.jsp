@@ -4,29 +4,37 @@
 
 <jsp:include page="/WEB-INF/views/template/adminHeader.jsp"></jsp:include>
 
-<div class="container w-800">
+
 	
 	<div class="row">
 		<h2>FAQ관리</h2>
 	</div>
 	
-	
-	
+	<br><br>
 
 	
+	
+	<div class="row right">
+		<a href="write" class="btn">
+			<i class="fa-solid fa-write"></i>
+			작성하기 
+		</a>
+
+
+
+<div class="row">
+    <a href="list?category=공지사항">공지사항</a>
+    <a href="list?category=기타">기타</a>
+    <a href="list?category=주문결제">주문결제</a>
+    <a href="list?category=회원정보">회원정보</a>
+</div>
+
+
+		
 	<form action="list" method="post" autocomplete="off">
 		<div class="row">
 		
-				
-					
-				
-
-
-	
-	<h3><a href="list?faq_category=공지사항">공지사항</a></h3>
-	<h3><a href="list?faq_category=주문결제">주문결제</a></h3>
-	<h3><a href="list?faq_category=회원정보">회원정보</a></h3>
-	<h3><a href="list?faq_category=기타">기타</a></h3>	
+		
 	
 	<div class="row">
 		<table class="table table-stripe">
@@ -46,7 +54,7 @@
 			
 			<td align="left">
 				<!-- 제목을 누르면 상세페이지로 이동 -->
-				<a href="detail?faqNo=${faqDto.faqNo}">
+				<a class="link" href="detail?faqNo=${faqDto.faqNo}">
 					${faqDto.faqTitle}
 				</a>
 			</td>
@@ -94,6 +102,36 @@
 </div>
 
 
-<a href="write">작성하기</a>
+
+<!-- 검색창 -->
+<form action="list" method="get">
+	
+	<c:choose>
+		<c:when test="${param.type == 'board_writer'}">
+			<select name="type" required>
+				<option value="board_title">제목</option>
+				<option value="board_writer" selected>작성자</option>
+			</select>
+		</c:when>
+		<c:otherwise>
+			<select name="type" required>
+				<option value="board_title">제목</option>
+				<option value="board_writer">작성자</option>
+			</select>
+		</c:otherwise>
+	</c:choose>
+	
+	<input type="search" name="keyword"  required
+				placeholder="검색어 입력" value="${param.keyword}">
+	<button>검색</button>
+</form>
+
+<br>
+
+
+
+
+
+
 </form>
 <jsp:include page="/WEB-INF/views/template/adminFooter.jsp"></jsp:include>

@@ -43,6 +43,7 @@ import com.kh.cuddly.dto.OrdersAdminDto;
 import com.kh.cuddly.dto.ProductDto;
 import com.kh.cuddly.dto.ProductOptionDto;
 import com.kh.cuddly.dto.QnaDto;
+import com.kh.cuddly.error.NoResultException;
 
 @Controller
 @RequestMapping("/cuddly/admin")
@@ -342,6 +343,9 @@ public class AdminController {
 	
 
 	
+	
+	
+	
 	@RequestMapping("/faq/list")
 	public String faqList(@ModelAttribute(name = "vo") FaqlistVO vo,
                 Model model) {
@@ -360,6 +364,51 @@ public class AdminController {
 		FaqDto faqDto = faqDao.selectOne(faqNo);
 		model.addAttribute("faqDto", faqDto);
 		return "/WEB-INF/views/admin/faq/detail.jsp";
+	}
+	
+	@GetMapping("faq/write")
+	private String faqWrite() {
+		return "/WEB-INF/views/admin/faq/write.jsp";
+	}
+	
+	@PostMapping("faq/write")
+	private String faqWrite(@ModelAttribute FaqDto faqDto) {
+		int faqNo = faqDao.sequence();
+		faqDto.setFaqNo(faqNo);
+		
+		
+		faqDao.insert(faqDto);
+		return "redirect:detail?faqNo="+faqNo;
+	}
+	
+	@GetMapping("faq/edit")
+	public String faqEdit(@RequestParam int faqNo, Model model) {
+		FaqDto faqDto = faqDao.selectOne(faqNo);
+		model.addAttribute("faqDto", faqDto);
+		return "/WEB-INF/views/admin/faq/edit.jsp";
+	}
+	
+	
+	@PostMapping("faq/edit")
+	public String faqEdit(@ModelAttribute FaqDto faqDto) {
+		boolean result = faqDao.update(faqDto);
+		if(result) {
+			return "redirect:detail?faqNo=" + faqDto.getFaqNo();
+		}
+		else {
+			throw new NoResultException("존재하지 않는 글");
+		}
+	}
+	
+	@RequestMapping("faq/delete")
+	public String faqDelete(@RequestParam int faqNo) {
+		boolean result = faqDao.delete(faqNo);
+		if(result) {
+			return "redirect:list";
+		}
+		else {
+			return "redirect:에러";
+		}
 	}
 	
 	
