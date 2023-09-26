@@ -4,6 +4,7 @@
 <jsp:include page="/WEB-INF/views/template/adminHeader.jsp"></jsp:include>
  
  <script>
+ //모달 JS
         $(function(){
             $(".popUpOpen").click(function(e){
             	e.preventDefault();
@@ -22,7 +23,37 @@
                 $("form").submit();
             });
         });
-    </script>
+ 
+ //피드백 JS
+ $(function(){
+	 var status = {
+			 productItem : false,
+			 creatorName : false,
+			 productName : false,
+			 productPrice : false,
+			 attachMain : false,
+			 attachDetail : false,
+			 ok:function(){
+				return  this.productItem && this.creatorName 
+							&& this.productName && this.productPrice 
+							&& this.attachMain && this.attachDetail
+			 }
+	 };
+ 
+	$("[name=creatorName]").blur(function(){
+		var creatorName = $(this).val();
+		var isValid = creatorName.length > 0;
+
+		$(this).removeClass("success fail");
+		$(this).addClass(isValid ? "success" : "fail");
+
+    	// status.creatorName 업데이트
+    	status.creatorName = isValid;
+		});
+
+ });
+ 
+</script>
     
  <style>
   
@@ -44,23 +75,29 @@
 				<option value="문구/오피스">문구/오피스</option>
 				<option value="기타">기타</option>
 			</select>
+			<div class="fail-feedback">품목을 선택하세요.</div>
 		</div>
 		<div class="row">
-			<input class="form-input w-100" name="creatorName" placeholder="크리에이터 입력">
+			<input type="text" class="form-input w-100" name="creatorName" placeholder="크리에이터 입력">
+			<div class="fail-feedback">크리에이터를 입력하세요.</div>
 		</div>
 		<div class="row">
-			<input class="form-input w-100" name="productName" placeholder="상품명 입력">
+			<input  type="text" class="form-input w-100" name="productName" placeholder="상품명 입력">
+			<div class="fail-feedback">상품명을 입력하세요.</div>
 		</div>
 		<div class="row">
-			<input class="form-input w-100" type="number" name="productPrice" placeholder="가격 입력">
+			<input  type="number" class="form-input w-100" name="productPrice" placeholder="가격 입력">
+			<div class="fail-feedback">가격을 입력하세요.</div>
 		</div>
 		<div class="row left">
 			메인이미지
-			<input class="form-input w-100" type="file" name="attachMain" accept="image/*" placeholder="대표이미지"> <br><br>
+			<input  type="file" class="form-input w-100" name="attachMain" accept="image/*" placeholder="대표이미지">
+			<div class="fail-feedback">대표이미지를 등록하세요.</div>
 		</div>
 		<div class="row left">
 			상세이미지
-			<input class="form-input w-100" type="file" name="attachDetail" accept="image/*" placeholder="상세이미지"> <br><br>
+			<input type="file" class="form-input w-100" name="attachDetail" accept="image/*" placeholder="상세이미지">
+			<div class="fail-feedback">상세이미지를 등록하세요.</div>
 		</div>
 		<div class="row">
 			<button class="btn btn-positive w-100 popUpOpen">상품등록</button>
