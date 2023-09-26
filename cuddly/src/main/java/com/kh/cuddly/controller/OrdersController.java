@@ -96,12 +96,15 @@ public class OrdersController {
 	    }
 
 		AddressDto addressDto = addressDao.selectOne(memberId);
+		List<AddressDto> list=addressDao.selectList(memberId);
 		
 		boolean NoAddr = addressDto==null;
 		
 		
 		model.addAttribute("NoAddr", NoAddr);
 		model.addAttribute("addressDto", addressDto);
+		model.addAttribute("list",list);
+		
 	    
 	    model.addAttribute("ordersProductDto", dtoList);
 	    model.addAttribute("total", total);
