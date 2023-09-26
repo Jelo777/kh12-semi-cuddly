@@ -105,19 +105,16 @@
 </div>
 
 
-
-<!-- 검색창 -->
 <form action="list" method="get">
-	<select name="type" required>
-		<option>제목</option>
-		<option>작성자</option>
-	</select>
-	<input type="search" name="keyword" 
-				placeholder="검색어 입력" required>
-	<button>검색</button>
+    <div class="row search-container">
+        <select name="type" required>
+            <option value="board_title">제목</option>
+            <option value="board_writer">작성자</option>
+        </select>
+        <input type="search" name="keyword" required placeholder="검색어 입력" value="${param.keyword}">
+        <button type="submit">검색</button>
+    </div>
 </form>
-
-<br>
 
 
 

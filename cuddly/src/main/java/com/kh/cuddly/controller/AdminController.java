@@ -400,17 +400,28 @@ public class AdminController {
 		}
 	}
 	
-
 	@RequestMapping("/faq/list")
 	public String faqList(@ModelAttribute(name = "vo") FaqlistVO vo,
-                Model model) {
+	                      @RequestParam(required = false) String category,
+	                      @RequestParam(required = false) String keyword,
+	                      Model model) {
 
-		int count = faqDao.countList(vo);
-		vo.setCount(count);	    
-		List<FaqDto> list = faqDao.selectListByPage(vo);
-		model.addAttribute("list", list);
+	    int count = faqDao.countList(vo);
+	    vo.setCount(count);
 
-		return "/WEB-INF/views/admin/faq/list.jsp";
+	    List<FaqDto> list;
+
+	    if (category != null && !category.isEmpty()) {
+	        list = faqDao.selectCategory(category);
+	    } else if (keyword != null && !keyword.isEmpty()) {
+	        list = faqDao.selectListByTitle(keyword);
+	    } else {
+	        list = faqDao.selectListByPage(vo);
+	    }
+
+	    model.addAttribute("list", list);
+
+	    return "/WEB-INF/views/admin/faq/list.jsp";
 	}
 }
 
