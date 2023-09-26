@@ -1,5 +1,15 @@
 $(function(){
 
+$("[name=join]").click(function() {
+  
+  if ($(".form-input.cert-input").val().length === 0) {
+   
+   $(".cert-input").addClass("fail2")
+   
+  }
+});
+
+
 
     var status={
         id:false,

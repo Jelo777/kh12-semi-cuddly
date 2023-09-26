@@ -81,7 +81,7 @@
                 <div class="fail-feedback">잘못된 날짜를 선택하셨습니다</div>
             </div>
             <div class="row">
-                <button type="submit" class="btn btn-positive w-100">가입하기</button>
+                <button type="submit" class="btn btn-positive w-100" name="join">가입하기</button>
             </div>
         </div>
     </form>
