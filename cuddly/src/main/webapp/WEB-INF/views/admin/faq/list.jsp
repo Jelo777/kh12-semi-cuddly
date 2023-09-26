@@ -14,22 +14,23 @@
 
 	
 	
+
+
+
+<div class="row left">
+    <a class="link" href="list?category=공지사항">공지사항</a>
+    <a class="link" href="list?category=기타">기타</a>
+    <a class="link" href="list?category=주문결제">주문결제</a>
+    <a class="link" href="list?category=회원정보">회원정보</a>
+</div>
+
+
 	<div class="row right">
 		<a href="write" class="btn">
 			<i class="fa-solid fa-write"></i>
 			작성하기 
 		</a>
-
-
-
-<div class="row">
-    <a href="list?category=공지사항">공지사항</a>
-    <a href="list?category=기타">기타</a>
-    <a href="list?category=주문결제">주문결제</a>
-    <a href="list?category=회원정보">회원정보</a>
-</div>
-
-
+		</div>
 		
 	<form action="list" method="post" autocomplete="off">
 		<div class="row">
