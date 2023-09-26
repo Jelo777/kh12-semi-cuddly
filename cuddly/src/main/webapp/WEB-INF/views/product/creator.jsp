@@ -9,7 +9,7 @@
 	</div>
 	<div class="flex-container allow-wrap">
 		<c:forEach var="creatorListDto" items="${list}">
-			<a class="link" href="list?creatorName=${creatorListDto.creatorName}">
+			<a class="link" href="list?creator=${creatorListDto.creatorName}">
 				<div claa="col-4">
 					<div class="row">
 						<img class="image image-circle"

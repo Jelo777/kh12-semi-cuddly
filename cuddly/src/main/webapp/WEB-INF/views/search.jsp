@@ -37,7 +37,7 @@
 			<div class="row left">
 				<h2>상품</h2>
 			</div>
-			<c:forEach var="productListDto" items="${productList}">
+			<c:forEach var="productListDto" items="${productList}" end="3">
 				<a class="link"
 					href="product/detail?productNo=${productListDto.productNo}">
 					<div class="inline-flex-container allow-wrap left">
@@ -64,6 +64,11 @@
 					</div>
 				</a>
 			</c:forEach>
+			<div class="row">
+				<a href="product/list?${vo.getQueryStringNew()}">
+				<label class="btn">검색상품 더보기</label>
+				</a>
+			</div>
 		</c:otherwise>
 	</c:choose>
 </div>
