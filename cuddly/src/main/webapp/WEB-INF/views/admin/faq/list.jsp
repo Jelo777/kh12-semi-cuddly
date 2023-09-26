@@ -15,14 +15,16 @@
 	
 	
 
-
-
-<div class="row left">
-    <a class="link" href="list?category=공지사항">공지사항</a>
-    <a class="link" href="list?category=기타">기타</a>
-    <a class="link" href="list?category=주문결제">주문결제</a>
-    <a class="link" href="list?category=회원정보">회원정보</a>
+<div class="row left category-links">
+    <select name="category" onchange="location = this.value;">
+        <option value="">카테고리 선택</option>
+        <option value="list?category=공지사항">공지사항</option>
+        <option value="list?category=기타">기타</option>
+        <option value="list?category=주문결제">주문결제</option>
+        <option value="list?category=회원정보">회원정보</option>
+    </select>
 </div>
+
 
 
 	<div class="row right">
