@@ -3,13 +3,15 @@
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="UTF-8">
-    <title>주문 정보 입력</title>
-</head>
-<body>
+<style>
+	.card{
+            /* border:1px solid; */
+            box-shadow: 0 0 0 1px #2d3436;
+	}
+	.list{
+		box-shadow: 0 0 0 1px #2d3436;
+	}
+</style>
 
 <script>
 
@@ -38,6 +40,27 @@ $(function() {
 	}
 		
 	})
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 
 })
@@ -168,9 +191,48 @@ $(function() {
   
         <button class="btn btn-order">주문하기</button>
     	</form>
-    	
-    	
-    	
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 	<div class="container w-700 list-border">
+ 		<c:forEach var="addressDto" items="${list}">
+			<div class="flex-container card mt-50">
+				<div class="w-75 mt-20">
+					<div class="row left ms-30">
+						<h1>${addressDto.addressName}
+							<c:if test="${addressDto.addressDefault =='Y'}">
+							(기본배송지)
+							</c:if>
+						</h1>
+					</div>
+					<div class="row left ms-30">
+						<h5>${addressDto.addressPost}/${addressDto.addressAddr1}/${addressDto.addressAddr2}</h5>
+					</div>  
+					<div class="row left ms-30">
+						<h5>${addressDto.addressContact}</h5>
+					</div>
+					<div class="row left ms-30">
+						<h5>${addressDto.addressComent}</h5>
+					</div>
+				</div>
+				<div class="w-25 mt-20">
+					<div class="row right me-30">
+						<h5>
+							<button type ="button"  style="width:150px; font-size:16px;"class="btn btn-positive btn-edit">선택</button>
+						</h5>	
+					</div>
+				</div>
+			
+			</div>
+		</c:forEach>  	
+   </div>	
         
        
    
