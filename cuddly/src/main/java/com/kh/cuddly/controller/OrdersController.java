@@ -29,6 +29,7 @@ import com.kh.cuddly.dto.MemberDto;
 import com.kh.cuddly.dto.MultiCartInsert;
 import com.kh.cuddly.dto.MultiOrders;
 import com.kh.cuddly.dto.OrderDetailJoinDto;
+import com.kh.cuddly.dto.OrderDetailJoinDto2;
 import com.kh.cuddly.dto.OrdersDetailDto;
 import com.kh.cuddly.dto.OrdersDto;
 import com.kh.cuddly.dto.OrdersProductDto;
@@ -95,6 +96,11 @@ public class OrdersController {
 	    }
 
 		AddressDto addressDto = addressDao.selectOne(memberId);
+		
+		boolean NoAddr = addressDto==null;
+		
+		
+		model.addAttribute("NoAddr", NoAddr);
 		model.addAttribute("addressDto", addressDto);
 	    
 	    model.addAttribute("ordersProductDto", dtoList);
@@ -194,9 +200,20 @@ public class OrdersController {
 	public String cartInsert(HttpSession session,
 	        @ModelAttribute MultiCartInsert cartList,
 	        @RequestParam(name = "action", required = false) String action) {
+		String memberId = (String) session.getAttribute("name");
 
+		if(memberId==null) {
+			
+			return "redirect:/cuddly/member/login";
+			
+		}
+		
+		else {
+		
+		
+		
+		
 	    List<CartDto> list = cartList.getCartList();
-	    String memberId = (String) session.getAttribute("name");
 	    StringBuilder cartNoParams = new StringBuilder();
 
 	    for (CartDto insert : list) {
@@ -222,6 +239,7 @@ public class OrdersController {
 	    } else {
 	        return "redirect:/cuddly/orders/insert?" + cartNoParams.toString();
 	    }
+		}
 	}
 	
 	
@@ -271,7 +289,7 @@ public class OrdersController {
 	@RequestMapping("/list")
 	public String orderList(Model model,String memberId) {
 		
-		List<OrderDetailJoinDto> list = ordersDao.selectListOrders(memberId);
+		List<OrderDetailJoinDto2> list = ordersDao.selectListOrders2(memberId);
 			
 		model.addAttribute("list", list);
 		

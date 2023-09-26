@@ -57,13 +57,21 @@
 
     <div class="row right">
     
+
         <a href="list" class="btn">
             <i class="fa-solid fa-list"></i>
             목록
         </a>
               
-		
-
+		<a href="edit?faqNo=${faqDto.faqNo}" class="btn btn-positive">		
+   			 <i class="fa-solid fa-edit"></i>
+   			 수정
+		</a>
+	
+       <a href="delete?faqNo=${faqDto.faqNo}" class="btn">
+  	 		 <i class="fa-solid fa-delete"></i>
+   			 삭제
+		</a>
 
   
 

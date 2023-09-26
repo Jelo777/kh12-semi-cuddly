@@ -168,36 +168,54 @@ public class MemberController {
 		return "/WEB-INF/views/member/findId.jsp";
 	}
 	
-//	@PostMapping("/findId")
-//	public String findId(@RequestParam String memberEmail) {
-//		//사용자가 입력한 memberEmail로 selectOneByEmail메소드를 사용해 memberDto 불러오기
-//		
-//		MemberDto memberDto =memberDao.selectOneByEmail(memberEmail);
-//		if(memberDto !=null) {//이메일로 찾은 memberDto가 null이 아니면=있으면
-//			SimpleMailMessage message =new SimpleMailMessage();
-//			message.setTo(memberEmail);
-//			message.setSubject("아이디 찾기 결과");
-//			message.setText("아이디는 [" + memberDto.getMemberId() +"] 입니다~ 네 찾아드렸어요");
-//			sender.send(message);
-//			return "redirect:findIdFinish";
-//		}
-//		else {
-//			return "redirect:findId?error";
-//		}
-//	}
-//	@RequestMapping("/findIdFinish")
-//	public String findIdFinish() {
-//		return "/WEB-INF/views/member/findIdFinish.jsp";
-//	}
+	@PostMapping("/findId")
+	public String findId(@RequestParam String memberEmail) {
+		//사용자가 입력한 memberEmail로 selectOneByEmail메소드를 사용해 memberDto 불러오기
+		
+		MemberDto memberDto =memberDao.selectOneByEmail(memberEmail);
+		if(memberDto !=null) {//이메일로 찾은 memberDto가 null이 아니면=있으면
+			SimpleMailMessage message =new SimpleMailMessage();
+			message.setTo(memberEmail);
+			message.setSubject("아이디 찾기 결과");
+			message.setText("아이디는 [" + memberDto.getMemberId() +"] 입니다~ 네 찾아드렸어요");
+			sender.send(message);
+			return "redirect:findIdFinish";
+		}
+		else {
+			return "redirect:findId?error";
+		}
+	}
+	@RequestMapping("/findIdFinish")
+	public String findIdFinish() {
+		return "/WEB-INF/views/member/findIdFinish.jsp";
+	}
+
 	
 	
 	@GetMapping("/findPw")
 	public String findPw() {
 		return "/WEB-INF/views/member/findPw.jsp";
 	}
-//	@PostMapping("/findPw")
-//	public String findPw(@RequestParam String memberEmail) {
-//		MemberDto memberDto =memberDao.selectOneByEmail(memberEmail);
+	@PostMapping("/findPw")
+	public String findPw(@RequestParam String memberId,@ RequestParam String memberEmail) {
+		MemberDto memberDto =memberDao.selectOne(memberId);
+		if(memberDto ==null) {
+			return "redirect:findPw?error";
+		}
+		else if(!memberDto.getMemberEmail().equals(memberEmail)) {
+			return "redirect:findPw?error2";
+		}
+		else {
+			SimpleMailMessage message =new SimpleMailMessage();
+			message.setTo(memberEmail);
+			message.setSubject("비밀번호 찾기 결과");
+			message.setText("비밀번호는 [" + memberDto.getMemberPw() +"] 입니다~ 네 찾아드렸어요");
+			sender.send(message);
+			return "redirect:findPwFinish";
+			
+		}
+		
+		
 //		if(memberDto !=null) {
 //			SimpleMailMessage message =new SimpleMailMessage();
 //			message.setTo(memberEmail);
@@ -209,13 +227,13 @@ public class MemberController {
 //		else {
 //			return "redirect:findPw?error";
 //		}
-//		
-//	}
-//	@RequestMapping("/findPwFinish")
-//	public String findPwFinish() {
-//		return "/WEB-INF/views/member/findPwFinish.jsp";
-//	}
-//	
+		
+	}
+	@RequestMapping("/findPwFinish")
+	public String findPwFinish() {
+		return "/WEB-INF/views/member/findPwFinish.jsp";
+	}
+	
 	
 	@RequestMapping("/mypage/wishlist")
 	public String wishlist(HttpSession session, Model model) {

@@ -5,16 +5,19 @@ import java.sql.Date;
 import lombok.Data;
 
 @Data
-public class OrdersAdminDto {
-	private int ordersNo;
-	private Date ordersDate;
+public class OrderDetailJoinDto2 {
+	
 	private int ordersDetailNo;
+	private int ordersDetailPrice;
+	private int ordersNo;
+	private	int productNo;
 	private String productName;
+	private String productOptionName;
 	private String creatorName;
 	private int ordersDetailCount;
-	private String productOptionName;
-	private int ordersDetailPrice;
+	private	Date ordersDate;
 	private String memberId;
-	private int productNo;
-	private int ordersCount;
+	private int orderCount;
+	private boolean two;
+
 }
