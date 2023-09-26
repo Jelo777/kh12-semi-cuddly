@@ -7,6 +7,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.kh.cuddly.VO.PaginationVO;
+import com.kh.cuddly.VO.ProductListVO;
 import com.kh.cuddly.dto.AttachDto;
 import com.kh.cuddly.dto.ProductDto;
 import com.kh.cuddly.mapper.AttachMapper;
@@ -90,72 +91,6 @@ public class ProductDaoImpl implements ProductDao{
 		}
 	}
 
-	@Override
-	public List<ProductDto> selectList(PaginationVO vo) {
-		if(vo.isSearch()) {
-			String sql = "select * from ("
-							+ "select rownum rn, TMP.* from ("
-								+ "SELECT * FROM product WHERE instr(product_name, ?)>0 "
-								+ "ORDER BY product_no DESC"
-							+ ")TMP"
-						+ ") where rn between ? and ?";
-			Object[] data = {vo.getKeyword(), vo.getStartRow(), vo.getFinishRow()};
-			return jdbcTemplate.query(sql, productMapper, data);
-		}
-		else if(vo.isSearchByCreatorName()) {
-			String sql = "select * from ("
-							+ "select rownum rn, TMP.* from ("
-								+ "select product.* from product inner join creator_product "
-								+ "on creator_product.product_no = product.product_no "
-								+ "LEFT OUTER JOIN creator ON creator_product.creator_no = creator.creator_no "
-								+ "WHERE creator.creator_name = ? "
-								+ "order by product.product_no desc "
-							+ ")TMP"
-						+ ") where rn between ? and ?";
-			Object[] data = {vo.getCreatorName(), vo.getStartRow(), vo.getFinishRow()}; 
-			return jdbcTemplate.query(sql, productMapper, data);
-		}
-		else if(vo.isSearchByProductItem()) {
-			String sql = "select * from ("
-							+ "select rownum rn, TMP.* from ("
-							+ "SELECT * FROM product WHERE product_item = ? "
-							+ "ORDER BY product_no DESC"
-						+ ")TMP"
-					+ ") where rn between ? and ?";
-		Object[] data = {vo.getProductItem(), vo.getStartRow(), vo.getFinishRow()};
-		return jdbcTemplate.query(sql, productMapper, data);
-		}
-		else if(vo.isSort()) {
-			String sql = "select * from( "
-							+ "select rownum rn, TMP.* from( "
-							+ "select * from product order by " + vo.getType() + " " + vo.getSort()
-							+")TMP"
-						+ ") where rn between ? and ?";
-			Object[] data = {vo.getStartRow(), vo.getFinishRow()};
-			return jdbcTemplate.query(sql, productMapper, data);
-		}
-		else if(vo.isSortByWishlist()) {
-			String sql = "select * from( "
-					+ "select rownum rn, TMP.* from( "
-					+ "SELECT p.*, (SELECT COUNT(*) FROM wishlist w WHERE w.product_no = p.product_no) AS wishlist_count "
-					+ "FROM product p "
-					+ "ORDER BY wishlist_count " + vo.getSortByWish()
-					+")TMP"
-				+ ") where rn between ? and ?";
-			Object[] data = {vo.getStartRow(), vo.getFinishRow()};
-			return jdbcTemplate.query(sql, productMapper, data);
-		}
-		else {
-			String sql = "select * from ("
-					+ "select rownum rn, TMP.* from ("
-						+ "SELECT * FROM product "
-						+ "ORDER BY product_no DESC"
-					+ ")TMP"
-				+ ") where rn between ? and ?";
-			Object[] data = {vo.getStartRow(), vo.getFinishRow()};
-			return jdbcTemplate.query(sql, productMapper, data);
-		}
-	}
 	
 	@Override
 	public AttachDto findProductMainImage(int productNo) {
@@ -178,6 +113,49 @@ public class ProductDaoImpl implements ProductDao{
 		Object[] data = {productNo};
 		List<AttachDto> list = jdbcTemplate.query(sql, attachMapper, data);
 		return list.isEmpty() ? null : list.get(0);
+	}
+	
+	
+	
+	
+	@Override
+	public List<ProductDto> selectList(ProductListVO vo) {
+		if(!vo.isSearch()) {
+			String sql = "select * from( "
+					+ "select rownum rn, TMP.* from( "
+					+ "SELECT p.*, (SELECT COUNT(*) FROM wishlist w WHERE w.product_no = p.product_no) AS wishlist_count "
+					+ "FROM product p "
+					+ "ORDER BY " + vo.getTarget() + " " + vo.getSort()
+					+")TMP"
+				+ ") where rn between ? and ?";
+			Object[] data = {vo.getStartRow(), vo.getFinishRow()};
+			return jdbcTemplate.query(sql, productMapper, data);
+		}
+		else {
+			String sql = "select * from( "
+					+ "select rownum rn, TMP.* from( "
+					+ "SELECT p.*, (SELECT COUNT(*) FROM wishlist w WHERE w.product_no = p.product_no) AS wishlist_count "
+					+ "FROM product p "
+					+ "where instr(p.product_name, ?)>0"
+					+ "ORDER BY " + vo.getTarget() + " " + vo.getSort()
+					+")TMP"
+				+ ") where rn between ? and ?";
+			Object[] data = {vo.getKeyword() ,vo.getStartRow(), vo.getFinishRow()};
+			return jdbcTemplate.query(sql, productMapper, data);
+		}
+	}
+	
+	@Override
+	public int countList(ProductListVO vo) {
+		if(vo.isSearch()) {
+			String sql = "select count(*) from product where instr(product_name, ?) >0";
+			Object[] data = {vo.getKeyword()};
+			return jdbcTemplate.queryForObject(sql, int.class, data);
+		}
+		else {
+			String sql = "select count(*) from product";
+			return jdbcTemplate.queryForObject(sql, int.class);
+		}
 	}
 	
 }

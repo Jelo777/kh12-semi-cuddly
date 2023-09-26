@@ -240,18 +240,18 @@ public class AdminController {
 	}
 	
 	
-	@RequestMapping("/product/list")//관리자페이지 상품목록
-	public String list(@ModelAttribute(name = "vo") PaginationVO vo, Model model) {
-		
-		int count = productDao.countList(vo);
-		vo.setCount(count);
-		vo.setSize(8);
-		
-		List<ProductDto> list = productDao.selectList(vo);
-		model.addAttribute("list", list);
-		
-		return "/WEB-INF/views/admin/product/list.jsp";		
-	}
+//	@RequestMapping("/product/list")//관리자페이지 상품목록
+//	public String list(@ModelAttribute(name = "vo") PaginationVO vo, Model model) {
+//		
+//		int count = productDao.countList(vo);
+//		vo.setCount(count);
+//		vo.setSize(8);
+//		
+//		List<ProductDto> list = productDao.selectList(vo);
+//		model.addAttribute("list", list);
+//		
+//		return "/WEB-INF/views/admin/product/list.jsp";		
+//	}
 	
 	@RequestMapping("/member/list")//회원목록조회
 	public String memberList(@ModelAttribute PaginationVO vo, Model model) {

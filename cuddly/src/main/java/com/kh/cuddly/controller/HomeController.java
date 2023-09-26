@@ -8,7 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.kh.cuddly.VO.PaginationVO;
+import com.kh.cuddly.VO.ProductListVO;
 import com.kh.cuddly.dao.CreatorDao;
 import com.kh.cuddly.dao.ProductDao;
 import com.kh.cuddly.dto.CreatorDto;
@@ -24,12 +24,9 @@ public class HomeController {
 	CreatorDao creatorDao;
 	
 	@RequestMapping("")
-	public String home(Model model,@ModelAttribute(name = "vo") PaginationVO vo,
-					@ModelAttribute(name = "vo2") PaginationVO vo2
+	public String home(Model model,@ModelAttribute(name = "vo") ProductListVO vo,
+					@ModelAttribute(name = "vo2") ProductListVO vo2
 					) {
-		vo2.setSortByWish("desc");
-		vo.setType("product_date");
-		vo.setSort("desc");
 		
 		List<ProductDto> sortByNew = productDao.selectList(vo);
 		List<ProductDto> sortByBest = productDao.selectList(vo2);
@@ -39,12 +36,11 @@ public class HomeController {
 	}
 	
 	@RequestMapping("/search")
-	public String search(@ModelAttribute(name = "vo") PaginationVO vo, Model model) {
+	public String search(@ModelAttribute(name = "vo") ProductListVO vo, Model model) {
 		
 		int count = productDao.countList(vo);
 		String keyword = vo.getKeyword();
 		vo.setCount(count);
-		vo.setSize(8);
 		List<ProductDto> productList = productDao.selectList(vo);
 		List<CreatorDto> creatorList = creatorDao.selectList(keyword);
 		
