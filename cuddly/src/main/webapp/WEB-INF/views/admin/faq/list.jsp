@@ -4,29 +4,40 @@
 
 <jsp:include page="/WEB-INF/views/template/adminHeader.jsp"></jsp:include>
 
-<div class="container w-800">
+
 	
 	<div class="row">
 		<h2>FAQ관리</h2>
 	</div>
 	
+	<br><br>
+
 	
 	
 
-	
+<div class="row left category-links">
+    <select name="category" onchange="location = this.value;">
+        <option value="">카테고리 선택</option>
+        <option value="list?category=공지사항">공지사항</option>
+        <option value="list?category=기타">기타</option>
+        <option value="list?category=주문결제">주문결제</option>
+        <option value="list?category=회원정보">회원정보</option>
+    </select>
+</div>
+
+
+
+	<div class="row right">
+		<a href="write" class="btn">
+			<i class="fa-solid fa-write"></i>
+			작성하기 
+		</a>
+		</div>
+		
 	<form action="list" method="post" autocomplete="off">
 		<div class="row">
 		
-				
-					
-				
-
-
-	
-	<h3><a href="list?faq_category=공지사항">공지사항</a></h3>
-	<h3><a href="list?faq_category=주문결제">주문결제</a></h3>
-	<h3><a href="list?faq_category=회원정보">회원정보</a></h3>
-	<h3><a href="list?faq_category=기타">기타</a></h3>	
+		
 	
 	<div class="row">
 		<table class="table table-stripe">
@@ -46,7 +57,7 @@
 			
 			<td align="left">
 				<!-- 제목을 누르면 상세페이지로 이동 -->
-				<a href="detail?faqNo=${faqDto.faqNo}">
+				<a class="link" href="detail?faqNo=${faqDto.faqNo}">
 					${faqDto.faqTitle}
 				</a>
 			</td>
@@ -94,6 +105,23 @@
 </div>
 
 
-<a href="write">작성하기</a>
+
+<!-- 검색창 -->
+<form action="list" method="get">
+	<select name="type" required>
+		<option>제목</option>
+		<option>작성자</option>
+	</select>
+	<input type="search" name="keyword" 
+				placeholder="검색어 입력" required>
+	<button>검색</button>
 </form>
+
+<br>
+
+
+
+
+
+
 <jsp:include page="/WEB-INF/views/template/adminFooter.jsp"></jsp:include>
