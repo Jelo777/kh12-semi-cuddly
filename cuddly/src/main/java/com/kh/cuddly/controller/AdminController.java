@@ -346,17 +346,6 @@ public class AdminController {
 	
 	
 	
-	@RequestMapping("/faq/list")
-	public String faqList(@ModelAttribute(name = "vo") FaqlistVO vo,
-                Model model) {
-
-		int count = faqDao.countList(vo);
-		vo.setCount(count);	    
-		List<FaqDto> list = faqDao.selectListByPage(vo);
-		model.addAttribute("list", list);
-
-		return "/WEB-INF/views/admin/faq/list.jsp";
-	}
 	
 	
 	@RequestMapping("faq/detail")
@@ -411,6 +400,18 @@ public class AdminController {
 		}
 	}
 	
-	
-	
+
+	@RequestMapping("/faq/list")
+	public String faqList(@ModelAttribute(name = "vo") FaqlistVO vo,
+                Model model) {
+
+		int count = faqDao.countList(vo);
+		vo.setCount(count);	    
+		List<FaqDto> list = faqDao.selectListByPage(vo);
+		model.addAttribute("list", list);
+
+		return "/WEB-INF/views/admin/faq/list.jsp";
+	}
 }
+
+

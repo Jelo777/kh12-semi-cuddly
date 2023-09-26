@@ -108,24 +108,12 @@
 
 <!-- 검색창 -->
 <form action="list" method="get">
-	
-	<c:choose>
-		<c:when test="${param.type == 'board_writer'}">
-			<select name="type" required>
-				<option value="board_title">제목</option>
-				<option value="board_writer" selected>작성자</option>
-			</select>
-		</c:when>
-		<c:otherwise>
-			<select name="type" required>
-				<option value="board_title">제목</option>
-				<option value="board_writer">작성자</option>
-			</select>
-		</c:otherwise>
-	</c:choose>
-	
-	<input type="search" name="keyword"  required
-				placeholder="검색어 입력" value="${param.keyword}">
+	<select name="type" required>
+		<option>제목</option>
+		<option>작성자</option>
+	</select>
+	<input type="search" name="keyword" 
+				placeholder="검색어 입력" required>
 	<button>검색</button>
 </form>
 
@@ -136,5 +124,4 @@
 
 
 
-</form>
 <jsp:include page="/WEB-INF/views/template/adminFooter.jsp"></jsp:include>
