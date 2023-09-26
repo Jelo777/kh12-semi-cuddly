@@ -43,13 +43,24 @@
 					<div class="row left">주문 가격: ${detail.ordersDetailPrice}</div>
 					<div class="row right">주문 날짜: ${detail.ordersDate}</div>
 					<div class="row right">
-						<a href="/cuddly/orders/detail?ordersNo=${detail.ordersNo}">주문
-							상세 보기</a>
+					
+					
+					
+					<c:if test="${detail.two}">
+					
+						<a href="/cuddly/orders/detail?ordersNo=${detail.ordersNo}">
+							외 ${detail.orderCount}건 더보기</a>
+							
+							
+							</c:if>
+							
+							
+							
+							
 					</div>
 				</div>
 				<hr>
 			</div>
-		</div>
 		</div>
 	</c:forEach>
 

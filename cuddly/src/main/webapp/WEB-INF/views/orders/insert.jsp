@@ -10,6 +10,41 @@
     <title>주문 정보 입력</title>
 </head>
 <body>
+
+<script>
+
+
+$(function() {
+	
+	
+	
+	
+	$(".btn.btn-order").click(function(e){
+	
+		
+	var no = ${NoAddr};
+	
+	if(no){
+		
+		e.preventDefault();
+		alert("기본 배송지를 설정해주세요")
+		
+	}
+	
+	
+	if ($("input[type='checkbox']:checked").length === 0) {
+	    e.preventDefault();
+	    alert("결제방식을 선택해주세요");
+	}
+		
+	})
+	
+
+})
+
+</script>
+
+
     <h1>주문 정보 입력</h1>
     
     
@@ -37,9 +72,10 @@
      	
      	<div><a href="/cuddly/orders/addrInsert"><button>배송지 목록</button></a></div>
      	
+     	
         <div class="row">
         <label>수령인 : </label>
-        ${addressDto.addressName}
+        ${addressDto.addressName}	
         </div>
          <br><br>
  	
@@ -124,13 +160,13 @@
   
   
   <div class="row">
-  <input type="checkbox" name="ordersPayment" value="네이버페이">네이버 페이
-  <input type="checkbox" name="ordersPayment" value="카카오페이">카카오 페이
-  <input type="checkbox" name="ordersPayment" value="무통장입금">무통장 페이
+  <input type="checkbox" name="ordersPayment" value="네이버페이" class="payType">네이버 페이
+  <input type="checkbox" name="ordersPayment" value="카카오페이" class="payType">카카오 페이
+  <input type="checkbox" name="ordersPayment" value="무통장입금" class="payType">무통장 페이
   </div>
   
   
-        <button>주문하기</button>
+        <button class="btn btn-order">주문하기</button>
     	</form>
     	
     	
