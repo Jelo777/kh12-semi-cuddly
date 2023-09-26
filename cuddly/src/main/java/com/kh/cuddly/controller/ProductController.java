@@ -68,14 +68,18 @@ public class ProductController {
 	public String list(@ModelAttribute(name = "vo") ProductListVO vo, 
 						Model model) {
 		
-		CreatorDto creatorDto = creatorDao.selectOne(vo.getCreator());
-		
-		vo.setCount(productDao.countList(vo));
-		
-		List<ProductDto> list = productDao.selectList(vo);
-		model.addAttribute("list", list);
-		model.addAttribute("creatorDto", creatorDto);
-		System.out.println("vo target = " + vo.getTarget());
+		if(vo.isCreator()) {
+			vo.setCount(productDao.countList(vo));
+			CreatorDto creatorDto = creatorDao.selectOne(vo.getCreator());
+			List<ProductDto> list = productDao.selectListByCreator(vo);
+			model.addAttribute("creatorDto", creatorDto);
+			model.addAttribute("list", list);
+		}
+		else {
+			vo.setCount(productDao.countList(vo));
+			List<ProductDto> list = productDao.selectList(vo);
+			model.addAttribute("list", list);
+		}
 		return "/WEB-INF/views/product/list.jsp";
 	}
 	

@@ -146,6 +146,21 @@ public class ProductDaoImpl implements ProductDao{
 	}
 	
 	@Override
+	public List<ProductDto> selectListByCreator(ProductListVO vo) {
+		String sql = "select * from ("
+					+ "select rownum rn, TMP.* from ("
+						+ "select product.* from product inner join creator_product "
+						+ "on creator_product.product_no = product.product_no "
+						+ "LEFT OUTER JOIN creator ON creator_product.creator_no = creator.creator_no "
+						+ "WHERE creator.creator_name = ? "
+						+ "order by product."+vo.getTarget()+ " " + vo.getSort()
+						+ ")TMP"
+					+ ") where rn between ? and ?";
+		Object[] data = {vo.getCreator(), vo.getStartRow(), vo.getFinishRow()}; 
+		return jdbcTemplate.query(sql, productMapper, data);
+	}
+	
+	@Override
 	public int countList(ProductListVO vo) {
 		if(vo.isSearch()) {
 			String sql = "select count(*) from product where instr(product_name, ?) >0";

@@ -17,6 +17,7 @@ public interface ProductDao {
 	ProductDto selectOne(int productNo);
 	
 	List<ProductDto> selectList(ProductListVO vo);
+	List<ProductDto> selectListByCreator(ProductListVO vo);
 
 	int countList(ProductListVO vo);
 	
