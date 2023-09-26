@@ -54,6 +54,8 @@
 
 <form action="write" method="post" enctype="multipart/form-data">
 
+
+
 <!--	리뷰 이미지 : <input type="file" name="attach" accept="image/*"><br><br>-->
 	<input type="hidden" name="productNo" value="${productNo}">
 	별점 : <input type="text" name="reviewGrade"><br><br>

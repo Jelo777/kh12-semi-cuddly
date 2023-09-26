@@ -25,18 +25,28 @@
 		}
 
 		var selectedOptionText = optionSelect.find(":selected").text();
-		var selectedOptionDiv = $("<div></div>");
+		var selectedOptionDiv = $("<div class='optionList'></div>");
 		selectedOptionDiv.text("선택한 옵션: " + selectedOptionText + ", 수량: "
 				+ selectedCount);
 		selectedOptions.append(selectedOptionDiv);
-
+		
 		count++;
+		
+		 // 추가된 옵션 뒤에 X 아이콘을 포함한 HTML 추가
+	    var optionItem = $("<button class='option-remove' type='button'><i class='fa fa-times-circle'></i></button>");
+	    selectedOptionDiv.append(optionItem);
+	    
+	    optionItem.data("index", count);
+	    
+	    
+	    console.log(count);
 
-		console.log(count);
+
 
 		for (var i = 0; i < count; i++) {
 
 			var hiddenInput = document.createElement("input");
+			hiddenInput.className= "hiddenSelect";
 			hiddenInput.type = "hidden";
 			hiddenInput.name = "cartList[" + i + "].optionNo";
 			hiddenInput.value = optionSelect.find(":selected").val();
@@ -47,6 +57,9 @@
 			hiddenInput2.name = "cartList[" + i + "].cartCount";
 			hiddenInput2.value = $(".cartCount").val();
 			$("#orderForm").append(hiddenInput2);
+			
+			
+			
 
 		}
 
@@ -100,8 +113,22 @@
 						}
 					});
 				});
+		
+	
+		
 
-		$(".btn.btn-cart").click(function(e) {
+		$("[name=action]").click(function(e) {
+			
+			var a= $(".hiddenSelect").val()==null;
+			
+			
+			if ($(".hiddenSelect").val()==null) {
+				alert("옵션을 선택하세요.");
+				e.preventDefault();
+			}
+			
+			
+			else if($(this).val()=="cart"){
 
 			var userConfirmed = confirm("장바구니로 이동하시겠습니까?");
 
@@ -110,8 +137,34 @@
 				e.preventDefault();
 
 			}
+			
+			
+			}
+			
+			
+			
 
 		});
+		
+		$(document).on("click", ".option-remove", function (e) {
+			
+		    var index = $(this).data("index")-1;
+		    $(this).closest(".optionList").remove(); 
+		    
+		    
+		    
+		    console.log("index: "+index);
+		    
+		    $("[name='cartList["+index+"].optionNo']").remove();
+	        $("[name='cartList["+index+"].cartCount']").remove();
+	        
+	        count--;
+		    
+		    
+		});
+		
+	
+		
 
 	});
 </script>

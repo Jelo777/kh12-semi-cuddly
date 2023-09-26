@@ -7,9 +7,11 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.kh.cuddly.dto.OrderDetailJoinDto;
+import com.kh.cuddly.dto.OrderDetailJoinDto2;
 import com.kh.cuddly.dto.OrdersDto;
 import com.kh.cuddly.dto.OrdersProductDto;
 import com.kh.cuddly.mapper.OrderDetailJoinMapper;
+import com.kh.cuddly.mapper.OrderDetailJoinMapper2;
 import com.kh.cuddly.mapper.OrdersMapper;
 import com.kh.cuddly.mapper.OrdersProductMapper;
 
@@ -30,6 +32,10 @@ public class OrdersDaoImpl implements OrdersDao{
 	
 	@Autowired
 	private OrderDetailJoinMapper orderDetailjoinMapper;
+	
+	@Autowired
+	private OrderDetailJoinMapper2 orderDetailjoinMapper2;
+	
 	
 	
 	@Override
@@ -100,6 +106,17 @@ public class OrdersDaoImpl implements OrdersDao{
 		Object[] data = {memberId};
 		
 		return jdbcTemplate.query(sql, orderDetailjoinMapper, data);
+		
+	}
+	
+	@Override
+	public List<OrderDetailJoinDto2> selectListOrders2(String memberId){	//주문 목록
+		
+		String sql = "select * from orders_detail_list1 where member_id=? order by orders_no desc";
+		
+		Object[] data = {memberId};
+		
+		return jdbcTemplate.query(sql, orderDetailjoinMapper2, data);
 		
 	}
 	
