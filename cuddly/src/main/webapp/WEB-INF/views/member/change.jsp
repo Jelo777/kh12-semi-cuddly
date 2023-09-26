@@ -19,13 +19,6 @@
             </div>
 
             <div class="row left">
-                <label>이메일</label>
-                <input type="text" name="memberEmail" value="${memberDto.memberEmail}" 
-                        placeholder="test@kh.com" class="form-input w-100">
-                <div class="fail-feedback">이메일 형식이 잘못되었습니다</div>
-            </div>
-
-            <div class="row left">
                 <label>생년월일</label>
                 <input type="date" name="memberBirth" value="${memberDto.memberBirth}" 
                 class="form-input w-100">

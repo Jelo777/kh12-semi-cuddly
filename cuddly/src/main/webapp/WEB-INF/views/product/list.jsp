@@ -5,18 +5,24 @@
 <style>
 </style>
 <div class="container w-1000">
-	<c:if test="${creator!=null}">
+	<c:if test="${creatorDto!=null}">
 	<div class="row">
-		<h1>${creator}</h1>
+		<img class="image image-circle"
+			src="/cuddly/image/creator?creatorNo=${creatorDto.creatorNo}"
+			onerror="this.src='https://dummyimage.com/200x200/000/fff;'"
+			width="200" height="200" />
+		<h1>${creatorDto.creatorName}</h1>
 	</div>
 	</c:if>
 	
-	<div class="row">
-		<a class="link" href="list?page=1&size8&type=product_price&sort=asc">낮은가격순</a>
-		<a class="link" href="list?page=1&size8&type=product_price&sort=desc">높은가격순</a>
-		<a class="link" href="list?page=1&size8&type=product_date&sort=desc">새로나온순</a>
-		<a class="link" href="list?page=1&size8&sortByWish=desc">인기많은순</a>
-	</div>
+	<c:if test="${paramSize<1}">
+		<div class="row">
+			<a class="link" href="list?page=1&size8&type=product_price&sort=asc">낮은가격순</a>
+			<a class="link" href="list?page=1&size8&type=product_price&sort=desc">높은가격순</a>
+			<a class="link" href="list?page=1&size8&type=product_date&sort=desc">새로나온순</a>
+			<a class="link" href="list?page=1&size8&sortByWish=desc">인기많은순</a>
+		</div>
+	</c:if>
 	
 	<c:forEach var="productListDto" items="${list}">
 		<a class="link" href="detail?productNo=${productListDto.productNo}">

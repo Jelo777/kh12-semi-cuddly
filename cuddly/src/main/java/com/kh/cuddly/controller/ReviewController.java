@@ -27,6 +27,7 @@ import com.kh.cuddly.dao.AttachDao;
 import com.kh.cuddly.dao.ReviewDao;
 import com.kh.cuddly.dto.AttachDto;
 import com.kh.cuddly.dto.ReviewDto;
+import com.kh.cuddly.dto.ReviewInfoDto;
 
 
 
@@ -87,23 +88,26 @@ public class ReviewController {
 
 	}
 	
-	@RequestMapping("/list")
-	public String list(Model model) {
-		List<ReviewDto> list = reviewDao.selectList();
+	@RequestMapping("/memberList")
+	public String memberList(Model model,HttpSession session) {
+		
+		String memberId = (String) session.getAttribute("name");
+		
+		List<ReviewInfoDto> list = reviewDao.selectMemberList(memberId);
 		
 		model.addAttribute("list",list);
 		
-		return "/WEB-INF/views/review/list.jsp";
+		return "/WEB-INF/views/review/memberList.jsp";
 		
 	}
 	
-	@RequestMapping("/memberList")
+	@RequestMapping("/list")//아직 수정 전
 	public String list(Model model,String memberId) {
 		List<ReviewDto> list = reviewDao.memberList(memberId);
 		
 		model.addAttribute("list",list);
 		
-		return "/WEB-INF/views/review/memberList.jsp";
+		return "/WEB-INF/views/review/list.jsp";
 		
 	}
 	

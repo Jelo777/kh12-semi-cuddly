@@ -26,7 +26,7 @@
 <link rel="stylesheet" type="text/css" href="/css/layout.css">
 <link rel="stylesheet" type="text/css" href="/css/commons.css">
 <link rel="stylesheet" type="text/css" href="/css/layout-sidebar.css">
-<!-- <link rel="stylesheet" type="text/css" href="/css/test.css"> -->
+<link rel="stylesheet" type="text/css" href="/css/test.css">
 
 <style>
 	hr{
@@ -79,32 +79,16 @@
 	         <div class="row">
         		<input type="checkbox" style="display:none;" id="sidebar-toggle">
         		<div class="sidebar">
+        		
         		<div class="row">
 	            	<img src="/images/cuddlys.png" width="200" height="50"><br>
             	</div>
         			
         			<div class="row left ms-30 mt-30">
 	        			<c:if test="${sessionScope.name==null}">
-	        				<h5><a class="link" href="/cuddly/member/login">로그인이 필요해요!</a></h5>
+	        				<h3><a class="link" href="/cuddly/member/login">로그인이 필요해요!</a></h3>
 	        			</c:if>
         			</div>
-        			
-        			
-        			
-        			
-        			
-        			
-        			
-        			
-        			
-        			
-        			
-        			
-        			
-        			
-        			
-        			
-        			
         			
         		</div>
          	
@@ -152,7 +136,7 @@
 	
 			<%-- 관리자인 경우 추가 메뉴 출력 --%>
 			<c:if test="${sessionScope.level == '관리자'}">
-				<li><a href="/cuddly/admin/home">관리자메뉴</a></li>
+				<li><a href="/cuddly/admin/product/list">관리자메뉴</a></li>
 			</c:if>
 		</ul>
 	</nav>

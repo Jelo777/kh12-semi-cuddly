@@ -16,7 +16,7 @@
 		</a>
 	</div>
 	<c:forEach var="productListDto" items="${list}">
-		<a class="link" href="detail?productNo=${productListDto.productNo}">
+		<a class="link" href="/cuddly/product/detail?productNo=${productListDto.productNo}">
 			<div class="inline-flex-container allow-wrap left">
 				<table class="">
 					<tr>

@@ -85,7 +85,7 @@
         			
         			<div class="row left ms-30 mt-30">
 	        			<c:if test="${sessionScope.name==null}">
-	        				<h5><a class="link" href="/cuddly/member/login">로그인이 필요해요!</a></h5>
+	        				<h3><a class="link" href="/cuddly/member/login">로그인이 필요해요!</a></h3>
 	        			</c:if>
         			</div>
         			
@@ -147,7 +147,7 @@
 			
 			<%-- 관리자인 경우 추가 메뉴 출력 --%>
 			<c:if test="${sessionScope.level == '관리자'}">
-				<li><a href="/cuddly/admin/home">관리자메뉴</a></li>
+				<li><a href="/cuddly/admin/product/list">관리자메뉴</a></li>
 			</c:if>
 			
 		</ul>

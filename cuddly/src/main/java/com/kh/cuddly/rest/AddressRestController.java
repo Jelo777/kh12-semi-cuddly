@@ -51,15 +51,15 @@ public class AddressRestController {
 		addressDao.delete(addressNo);
 	}
 	
-	@PostMapping("/edit")
-	public void edit(@ModelAttribute AddressDto addressDto, 
-					HttpSession sesstion) {
-		String memberId=(String)sesstion.getAttribute("name");
-		if(addressDto.getAddressDefault().equals("Y")) {//addressDto의 default값이 Y면
-			addressDao.changeDefault(memberId);
-		}
-		addressDao.update(addressDto);
-
-	}
+//	@PostMapping("/edit")
+//	public void edit(@ModelAttribute AddressDto addressDto, 
+//					HttpSession sesstion) {
+//		String memberId=(String)sesstion.getAttribute("name");
+//		if(addressDto.getAddressDefault().equals("Y")) {//addressDto의 default값이 Y면
+//			addressDao.changeDefault(memberId);
+//		}
+//		addressDao.update(addressDto);
+//
+//	}
 	
 }

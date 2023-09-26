@@ -10,6 +10,7 @@ public class PaginationVO {
 	private String keyword;	//검색 분류 및 키워드
 	private String type;//회원 검색할때 쓸 타입 추가
 	private String creatorName;
+	private String productItem;
 	private String sort;//상품 정렬때매
 	private String sortByWish;//찜하기 개수로 정렬
 	private int page = 1;//현재 페이지 번호(기본:1)
@@ -20,16 +21,19 @@ public class PaginationVO {
 	public boolean isSearch() {
 		return keyword != null;
 	}
-	public boolean isSearchByCreatorName() {
+	public boolean isSearchByCreatorName() {//크리에이터별 상품
 		return creatorName != null;
 	}
 	public boolean isSearchByMember() {//회원 검색용
 		return type != null && keyword != null;
 	}
-	public boolean isSort() {
+	public boolean isSearchByProductItem() {//항목별 상품
+		return productItem != null;
+	}
+	public boolean isSort() {//정렬
 		return type != null && sort != null;
 	}
-	public boolean isSortByWishlist() {
+	public boolean isSortByWishlist() {//관심순
 		return sortByWish != null;
 	}
 	
@@ -63,6 +67,9 @@ public class PaginationVO {
 		else if(isSearchByMember()) {//회원 검색용
 			return "page="+(getBegin()-1)+"&size="+size+"&type="+type+"&keyword="+keyword;
 		}
+		else if(isSearchByProductItem()) {
+			return "page="+(getBegin()-1)+"&size="+size+"&type="+type+"&productItem="+productItem;
+		}
 		else if(isSort()){
 			return "page="+(getBegin()-1)+"&size="+size+"&type="+type+"&sort="+sort;
 		}
@@ -84,6 +91,9 @@ public class PaginationVO {
 		else if(isSearchByMember()) {//회원검색용
 			return "page="+(getEnd()+1)+"&size="+size+"&type="+type+"&keyword="+keyword;
 		}
+		else if(isSearchByProductItem()) {
+			return "page="+(getEnd()+1)+"&size="+size+"&productItem="+productItem;
+		}
 		else if(isSort()){
 			return "page="+(getEnd()+1)+"&size="+size+"&type="+type+"&sort="+sort;
 		}
@@ -104,6 +114,9 @@ public class PaginationVO {
 		}
 		else if(isSearchByMember()) {//회원검색용
 			return "page="+page+"&size="+size+"&type="+type+"&keyword="+keyword;
+		}
+		else if(isSearchByProductItem()) {
+			return "page="+page+"&size="+size+"&productItem="+productItem;
 		}
 		else if(isSort()){
 			return "page="+page+"&size"+size+"&type="+type+"&sort="+sort;

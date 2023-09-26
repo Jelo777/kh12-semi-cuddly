@@ -52,6 +52,18 @@ public class AddressDaoImpl implements AddressDao{
 		return list.isEmpty() ? null : list.get(0);
 	}
 	@Override
+	public AddressDto selectOneByNo(int addressNo) {
+		String sql ="select * from address where address_no=?";
+		Object[] data= {addressNo};
+		List<AddressDto>list=jdbcTemplate.query(sql,addressMapper,data);
+		
+		return list.isEmpty() ? null : list.get(0);
+	}
+	
+	
+	
+	
+	@Override
 	public List<AddressDto> selectList(String memberId) {
 		String sql="select * from address where member_id=? order by address_default desc, address_no asc";
 		Object[]data= {memberId};
