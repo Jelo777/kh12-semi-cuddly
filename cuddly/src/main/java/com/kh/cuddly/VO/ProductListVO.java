@@ -47,6 +47,9 @@ public class ProductListVO {
 		if(isSearch()) {
 			return "target="+target+"&sort="+sort+"&keyword="+ keyword +"&page="+(getBegin()-1)+"&size="+size;
 		}
+		else if(isCreator()) {
+			return "target="+target+"&sort="+sort+"&creator="+creator+"&page="+(getBegin()-1)+"&size="+size;
+		}
 		else {
 			return "target="+target+"&sort="+sort+"&page="+(getBegin()-1)+"&size="+size;
 		}
@@ -55,6 +58,9 @@ public class ProductListVO {
 	public String getNextQueryString() {
 		if(isSearch()) {
 			return "target="+target+"&sort="+sort+"&keyword="+ keyword +"&page="+(getEnd()+1)+"&size="+size;
+		}
+		else if(isCreator()) {
+			return "target="+target+"&sort="+sort+"&creator="+creator+"&page="+(getEnd()+1)+"&size="+size;
 		}
 		else {
 			return "target="+target+"&sort="+sort+"&page="+(getEnd()+1)+"&size="+size;
@@ -77,6 +83,9 @@ public class ProductListVO {
 		if(isSearch()) {
 			return "target=product_price&sort=asc&keyword="+ keyword+"&page="+page+"&size="+size;
 		}
+		else if(isCreator()) {
+			return "target=product_price&sort=asc&creator="+creator+"&page="+page+"&size="+size;
+		}
 		else {
 			return "target=product_price&sort=asc&page="+page+"&size="+size;
 		}
@@ -85,6 +94,9 @@ public class ProductListVO {
 	public String getQueryStringPriceDesc() {
 		if(isSearch()) {
 			return "target=product_price&sort=desc&keyword="+ keyword+"&page="+page+"&size="+size;
+		}
+		else if(isCreator()) {
+			return "target=product_price&sort=desc&creator="+creator+"&page="+page+"&size="+size;
 		}
 		else {
 			return "target=product_price&sort=desc&page="+page+"&size="+size;
@@ -95,6 +107,9 @@ public class ProductListVO {
 		if(isSearch()) {
 			return "target=product_no&sort=desc&keyword="+ keyword+"&page="+page+"&size="+size;
 		}
+		else if(isCreator()) {
+			return "target=product_no&sort=desc&creator="+creator+"&page="+page+"&size="+size;
+		}
 		else {
 			return "target=product_no&sort=desc&page="+page+"&size="+size;
 		}
@@ -103,6 +118,9 @@ public class ProductListVO {
 	public String getQueryStringPopular() {
 		if(isSearch()) {
 			return "target=wishlist_count&sort=desc&keyword="+ keyword+"&page="+page+"&size="+size;
+		}
+		else if(isCreator()) {
+			return "target=wishlist_count&sort=desc&creator="+creator+"&page="+page+"&size="+size;
 		}
 		else {
 			return "target=wishlist_count&sort=desc&page="+page+"&size="+size;

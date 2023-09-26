@@ -49,7 +49,17 @@
 	</c:forEach>
 </div>
 
-
+<c:if test="${creatorDto==null}">
+<div class="row">
+	<form action="list">
+		<input class="form-input" name="keyword">
+		<button class="btn">검색</button>
+	</form>
+</div>
+</c:if>
+<div class="row">
+	<a href="list"><label class="btn">전체목록</label></a>
+</div>
 
 <div class="row page-navigator mv-30">
 	<!-- 이전 버튼 -->
