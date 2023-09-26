@@ -21,10 +21,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.kh.cuddly.VO.FaqlistVO;
 import com.kh.cuddly.VO.PaginationVO;
 import com.kh.cuddly.dao.AttachDao;
 import com.kh.cuddly.dao.CreatorDao;
 import com.kh.cuddly.dao.CreatorProductDao;
+import com.kh.cuddly.dao.FaqDao;
 import com.kh.cuddly.dao.MemberDao;
 import com.kh.cuddly.dao.OrdersAdminDao;
 import com.kh.cuddly.dao.OrdersDao;
@@ -34,6 +36,7 @@ import com.kh.cuddly.dao.QnaDao;
 import com.kh.cuddly.dto.AttachDto;
 import com.kh.cuddly.dto.CreatorDto;
 import com.kh.cuddly.dto.CreatorProductDto;
+import com.kh.cuddly.dto.FaqDto;
 import com.kh.cuddly.dto.MemberDto;
 import com.kh.cuddly.dto.MemberListDto;
 import com.kh.cuddly.dto.OrdersAdminDto;
@@ -68,6 +71,9 @@ public class AdminController {
 	
 	@Autowired
 	private QnaDao qnaDao;
+	
+	@Autowired
+	private FaqDao faqDao;
 	
 	@Autowired
 	private OrdersAdminDao ordersAdminDao;
@@ -336,8 +342,25 @@ public class AdminController {
 	
 
 	
+	@RequestMapping("/faq/list")
+	public String faqList(@ModelAttribute(name = "vo") FaqlistVO vo,
+                Model model) {
 
+		int count = faqDao.countList(vo);
+		vo.setCount(count);	    
+		List<FaqDto> list = faqDao.selectListByPage(vo);
+		model.addAttribute("list", list);
+
+		return "/WEB-INF/views/admin/faq/list.jsp";
+	}
 	
+	
+	@RequestMapping("faq/detail")
+	public String faqDetail(@RequestParam int faqNo, Model model) {
+		FaqDto faqDto = faqDao.selectOne(faqNo);
+		model.addAttribute("faqDto", faqDto);
+		return "/WEB-INF/views/admin/faq/detail.jsp";
+	}
 	
 	
 	

@@ -52,7 +52,7 @@ public class FaqController {
 		int count = faqDao.countList(vo);
 		vo.setCount(count);	    
 	    List<FaqDto> list = faqDao.selectListByPage(vo);
-	//    List<FaqDto> contentlist = faqDao.countList(FaqListVO vo);
+	//    List<FaqDto> countlist = faqDao.countList(FaqListVO vo);
 	    model.addAttribute("list", list);
 	    
 	    return "/WEB-INF/views/faq/list.jsp";
