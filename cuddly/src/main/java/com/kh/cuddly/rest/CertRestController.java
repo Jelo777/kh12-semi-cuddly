@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.kh.cuddly.dao.CertDao;
 import com.kh.cuddly.dao.MemberDao;
 import com.kh.cuddly.dto.CertDto;
-import com.kh.cuddly.dto.MemberDto;
 
 @CrossOrigin
 @RestController
@@ -28,8 +27,6 @@ public class CertRestController {
 	@Autowired
 	private CertDao certDao;
 	
-	@Autowired
-	private MemberDao memberDao;
 	
 	@Autowired
 	private JavaMailSender sender;
@@ -59,7 +56,6 @@ public class CertRestController {
 	@PostMapping("/check")
 	public Map<String, Object> check(@ModelAttribute CertDto certDto,Model model){
 		//[1] 이메일로 인증번호를 조회
-		MemberDto memberDto=memberDao.selectOneByEmail(certDto.getCertEmail());
 		CertDto findDto = certDao.selectOneIn10min(certDto.getCertEmail());
 		if(findDto !=null) {
 			boolean isValid=
@@ -67,7 +63,6 @@ public class CertRestController {
 			if(isValid) {
 				//인증 성공하면 인증번호를 삭제
 				certDao.delete(certDto.getCertEmail());
-				model.addAttribute("memberDto",memberDto);
 				return Map.of("result",true);
 			}
 		}
