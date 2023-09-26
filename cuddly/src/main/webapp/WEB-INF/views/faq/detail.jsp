@@ -57,13 +57,14 @@
 
     <div class="row right">
     
+
         <a href="list" class="btn">
             <i class="fa-solid fa-list"></i>
             목록
         </a>
               
-		
-
+	
+     
 
   
 

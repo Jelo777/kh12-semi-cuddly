@@ -14,22 +14,24 @@
 
 	
 	
-	<div class="row right">
-		<a href="write" class="btn">
-			<i class="fa-solid fa-write"></i>
-			작성하기 
-		</a>
+
+<div class="row left category-links">
+    <select name="category" onchange="location = this.value;">
+        <option value="">카테고리 선택</option>
+        <option value="list?category=공지사항">공지사항</option>
+        <option value="list?category=기타">기타</option>
+        <option value="list?category=주문결제">주문결제</option>
+        <option value="list?category=회원정보">회원정보</option>
+    </select>
+</div>
+
+
 
 		
 	<form action="list" method="post" autocomplete="off">
 		<div class="row">
 		
 		
-				
-					
-				
-
-
 	
 	<div class="row">
 		<table class="table table-stripe">
@@ -98,13 +100,19 @@
 
 
 <form action="list" method="get">
-    <input type="search" name="keyword" required placeholder="검색어 입력" value="${param.keyword}">
-    <button type="submit">검색</button>
+    <div class="row search-container">
+        <select name="type" required>
+            <option value="board_title">제목</option>
+            <option value="board_writer">작성자</option>
+        </select>
+        <input type="search" name="keyword" required placeholder="검색어 입력" value="${param.keyword}">
+        <button type="submit">검색</button>
+    </div>
 </form>
 
 
 
 
 
-</form>
+
 <jsp:include page="/WEB-INF/views/template/adminFooter.jsp"></jsp:include>
