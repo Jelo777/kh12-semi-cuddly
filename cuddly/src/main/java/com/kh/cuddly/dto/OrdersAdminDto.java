@@ -6,12 +6,15 @@ import lombok.Data;
 
 @Data
 public class OrdersAdminDto {
-	private int productNo;
+	private int ordersNo;
 	private Date ordersDate;
-	private String productName;
-	private int productPrice;
-	private String productOptionName;
-	private int ordersDetailCount;
-	private String creatorName;
 	private int ordersDetailNo;
+	private String productName;
+	private String creatorName;
+	private int ordersDetailCount;
+	private String productOptionName;
+	private int ordersDetailPrice;
+	private String memberId;
+	private int productNo;
+	private int ordersCount;
 }

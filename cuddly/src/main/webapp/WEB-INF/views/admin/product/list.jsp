@@ -15,26 +15,38 @@
 			<button class="btn btn-positive" style="margin-right: 38px">상품등록</button>
 		</a>
 	</div>
-	<c:forEach var="productListDto" items="${list}">
-		<a class="link" href="/cuddly/product/detail?productNo=${productListDto.productNo}">
+	<c:forEach var="adminProductListDto" items="${list}">
+		<a class="link" href="/cuddly/product/detail?productNo=${adminProductListDto.productNo}">
 			<div class="inline-flex-container allow-wrap left">
 				<table class="">
 					<tr>
-						<td><img src="/cuddly/admin/product/main?productNo=${productListDto.productNo}" width="200" height="200"></td>
+						<td><img src="/cuddly/admin/product/main?productNo=${adminProductListDto.productNo}" width="200" height="200"></td>
 					</tr>
 					<tr>
-						<td>${productListDto.productNo}</td>
+						<td>상품번호 : ${adminProductListDto.productNo}</td>
 					</tr>
 					<tr>
-						<td>${productListDto.productName}</td>
+						<td>상품명 : ${adminProductListDto.productName}</td>
 					</tr>
 					<tr>
-						<td>${productListDto.productPrice}</td>
+						<td>크리에이터명 : ${adminProductListDto.creatorName}</td>
 					</tr>
+					<tr>
+						<td>등록일 : ${adminProductListDto.productDate}</td>
+					</tr>
+					
 					<tr>
 						<td>
-							${productListDto.productDate}
-							<a href="edit?productNo=${productListDto.productNo}">
+							<c:choose>
+								<c:when test="${adminProductListDto.optionCount == 0}">
+									<span>옵션 미등록</span>
+								</c:when>
+								<c:otherwise>
+									<span>등록된 옵션수 : ${adminProductListDto.optionCount}</span>
+								</c:otherwise>
+							</c:choose>
+							
+							<a href="edit?productNo=${adminProductListDto.productNo}">
 								<button style="float:right">수정</button>
 							</a>
 						</td>

@@ -143,38 +143,39 @@ $(function(){
 			
 <c:choose>
 	<c:when test="${not empty ordersList}">
-		<c:forEach var="ordersDto" items="${ordersList}">
+		<c:forEach var="ordersAdminDto" items="${ordersList}">
 			<div class="float-container card">
 		
 				<div class="row left">
-					<span>주문일 : ${ordersDto.ordersDate}</span>
-					<span>(주문번호 : ${ordersDto.ordersNo})</span>
+					<span>주문일 : ${ordersAdminDto.ordersDate}</span>
+					<span>(주문번호 : ${ordersAdminDto.ordersNo})</span>
 				</div>
 				
 				<div class="float-left w-25">
-					<img src="/cuddly/image/product/main?productNo=${ordersDto.productNo}"  width="100" height="100">
+					<img src="/cuddly/image/product/main?productNo=${ordersAdminDto.productNo}"  width="100" height="100">
 				</div>	
 				
 				<div class="row left">
-					<span>상품명 : ${ordersDto.productName}</span>
+					<span>상품명 : ${ordersAdminDto.productName}</span>
 				</div>
 				
 				<div class="row left">
-						<span>크리에이터 : ${ordersDto.creatorName}</span>
+						<span>크리에이터 : ${ordersAdminDto.creatorName}</span>
 				</div>
 				
 				<div class="row left">
-						<span>수량 : ${ordersDto.ordersDetailCount}</span>
-						<span>옵션 : ${ordersDto.productOptionName}</span>
+						<span>수량 : ${ordersAdminDto.ordersDetailCount}</span>
+						<span>옵션 : ${ordersAdminDto.productOptionName}</span>
 				</div>
 				
 				
 				<div class="row left">
-					<span>구매금액 : ${ordersDto.ordersDetailPrice}</span>
+					<span>구매금액 : ${ordersAdminDto.ordersDetailPrice}</span>
 				</div>		
 				
 				<div class="row right">
-					<a href="ordersDetailList?ordersNo=${ordersDto.ordersNo}"><span>주문상세보기</span></a>
+					<span>포함 ${ordersAdminDto.ordersCount}건</span>
+					<a href="ordersDetailList?ordersNo=${ordersAdminDto.ordersNo}"><span>주문상세보기</span></a>
 				</div>		
 				
 			</div>

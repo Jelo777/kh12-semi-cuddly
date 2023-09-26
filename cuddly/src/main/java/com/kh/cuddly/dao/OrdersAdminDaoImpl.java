@@ -20,28 +20,28 @@ public class OrdersAdminDaoImpl implements OrdersAdminDao{
 	
 	@Override
 	public List<OrdersAdminDto> selectList(String memberId) {
-		String sql = "select  "
-				+"p.product_no, "
+		String sql = "select "
+				+ "o.orders_no, "
+				+ "(select count(*) from orders_detail "
+				+ "where orders_detail.orders_no = o.orders_no) as orders_count, "
 				+ "o.orders_date, "
+				+ "od.orders_detail_no, "
 				+ "p.product_name, "
-				+ "p.product_price, "
+				+ "c.creator_name, "
 				+ "po.product_option_name, "
 				+ "od.orders_detail_count, "
-				+ "c.creator_name, "
-				+ "od.orders_detail_no "
-				+ "from  "
-				+ "orders o, orders_detail od, product_option po, product p, creator_product cp, creator c "
-				+ "where "
-				+ "o.orders_no = od.orders_no  "
-				+ "and "
-				+ "od.orders_no = po.product_option_no  "
-				+ "and "
-				+ "p.product_no = po.product_no  "
-				+ "and "
-				+ "cp.product_no = p.product_no  "
-				+ "and "
-				+ "c.creator_no = cp.creator_no "
-				+"and o.member_id = ?";
+				+ "od.orders_detail_price, "
+				+ "o.member_id, "
+				+ "p.product_no "
+				+ "from orders o "
+				+ "inner join orders_detail od ON o.orders_no = od.orders_no "
+				+ "inner join product_option po ON od.option_no = po.product_option_no "
+				+ "inner join product p ON po.product_no = p.product_no "
+				+ "inner join creator_product cp ON p.product_no = cp.product_no "
+				+ "inner join creator c ON cp.creator_no = c.creator_no "
+				+ "where member_id = ? "
+				+ "GROUP BY o.orders_no, o.orders_date, od.orders_detail_no, p.product_name, "
+				+ "c.creator_name, po.product_option_name, od.orders_detail_count, od.orders_detail_price, o.member_id, p.product_no";
 		Object[] data = {memberId};
 		
 		return jdbcTemplate.query(sql, ordersAdminMapper, data);

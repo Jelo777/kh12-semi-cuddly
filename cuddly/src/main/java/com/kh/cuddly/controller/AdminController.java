@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.kh.cuddly.VO.PaginationVO;
+import com.kh.cuddly.dao.AdminProductListDao;
 import com.kh.cuddly.dao.AttachDao;
 import com.kh.cuddly.dao.CreatorDao;
 import com.kh.cuddly.dao.CreatorProductDao;
@@ -32,13 +33,14 @@ import com.kh.cuddly.dao.OrdersDetailDao;
 import com.kh.cuddly.dao.ProductDao;
 import com.kh.cuddly.dao.ProductOptionDao;
 import com.kh.cuddly.dao.QnaDao;
+import com.kh.cuddly.dto.AdminProductListDto;
 import com.kh.cuddly.dto.AttachDto;
 import com.kh.cuddly.dto.CreatorDto;
 import com.kh.cuddly.dto.CreatorProductDto;
 import com.kh.cuddly.dto.MemberDto;
 import com.kh.cuddly.dto.MemberListDto;
 import com.kh.cuddly.dto.OrderDetailJoinDto;
-import com.kh.cuddly.dto.OrdersDto;
+import com.kh.cuddly.dto.OrdersAdminDto;
 import com.kh.cuddly.dto.ProductDto;
 import com.kh.cuddly.dto.ProductOptionDto;
 import com.kh.cuddly.dto.QnaDto;
@@ -76,6 +78,9 @@ public class AdminController {
 	
 	@Autowired
 	private OrdersAdminDao ordersAdminDao;
+	
+	@Autowired
+	private AdminProductListDao adminProductListDao;
 	
 	@RequestMapping("/home")
 	public String home() {
@@ -243,11 +248,11 @@ public class AdminController {
 	@RequestMapping("/product/list")//관리자페이지 상품목록
 	public String list(@ModelAttribute(name = "vo") PaginationVO vo, Model model) {
 		
-		int count = productDao.countList(vo);
+		int count = adminProductListDao.countList(vo);
 		vo.setCount(count);
 		vo.setSize(8);
 		
-		List<ProductDto> list = productDao.selectList(vo);
+		List<AdminProductListDto> list = adminProductListDao.selectList(vo);
 		model.addAttribute("list", list);
 		
 		return "/WEB-INF/views/admin/product/list.jsp";		
@@ -276,8 +281,10 @@ public class AdminController {
 		model.addAttribute("memberDto", memberDto);
 		
 		//이 회원이 구매한 내역 첨부
-		List<OrderDetailJoinDto> ordersList =  ordersDao.selectListOrders(memberId);
-		model.addAttribute("ordersList", ordersList);	
+//		List<OrderDetailJoinDto> ordersList =  ordersDao.selectListOrders(memberId);
+//		model.addAttribute("ordersList", ordersList);	
+		List<OrdersAdminDto> ordersList = ordersAdminDao.selectList(memberId);
+		model.addAttribute("ordersList", ordersList);
 		
 		return "/WEB-INF/views/admin/member/edit.jsp";
 	}
