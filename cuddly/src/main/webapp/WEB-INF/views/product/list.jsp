@@ -15,14 +15,12 @@
 	</div>
 	</c:if>
 	
-	<c:if test="${paramSize<1}">
-		<div class="row">
-			<a class="link" href="list?page=1&size8&type=product_price&sort=asc">낮은가격순</a>
-			<a class="link" href="list?page=1&size8&type=product_price&sort=desc">높은가격순</a>
-			<a class="link" href="list?page=1&size8&type=product_date&sort=desc">새로나온순</a>
-			<a class="link" href="list?page=1&size8&sortByWish=desc">인기많은순</a>
-		</div>
-	</c:if>
+	<div class="row">
+		<a class="link" href="list?${vo.getQueryStringPriceAsc()}">낮은가격순</a>
+		<a class="link" href="list?${vo.getQueryStringPriceDesc()}">높은가격순</a>
+		<a class="link" href="list?${vo.getQueryStringNew()}">새로나온순</a>
+		<a class="link" href="list?${vo.getQueryStringPopular()}">인기많은순</a>
+	</div>
 	
 	<c:forEach var="productListDto" items="${list}">
 		<a class="link" href="detail?productNo=${productListDto.productNo}">
@@ -82,7 +80,7 @@
 </div>
 
 
-
+${requestScope.vo}
 
 
 

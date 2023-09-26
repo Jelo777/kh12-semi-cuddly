@@ -112,7 +112,7 @@
 	</c:forEach>
 	<div class="row">
 		<a class="link"
-			href="cuddly/product/list?page=1&size8&type=product_date&sort=desc">
+			href="cuddly/product/list?${vo.getQueryStringNew()}">
 			<h3 class="btn">신상품 더보기</h3>
 		</a>
 	</div>
@@ -148,7 +148,7 @@
 	</c:forEach>
 	<div class="row">
 		<a class="link"
-			href="cuddly/product/list?page=1&size8&sortByWish=desc">
+			href="cuddly/product/list?${vo.getQueryStringPopular()}">
 			<h3 class="btn">베스트상품 더보기</h3>
 		</a>
 	</div>

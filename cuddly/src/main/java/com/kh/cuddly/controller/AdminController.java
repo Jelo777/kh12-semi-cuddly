@@ -251,7 +251,7 @@ public class AdminController {
 		
 	}
 	
-	
+
 	@RequestMapping("/product/list")//관리자페이지 상품목록
 	public String list(@ModelAttribute(name = "vo") PaginationVO vo, Model model) {
 		
@@ -264,6 +264,7 @@ public class AdminController {
 		
 		return "/WEB-INF/views/admin/product/list.jsp";		
 	}
+
 	
 	@RequestMapping("/member/list")//회원목록조회
 	public String memberList(@ModelAttribute PaginationVO vo, Model model) {

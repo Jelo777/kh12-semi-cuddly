@@ -20,7 +20,7 @@
 				<h2>크리에이터</h2>
 			</div>
 			<c:forEach var="creatorListDto" items="${creatorList}">
-			<a class="link" href="product/list?creatorName=${creatorListDto.creatorName}">
+			<a class="link" href="product/list?creator=${creatorListDto.creatorName}">
 				<div claa="col-4">
 					<div class="row">
 						<img class="image image-circle"
