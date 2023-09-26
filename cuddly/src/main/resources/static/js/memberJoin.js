@@ -9,11 +9,95 @@ $(function(){
         contact:false,
         email:false,
         birth:false,
+        emailOk:false,
         ok:function(){
             return this.id && this.name && this.pw && this.pwCheck && 
-                 this.contact && this.email && this.birth;
+                 this.contact && this.email && this.birth && this.emailOk;
         }
     };
+
+
+
+
+
+        //이메일 인증번호 보내기
+
+		$(".btn-send").find(".fa-spinner").hide();
+		
+		//인증번호 보내기 버튼 누르면
+		//서버로 비동기 통신을 보내 메일 발송 요쳥
+		$(".btn-send").click(function(){
+			var email = $("[name=memberEmail]").val();
+			if(email.length == 0) return;
+			$(".btn-send").prop("disabled",true);
+			$(".btn-send").find(".fa-spinner").show();
+			$(".btn-send").find("span").text("이메일 보내는중이요");
+			
+			$.ajax({
+				url:"http://localhost:8080/cuddly/rest/cert/send",
+				method:"post",
+				data:{certEmail:email},
+				success: function(){
+					$(".btn-send").prop("disabled",false);
+					$(".btn-send").find(".fa-spinner").hide();
+					$(".btn-send").find("span").text("인증번호 보내기");
+					
+					window.alert("이메일로 보내드렸어요");
+					
+				},
+			});
+
+		});
+		
+		//확인버튼 누르면 이메일과 인증번호를 서버로 전달해서 검사
+		$(".btn-cert").click(function(){
+			var email = $("[name=memberEmail]").val();
+			var number = $(".cert-input").val();
+		
+			
+//			if(email.length==0 || number.length ==0 ) return;
+			
+			$.ajax({
+				url:"http://localhost:8080/cuddly/rest/cert/check",
+				method : "post",
+				data:{
+					certEmail:email,
+					certNumber:number,
+						
+				},
+				success:function(response){
+					if(number.length==0){
+						$(".cert-input").removeClass("success fail fail2")
+											.addClass("fail2");
+						status.emailOk =false;
+					}
+					else if(response.result){
+						$(".cert-input").removeClass("success fail fail2")
+											.addClass("success");
+                        status.emailOk =true;                    
+						$(".btn-cert").prop("disabled",true);
+					}
+					else{
+						$(".cert-input").removeClass("success fail fail2")
+											.addClass("fail");
+                        status.emailOk =false;
+					}
+				},
+			});
+		});
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -103,39 +187,15 @@ $(function(){
         status.contact=isValid;
     });
 
-    $("[name=memberEmail]").blur(function(e){
-	    var regex=/^[a-zA-Z0-9+-\_.]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/;
-	    var inputEmail=$(e.target).val();
-	    
-	    var isValid=regex.test(inputEmail);
-	    $(e.target).removeClass("success fail fail2");
-	    if(isValid){
-	        $.ajax({
-	            url:"http://localhost:8080/cuddly/rest/member/emailCheck",
-	            method:"post",
-	            data :{memberEmail:$(e.target).val()},
-	            success:function(response){
-	                if(response == "Y"){ //Y면 사용가능
-	                    $(e.target).addClass("success");
-	                    status.email=true;
-	                }
-	                else{//사용불가(중복)
-	                    $(e.target).addClass("fail2");
-	                    status.email=false;
-	                }
-	            },
-	            error:function(){
-	                alert("서버와의 통신이 원활하지 않습니다");
-	            },
-	
-	        });
-	    }
-	    else{
-	        $(e.target).addClass("fail");
-	        status.email=false;
-	    }
-	
-	});
+    $("[name=memberEmail]").blur(function(){
+        var regex=/^[a-zA-Z0-9+-\_.]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/;
+        var inputEmail=$(this).val();
+        
+        var isValid=regex.test(inputEmail);
+        $(this).removeClass("success fail");
+        $(this).addClass(isValid ? "success" : "fail");
+        status.email=isValid;
+    });
     $("[name=memberBirth]").blur(function(){
         var regex=/^(19[0-9]{2}|20[0-9]{2})-(((0[13578]|1[02])-(0[1-9]|1[0-9]|2[0-9]|3[01]))|((0[469]|11)-(0[1-9]|1[0-9]|2[0-9]|30))|((02)-(0[1-9]|1[0-9]|2[0-9])))$/;
         var inputBirth=$(this).val();
@@ -158,6 +218,9 @@ $(function(){
     //-form 전송할 때는 beforeunload 이벤트를 제거
     $(".join-form").submit(function(e){
         $(".form-input").blur();
+        
+     
+        
         
         if(!status.ok()){
             e.preventDefault();

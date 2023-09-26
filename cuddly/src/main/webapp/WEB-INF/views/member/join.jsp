@@ -55,6 +55,25 @@
                     placeholder="test@kh.com" class="form-input w-100">
             <div class="fail-feedback">이메일 형식이 잘못되었습니다</div>
             <div class="fail2-feedback">이미 이 이메일로 아이디를 만드셨습니다</div>
+            
+            </div>
+            
+            <div class="row flex-container">
+            	<div class="w-33 left">
+		       	<button type="button" class="btn btn-send btn-positive">
+			        <i class="fa-solid fa-spinner fa-spin"></i>
+			        <span>인증번호 보내기</span>
+		    	</button>
+		        </div>
+		        
+	            <div class="cert-wrapper w-66 right">
+			        <input type="text" class="form-input cert-input">
+			        <button type="button" class="btn btn-cert btn-positive">확인</button>
+			        
+			        <div class="fail2-feedback">인증번호를 입력해주세요</div>
+			        <div class="fail-feedback">인증번호 잘못입력하셨습니다</div>
+			        <div class="success-feedback">성공!</div>
+	    		</div>
             </div>
             <div class="row left">
                 <label>생년월일</label>
