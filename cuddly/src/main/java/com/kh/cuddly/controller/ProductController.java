@@ -80,6 +80,7 @@ public class ProductController {
 			List<ProductDto> list = productDao.selectList(vo);
 			model.addAttribute("list", list);
 		}
+		
 		return "/WEB-INF/views/product/list.jsp";
 	}
 	

@@ -147,17 +147,36 @@ public class ProductDaoImpl implements ProductDao{
 	
 	@Override
 	public List<ProductDto> selectListByCreator(ProductListVO vo) {
-		String sql = "select * from ("
-					+ "select rownum rn, TMP.* from ("
-						+ "select product.* from product inner join creator_product "
-						+ "on creator_product.product_no = product.product_no "
-						+ "LEFT OUTER JOIN creator ON creator_product.creator_no = creator.creator_no "
-						+ "WHERE creator.creator_name = ? "
-						+ "order by product."+vo.getTarget()+ " " + vo.getSort()
-						+ ")TMP"
+		if(vo.getTarget().equals("wishlist_count")) {
+			String sql = "select * from( "
+					+ "select rownum rn, TMP.* from( "
+					+ "SELECT p.*, (SELECT COUNT(*) FROM wishlist w "
+					+ "WHERE w.product_no = p.product_no) AS wishlist_count "
+					+ "FROM product p inner join creator_product cp "
+					+ "on cp.product_no = p.product_no "
+					+ "left outer join creator c on cp.creator_no = c.creator_no "
+					+ "where c.creator_name = ? "
+					+ "ORDER BY " + vo.getTarget() + " " + vo.getSort()
+					+")TMP"
 					+ ") where rn between ? and ?";
-		Object[] data = {vo.getCreator(), vo.getStartRow(), vo.getFinishRow()}; 
-		return jdbcTemplate.query(sql, productMapper, data);
+			Object[] data = {vo.getCreator(), vo.getStartRow(), vo.getFinishRow()}; 
+			return jdbcTemplate.query(sql, productMapper, data);
+		}
+		else{
+			String sql = "select * from( "
+					+ "select rownum rn, TMP.* from( "
+					+ "SELECT p.*, (SELECT COUNT(*) FROM wishlist w "
+					+ "WHERE w.product_no = p.product_no) AS wishlist_count "
+					+ "FROM product p inner join creator_product cp "
+					+ "on cp.product_no = p.product_no "
+					+ "left outer join creator c on cp.creator_no = c.creator_no "
+					+ "where c.creator_name = ? "
+					+ "ORDER BY p." + vo.getTarget() + " " + vo.getSort()
+					+")TMP"
+					+ ") where rn between ? and ?";
+			Object[] data = {vo.getCreator(), vo.getStartRow(), vo.getFinishRow()}; 
+			return jdbcTemplate.query(sql, productMapper, data);
+		}
 	}
 	
 	@Override
@@ -165,6 +184,15 @@ public class ProductDaoImpl implements ProductDao{
 		if(vo.isSearch()) {
 			String sql = "select count(*) from product where instr(product_name, ?) >0";
 			Object[] data = {vo.getKeyword()};
+			return jdbcTemplate.queryForObject(sql, int.class, data);
+		}
+		if(vo.isCreator()) {
+			String sql = "select count(*) "
+						+ "from product inner join creator_product "
+						+ "on creator_product.product_no = product.product_no "
+						+ "left outer join creator on creator_product.creator_no = creator.creator_no "
+						+ "where creator.creator_name = ?";
+			Object[] data = {vo.getCreator()};
 			return jdbcTemplate.queryForObject(sql, int.class, data);
 		}
 		else {
