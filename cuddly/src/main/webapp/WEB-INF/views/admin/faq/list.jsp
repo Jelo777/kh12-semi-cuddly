@@ -5,26 +5,23 @@
 <jsp:include page="/WEB-INF/views/template/adminHeader.jsp"></jsp:include>
 
 
+
 	
+
 	<div class="row">
 		<h2>FAQ관리</h2>
 	</div>
 	
-	<br><br>
-
-	
 	
 
-<div class="row left category-links">
-    <select name="category" onchange="location = this.value;">
-        <option value="">카테고리 선택</option>
-        <option value="list?category=공지사항">공지사항</option>
-        <option value="list?category=기타">기타</option>
-        <option value="list?category=주문결제">주문결제</option>
-        <option value="list?category=회원정보">회원정보</option>
-    </select>
-</div>
-
+	<%-- 글쓰기는 로그인 상태인 경우에만 출력 --%>
+	<c:if test="${sessionScope.name != null}">
+	<div class="row right">
+		<c:if test="${sessionScope.level == '관리자'}">
+		
+		
+		</c:if>
+	
 
 
 	<div class="row right">
@@ -33,6 +30,7 @@
 			작성하기 
 		</a>
 		</div>
+			</c:if>
 		
 	<form action="list" method="post" autocomplete="off">
 		<div class="row">
@@ -43,9 +41,10 @@
 		<table class="table table-stripe">
 			<thead>
 				<tr>
+				
 				<th>no</th>
 				<th>title</th>
-				<th>id</th>
+				<th>writer</th>
 				<th>date</th>
 				<th>category</th>
 				</tr>
@@ -53,16 +52,23 @@
 			<tbody>
 				<c:forEach var="faqDto" items="${list}">
 					<tr>
+					<c:if test="${sessionScope.level == '관리자'}">
+					
+					</c:if>
+					
+					
+					
 			<td>${faqDto.faqNo}</td>
-			
 			<td align="left">
+			
+			
+			
 				<!-- 제목을 누르면 상세페이지로 이동 -->
 				<a class="link" href="detail?faqNo=${faqDto.faqNo}">
 					${faqDto.faqTitle}
 				</a>
 			</td>
-		
-			<td>${faqDto.faqId}</td>
+			<td>관리자</td>
 			<td>${faqDto.faqDate}</td>
 			<td>${faqDto.faqCategory}</td>
 						
@@ -105,19 +111,6 @@
 </div>
 
 
-
-<!-- 검색창 -->
-<form action="list" method="get">
-	<select name="type" required>
-		<option>제목</option>
-		<option>작성자</option>
-	</select>
-	<input type="search" name="keyword" 
-				placeholder="검색어 입력" required>
-	<button>검색</button>
-</form>
-
-<br>
 
 
 

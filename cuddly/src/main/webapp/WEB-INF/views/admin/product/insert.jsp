@@ -4,25 +4,7 @@
 <jsp:include page="/WEB-INF/views/template/adminHeader.jsp"></jsp:include>
  
  <script>
- //모달 JS
-        $(function(){
-            $(".popUpOpen").click(function(e){
-            	e.preventDefault();
-                //모달을 보이도록 설정
-                $("#modal").show();
-            });
-         
-            //확인버튼 클릭시 모달버튼 숨김
-            $(".popUpClose").click(function(){
-                $("#modal").hide();
-            });
-            
-         // 모달 확인 버튼 클릭 시 폼을 제출
-            $(".popUpConfirm").click(function(){
-                // 폼을 선택하고 제출
-                $("form").submit();
-            });
-        });
+ 
  
  //피드백 JS
  $(function(){
@@ -36,23 +18,255 @@
 			 ok:function(){
 				return  this.productItem && this.creatorName 
 							&& this.productName && this.productPrice 
-							&& this.attachMain && this.attachDetail
+							&& this.attachMain && this.attachDetail;
 			 }
 	 };
+	 
+	 //품목선택
+	 $("[name=productItem]").blur(function(){
+		 var productItem = $(this).val();
+		 console.log($(this).val());
+		 var isValid = productItem != "none";
+		 
+		 $(this).removeClass("success fail");
+		 if(isValid){
+			 $(this).addClass("success");
+		 }
+		 else{
+			 $(this).addClass("fail");
+		 }
+		 
+		 //status.productItem 업데이트
+		 status.productItem = isValid;
+	 });
  
+	 //크리에이터 입력
 	$("[name=creatorName]").blur(function(){
 		var creatorName = $(this).val();
 		var isValid = creatorName.length > 0;
 
 		$(this).removeClass("success fail");
-		$(this).addClass(isValid ? "success" : "fail");
+		if(isValid){
+			$(this).addClass("success");
+		}
+		else{
+			$(this).addClass("fail");
+		}
 
     	// status.creatorName 업데이트
     	status.creatorName = isValid;
-		});
+	});
+	 
+	 
+	 //상품명입력
+	 $("[name=productName]").blur(function(){
+		 var productName = $(this).val();
+		 var isValid = productName.length > 0;
+		 
+		 $(this).removeClass("success fail");
+		if(isValid){
+			$(this).addClass("success");
+		}
+		else{
+			$(this).addClass("fail");
+		}
+			
+		status.productName = isValid;
+	 });
 
+	 
+	 //가격입력
+	$("[name=productPrice]").blur(function(){
+		var productPrice = $(this).val();
+		var isValid = productPrice.length > 0;
+		
+		$(this).removeClass("success fail");
+		if(isValid){
+			$(this).addClass("success");
+		}
+		else{
+			$(this).addClass("fail");
+		}
+		
+		status.productPrice = isValid;
+	});
+	 
+	 
+
+	 
+	 //대표이미지
+	$("[name=attachMain]").blur(function(){
+		var isResult1 = $("[name=attachMain]").val() == "";
+
+		var regex = /(.*?)\.(jpg|jpeg|png|gif|bmp|pdf)$/;
+		var isResult2 = regex.test($(this).val());
+		var isValid = !isResult1 && isResult2;
+		console.log(isValid);
 	
+		$(this).removeClass("success fail fali2");
+		if(isResult1){
+			$(this).addClass("fail");
+		}
+		else if(!isResult2){
+			$(this).addClass("fail2");
+		}
+		else{
+			$(this).addClass("success");
+		}
+		status.attachMain = isValid;
+	 }); 
+	 
+	 //상세이미지
+	 $("[name=attachDetail]").blur(function(){
+		 var isResult1 = $("[name=attachDetail]").val() == "";
+		 var regex = /(.*?)\.(jpg|jpeg|png|gif|bmp|pdf)$/;
+		var isResult2 = regex.test($(this).val());
+		var isValid = !isResult1 && isResult2;
+		console.log(isValid);		
+		
+		$(this).removeClass("success fail fali2");
+		if(isResult1){
+			$(this).addClass("fail");
+		}
+		else if(!isResult2){
+			$(this).addClass("fail2");
+		}
+		else{
+			$(this).addClass("success");
+		}
+		status.attachDetail = isValid;
+	
+	 }); 
+
+	 
+	 //페이지 이탈 방지
+	//- window에 beforeunload 이벤트 설정
+	$(window).on("beforeunload", function(){
+		
+		return false;
+	
+	});
+	 
+	 //- form 전송할 때는 beforeunload 이벤트를 제거
+	 $(".join-form").submit(function(e){
+		 
+		// $(".form-input").blur();
+		 if(!status.ok()){
+		 	e.preventDefault();
+		 	console.table(status);
+			 //return false;
+		 }
+		 else{
+			 $(window).off("beforeunload");
+		 }
+	 });
+
+	 
+	 $("[name=insert]").click(function(e){
+		 if(!status.ok()){
+			// console.log($(".form-input").val().length);
+			 
+			 $(".form-input").filter(function() {
+				    return $(this).val().length === 0||$(this).val() == "none";
+				}).addClass("fail");
+			 
+			
+			 e.preventDefault(); 
+		 }
+		 
+	 });
+	 
+});
+	
+ 
+//모달 JS
+ $(function(){
+ 	//덜 입력하고 상품등록 버튼 클릭시 
+ 	$(".popUpOpen").click(function(e){
+ 		e.preventDefault();
+ 		
+ 		var productItemValue = $("[name=productItem]").val();
+ 	    var creatorNameValue = $("[name=creatorName]").val();
+ 	    var productNameValue = $("[name=productName]").val();
+ 	    var productPriceValue = $("[name=productPrice]").val();
+ 	    var attachMainValue = $("[name=attachMain]").val();
+ 	    var attachDetailValue = $("[name=attachDetail]").val();
+
+ 		if(productItemValue == ""){
+ 			$(".fail-feedback.productItem").show();
+ 		}
+ 		else{
+ 			$(".fail-feedback.productItem").hide();
+ 		}
+ 		
+ 		if(creatorNameValue == ""){
+ 			$(".fail-feedback.creatorName").show();
+ 		}
+ 		else{
+ 			$(".fail-feedback.creatorName").hide();
+ 		}
+ 		
+ 		if(productNameValue == ""){
+ 			$(".fail-feedback.productName").show();
+ 		}
+ 		else{
+ 			$(".fail-feedback.productName").hide();
+ 		}
+ 		
+ 		if(productPriceValue == ""){
+ 			$(".fail-feedback.productPrice").show();
+ 		}
+ 		else{
+ 			$(".fail-feedback.productPrice").hide();
+ 		}
+ 		
+ 		if(attachMainValue == ""){
+ 			$(".fail-feedback.attachMain").show();
+ 		}
+ 		else{
+ 			$(".fail-feedback.attachMain").hide();
+ 		}
+ 		
+ 		if(attachDetailValue == ""){
+ 			$(".fail-feedback.attachDetail").show();
+ 		}
+ 		else{
+ 			$(".fail-feedback.attachDetail").hide();
+ 		}
+ 		
+ 		if(
+ 				productItemValue === "" ||
+ 				creatorNameValue === "" ||
+ 				productNameValue === "" ||
+ 				productPriceValue === "" ||
+ 				attachMainValue === "" ||
+ 				attachDetailValue === ""
+ 				){
+ 			// 하나라도 값이 비어 있을 경우 모달창 열지 않음
+ 			return;
+ 		}
+ 		
+ 	    
+ 		$(".fail-feedback").hide();
+ 		$("#modal").show();
+ 		
+ 	});
+          
+ 	//확인버튼 클릭시 모달버튼 숨김
+ 	$(".popUpClose").click(function(){
+ 		$("#modal").hide();
+ 	});
+             
+ 	// 모달 확인 버튼 클릭 시 폼을 제출
+ 	$(".popUpConfirm").click(function(){
+ 		 // 폼을 선택하고 제출
+ 		$("form").submit();
+ 		 
+ 		$(window).off("beforeunload");
+ 	});
  });
+	 
+
  
 </script>
     
@@ -62,13 +276,13 @@
     
 <body>
 	<div class="container w-600">
-		<form action="insert" method="post" autocomplete="off" enctype="multipart/form-data">
+		<form class="join-form" action="insert" method="post" autocomplete="off" enctype="multipart/form-data">
 		<div class="row">
 			<h1>상품등록</h1>
 		</div>
 		<div class="row">
 			<select class="form-input w-100" name="productItem">
-				<option>품목선택</option>
+				<option value="none">품목선택</option>
 				<option value="의류">의류</option>
 				<option value="스티커/지류">스티커/지류</option>
 				<option value="폰악세서리">폰악세서리</option>
@@ -76,32 +290,34 @@
 				<option value="문구/오피스">문구/오피스</option>
 				<option value="기타">기타</option>
 			</select>
-			<div class="fail-feedback">품목을 선택하세요.</div>
+			<div class="fail-feedback left">품목을 선택하세요.</div>
 		</div>
 		<div class="row">
 			<input type="text" class="form-input w-100" name="creatorName" placeholder="크리에이터 입력">
-			<div class="fail-feedback">크리에이터를 입력하세요.</div>
+			<div class="fail-feedback left">크리에이터를 입력하세요.</div>
 		</div>
 		<div class="row">
 			<input  type="text" class="form-input w-100" name="productName" placeholder="상품명 입력">
-			<div class="fail-feedback">상품명을 입력하세요.</div>
+			<div class="fail-feedback left">상품명을 입력하세요.</div>
 		</div>
 		<div class="row">
 			<input  type="number" class="form-input w-100" name="productPrice" placeholder="가격 입력">
-			<div class="fail-feedback">가격을 입력하세요.</div>
+			<div class="fail-feedback left">가격을 입력하세요.</div>
 		</div>
 		<div class="row left">
 			메인이미지
 			<input  type="file" class="form-input w-100" name="attachMain" accept="image/*" placeholder="대표이미지">
-			<div class="fail-feedback">대표이미지를 등록하세요.</div>
+			<div class="fail-feedback left">대표이미지를 등록하세요.</div>
+			<div class="fail2-feedback left">이미지 파일만 업로드 가능합니다.</div>
 		</div>
 		<div class="row left">
 			상세이미지
 			<input type="file" class="form-input w-100" name="attachDetail" accept="image/*" placeholder="상세이미지">
-			<div class="fail-feedback">상세이미지를 등록하세요.</div>
+			<div class="fail-feedback left">상세이미지를 등록하세요.</div>
+			<div class="fail2-feedback left">이미지 파일만 업로드 가능합니다.</div>
 		</div>
 		<div class="row">
-			<button class="btn btn-positive w-100 popUpOpen">상품등록</button>
+			<button class="btn btn-positive w-100 popUpOpen" name="insert">상품등록</button>
 		</div>
 
 	</form>
@@ -127,5 +343,6 @@
             </div>
         </div>
     </div>
+    
 	
 <jsp:include page="/WEB-INF/views/template/adminFooter.jsp"></jsp:include>

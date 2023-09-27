@@ -114,4 +114,11 @@ public class QnaDaoImpl implements QnaDao{
 //		return list;
 //	}
 	
+	@Override
+	public List<QnaDto> selectList(int productNo) {
+		String sql = "select * from qna where product_no = ?";
+		Object[] data = {productNo};
+		return jdbcTemplate.query(sql, qnaMapper, data);
+	}
+	
 }

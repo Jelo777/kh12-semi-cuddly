@@ -5,6 +5,8 @@ import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ByteArrayResource;
@@ -176,7 +178,7 @@ public class AdminController {
 			productDao.connectDetail(productNo, attachNo);//상세이미지 등록
 			}
 
-		return "/WEB-INF/views/admin/product/insert.jsp";
+		return "redirect:/cuddly/admin/product/list";
 	}
 	
 
@@ -367,11 +369,6 @@ public class AdminController {
 	
 
 	
-	
-	
-	
-	
-	
 	@RequestMapping("faq/detail")
 	public String faqDetail(@RequestParam int faqNo, Model model) {
 		FaqDto faqDto = faqDao.selectOne(faqNo);
@@ -385,14 +382,22 @@ public class AdminController {
 	}
 	
 	@PostMapping("faq/write")
-	private String faqWrite(@ModelAttribute FaqDto faqDto) {
+	private String write(@ModelAttribute FaqDto faqDto, HttpSession session) {
 		int faqNo = faqDao.sequence();
 		faqDto.setFaqNo(faqNo);
-		
+		String faqId = (String) session.getAttribute("name");
+		faqDto.setFaqId(faqId);
 		
 		faqDao.insert(faqDto);
 		return "redirect:detail?faqNo="+faqNo;
 	}
+	
+
+	
+	
+	
+	
+	
 	
 	@GetMapping("faq/edit")
 	public String faqEdit(@RequestParam int faqNo, Model model) {
@@ -424,18 +429,32 @@ public class AdminController {
 		}
 	}
 	
-
 	@RequestMapping("/faq/list")
 	public String faqList(@ModelAttribute(name = "vo") FaqlistVO vo,
-                Model model) {
+	                      @RequestParam(required = false) String category,
+	                      @RequestParam(required = false) String keyword,
+	                      Model model) {
 
-		int count = faqDao.countList(vo);
-		vo.setCount(count);	    
-		List<FaqDto> list = faqDao.selectListByPage(vo);
-		model.addAttribute("list", list);
+	    int count = faqDao.countList(vo);
+	    vo.setCount(count);
 
-		return "/WEB-INF/views/admin/faq/list.jsp";
+	    List<FaqDto> list;
+	   
+
+	    if (category != null && !category.isEmpty()) {
+	        list = faqDao.selectCategory(category);
+	    } else if (keyword != null && !keyword.isEmpty()) {
+	        list = faqDao.selectListByTitle(keyword);
+	    } else {
+	        list = faqDao.selectListByPage(vo);
+	    }
+
+	    model.addAttribute("list", list);
+
+	    return "/WEB-INF/views/admin/faq/list.jsp";
 	}
 }
+
+
 
 

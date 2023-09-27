@@ -143,8 +143,21 @@ public class FaqDaoImpl implements FaqDao{
 		}
 	}
 	
+	@Override
+	public List<FaqDto> selectListByTitle(String keyword) {
+	    String sql = "select * from faq where instr(faq_title, ?) > 0 order by faq_no desc";
+	    Object[] data = { keyword };
+	    return jdbcTemplate.query(sql, faqListMapper, data);
+	}
 
 
+	@Override
+	public List<FaqDto> selectList2(int faqNo) {
+		String sql = "SELECT * FROM faq ORDER BY faq_no ASC";
+		return jdbcTemplate.query(sql, faqListMapper);
+	}
+
+	
 
 }
 	

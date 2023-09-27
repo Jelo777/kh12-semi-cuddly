@@ -22,10 +22,8 @@
                 </select>
             </div>
             
-           	<div class="row left">
-           	<label> 아이디 </label>
-            <input class="form-input w-60" type="text" name="faqId" value="${faqDto.faqId}" placeholder="아이디를 입력해주세요"> <br><br>
-            </div>
+      
+          <input type="hidden" name="faqId">
             
             <div class="row left">
                 <label>제목</label>
@@ -43,6 +41,7 @@
             	<i class="fa-solid fa-pen"></i>
             	작성
            	</button>
+           	
        	  	<a href="list" class="btn">
             	<i class="fa-solid fa-list"></i>
             	목록

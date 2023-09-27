@@ -85,12 +85,13 @@ public class OrdersController {
 
 	    for (int No : cartNo) {
 	        OrdersProductDto ordersProductDto = ordersDao.viewProduct(No);
+//	        int price = ordersProductDto.getProductPrice();
+//	        int count = ordersProductDto.getCartCount();
+//	        
+//	        int productTotal = price * count; 
 	        
-	        int price = ordersProductDto.getProductPrice();
-	        int count = ordersProductDto.getCartCount();
-	        
-	        int productTotal = price * count; 
-	        total += productTotal; 
+//	        total += productTotal; 
+	        total += ordersProductDto.getCartPrice();
 	        
 	        dtoList.add(ordersProductDto); 
 	    }
@@ -164,6 +165,8 @@ public class OrdersController {
 
 	    int ordersNo = ordersDao.sequence();
 	    String memberId = (String) session.getAttribute("name");
+	    String memberLevel = (String) session.getAttribute("level");
+	    
 	    ordersDto.setOrdersNo(ordersNo);
 	    ordersDto.setAddressNo(addrNo);
 	    ordersDto.setMemberId(memberId);
@@ -173,19 +176,26 @@ public class OrdersController {
 	    ordersDao.insert(ordersDto);
 
 	    List<OrdersDetailDto> list = details.getDetails();
+	    
 
 	    for (OrdersDetailDto detail : list) {
 	        int ordersDetailNo = ordersDetailDao.sequence();
 	        detail.setOrdersDetailNo(ordersDetailNo);
 	        detail.setOrdersNo(ordersNo);
-	        
-		int price = cartDao.price(detail.getOptionNo());
-		int count = detail.getOrdersDetailCount();
-		
-		int total = price * count;
-		
-		detail.setOrdersDetailPrice(total);
-	        
+
+			int price = cartDao.price(detail.getOptionNo());
+			if(memberLevel.equals("골드")) {
+				price = (int) (price*0.9);
+			}
+			else if(memberLevel.equals("실버")) {
+				price = (int) (price*0.95);
+			}
+			
+			int count = detail.getOrdersDetailCount();
+			int total = price * count;
+			
+			detail.setOrdersDetailPrice(total);
+		    
 	        
 	        ordersDetailDao.insert(detail);	    
 	    }
@@ -207,15 +217,13 @@ public class OrdersController {
 	        @ModelAttribute MultiCartInsert cartList,
 	        @RequestParam(name = "action", required = false) String action,int productNo) {
 		String memberId = (String) session.getAttribute("name");
+		String memberLevel = (String) session.getAttribute("level");
 
 		if(memberId==null) {
-			
 			return "redirect:/cuddly/member/login";
-			
 		}
 		
 		else {
-
 	    List<CartDto> list = cartList.getCartList();
 	    StringBuilder cartNoParams = new StringBuilder();
 
@@ -224,8 +232,18 @@ public class OrdersController {
 	        insert.setCartNo(cartNo);
 	        insert.setMemberId(memberId);
 
-	        int price = cartDao.price(insert.getOptionNo());
-
+	        int originPrice = cartDao.price(insert.getOptionNo());
+	        int price;
+	        if(memberLevel.equals("골드")) {
+	        	price = (int) (originPrice * 0.9);
+	        }
+	        else if(memberLevel.equals("실버")) {
+	        	price = (int) (originPrice * 0.95);
+	        }
+	        else {
+	        	price = originPrice;
+	        }
+	        
 	        int totalPrice = insert.getCartCount() * price;
 
 	        insert.setCartPrice(totalPrice);

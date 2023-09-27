@@ -91,7 +91,13 @@ public class CartDaoImpl implements CartDao {
 		 
 	 }
 	 
-	 
+	 @Override
+	public CartDto selectOne(int cartNo) {
+		String sql = "select * from cart where cart_no=?";
+		Object[] data = {cartNo};
+		List<CartDto> list = jdbcTemplate.query(sql, cartMapper, data);
+		return list.isEmpty()?null : list.get(0);
+	}
 	
 }
 

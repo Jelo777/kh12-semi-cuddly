@@ -133,7 +133,16 @@ public class ReviewDaoImpl implements ReviewDao{
 		List<ProductDto> list = jdbcTemplate.query(sql, productMapper, data);
 		
 		return list.isEmpty() ? null: list.get(0);
+	}
 	
+	@Override
+	public List<ReviewDto> selectListByProduct(int productNo) {
+		String sql = "SELECT r.*, rm.attach_no "
+					+ "FROM review r LEFT OUTER JOIN review_image rm "
+					+ "ON r.REVIEW_NO = rm.REVIEW_NO "
+					+ "WHERE PRODUCT_NO = ? ORDER BY r.REVIEW_NO DESC";
+		Object[] data = {productNo};
+		return jdbcTemplate.query(sql, reviewMapper, data);
 	}
 	
 	@Override
@@ -170,6 +179,5 @@ public class ReviewDaoImpl implements ReviewDao{
 		
 		
 		return jdbcTemplate.update(sql,data)>0;
-	}
-	
+  }	
 }
