@@ -3,13 +3,16 @@ package com.kh.cuddly.rest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.kh.cuddly.dao.CreatorDao;
+import com.kh.cuddly.dao.ProductDao;
 import com.kh.cuddly.dao.QnaDao;
+import com.kh.cuddly.dto.CreatorDto;
 import com.kh.cuddly.dto.QnaDto;
 
 @RestController
@@ -18,6 +21,7 @@ public class AdminRestController {
 
 	@Autowired
 	private QnaDao qnaDao;
+	
 	
 	@PostMapping("qna/answer/update")
 	public boolean update(@ModelAttribute QnaDto qnaDto, HttpSession session) {
@@ -29,4 +33,5 @@ public class AdminRestController {
 			return false;
 		}
 	}
+	
 }
