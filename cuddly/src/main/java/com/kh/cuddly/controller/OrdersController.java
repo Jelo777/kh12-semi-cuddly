@@ -168,6 +168,8 @@ public class OrdersController {
 	    ordersDto.setAddressNo(addrNo);
 	    ordersDto.setMemberId(memberId);
 
+	    
+	    
 	    ordersDao.insert(ordersDto);
 
 	    List<OrdersDetailDto> list = details.getDetails();
