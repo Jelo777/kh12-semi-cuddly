@@ -159,8 +159,17 @@ public class ReviewDaoImpl implements ReviewDao{
 		List<ReviewDto> list = jdbcTemplate.query(sql, reviewMapper,  data);
 		
 		return list.isEmpty()? null : list.get(0);
+	}
+	
+	@Override
+	public boolean update(ReviewDto reviewDto) { 
+		
+		String sql = "update set review_content=? where review_no";
+		
+		Object[] data = {reviewDto.getReviewContent(),reviewDto.getReviewNo()};
 		
 		
+		return jdbcTemplate.update(sql,data)>0;
 	}
 	
 }
