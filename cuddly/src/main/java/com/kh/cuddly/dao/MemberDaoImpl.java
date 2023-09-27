@@ -61,10 +61,10 @@ public class MemberDaoImpl implements MemberDao{
 	@Override
 	public boolean updateMemberInfo(MemberDto memberDto) {
 		String sql="update member set "
-					+ "member_contact =?, member_email=?, "
+					+ "member_contact =?, "
 					+ "member_birth =? where member_id= ?";
 		Object[] data= {
-				memberDto.getMemberContact(), memberDto.getMemberEmail(), 
+				memberDto.getMemberContact(), 
 				memberDto.getMemberBirth(), memberDto.getMemberId()
 		};
 		return jdbcTemplate.update(sql,data)>0;
