@@ -13,4 +13,5 @@ public interface AddressDao {
 	void changeDefault(String memberId);
 	boolean delete(int addressNo);
 	boolean update(AddressDto addressDto);
+	boolean updateComenet(int addrNo, String addrComent);
 }

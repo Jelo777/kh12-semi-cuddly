@@ -91,6 +91,8 @@ $(function() {
      
      <br><br>
      
+  <form action="insert" method="post">
+         <input type="hidden" name="addrNo" value="${addressDto.addressNo}">
     <h1>배송지 정보</h1><br><br>
      	
      	<div><a href="/cuddly/orders/addrInsert"><button>배송지 목록</button></a></div>
@@ -129,12 +131,10 @@ $(function() {
          
           <div class="row">
         <label>요청사항 : </label>
-         ${addressDto.addressComent}
+         <input name="addrComent">
         </div>
          <br><br>
-         
         
-  <form action="insert" method="post">
     
     	<h1>주문할 상품 정보</h1>
 

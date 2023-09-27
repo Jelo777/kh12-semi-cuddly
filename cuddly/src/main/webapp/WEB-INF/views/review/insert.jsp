@@ -50,12 +50,29 @@
         });        
     </script>
 
+<div class="container w-600">
+					<div class="row">
+						<div class="flex-container card">
+							<div class="w-25 flex-container align-center">
+								<a href="/cuddly/product/detail?productNo=${productDto.productNo}">
+								<img src="/cuddly/image/product/main?productNo=${productDto.productNo}"
+									width="150" height="200">
+								</a>
+							</div>
+							<div class="w-75">
+								<div class="row left title"> 상품명 : ${productDto.productName}</div>
+								<div class="row left">
+									가격 : <label class="price">${productDto.productPrice}</label>
+								</div>
+							</div>
+						</div>
+					</div>
+</div>
+
+
 
 
 <form action="write" method="post" enctype="multipart/form-data">
-
-
-
 <!--	리뷰 이미지 : <input type="file" name="attach" accept="image/*"><br><br>-->
 	<input type="hidden" name="productNo" value="${productNo}">
 	별점 : <input type="text" name="reviewGrade"><br><br>
