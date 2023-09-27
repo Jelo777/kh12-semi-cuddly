@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.kh.cuddly.dao.AttachDao;
-import com.kh.cuddly.dao.ProductDao;
 import com.kh.cuddly.dao.ReviewDao;
 import com.kh.cuddly.dto.AttachDto;
 import com.kh.cuddly.dto.ProductDto;
@@ -111,6 +110,30 @@ public class ReviewController {
 		return "/WEB-INF/views/review/list.jsp";
 		
 	}
+	
+	@RequestMapping("/delete")
+	public String delete(@RequestParam int reviewNo,HttpSession session) {
+		
+		String memberId = (String) session.getAttribute("name");
+		
+		AttachDto attachDto = reviewDao.findImage(reviewNo);
+		ReviewDto reviewDto= reviewDao.selectOne(reviewNo);
+		
+		//이미지 있는 경우 이미지 삭제 처리 추가
+		if(reviewDto.isImage()) {
+		String home=System.getProperty("user.home");
+		File dir = new File(home,"upload");
+		File target = new File(dir,String.valueOf(attachDto.getAttachNo()));
+		target.delete();	//실제파일 삭제
+
+		attachDao.delete(attachDto.getAttachNo());	//파일정보 삭제
+		}
+		reviewDao.delete(reviewNo);	//리뷰 + 이미지연결정보 삭제
+		
+		return "redirect:/cuddly/review/memberList?memberId="+memberId;
+		
+	}
+	
 	
 	
 
