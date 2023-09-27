@@ -2,6 +2,8 @@ package com.kh.cuddly.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -33,10 +35,11 @@ public class FaqController {
 	}
 	
 	@PostMapping("/write")
-	private String write(@ModelAttribute FaqDto faqDto) {
+	private String write(@ModelAttribute FaqDto faqDto, HttpSession session) {
 		int faqNo = faqDao.sequence();
 		faqDto.setFaqNo(faqNo);
-		
+		String faqId = (String) session.getAttribute("name");
+		faqDto.setFaqId(faqId);
 		
 		faqDao.insert(faqDto);
 		return "redirect:detail?faqNo="+faqNo;
@@ -54,7 +57,8 @@ public class FaqController {
 	    vo.setCount(count);
 
 	    List<FaqDto> list;
-
+	   
+	    
 	    if (category != null && !category.isEmpty()) {
 	        list = faqDao.selectCategory(category);
 	    } else if (keyword != null && !keyword.isEmpty()) {
@@ -64,6 +68,8 @@ public class FaqController {
 	    }
 
 	    model.addAttribute("list", list);
+	    
+	    
 
 	    return "/WEB-INF/views/faq/list.jsp";
 	}

@@ -5,6 +5,8 @@ import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ByteArrayResource;
@@ -367,11 +369,6 @@ public class AdminController {
 	
 
 	
-	
-	
-	
-	
-	
 	@RequestMapping("faq/detail")
 	public String faqDetail(@RequestParam int faqNo, Model model) {
 		FaqDto faqDto = faqDao.selectOne(faqNo);
@@ -385,14 +382,22 @@ public class AdminController {
 	}
 	
 	@PostMapping("faq/write")
-	private String faqWrite(@ModelAttribute FaqDto faqDto) {
+	private String write(@ModelAttribute FaqDto faqDto, HttpSession session) {
 		int faqNo = faqDao.sequence();
 		faqDto.setFaqNo(faqNo);
-		
+		String faqId = (String) session.getAttribute("name");
+		faqDto.setFaqId(faqId);
 		
 		faqDao.insert(faqDto);
 		return "redirect:detail?faqNo="+faqNo;
 	}
+	
+
+	
+	
+	
+	
+	
 	
 	@GetMapping("faq/edit")
 	public String faqEdit(@RequestParam int faqNo, Model model) {
@@ -434,6 +439,7 @@ public class AdminController {
 	    vo.setCount(count);
 
 	    List<FaqDto> list;
+	   
 
 	    if (category != null && !category.isEmpty()) {
 	        list = faqDao.selectCategory(category);
@@ -448,5 +454,7 @@ public class AdminController {
 	    return "/WEB-INF/views/admin/faq/list.jsp";
 	}
 }
+
+
 
 

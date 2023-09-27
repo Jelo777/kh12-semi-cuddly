@@ -150,6 +150,13 @@ public class FaqDaoImpl implements FaqDao{
 	    return jdbcTemplate.query(sql, faqListMapper, data);
 	}
 
+
+	@Override
+	public List<FaqDto> selectList2(int faqNo) {
+		String sql = "SELECT * FROM faq ORDER BY faq_no ASC";
+		return jdbcTemplate.query(sql, faqListMapper);
+	}
+
 	
 
 }

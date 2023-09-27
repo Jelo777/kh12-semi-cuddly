@@ -12,16 +12,39 @@
 	<div class="container w-600">
         <div class="row">
 	<h1>FAQ등록</h1>
+	
+	<div class="row left">
 	<select name="faqCategory" value="${faqDto.faqCategory}">
 		<option>공지사항</option>
 		<option>회원정보</option>
 		<option>주문결제</option>
 		<option>기타</option>
-	
-		<input type="text" name="faqTitle" value="${faqDto.faqTitle}" placeholder="글제목 입력"> <br><br>
-		<textarea type="text" name="faqContent" value="${faqDto.faqContent}"></textarea> <br><br>
-		<button>등록</button>
 	</select>
+	 </div>
+	 
+            <div class="row left">
+                <label>제목</label>
+                <input class="form-input w-100" type="text" name="faqTitle" value="${faqDto.faqTitle}" required>
+            </div>
+            
+            <div class="row left">
+                <label>내용</label>
+                <textarea class="form-input w-100" name="faqContent" style="min-height:250px" required>${faqDto.faqContent}</textarea>
+            </div>
+        </div>
+        
+             <div class="row right">
+            <button type="submit" class="btn btn-positive">
+            	<i class="fa-solid fa-pen"></i>
+            	작성
+           	</button>
+           	
+       	  	<a href="list" class="btn">
+            	<i class="fa-solid fa-list"></i>
+            	목록
+            	</a>
+   			 </div>
+	
 </form>
 
 </body>

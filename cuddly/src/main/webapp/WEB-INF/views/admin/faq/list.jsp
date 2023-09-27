@@ -5,17 +5,23 @@
 <jsp:include page="/WEB-INF/views/template/adminHeader.jsp"></jsp:include>
 
 
+
 	
+
 	<div class="row">
 		<h2>FAQ관리</h2>
 	</div>
 	
-	<br><br>
-
-	
 	
 
-
+	<%-- 글쓰기는 로그인 상태인 경우에만 출력 --%>
+	<c:if test="${sessionScope.name != null}">
+	<div class="row right">
+		<c:if test="${sessionScope.level == '관리자'}">
+		
+		
+		</c:if>
+	
 
 
 	<div class="row right">
@@ -24,6 +30,7 @@
 			작성하기 
 		</a>
 		</div>
+			</c:if>
 		
 	<form action="list" method="post" autocomplete="off">
 		<div class="row">
@@ -34,6 +41,7 @@
 		<table class="table table-stripe">
 			<thead>
 				<tr>
+				
 				<th>no</th>
 				<th>title</th>
 				<th>writer</th>
@@ -44,15 +52,22 @@
 			<tbody>
 				<c:forEach var="faqDto" items="${list}">
 					<tr>
+					<c:if test="${sessionScope.level == '관리자'}">
+					
+					</c:if>
+					
+					
+					
 			<td>${faqDto.faqNo}</td>
-			
 			<td align="left">
+			
+			
+			
 				<!-- 제목을 누르면 상세페이지로 이동 -->
 				<a class="link" href="detail?faqNo=${faqDto.faqNo}">
 					${faqDto.faqTitle}
 				</a>
 			</td>
-		
 			<td>관리자</td>
 			<td>${faqDto.faqDate}</td>
 			<td>${faqDto.faqCategory}</td>
