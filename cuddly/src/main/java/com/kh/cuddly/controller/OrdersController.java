@@ -215,7 +215,7 @@ public class OrdersController {
 	@RequestMapping("/cartInsert")
 	public String cartInsert(HttpSession session,
 	        @ModelAttribute MultiCartInsert cartList,
-	        @RequestParam(name = "action", required = false) String action) {
+	        @RequestParam(name = "action", required = false) String action,int productNo) {
 		String memberId = (String) session.getAttribute("name");
 		String memberLevel = (String) session.getAttribute("level");
 
@@ -224,7 +224,6 @@ public class OrdersController {
 		}
 		
 		else {
-			
 	    List<CartDto> list = cartList.getCartList();
 	    StringBuilder cartNoParams = new StringBuilder();
 
@@ -258,7 +257,12 @@ public class OrdersController {
 	        return "redirect:/cuddly/orders/insert?" + cartNoParams.toString();
 	    } else if ("cart".equals(action)) {
 	        return "redirect:/cuddly/orders/cartList?memberId="+memberId;
-	    } else {
+	    } else if("cancel".equals(action)) {
+	    	
+	    	return "redirect:/cuddly/product/detail?productNo=" + productNo;
+	    }
+	    
+	    else {
 	        return "redirect:/cuddly/orders/insert?" + cartNoParams.toString();
 	    }
 		}

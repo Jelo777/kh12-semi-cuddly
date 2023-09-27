@@ -20,5 +20,6 @@ public interface ReviewDao {
 	List<ReviewDto> selectListByProduct(int productNo);
 	boolean delete(int reviewNo);
 	ReviewDto selectOne(int reviewNo);
+	boolean update(ReviewDto reviewDto);
 
 }

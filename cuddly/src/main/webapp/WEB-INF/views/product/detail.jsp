@@ -68,6 +68,9 @@
 	}
 
 	$(function() {
+		
+		
+
 		var params = new URLSearchParams(location.search);
 		var productNo = params.get("productNo");
 
@@ -118,6 +121,7 @@
 		
 
 		$("[name=action]").click(function(e) {
+	
 			
 			var a= $(".hiddenSelect").val()==null;
 			
@@ -134,17 +138,33 @@
 
 			if (!userConfirmed) {
 
-				e.preventDefault();
+				
+			/*  $(document).ready(function() {
+					 
+					 
+				 $("[name=action]").val("cancel")
+				 
+				 console.log($("[name=action]").val("cancel"));
+				 $("#orderForm").submit();
+				 
+				    });  */
+				    
+				    $(this).val("cancel");
+				    
+				
+				 
 
 			}
-			
-			
 			}
+			
+			
 			
 			
 			
 
 		});
+		
+		
 		
 		$(document).on("click", ".option-remove", function (e) {
 			
@@ -162,6 +182,10 @@
 		    
 		    
 		});
+		
+		
+		
+		
 		
 	
 		
@@ -216,13 +240,11 @@
 						<div id="selectedOptions"></div>
 					</div>
 					<div class="row ms-20">
-						<button class="btn w-100" type="submit" name="action" value="order">주문</button>
+						<button class="btn w-100" name="action" value="order" type="submit">주문</button>
 					</div>	
 					<div class="row ms-20">
-						<a href="/cuddly/orders/cartList?memberId=${sessionScope.name}">
-							<button class="btn btn-positive btn-cart w-100" type="submit" name="action"
-								value="cart">장바구니</button>
-						</a>
+							<button class="btn btn-positive btn-cart w-100" name="action"
+								value="cart" type="submit">장바구니</button>
 					</div>
 				</form>
 			</div>
@@ -246,6 +268,8 @@
 		<h3 class="col-3"><a class="link" href="#productDetail">상품상세</a></h3>
 		<h3 class="col-3"><a class="link" href="#reviewList">리뷰</a></h3>
 		<h3 class="col-3"><a class="link" href="#reviewList">상품문의</a></h3>
+
+
 
 	</div>	
 	

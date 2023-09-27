@@ -84,7 +84,7 @@ public class ReviewController {
 		}
 		
 		
-		return "redirect:/cuddly/review/list";
+		return "redirect:/cuddly/review/memberList?memberId="+memberId;
 
 	}
 	
@@ -131,6 +131,62 @@ public class ReviewController {
 		reviewDao.delete(reviewNo);	//리뷰 + 이미지연결정보 삭제
 		
 		return "redirect:/cuddly/review/memberList?memberId="+memberId;
+		
+	}
+	
+	@GetMapping("/edit")
+	public String edit(@RequestParam int reviewNo, Model model) {
+		
+		ReviewDto reviewDto = reviewDao.selectOne(reviewNo);
+		
+		model.addAttribute("reviewDto", reviewDto);
+		
+		return "/WEB-INF/views/review/edit.jsp";
+		
+		
+	}
+	
+	
+	
+	@PostMapping("/edit")
+	public String edit(@ModelAttribute ReviewDto reviewDto,
+			@RequestParam MultipartFile attach) throws IllegalStateException, IOException {
+		//포켓몬스터 정보 변경
+		reviewDao.update(reviewDto);
+		
+		if(!attach.isEmpty()) {//파일이 있으면
+			//파일 삭제 - 기존 파일이 있을 경우에만 처리
+			AttachDto attachDto = reviewDao.findImage(reviewDto.getReviewNo());
+			String home = System.getProperty("user.home");
+			File dir = new File(home,"upload");
+			
+			if(attachDto != null) {
+			
+				attachDao.delete(attachDto.getAttachNo());
+			File target = new File(dir,String.valueOf(attachDto.getAttachNo()));
+			target.delete();
+			}
+			
+			//파일 추가 및 연결
+			int attachNo = attachDao.sequence();
+			
+			
+			File insertTarget = new File(dir,String.valueOf(attachNo));
+			attach.transferTo(insertTarget);
+			
+			AttachDto insertDto = new AttachDto();
+			insertDto.setAttachNo(attachNo);
+			insertDto.setAttachName(attach.getOriginalFilename());
+			insertDto.setAttachSize(attach.getSize());
+			insertDto.setAttachType(attach.getContentType());
+			attachDao.insert(insertDto);
+			
+			reviewDao.connect(reviewDto.getReviewNo(), attachNo);
+		}
+		
+		
+		return "redirect:/cuddly/review/memberList?="+reviewDto.getMemberId();
+		
 		
 	}
 	
