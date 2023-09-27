@@ -152,6 +152,8 @@ public class ReviewController {
 	public String edit(@ModelAttribute ReviewDto reviewDto,
 			@RequestParam MultipartFile attach) throws IllegalStateException, IOException {
 		//포켓몬스터 정보 변경
+		
+		
 		reviewDao.update(reviewDto);
 		
 		if(!attach.isEmpty()) {//파일이 있으면
