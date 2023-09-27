@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
     
     
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 
@@ -55,7 +55,7 @@
 						<div class="flex-container card">
 							<div class="w-25 flex-container align-center">
 								<a href="/cuddly/product/detail?productNo=${productDto.productNo}">
-								<img src="/cuddly/image/product/main?productNo=${productDto.productNo}"
+								<img class=".now" src="/cuddly/image/product/main?productNo=${productDto.productNo}"
 									width="150" height="200">
 								</a>
 							</div>
@@ -74,13 +74,22 @@
 
 <form action="edit" method="post" enctype="multipart/form-data">
 <!--	리뷰 이미지 : <input type="file" name="attach" accept="image/*"><br><br>-->
-	<input type="hidden" name="productNo" value="${productNo}">
-	
+	<input type="hidden" name="productNo" value="${reviewDto.productNo}">
+	<input type="hidden" name="reviewNo" value="${reviewDto.reviewNo}">
 	별점 : <input type="text" name="reviewGrade" value="${reviewDto.reviewGrade}"><br><br>
 	리뷰 내용 : <input type="text" name="reviewContent" value="${reviewDto.reviewContent}"><br><br>
 	<input type="file" class="file-chooser" name="attach" accept="image/*"><br><br>
-	<img class="now" src=" "
-                                                    width="200" height="200"><br><br>
+	
+	<c:choose>
+	<c:when test="${reviewDto.image}">
+		<img class="now" src="/cuddly/image/review/image?reviewNo=${reviewDto.reviewNo}" width="200" height="200">
+	</c:when>
+	<c:otherwise>
+		<img class="now" src="https://dummyimage.com/50x50/000/fff">
+	</c:otherwise>
+	</c:choose>
+	
+	<br><br>
 	<button class="btn-save">사진 등록</button><br><br>
 	
 
