@@ -13,7 +13,9 @@
 	<br><br>
 
 	
-	
+	<c:if test="${sessionScope.name != null}">
+<h3><a href="write">글쓰기</a></h3>
+</c:if>
 
 <div class="row left category-links">
     <select name="category" onchange="location = this.value;">
@@ -39,7 +41,7 @@
 				<tr>
 				<th>no</th>
 				<th>title</th>
-				<th>id</th>
+				<th>writer</th>
 				<th>date</th>
 				<th>category</th>
 				</tr>
@@ -56,7 +58,7 @@
 				</a>
 			</td>
 		
-			<td>${faqDto.faqId}</td>
+			<td>관리자</td>
 			<td>${faqDto.faqDate}</td>
 			<td>${faqDto.faqCategory}</td>
 						

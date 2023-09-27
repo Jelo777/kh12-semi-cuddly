@@ -22,10 +22,8 @@
                 </select>
             </div>
             
-           	<div class="row left">
-           	<label> 아이디 </label>
-            <input class="form-input w-60" type="text" name="faqId" value="${faqDto.faqId}" placeholder="아이디를 입력해주세요"> <br><br>
-            </div>
+      
+          
             
             <div class="row left">
                 <label>제목</label>

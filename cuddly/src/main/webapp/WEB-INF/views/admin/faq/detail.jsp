@@ -33,22 +33,12 @@
     <div class="row">
         <table class="table table-border">
             <tbody>
-                <tr>
-                    <th width="25%">작성자</th>
-                    <td>${faqDto.faqId}</td>
-                </tr>
-                <tr>
-                    <th>제목</th>
-                    <td>${faqDto.faqTitle}</td>
-                </tr>
+               
                 <tr height="150">
-                    <th>내용</th>
+                   
                     <td>${faqDto.faqContent}</td>
                 </tr>
-                <tr>
-                    <th>작성일</th>
-                    <td>${faqDto.faqDate}</td>
-                </tr>
+                
             </tbody>
         </table>
     </div>

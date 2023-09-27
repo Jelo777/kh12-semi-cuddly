@@ -36,7 +36,7 @@
 				<tr>
 				<th>no</th>
 				<th>title</th>
-				<th>id</th>
+				<th>writer</th>
 				<th>date</th>
 				<th>category</th>
 				</tr>
@@ -53,7 +53,7 @@
 				</a>
 			</td>
 		
-			<td>${faqDto.faqId}</td>
+			<td>관리자</td>
 			<td>${faqDto.faqDate}</td>
 			<td>${faqDto.faqCategory}</td>
 						
