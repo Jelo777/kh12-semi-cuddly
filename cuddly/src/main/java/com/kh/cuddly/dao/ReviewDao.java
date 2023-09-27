@@ -17,5 +17,5 @@ public interface ReviewDao {
 	float reviewAvg (int productNo);
 	List<ReviewDto> memberList(String memberId);
 	ProductDto productInfo(int productNo);
-
+	List<ReviewDto> selectListByProduct(int productNo);
 }

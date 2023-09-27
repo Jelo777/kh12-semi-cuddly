@@ -15,10 +15,13 @@ import com.kh.cuddly.dao.CreatorDao;
 import com.kh.cuddly.dao.CreatorProductDao;
 import com.kh.cuddly.dao.ProductDao;
 import com.kh.cuddly.dao.ProductOptionDao;
+import com.kh.cuddly.dao.QnaDao;
 import com.kh.cuddly.dao.ReviewDao;
 import com.kh.cuddly.dto.CreatorDto;
 import com.kh.cuddly.dto.ProductDto;
 import com.kh.cuddly.dto.ProductOptionDto;
+import com.kh.cuddly.dto.QnaDto;
+import com.kh.cuddly.dto.ReviewDto;
 
 @Controller
 @RequestMapping("/cuddly/product")
@@ -36,6 +39,8 @@ public class ProductController {
 	ReviewDao reviewDao;
 	@Autowired
 	CartDao cartDao;
+	@Autowired
+	QnaDao qnaDao;
 	
 	
 	@RequestMapping("/detail")
@@ -45,8 +50,11 @@ public class ProductController {
 		String creatorName = creatorDto.getCreatorName();
 		List<ProductOptionDto> optionList = productOptionDao.selectListByProductNo(productNo); 
 		float reviewAvg = reviewDao.reviewAvg(productNo);
+		List<ReviewDto> reviewList = reviewDao.selectListByProduct(productNo);
+		List<QnaDto> qnaList = qnaDao.selectList(productNo);
 		
-		
+		model.addAttribute("qnaList", qnaList);
+		model.addAttribute("reviewList", reviewList);
 		model.addAttribute("optionList", optionList);
 		model.addAttribute("creatorName", creatorName);
 		model.addAttribute("productDto", productDto);

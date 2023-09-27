@@ -57,6 +57,8 @@ public class ProductDaoImpl implements ProductDao{
 		Object[] data = {attachNo, productNo};
 		jdbcTemplate.update(sql, data);			
 	}
+	
+	@Override
 	public ProductDto selectOne(int productNo) {
 		String sql = "select * from product where product_no = ?";
 		Object[] data = {productNo};

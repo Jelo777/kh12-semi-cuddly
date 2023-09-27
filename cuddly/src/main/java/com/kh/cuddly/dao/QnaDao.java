@@ -14,5 +14,6 @@ public interface QnaDao {
 	QnaDto selectOne(int qnaNo);
 	List<QnaDto> selectList();
 	List<QnaDto> selectList(String memberId);
+	List<QnaDto> selectList(int productNo);
 	
 }

@@ -171,7 +171,7 @@
 
 
 
-<div class="container w-1000">
+<div class="container w-900">
 	<div class="flex-container">
 		<div class="col-2">
 			<div class="row">
@@ -228,13 +228,69 @@
 			</div>
 		</div>
 	</div>
-	<hr>
+	
+	
+	<div id="productDetail" class="flex-container form-input form-underline">
+		<h3 class="col-3"><a class="link" href="#productDetail">상품상세</a></h3>
+		<h3 class="col-3"><a class="link" href="#reviewList">리뷰</a></h3>
+		<h3 class="col-3"><a class="link" href="#reviewList">상품문의</a></h3>
+	</div>
+	
 	<div class="row">
 		<img
 			src="/cuddly/image/product/detail?productNo=${productDto.productNo}"
 			width="100%" height="100%">
 	</div>
+	
+	<div id="reviewList" class="flex-container form-input form-underline">
+		<h3 class="col-3"><a class="link" href="#productDetail">상품상세</a></h3>
+		<h3 class="col-3"><a class="link" href="#reviewList">리뷰</a></h3>
+		<h3 class="col-3"><a class="link" href="#reviewList">상품문의</a></h3>
+
+	</div>	
+	
+	<c:forEach var="reviewListDto" items="${reviewList}">
+	<div class="flex-container" style="border: 1px solid #636e72;">
+        <div class="w-75" style="padding: 1em;">
+            <div class="row left">
+                ${productDto.productName}    ${reviewListDto.reviewGrade}
+            </div>
+            <div class="row left">
+                ${reviewListDto.memberId}   ${reviewListDto.reviewDate}
+            </div>
+            <div class="row left">
+                ${reviewListDto.reviewContent}
+            </div>
+        </div>
+        <div class="w-25" style="padding: 1em;">
+            <img src="/cuddly/image/review/image?reviewNo=${reviewListDto.reviewNo}" width="100%" height="100%">
+        </div>
+    </div>
+    </c:forEach>
+	
+	
+	<div id="qnaList" class="flex-container form-input form-underline">
+		<h3 class="col-3"><a class="link" href="#productDetail">상품상세</a></h3>
+		<h3 class="col-3"><a class="link" href="#reviewList">리뷰</a></h3>
+		<h3 class="col-3"><a class="link" href="#reviewList">상품문의</a></h3>
+	</div>
+	
+	<c:forEach var="qnaListDto" items="${qnaList}">
+	<div class="flex-container" style="border: 1px solid #636e72;">
+        <div class="w-25" style="padding: 1em;">
+            <img src="/cuddly/image/product/main?productNo=${productDto.productNo}" width="100%" height="100%">
+        </div>
+        <div class="w-75" style="padding: 1em;">
+            <div class="row left">
+                ${qnaListDto.qnaContent}     ${qnaListDto.memberId}
+            </div>
+            <div class="row left">
+                ${qnaListDto.qnaAnswer}
+            </div>
+        </div>
+    </div>
+    </c:forEach>
+	
+	
 </div>
-
-
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
