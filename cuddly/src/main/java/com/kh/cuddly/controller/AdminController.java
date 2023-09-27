@@ -178,7 +178,7 @@ public class AdminController {
 			productDao.connectDetail(productNo, attachNo);//상세이미지 등록
 			}
 
-		return "/WEB-INF/views/admin/product/insert.jsp";
+		return "redirect:/cuddly/admin/product/list";
 	}
 	
 
