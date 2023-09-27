@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
-import com.kh.cuddly.VO.PaginationVO;
 import com.kh.cuddly.VO.ProductListVO;
 import com.kh.cuddly.dto.AttachDto;
 import com.kh.cuddly.dto.ProductDto;
@@ -57,6 +56,8 @@ public class ProductDaoImpl implements ProductDao{
 		Object[] data = {attachNo, productNo};
 		jdbcTemplate.update(sql, data);			
 	}
+	
+	@Override
 	public ProductDto selectOne(int productNo) {
 		String sql = "select * from product where product_no = ?";
 		Object[] data = {productNo};
@@ -64,32 +65,6 @@ public class ProductDaoImpl implements ProductDao{
 		return list.isEmpty()?null : list.get(0);
 	}
 	
-	@Override
-	public int countList(PaginationVO vo) {
-		if(vo.isSearch()) {
-			String sql = "select count(*) from product "
-					+ "where instr(product_name, ?)>0";
-			Object[] data = {vo.getKeyword()};
-			return jdbcTemplate.queryForObject(sql, int.class, data);
-		}
-		else if(vo.isSearchByCreatorName()) {
-			String sql= "select count(*) from product inner join creator_product "
-							+ "on creator_product.product_no = product.product_no "
-							+ "LEFT OUTER JOIN creator ON creator_product.creator_no = creator.creator_no "
-						+ "WHERE creator.creator_name = ? ";
-			Object[] data = {vo.getCreatorName()};
-			return jdbcTemplate.queryForObject(sql, int.class, data);
-		}
-		else if(vo.isSearchByProductItem()) {
-			String sql = "select count(*) from product where product_item = ?";
-			Object[] data = {vo.getProductItem()};
-			return jdbcTemplate.queryForObject(sql, int.class, data);
-		}
-		else {
-			String sql = "select count(*) from product";
-			return jdbcTemplate.queryForObject(sql, int.class);
-		}
-	}
 
 	
 	@Override

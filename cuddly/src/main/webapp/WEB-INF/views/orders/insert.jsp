@@ -10,9 +10,11 @@
 	box-shadow: 0 0 0 1px #2d3436;
 }
 
+
 .list {
 	box-shadow: 0 0 0 1px #2d3436;
 }
+
 .position-center{
 
 	position: fixed;
@@ -30,14 +32,6 @@
 <script>
 	$(function() {
 		
-		
-		
-		
-		
-		
-		
-		
-		
 
 		$(".btn.btn-order").click(function(e) {
 
@@ -53,6 +47,7 @@
 				alert("기본 배송지를 설정해주세요")
 
 			}
+
 
 			if ($("input[type='checkbox']:checked").length === 0) {
 				e.preventDefault();
@@ -105,8 +100,7 @@
 </script>
 
 
-<h1>주문 정보 입력</h1>
-
+	<h1>주문할 상품 정보</h1>
 
 
 <br>
@@ -311,23 +305,6 @@
 					class="btn btn-exit mt-30">나가기</button>
 	</div>
 </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 </body>
 </html>

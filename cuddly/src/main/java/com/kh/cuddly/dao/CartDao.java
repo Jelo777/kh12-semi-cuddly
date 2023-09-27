@@ -4,7 +4,6 @@ import java.util.List;
 
 import com.kh.cuddly.dto.CartDto;
 import com.kh.cuddly.dto.OrdersProductDto;
-import com.kh.cuddly.dto.WishlistDto;
 
 public interface CartDao {
 	int sequence();
@@ -13,4 +12,5 @@ public interface CartDao {
 	List<OrdersProductDto> selectCartList(String memberId);
 	boolean cartDelete(int cartNo);
 
+	CartDto selectOne(int cartNo);
 }
