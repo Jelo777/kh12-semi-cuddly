@@ -17,7 +17,7 @@
 		<option>회원정보</option>
 		<option>주문결제</option>
 		<option>기타</option>
-		<input type="text" name="faqId" placeholder="임의 회원아이디"> <br><br>
+	
 		<input type="text" name="faqTitle" value="${faqDto.faqTitle}" placeholder="글제목 입력"> <br><br>
 		<textarea type="text" name="faqContent" value="${faqDto.faqContent}"></textarea> <br><br>
 		<button>등록</button>

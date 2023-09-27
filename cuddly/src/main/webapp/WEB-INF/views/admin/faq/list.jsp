@@ -15,15 +15,6 @@
 	
 	
 
-<div class="row left category-links">
-    <select name="category" onchange="location = this.value;">
-        <option value="">카테고리 선택</option>
-        <option value="list?category=공지사항">공지사항</option>
-        <option value="list?category=기타">기타</option>
-        <option value="list?category=주문결제">주문결제</option>
-        <option value="list?category=회원정보">회원정보</option>
-    </select>
-</div>
 
 
 
@@ -45,7 +36,7 @@
 				<tr>
 				<th>no</th>
 				<th>title</th>
-				<th>id</th>
+				<th>writer</th>
 				<th>date</th>
 				<th>category</th>
 				</tr>
@@ -62,7 +53,7 @@
 				</a>
 			</td>
 		
-			<td>${faqDto.faqId}</td>
+			<td>관리자</td>
 			<td>${faqDto.faqDate}</td>
 			<td>${faqDto.faqCategory}</td>
 						
@@ -105,19 +96,6 @@
 </div>
 
 
-
-<!-- 검색창 -->
-<form action="list" method="get">
-	<select name="type" required>
-		<option>제목</option>
-		<option>작성자</option>
-	</select>
-	<input type="search" name="keyword" 
-				placeholder="검색어 입력" required>
-	<button>검색</button>
-</form>
-
-<br>
 
 
 
