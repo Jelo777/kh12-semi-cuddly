@@ -158,7 +158,7 @@ public class OrdersController {
 	
 	@PostMapping("/insert")
 	public String insert(@ModelAttribute OrdersDto ordersDto,
-	        HttpSession session, int addrNo,
+	        HttpSession session, @RequestParam int addrNo, @RequestParam String addrComent,
 	        @ModelAttribute MultiOrders details,
 	        @RequestParam int[] cartNo) {
 
@@ -168,7 +168,7 @@ public class OrdersController {
 	    ordersDto.setAddressNo(addrNo);
 	    ordersDto.setMemberId(memberId);
 
-	    
+	    addressDao.updateComenet(addrNo,addrComent);
 	    
 	    ordersDao.insert(ordersDto);
 

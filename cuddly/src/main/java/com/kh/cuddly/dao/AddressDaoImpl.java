@@ -98,5 +98,15 @@ public class AddressDaoImpl implements AddressDao{
 		return jdbcTemplate.update(sql,data)>0;
 	}
 	
+	@Override
+	public boolean updateComenet(int addrNo, String addrComent) {
+		String sql="update address set address_coment=? where address_no = ?";
+		Object[]data= {
+				addrComent,addrNo
+		};
+		
+		return jdbcTemplate.update(sql,data)>0;
+	}
+	
 	
 }
