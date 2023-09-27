@@ -57,7 +57,8 @@ public class FaqController {
 	    vo.setCount(count);
 
 	    List<FaqDto> list;
-
+	   
+	    
 	    if (category != null && !category.isEmpty()) {
 	        list = faqDao.selectCategory(category);
 	    } else if (keyword != null && !keyword.isEmpty()) {
@@ -67,6 +68,8 @@ public class FaqController {
 	    }
 
 	    model.addAttribute("list", list);
+	    
+	    
 
 	    return "/WEB-INF/views/faq/list.jsp";
 	}

@@ -22,5 +22,6 @@ public interface FaqDao {
 	int countList(FaqlistVO vo);
 	List<FaqDto> selectListByPage(FaqlistVO vo);
 	List<FaqDto> selectListByTitle(String keyword);
+	List<FaqDto> selectList2(int faqNo);
 	
 }

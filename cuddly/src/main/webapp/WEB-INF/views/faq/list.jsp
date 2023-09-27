@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-<jsp:include page="/WEB-INF/views/template/adminHeader.jsp"></jsp:include>
+<jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 
 
 	
@@ -14,7 +14,7 @@
 
 	
 	<c:if test="${sessionScope.name != null}">
-<h3><a href="write">글쓰기</a></h3>
+
 </c:if>
 
 <div class="row left category-links">
@@ -112,7 +112,11 @@
     </div>
 </form>
 
-
+  <div class="row right">
+            <button type="submit" class="btn btn-positive">
+            	<i class="fa-solid fa-pen"></i>
+            	작성
+           	</button>
 
 
 
