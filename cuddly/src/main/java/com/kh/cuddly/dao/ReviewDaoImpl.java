@@ -7,9 +7,11 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.kh.cuddly.dto.AttachDto;
+import com.kh.cuddly.dto.ProductDto;
 import com.kh.cuddly.dto.ReviewDto;
 import com.kh.cuddly.dto.ReviewInfoDto;
 import com.kh.cuddly.mapper.AttachMapper;
+import com.kh.cuddly.mapper.ProductMapper;
 import com.kh.cuddly.mapper.ReviewInfoMapper;
 import com.kh.cuddly.mapper.ReviewMapper;
 
@@ -27,6 +29,9 @@ public class ReviewDaoImpl implements ReviewDao{
 	
 	@Autowired
 	AttachMapper attachMapper;
+	
+	@Autowired
+	ProductMapper productMapper;	
 
 	@Override
 	public void insert(ReviewDto reviewDto) {
@@ -117,4 +122,18 @@ public class ReviewDaoImpl implements ReviewDao{
 			return jdbcTemplate.queryForObject(sql, float.class, data);
 		}
 	}
+	
+	@Override
+	public ProductDto productInfo(int productNo) {
+		
+		String sql = "select * from product where product_no=?";
+		
+		Object[] data = {productNo};
+		
+		List<ProductDto> list = jdbcTemplate.query(sql, productMapper, data);
+		
+		return list.isEmpty() ? null: list.get(0);
+	
+	}
+	
 }

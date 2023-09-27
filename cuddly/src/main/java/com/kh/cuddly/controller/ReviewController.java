@@ -2,17 +2,11 @@ package com.kh.cuddly.controller;
 
 import java.io.File;
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
-import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.ByteArrayResource;
-import org.springframework.http.ContentDisposition;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,12 +14,13 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.kh.cuddly.dao.AttachDao;
+import com.kh.cuddly.dao.ProductDao;
 import com.kh.cuddly.dao.ReviewDao;
 import com.kh.cuddly.dto.AttachDto;
+import com.kh.cuddly.dto.ProductDto;
 import com.kh.cuddly.dto.ReviewDto;
 import com.kh.cuddly.dto.ReviewInfoDto;
 
@@ -41,9 +36,15 @@ public class ReviewController {
 	@Autowired
 	AttachDao attachDao;
 	
+	
 	@GetMapping("/write")
 	public String write(int productNo,Model model) {
 		
+		ProductDto productDto = reviewDao.productInfo(productNo);
+		
+		
+		
+		model.addAttribute("productDto", productDto);
 		model.addAttribute("productNo", productNo);
 		
 		return "/WEB-INF/views/review/insert.jsp";

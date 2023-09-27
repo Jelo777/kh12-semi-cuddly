@@ -158,13 +158,14 @@ public class OrdersController {
 	
 	@PostMapping("/insert")
 	public String insert(@ModelAttribute OrdersDto ordersDto,
-	        HttpSession session,
+	        HttpSession session, int addrNo,
 	        @ModelAttribute MultiOrders details,
 	        @RequestParam int[] cartNo) {
 
 	    int ordersNo = ordersDao.sequence();
 	    String memberId = (String) session.getAttribute("name");
 	    ordersDto.setOrdersNo(ordersNo);
+	    ordersDto.setAddressNo(addrNo);
 	    ordersDto.setMemberId(memberId);
 
 	    ordersDao.insert(ordersDto);

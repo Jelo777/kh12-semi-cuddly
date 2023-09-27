@@ -132,9 +132,9 @@ $(function() {
          ${addressDto.addressComent}
         </div>
          <br><br>
-         
         
   <form action="insert" method="post">
+         <input type="hidden" name="addrNo" value="${addressDto.addressNo}">
     
     	<h1>주문할 상품 정보</h1>
 

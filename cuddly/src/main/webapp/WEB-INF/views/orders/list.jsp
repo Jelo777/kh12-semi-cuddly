@@ -28,8 +28,8 @@
 		<div class="container w-600">
 			<div class="flex-container card mv-10">
 				<div class="row w-25 me-20">
-					<img src="/cuddly/image/product/main?productNo=${detail.productNo}"
-						width="150" height="200">
+					<a href="/cuddly/product/detail?productNo=${detail.productNo}"><img src="/cuddly/image/product/main?productNo=${detail.productNo}"
+						width="150" height="200"></a>
 				</div>
 				<div class="w-75">
 					주문 번호 : ${detail.ordersNo}
@@ -45,16 +45,19 @@
 					<div class="row right">
 					
 					
-					
-					<c:if test="${detail.two}">
-					
+					<c:choose>
+					<c:when test="${detail.two}">
 						<a href="/cuddly/orders/detail?ordersNo=${detail.ordersNo}">
 							외 ${detail.orderCount}건 더보기</a>
+					
+							</c:when>
 							
-							
-							</c:if>
-							
-							
+					<c:otherwise>
+					
+					<a href="/cuddly/review/write?productNo=${detail.productNo}">리뷰쓰기</a>
+					
+					</c:otherwise>
+							</c:choose>
 							
 							
 					</div>
