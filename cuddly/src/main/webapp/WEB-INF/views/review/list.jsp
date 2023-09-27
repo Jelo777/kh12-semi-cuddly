@@ -19,6 +19,11 @@
 	<br><br>
 	<a href="/cuddly/product/detail?productNo=${reviewDto.productNo}"><img src="/cuddly/image/product/main?productNo=${reviewDto.productNo}" width="100" height="100"></a>
 	
+	<div class="row">
+	
+	<a href="/cuddly/review/delete?reviewNo=${reviewDto.reviewNo}">삭제하기</a>
+	
+	</div>
 	
 	
 	<hr>

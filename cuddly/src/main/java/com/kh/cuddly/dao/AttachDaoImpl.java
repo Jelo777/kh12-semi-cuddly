@@ -45,6 +45,16 @@ public class AttachDaoImpl implements AttachDao{
 		List<AttachDto> list = jdbcTemplate.query(sql, attachMapper, data);
 		return list.isEmpty() ? null : list.get(0);
 	}
+	
+	@Override
+	public boolean delete(int attachNo) {
+		
+		String sql = "delete attach where attach_no=?";
+		
+		Object[] data = {attachNo};
+		
+		return jdbcTemplate.update(sql,data)>0;
+	}
 
 	
 	

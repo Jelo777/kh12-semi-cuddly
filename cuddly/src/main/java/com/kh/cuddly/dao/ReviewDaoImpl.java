@@ -145,5 +145,31 @@ public class ReviewDaoImpl implements ReviewDao{
 		return jdbcTemplate.query(sql, reviewMapper, data);
 	}
 	
+	@Override
+	public boolean delete(int reviewNo) {
+		
+		String sql = "delete review where review_no=?";
+		
+		Object[] data = {reviewNo};
+		
+		return jdbcTemplate.update(sql,data)>0;
+		
+	}
+	
+	@Override
+	public ReviewDto selectOne(int reviewNo) { 
+		
+		String sql = "select r.*,rm.attach_no from "
+				+ "review r left outer join "
+				+ "review_image rm on r.review_no = rm.review_no where r.review_no=?";
+		
+		Object[] data = {reviewNo};
+		
+		List<ReviewDto> list = jdbcTemplate.query(sql, reviewMapper,  data);
+		
+		return list.isEmpty()? null : list.get(0);
+		
+		
+  }
 	
 }

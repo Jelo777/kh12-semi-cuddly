@@ -25,7 +25,9 @@
 	<br><br>
 	상품 가격 : ${reviewDto.productPrice}
 	
-	
+	<div class="row">
+	<a href="/cuddly/review/delete?reviewNo=${reviewDto.reviewNo}">삭제하기</a>
+	</div>
 	<hr>
 </div>
 </c:forEach>
