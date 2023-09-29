@@ -4,6 +4,39 @@
 
 <jsp:include page="/WEB-INF/views/template/adminHeader.jsp"></jsp:include>
 
+<script>
+
+$(function(){
+	$(".search-btn").click(function(e){
+		
+		var isType = $("[name=type]").val();
+		var isKeyword = $("#kw").val();
+		
+		if(isType == '선택'){
+			alert("검색 타입을 선택하세요.");
+			e.preventDefault();
+		}
+		else if (isKeyword.length == 0){
+			alert("검색어를 입력하세요.");
+			e.preventDefault();
+		}
+		else{
+			$.ajax({
+				url : "http://localhost:8080/cuddly/admin/member/list",
+				method : "post",
+				data : $("form").serialize(),
+				success : function(response){
+				}
+			});		
+		}	
+		
+	});
+		
+});
+
+
+</script>
+
 <div class="container w-800">
 	
 	<div class="row">
@@ -52,16 +85,6 @@
 						<option value="member_level" selected>등급</option>
 					</select>
 				</c:when>
-					
-				<c:when test="${vo.type == 'member_level'}">
-					<select class="form-input" name="type">
-						<option>선택</option>
-						<option value="member_id">아이디</option>
-						<option value="member_name">이름</option>
-						<option value="member_contact">연락처</option>
-						<option value="member_level" selected>등급</option>
-					</select>
-				</c:when>
 				
 				<c:otherwise>
 					<select class="form-input" name="type">
@@ -76,14 +99,14 @@
 			
 		<c:choose>
 			<c:when test="${vo.keyword != null}">
-				<input class="form-input" type="text" name="keyword" value="${vo.keyword}"> 
+				<input id="kw" class="form-input" type="text" name="keyword" value="${vo.keyword}"> 
 			</c:when>
 			<c:otherwise>
-				<input class="form-input" type="text" name="keyword" placeholder="검색어 입력"> 
+				<input id="kw" class="form-input" type="text" name="keyword" placeholder="검색어 입력"> 
 			</c:otherwise>
 		</c:choose>	
-		
-			<button class="btn btn-positive">검색</button>
+			
+				<button class="btn btn-positive search-btn">검색</button>
 		</div>
 	</form>
 	
@@ -102,20 +125,34 @@
 				</tr>
 			</thead>
 			<tbody>
-				<c:forEach var="memberListDto" items="${list}">
-					<tr>
-						<td>${memberListDto.memberId}</td>
-						<td>${memberListDto.memberName}</td>
-						<td>${memberListDto.memberContact}</td>
-						<td>${memberListDto.memberEmail}</td>
-						<td>${memberListDto.memberLevel}</td>
-						<td>${memberListDto.memberTotalprice}</td>
-						<td>${memberListDto.memberJoin}</td>
-						<td>
-							<a class="link" href="edit?memberId=${memberListDto.memberId}"><button>보기</button></a>
-						</td>
-					</tr>
-				</c:forEach>
+			
+				<c:choose>
+				
+					<c:when test="${list.size() == 0}">
+						<tr>
+							<td colspan="8">검색결과가 없습니다.</td>
+						</tr>
+					</c:when>
+					
+					<c:otherwise>
+						<c:forEach var="memberListDto" items="${list}">
+							<tr>
+								<td>${memberListDto.memberId}</td>
+								<td>${memberListDto.memberName}</td>
+								<td>${memberListDto.memberContact}</td>
+								<td>${memberListDto.memberEmail}</td>
+								<td>${memberListDto.memberLevel}</td>
+								<td>${memberListDto.memberTotalprice}</td>
+								<td>${memberListDto.memberJoin}</td>
+								<td>
+									<a class="link" href="edit?memberId=${memberListDto.memberId}"><button>보기</button></a>
+								</td>
+							</tr>
+						</c:forEach>
+					</c:otherwise>
+					
+				</c:choose>
+			
 			</tbody>
 	
 		</table>
