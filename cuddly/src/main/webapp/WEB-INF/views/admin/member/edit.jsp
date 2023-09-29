@@ -143,7 +143,8 @@ $(function(){
 			
 <c:choose>
 	<c:when test="${not empty ordersList}">
-		<c:forEach var="ordersAdminDto" items="${ordersList}">
+		<c:forEach var="ordersAdminDto" items="${ordersList}" varStatus="loop">
+			<c:if test="${loop.index == 0 || ordersAdminDto.ordersNo != ordersList[loop.index - 1].ordersNo}">
 			<div class="float-container card">
 		
 				<div class="row left">
@@ -173,12 +174,15 @@ $(function(){
 					<span>구매금액 : ${ordersAdminDto.ordersDetailPrice}</span>
 				</div>		
 				
-				<div class="row right">
-					<span>포함 ${ordersAdminDto.ordersCount}건</span>
-					<a href="ordersDetailList?ordersNo=${ordersAdminDto.ordersNo}"><span>주문상세보기</span></a>
-				</div>		
+				<c:if test="${ordersAdminDto.ordersCount > 1}">
+					<div class="row right">
+						<span>외 ${ordersAdminDto.ordersCount - 1}건</span>
+						<a href="ordersDetailList?ordersNo=${ordersAdminDto.ordersNo}"><span>주문상세보기</span></a>
+					</div>
+				</c:if>
 				
 			</div>
+			</c:if>
 		</c:forEach>
 	</c:when>
 	
