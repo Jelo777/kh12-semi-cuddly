@@ -59,7 +59,7 @@
 		display:block;
 	
 	}
-
+	
 
 
 
@@ -72,6 +72,23 @@
 <!-- jquery cdn -->
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 
+
+<script> //x아이콘 눌렀을 때 사이드바 끄게 하기
+$(document).ready(function() {
+    var sidebarVisible = false; // 초기에 사이드바가 숨겨진 상태
+    
+    $("#sidebar-toggle, .fa-regular.fa-circle-xmark.fa-2x").click(function() {
+        if (sidebarVisible) {
+            $(".sidebar").hide(); // 사이드바를 숨깁니다.
+        } else {
+            $(".sidebar").show(); // 사이드바를 표시합니다.
+        }
+        sidebarVisible = !sidebarVisible; // 상태를 토글합니다.
+    });
+});
+</script>
+
+
 </head>
 <body class="center">
 	<main>
@@ -80,22 +97,51 @@
          	<div class="row">
         		<input type="checkbox" style="display:none;" id="sidebar-toggle">
         		<div class="sidebar">
-        		<div class="row">
-	            	<img src="/images/cuddlys.png" width="200" height="50"><br>
-            	</div>
+	        		<div class="row right me-10">
+	        		
+	        			<a class="link" href="/cuddly/member/mypage">
+							<i class="fa-solid fa-circle-user fa-2x"></i>
+						</a>	
+							
+	        			<i class="fa-regular fa-circle-xmark fa-2x"></i>
+	        			
+	        		</div>
+	        		<div class="row">
+		            	<img src="/images/cuddlys.png" width="200" height="50">
+	            	</div>
+	        			
+	        			<div class="row left ms-20 mt-30">
+	        			<c:choose>
+		        			<c:when test="${sessionScope.name==null}">
+		        				<h3><a class="link" href="/cuddly/member/login">로그인이 필요해요!</a></h3>
+		        			</c:when>
+							<c:otherwise>
+								<h3>${sessionScope.name}님 환영해요!</h3>
+							</c:otherwise>
+						</c:choose>
+	        			</div>
+	        			
+	        			<div class="row left ms-20 mt-30">
+	        				<h2><a class="link" href="/cuddly">홈</a></h2>
+	        			</div>
+	        			
+	        			<div class="row left ms-20 mt-30">
+	        				<h2><a class="link" href="/cuddly/product/creator">크리에이터</a></h2>
+	        			</div>
+	        			
+	        			<div class="row left ms-20 mt-30">
+	        				<h2><a class="link" href="/cuddly/product/list">전체상품</a></h2>
+	        			</div>
+	        			
+	        			<div class="row left ms-20 mt-30">
+	        				<h2><a class="link" href="/cuddly/review/list">리뷰</a></h2>
+	        			</div>
+	        			
+	        			<div class="row left ms-20 mt-30">
+	        				<h2><a class="link" href="/cuddly/faq/list">공지사항</a></h2>
+	        			</div>
         			
-        			<div class="row left ms-20 mt-30">
-        			<c:choose>
-	        			<c:when test="${sessionScope.name==null}">
-	        				<h3><a class="link" href="/cuddly/member/login">로그인이 필요해요!</a></h3>
-	        			</c:when>
-						<c:otherwise>
-							<h3>${sessionScope.name}님 환영해요!</h3>
-						</c:otherwise>
-					</c:choose>
-        			</div>	
-        			
-        			
+        				
         			
         			
         			
@@ -142,7 +188,7 @@
             <div class="w-100 right">
 		        <div class="etc mt-20">
 					<i class="fa-brands fa-gratipay fa-2x"></i>
-					<a href="/cuddly/orders/cartList?memberId=${sessionScope.name}"><i class="fa-solid fa-cart-shopping fa-2x"></i></a>
+					<a class="link" href="/cuddly/orders/cartList?memberId=${sessionScope.name}"><i class="fa-solid fa-cart-shopping fa-2x"></i></a>
 					<a class="link" href="/cuddly/member/mypage">
 					<i class="fa-solid fa-circle-user fa-2x"></i>
 					</a>

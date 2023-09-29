@@ -267,31 +267,31 @@
 <div class="container w-700">
 	<div class="row position-center w-700">
 		<c:forEach var="addressDto" items="${list}">
-			<div class="flex-container card mt-50">
+			<div class="flex-container card mt-10">
 				<div class="w-75 mt-20">
 					<input type="hidden" class="addressNo"
 						value="${addressDto.addressNo}">
-					<div class="row left ms-30">
+					<div class="row left ms-10">
 						<h1 class="addressName">${addressDto.addressName}</h1>
 						<c:if test="${addressDto.addressDefault =='Y'}">
 								(기본배송지)
 								</c:if>
 	
 					</div>
-					<div class="row left ms-30">
+					<div class="row left ms-10">
 						<h5 class="addressPost">${addressDto.addressPost}</h5>
 						<h5 class="addressAddr1">${addressDto.addressAddr1}</h5>
 						<h5 class="addressAddr2">${addressDto.addressAddr2}</h5>
 					</div>
-					<div class="row left ms-30">
+					<div class="row left ms-10">
 						<h5 class="addressContact">${addressDto.addressContact}</h5>
 					</div>
-					<div class="row left ms-30">
+					<div class="row left ms-10">
 						<h5 class="addressComent">${addressDto.addressComent}</h5>
 					</div>
 				</div>
 				<div class="w-25 mt-20">
-					<div class="row right me-30">
+					<div class="row right me-10">
 						<h5>
 							<button type="submit" style="width: 150px; font-size: 16px;"
 								class="btn btn-positive btn-select">선택</button>
