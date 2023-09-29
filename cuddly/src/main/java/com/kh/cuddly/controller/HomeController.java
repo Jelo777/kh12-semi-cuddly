@@ -27,8 +27,9 @@ public class HomeController {
 	public String home(Model model,@ModelAttribute(name = "vo") ProductListVO vo,
 					@ModelAttribute(name = "vo2") ProductListVO vo2
 					) {
-		
 		List<ProductDto> sortByNew = productDao.selectList(vo);
+		
+		vo2.setTarget("wishlist_count");
 		List<ProductDto> sortByBest = productDao.selectList(vo2);
 		model.addAttribute("sortByNew", sortByNew);
 		model.addAttribute("sortByBest", sortByBest);

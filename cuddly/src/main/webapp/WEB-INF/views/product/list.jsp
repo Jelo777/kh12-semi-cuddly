@@ -15,7 +15,7 @@
 	</div>
 	</c:if>
 	
-	<div class="row">
+	<div class="row right">
 		<a class="link" href="list?${vo.getQueryStringPriceAsc()}">낮은가격순</a>
 		<a class="link" href="list?${vo.getQueryStringPriceDesc()}">높은가격순</a>
 		<a class="link" href="list?${vo.getQueryStringNew()}">새로나온순</a>
@@ -52,6 +52,9 @@
 <c:if test="${creatorDto==null}">
 <div class="row">
 	<form action="list">
+		<c:if test="${param.item!=null}">
+			<input type="hidden" name="item" value="${param.item}">
+		</c:if>
 		<input class="form-input" name="keyword">
 		<button class="btn">검색</button>
 	</form>

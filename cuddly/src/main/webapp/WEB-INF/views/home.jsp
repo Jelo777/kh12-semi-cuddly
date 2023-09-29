@@ -46,7 +46,7 @@
 </script>
 
 
-<div class="container w-1000">
+<div class="container w-900">
 	<div class="row">
 		<!-- Slider main container -->
 		<div class="swiper">
