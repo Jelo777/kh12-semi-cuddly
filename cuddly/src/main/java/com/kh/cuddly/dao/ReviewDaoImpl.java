@@ -180,4 +180,22 @@ public class ReviewDaoImpl implements ReviewDao{
 		
 		return jdbcTemplate.update(sql,data)>0;
   }	
+	
+	@Override 
+	public boolean checkReviewExistence(String memberId, int productNo) {
+	
+		String sql = "select r.*,a.ATTACH_NO from review r join attach a on r.review_no=a.attach_no where r.member_id=? and r.product_no=?";
+		
+		Object[] data= {memberId, productNo};
+		
+		List<ReviewDto> list = jdbcTemplate.query(sql, reviewMapper,data);
+		
+		return list.isEmpty()?false:true;
+		
+		
+		
+	}
+	
+	
+	
 }

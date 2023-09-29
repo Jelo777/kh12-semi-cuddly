@@ -21,5 +21,6 @@ public interface ReviewDao {
 	boolean delete(int reviewNo);
 	ReviewDto selectOne(int reviewNo);
 	boolean update(ReviewDto reviewDto);
+	boolean checkReviewExistence(String memberId, int productNo);
 
 }

@@ -2,12 +2,6 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>장바구니 목록</title>
-</head>
 <style>
 
 	.card {
@@ -16,11 +10,7 @@
             border-radius: 0.2em;
         }
         
-        .row{
-        
-        padding: 0.5em 1em;
-        
-        }
+      
         
         
 

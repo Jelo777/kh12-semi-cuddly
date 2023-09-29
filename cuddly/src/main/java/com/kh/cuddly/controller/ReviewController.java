@@ -137,8 +137,15 @@ public class ReviewController {
 	@GetMapping("/edit")
 	public String edit(@RequestParam int reviewNo, Model model) {
 		
+		
 		ReviewDto reviewDto = reviewDao.selectOne(reviewNo);
 		
+		int productNo = reviewDto.getProductNo();
+		
+		ProductDto productDto = reviewDao.productInfo(productNo);
+		
+		
+		model.addAttribute("productDto", productDto);
 		model.addAttribute("reviewDto", reviewDto);
 		
 		return "/WEB-INF/views/review/edit.jsp";

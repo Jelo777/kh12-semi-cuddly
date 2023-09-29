@@ -3,12 +3,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
 <title>주문 목록</title>
-</head>
 <style>
 .card {
 	/* border: 1px solid #2d3436; */
@@ -21,7 +16,30 @@
 }
 </style>
 
+
+
 <body>
+<script>
+
+$(function(){
+
+	
+	
+	
+})
+
+
+</script>
+
+
+
+
+
+
+
+
+
+
 	<h1>나의 주문 목록</h1>
 
 	<c:forEach var="detail" items="${list}">
@@ -42,6 +60,7 @@
 					</div>
 					<div class="row left">주문 가격: ${detail.ordersDetailPrice}</div>
 					<div class="row right">주문 날짜: ${detail.ordersDate}</div>
+					<div class="row left">총 주문 가격: ${detail.ordersPrice}원</div>
 					<div class="row right">
 					
 					
@@ -54,12 +73,11 @@
 							
 					<c:otherwise>
 					
+					<c:if test="${!detail.reviewEx}">
 					<a href="/cuddly/review/write?productNo=${detail.productNo}">리뷰쓰기</a>
-					
+					</c:if>
 					</c:otherwise>
 							</c:choose>
-							
-							
 					</div>
 				</div>
 				<hr>

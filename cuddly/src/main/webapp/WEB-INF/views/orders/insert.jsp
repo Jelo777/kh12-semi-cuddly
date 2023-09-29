@@ -35,27 +35,38 @@
 
 		$(".btn.btn-order").click(function(e) {
 
-			var no = $
-			{
-				NoAddr
-			}
-			;
+			
+			var no = $(".no").val().length===0;
 
 			if (no) {
 
 				e.preventDefault();
-				alert("기본 배송지를 설정해주세요")
+				
+				$(".form-input").removeClass("fail");
+				$(".form-input").addClass("fail");
+				 $(".fail-feedback").css("display", "block");
 
 			}
 
 
 			if ($("input[type='checkbox']:checked").length === 0) {
 				e.preventDefault();
-				alert("결제방식을 선택해주세요");
+				
+				$(".fail2-feedback").css("display", "block");
 			}
 
 		})
-
+		
+		$(".payType").change(function(){
+		
+			$(".fail2-feedback").css("display", "none");
+			
+			
+		})
+		
+		
+		
+		
 		$(".btn-select").click(function() {
 			//this == 누른 버튼 
 
@@ -93,6 +104,8 @@
 		});
 		//배송지 목록에서 선택 버튼을 눌렀을 때
 		$(".btn-select").click(function(){
+			$(".form-input").removeClass("fail")
+			$(".fail-feedback").css("display", "none");
 			$(".position-center").hide();
 		});
 
@@ -122,11 +135,15 @@
 <br>
 
 <form action="insert" method="post">
-	<h1>배송지 정보</h1>
-	<br>
-	<br>
 
-	<button type ="button" class="btn btn-positive w-400 btn-addressList">배송지 목록</button>
+<div class="container w-700 addrBox">
+
+	<h1>배송지 정보</h1>
+	
+	
+
+<div class="row right">
+	<button type ="button" class="btn btn-positive w-200 btn-addressList">배송지 목록</button></div>
 
 
 	<div class="row">
@@ -155,6 +172,8 @@
 
 	<div class="row">
 		<input class="coment form-input"  name="addrComent" value="" placeholder="요청사항">
+	</div>
+	<h1 class="row fail-feedback">배송지를 선택해주세요.</h1>
 	</div>
 
 
@@ -244,12 +263,11 @@
 
 
 	<div class="row">
-		<input type="checkbox" name="ordersPayment" value="네이버페이"
-			class="payType">네이버 페이 <input type="checkbox"
-			name="ordersPayment" value="카카오페이" class="payType">카카오 페이 <input
-			type="checkbox" name="ordersPayment" value="무통장입금" class="payType">무통장
-		페이
+		<input type="checkbox" name="ordersPayment" value="네이버페이" class="payType">네이버 페이 
+		<input type="checkbox" name="ordersPayment" value="카카오페이" class="payType">카카오 페이 
+		<input type="checkbox" name="ordersPayment" value="무통장입금" class="payType">무통장 페이
 	</div>
+	<h1 class="fail2-feedback">결제 방식을 선택해주세요</h1>
 
 
 	<button class="btn btn-order">주문하기</button>

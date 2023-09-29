@@ -23,6 +23,7 @@ import com.kh.cuddly.dao.OrdersDao;
 import com.kh.cuddly.dao.OrdersDetailDao;
 import com.kh.cuddly.dao.ProductDao;
 import com.kh.cuddly.dao.QnaDao;
+import com.kh.cuddly.dao.ReviewDao;
 import com.kh.cuddly.dto.AddressDto;
 import com.kh.cuddly.dto.CartDto;
 import com.kh.cuddly.dto.MemberDto;
@@ -67,6 +68,9 @@ public class OrdersController {
 	
 	@Autowired QnaDao qnaDao;
 	
+	@Autowired
+	ReviewDao reviewDao;
+	
 	
 	
 
@@ -99,10 +103,10 @@ public class OrdersController {
 		AddressDto addressDto = addressDao.selectOne(memberId);
 		List<AddressDto> list=addressDao.selectList(memberId);
 		
-		boolean NoAddr = addressDto==null;
-		
-		
-		model.addAttribute("NoAddr", NoAddr);
+//		boolean NoAddr = addressDto==null;
+//		
+//		
+//		model.addAttribute("NoAddr", NoAddr);
 		model.addAttribute("addressDto", addressDto);
 		model.addAttribute("list",list);
 		
@@ -294,7 +298,18 @@ public class OrdersController {
 	    
 	    List<OrderDetailJoinDto> list  = ordersDetailDao.detailList(ordersNo);
 	    
+	    int total=0;
+	    
+	    for(OrderDetailJoinDto dto : list) {
+			
+			
+			dto.setReviewEx(reviewDao.checkReviewExistence(dto.getMemberId(), dto.getProductNo()));
+			total = dto.getOrdersPrice();
+		}
+	    
+	    
 	    model.addAttribute("ordersDetailDto", list);
+	    model.addAttribute("total", total);
 	    
     
 	    return "/WEB-INF/views/orders/detail.jsp";
@@ -316,8 +331,20 @@ public class OrdersController {
 	public String orderList(Model model,String memberId) {
 		
 		List<OrderDetailJoinDto2> list = ordersDao.selectListOrders2(memberId);
+
+		for(OrderDetailJoinDto2 dto : list) {
 			
+			
+			dto.setReviewEx(reviewDao.checkReviewExistence(memberId, dto.getProductNo()));
+			
+		}
+		
+		
+		
+		
 		model.addAttribute("list", list);
+		
+		
 		
 		return "/WEB-INF/views/orders/list.jsp";
 	}

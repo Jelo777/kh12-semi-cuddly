@@ -21,9 +21,13 @@
           <div class="row">  주문 수량: ${detail.ordersDetailCount}</div>
            <div class="row"> 주문 가격: ${detail.ordersDetailPrice}</div>
            <div class="row"> 주문 날짜: ${detail.ordersDate}</div>
-           <a href="/cuddly/review/write?productNo=${detail.productNo}">리뷰쓰기</a>
+           
+           	<c:if test="${!detail.reviewEx}">
+					<a href="/cuddly/review/write?productNo=${detail.productNo}">리뷰쓰기</a>
+					</c:if>
            <hr>
 </c:forEach>
+			<div class="row">총 주문 가격: ${total}원</div>
 
      
        
