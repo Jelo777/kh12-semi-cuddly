@@ -55,6 +55,10 @@ hr {
 	/* 		left:200px; */
 	display: block;
 }
+
+ul.menu > li > ul > li{
+	font-size: 18px;
+}
 </style>
 
 <!-- jquery cdn -->
@@ -142,7 +146,7 @@ hr {
                             	<a class="link" href="/cuddly/product/list?item=폰악세서리"> - 폰악세서리</a>
                             </h3>
                             <h3>
-                            	<a href="/cuddly/product/list?item=기타"> - 기타</a>
+                            	<a class="link" href="/cuddly/product/list?item=기타"> - 기타</a>
                             </h3>
                         </div>
 					</div>
@@ -198,11 +202,20 @@ hr {
 
 		</header>
 		<nav>
-			<ul class="menu">
-				<li><a href="/cuddly/product/creator">크리에이터</a></li>
-				<li><a href="#">굿즈</a></li>
-				<li><a href="#">문구</a></li>
-				<li><a href="#">엑세서리</a></li>
+			<ul class="menu left">
+				<li class="center"><a href="/cuddly/product/creator">크리에이터</a></li>
+				<li class="center">
+					<a href="/cuddly/product/list">전체상품</a>
+					<ul>
+						<li><a href="/cuddly/product/list?item=패션">패션</a></li>
+						<li><a href="/cuddly/product/list?item=문구/오피스">문구/오피스</a></li>
+						<li><a href="/cuddly/product/list?item=홈데코/리빙">홈데코/리빙</a></li>
+						<li><a href="/cuddly/product/list?item=폰악세서리">폰악세서리</a></li>
+						<li><a href="/cuddly/product/list?item=기타">기타</a></li>
+					</ul>
+				</li>
+				<li class="center"><a href="/cuddly/review/list">리뷰</a></li>
+				<li class="center"><a href="/cuddly/faq/list">FAQ</a></li>
 
 				<%-- 관리자인 경우 추가 메뉴 출력 --%>
 				<c:if test="${sessionScope.level == '관리자'}">
