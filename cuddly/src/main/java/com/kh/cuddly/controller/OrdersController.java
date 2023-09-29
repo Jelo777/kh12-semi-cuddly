@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.kh.cuddly.VO.PaginationVO;
 import com.kh.cuddly.dao.AddressDao;
 import com.kh.cuddly.dao.CartDao;
 import com.kh.cuddly.dao.MemberDao;
@@ -317,20 +318,31 @@ public class OrdersController {
 
 	
 	@RequestMapping("/cartList")
-	public String cartList(Model model,HttpSession session) {
+	public String cartList(Model model,HttpSession session,@ModelAttribute(name = "vo") PaginationVO vo) {
 		
 		String memberId = (String) session.getAttribute("name");
 		
-		List<OrdersProductDto> cartList = cartDao.selectCartList(memberId);
+		int count = cartDao.countList(vo,memberId);
+		
+		vo.setCount(count);
+		vo.setSize(5);
+		
+		List<OrdersProductDto> cartList = cartDao.selectCartList(vo,memberId);
 		model.addAttribute("cartList", cartList);
 		return "/WEB-INF/views/cart/list.jsp";
 	}
 	
 	
 	@RequestMapping("/list")
-	public String orderList(Model model,String memberId) {
+	public String orderList(Model model,@ModelAttribute(name = "vo") PaginationVO vo,String memberId) {
 		
-		List<OrderDetailJoinDto2> list = ordersDao.selectListOrders2(memberId);
+		int count = ordersDao.countList(vo,memberId);
+		
+		vo.setCount(count);
+		vo.setSize(5);
+		
+		List<OrderDetailJoinDto2> list = ordersDao.selectListOrders2(vo,memberId);
+		
 
 		for(OrderDetailJoinDto2 dto : list) {
 			
@@ -340,8 +352,7 @@ public class OrdersController {
 		}
 		
 		
-		
-		
+
 		model.addAttribute("list", list);
 		
 		

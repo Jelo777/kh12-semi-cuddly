@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.kh.cuddly.VO.PaginationVO;
 import com.kh.cuddly.dao.AttachDao;
 import com.kh.cuddly.dao.ReviewDao;
 import com.kh.cuddly.dto.AttachDto;
@@ -89,11 +90,17 @@ public class ReviewController {
 	}
 	
 	@RequestMapping("/memberList")
-	public String memberList(Model model,HttpSession session) {
+	public String memberList(Model model,HttpSession session,@ModelAttribute(name = "vo") PaginationVO vo) {
 		
 		String memberId = (String) session.getAttribute("name");
 		
-		List<ReviewInfoDto> list = reviewDao.selectMemberList(memberId);
+		int count = reviewDao.countMemberList(vo,memberId);
+		
+		vo.setCount(count);
+		vo.setSize(5);
+		
+		
+		List<ReviewInfoDto> list = reviewDao.selectMemberList(memberId,vo);
 		
 		model.addAttribute("list",list);
 		
@@ -101,9 +108,17 @@ public class ReviewController {
 		
 	}
 	
-	@RequestMapping("/list")//아직 수정 전
-	public String list(Model model,String memberId) {
-		List<ReviewDto> list = reviewDao.memberList(memberId);
+	@RequestMapping("/list")
+	public String list(Model model,String memberId,@ModelAttribute(name = "vo") PaginationVO vo) {
+		
+		int count = reviewDao.countAllList(vo);
+		
+		vo.setCount(count);
+		vo.setSize(5);
+		
+		
+		List<ReviewDto> list = reviewDao.list(vo);
+		
 		
 		model.addAttribute("list",list);
 		

@@ -17,6 +17,7 @@ public class PaginationVO {
 	private int size = 10;//보여줄 게시판의 글 수(기본:10)
 	private int count;//전체 글 수
 	private int navigatorSize = 10;//하단 네비게이터 표시 개수(기본:10)
+	private String memberId;
 	
 	public boolean isSearch() {
 		return keyword != null;
@@ -35,6 +36,10 @@ public class PaginationVO {
 	}
 	public boolean isSortByWishlist() {//관심순
 		return sortByWish != null;
+	}
+	public boolean isMember() {
+		return memberId != null;
+		
 	}
 	
 	
@@ -76,6 +81,10 @@ public class PaginationVO {
 		else if(isSortByWishlist()) {
 			return "page="+(getBegin()-1)+"&size="+size+"&type="+type+"&sortByWish="+sortByWish;
 		}
+		else if(isMember()) {
+			
+			return "page="+(getBegin()-1)+"&size="+size+"&memberId="+memberId;
+		}
 		else {//목록
 			return "page="+(getBegin()-1)+"&size="+size;
 		}
@@ -99,6 +108,10 @@ public class PaginationVO {
 		}
 		else if(isSortByWishlist()) {
 			return "page="+(getEnd()+1)+"&size="+size+"&sortByWish="+sortByWish;
+		}
+		else if(isMember()) {
+			
+			return "page="+(getEnd()+1)+"&size="+size+"&memberId="+memberId;
 		}
 		else {//목록
 			return "page="+(getEnd()+1)+"&size="+size;
@@ -124,6 +137,10 @@ public class PaginationVO {
 		else if(isSortByWishlist()) {
 			return "page="+page+"&size="+size+"&sortByWish="+sortByWish;
 		}
+		else if(isMember()) {
+			
+			return "page="+page+"&size="+size+"&memberId="+memberId;
+		}
 		else {//목록
 			return "page="+page+"&size="+size;
 		}
@@ -135,4 +152,5 @@ public class PaginationVO {
 	public int getFinishRow() {
 		return page * size;
 	}
+	
 }

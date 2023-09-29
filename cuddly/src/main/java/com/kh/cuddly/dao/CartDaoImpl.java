@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import com.kh.cuddly.VO.PaginationVO;
 import com.kh.cuddly.dto.CartDto;
 import com.kh.cuddly.dto.OrdersProductDto;
 import com.kh.cuddly.mapper.CartMapper;
@@ -53,11 +54,17 @@ public class CartDaoImpl implements CartDao {
 //	    }
 	 
 	 @Override
-		public List<OrdersProductDto> selectCartList(String memberId) {
+		public List<OrdersProductDto> selectCartList(PaginationVO vo,String memberId) {
 			
-			String sql = "select * from ordered_product where member_id = ? order by cart_date desc";
+//			String sql = "select * from ordered_product where member_id = ? order by cart_date desc";
 			
-			Object[] data= {memberId};
+			String sql = "select * from ("
+					+ "select rownum rn, TMP.* from ("
+					+ "select * from ordered_product where member_id = ? order by cart_date desc"
+					+ ")TMP"
+					+ ") where rn between ? and ?";
+			
+			Object[] data= {memberId,vo.getStartRow(), vo.getFinishRow()};
 			
 			
 			
@@ -98,6 +105,16 @@ public class CartDaoImpl implements CartDao {
 		List<CartDto> list = jdbcTemplate.query(sql, cartMapper, data);
 		return list.isEmpty()?null : list.get(0);
 	}
+	 
+		@Override
+		public int countList(PaginationVO vo,String memberId) {
+			String sql = "select count(*) from ordered_product where member_id = ?";
+			
+			Object[] data = {memberId};
+			
+			return jdbcTemplate.queryForObject(sql, int.class,data);
+		}
+		
 	
 }
 

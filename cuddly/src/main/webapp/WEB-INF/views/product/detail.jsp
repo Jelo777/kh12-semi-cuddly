@@ -14,15 +14,16 @@
 
 		// 옵션 선택 여부 확인
 		if (optionSelect.val() === "옵션 선택" || cartCount.val() === "") {
-			alert("옵션과 수량을 선택하세요.");
+			
+			$("#optionSelect").removeClass("fail")
+			$("#optionSelect").addClass("fail")
+			$(".fail-feedback").css("display","block")
+			
 			return;
 		}
 
 		var selectedCount = cartCount.val();
-		if (isNaN(selectedCount) || selectedCount === "") {
-			alert("수량을 숫자로 입력하세요.");
-			return;
-		}
+		
 
 		var selectedOptionText = optionSelect.find(":selected").text();
 		var selectedOptionDiv = $("<div class='optionList'></div>");
@@ -65,6 +66,10 @@
 
 		optionSelect.val("옵션 선택");
 		cartCount.val("1");
+		
+		$(".cartCount,.form-input").removeClass("fail")
+		$(".fail-feedback").css("display","none");
+		$(".fail2-feedback").css("display","none");
 	}
 
 	$(function() {
@@ -127,7 +132,7 @@
 			
 			
 			if ($(".hiddenSelect").val()==null) {
-				alert("옵션을 선택하세요.");
+				$(".fail2-feedback").css("display","block");
 				e.preventDefault();
 			}
 			
@@ -231,14 +236,16 @@
 								<option class="select" value="${optionList.productOptionNo}">${optionList.productOptionName}</option>
 							</c:forEach>
 						</select>
+							<div class="fail-feedback">옵션을 선택하세요</div>
 					</div>
 					<div class="row left ms-20">
 						<input type="number" min="1" id="cartCount"
 							class="cartCount form-input w-50" value="1">
-						<button class="btn" type="button" onclick="addSelectedOption();">
+						<button class="btn" type="button" onclick="addSelectedOption();" name="add">
 							옵션추가</button>
 						<div id="selectedOptions"></div>
 					</div>
+					<div class="fail2-feedback">옵션을 최소 하나이상 추가해주세요</div>
 					<div class="row ms-20">
 						<button class="btn w-100" name="action" value="order" type="submit">주문</button>
 					</div>	
@@ -268,7 +275,7 @@
 		<h3 class="col-3"><a class="link" href="#productDetail">상품상세</a></h3>
 		<h3 class="col-3"><a class="link" href="#reviewList">리뷰</a></h3>
 		<h3 class="col-3"><a class="link" href="#reviewList">상품문의</a></h3>
-
+		<a href="/cuddly/qna/write?productNo=${productDto.productNo}">문의하기</a>
 
 
 	</div>	

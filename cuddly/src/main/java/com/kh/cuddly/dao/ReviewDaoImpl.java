@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import com.kh.cuddly.VO.PaginationVO;
 import com.kh.cuddly.dto.AttachDto;
 import com.kh.cuddly.dto.ProductDto;
 import com.kh.cuddly.dto.ReviewDto;
@@ -83,29 +84,40 @@ public class ReviewDaoImpl implements ReviewDao{
 	}
 	
 	@Override
-	public List<ReviewInfoDto> selectMemberList(String memberId) {
+	public List<ReviewInfoDto> selectMemberList(String memberId,PaginationVO vo) {
 		
-//		String sql = "select r.*,rm.attach_no from "
-//				+ "review r left outer join "
-//				+ "review_image rm on r.review_no = rm.review_no"
-//				+ " order by r.review_no asc";
+		String sql = "select * from ("
+				+ "select rownum rn, TMP.* from ("
+				+"select * from review_info where member_id= ? order by review_date desc"
+				+ ")TMP"
+				+ ") where rn between ? and ?";
 		
-		String sql = "select * from review_info where member_id= ? order by review_date desc";
-		
-		Object[] data= {memberId};
+		Object[] data= {memberId,vo.getStartRow(), vo.getFinishRow()};
 		
 		return jdbcTemplate.query(sql, reviewInfoMapper,data);
 	}
 	
+	
 	@Override
-	public List<ReviewDto> memberList(String memberId) {
+	public List<ReviewDto> list(PaginationVO vo) {
 		
-		String sql = "select r.*,rm.attach_no from "
+//		String sql = "select r.*,rm.attach_no from "
+//				+ "review r left outer join "
+//				+ "review_image rm on r.review_no = rm.review_no"
+//				+ " order by r.review_no desc";
+		
+		String sql = "select * from ("
+				+ "select rownum rn, TMP.* from ("
+				+ "select r.*,rm.attach_no from "
 				+ "review r left outer join "
 				+ "review_image rm on r.review_no = rm.review_no"
-				+ " where member_id=? order by r.review_no asc";
+				+ " order by r.review_no desc"
+				+ ")TMP"
+				+ ") where rn between ? and ?";
 		
-		Object[] data = {memberId};
+		Object[] data = {vo.getStartRow(), vo.getFinishRow()};
+		
+	
 		
 		return jdbcTemplate.query(sql, reviewMapper,data);
 	}
@@ -194,6 +206,22 @@ public class ReviewDaoImpl implements ReviewDao{
 		
 		
 		
+	}
+	
+	@Override
+	public int countAllList(PaginationVO vo) {
+		String sql = "select count(*) from review_view";
+		
+		return jdbcTemplate.queryForObject(sql, int.class);
+	}
+	
+	@Override
+	public int countMemberList(PaginationVO vo,String memberId) {
+		String sql = "select count(*) from review_view where member_id=?";
+		
+		Object[] data = {memberId};
+		
+		return jdbcTemplate.queryForObject(sql, int.class,data);
 	}
 	
 	
