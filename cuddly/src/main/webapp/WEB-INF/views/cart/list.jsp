@@ -2,12 +2,6 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>장바구니 목록</title>
-</head>
 <style>
 
 	.card {
@@ -16,11 +10,7 @@
             border-radius: 0.2em;
         }
         
-        .row{
-        
-        padding: 0.5em 1em;
-        
-        }
+      
         
         
 
@@ -34,8 +24,18 @@
 			//전체선택과 개별체크박스에 대한 이벤트 구현
 			
 			$(".btn").click(function(e){
+				
+				if($("input[type=checkbox]:checked").length==0){
+					
+					e.preventDefault();
+					$(".fail-feedback").css("display","block")
+					
+					
+				}
+					
+				
 			
-				if($(this).val()=="delete"){
+				else if($(this).val()=="delete"){
 					 // 현재 폼의 action을 변경
 				    $(this).closest("form").attr("action", "/cuddly/orders/delete");
 
@@ -47,6 +47,7 @@
 				
 				
 			})
+			
 			
 			
 
@@ -132,10 +133,40 @@
 	<div class="row">
 		총 가격:<label class="total">0</label>원
 	</div>
+	<h1 class="fail-feedback">
+	선택된 상품이 없습니다.
+	</h1>
 	<button type="submit" class="btn">주문하기</button>
 	<button class="btn" value="delete">선택삭제</button>
 			</form>
 	</div>
+</div>
+	<div class="row page-navigator mv-30">
+    <!-- 이전 버튼 -->
+    <c:if test="${!vo.first}">
+        <a href="/cuddly/orders/cartList?${vo.getPrevQueryString()}"> <i
+            class="fa-solid fa-angle-left"></i>
+        </a>
+    </c:if>
+
+    <!-- 숫자 버튼 -->
+    <c:forEach var="i" begin="${vo.begin}" end="${vo.end}" step="1">
+        <c:choose>
+            <c:when test="${vo.page == i}">
+                <a class="on">${i}</a>
+            </c:when>
+            <c:otherwise>
+                <a href="/cuddly/orders/cartList?${vo.getQueryString(i)}">${i}</a>
+            </c:otherwise>
+        </c:choose>
+    </c:forEach>
+
+    <!-- 다음 버튼 -->
+    <c:if test="${!vo.last}">
+        <a href="/cuddly/orders/cartList?${vo.getNextQueryString()}"> <i
+            class="fa-solid fa-angle-right"></i>
+        </a>
+    </c:if>
 </div>
 
 

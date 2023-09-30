@@ -3,11 +3,10 @@
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 
 	<form action="write" method="post">
-	상품 번호<input type="text" name="productNo"><br><br>
-	회원 아이디<input type="text" name="memberId"><br><br>
-	문의 내용<input type="text" name="qnaContent"><br><br>
-	문의 답변<input type="text" name="qnaAnswer"><br><br>
-	<button>작성</button>
+	<input type="hidden" name="productNo" value="${productNo}"> 
+	<input type="hidden" name="memberId" value="${sessionScope.name}">
+	<div class="row">문의 내용<input type="text" name="qnaContent"></div>
+	<div class="row"><button>작성</button></div>
 	</form>
 
 </body>

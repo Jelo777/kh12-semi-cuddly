@@ -17,5 +17,7 @@ public class OrderDetailJoinDto {
 	private int ordersDetailCount;
 	private	Date ordersDate;
 	private String memberId;
+	private boolean reviewEx;
+	private int ordersPrice;
 
 }

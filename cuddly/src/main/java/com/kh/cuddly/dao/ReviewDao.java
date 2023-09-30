@@ -2,6 +2,7 @@ package com.kh.cuddly.dao;
 
 import java.util.List;
 
+import com.kh.cuddly.VO.PaginationVO;
 import com.kh.cuddly.dto.AttachDto;
 import com.kh.cuddly.dto.ProductDto;
 import com.kh.cuddly.dto.ReviewDto;
@@ -13,13 +14,16 @@ public interface ReviewDao {
 	int sequence();
 	void connect(int reviewNo, int attachNo);
 	AttachDto findImage(int reviewNo);
-	List<ReviewInfoDto> selectMemberList(String memberId);
+	List<ReviewInfoDto> selectMemberList(String memberId,PaginationVO vo);
 	float reviewAvg (int productNo);
-	List<ReviewDto> memberList(String memberId);
 	ProductDto productInfo(int productNo);
 	List<ReviewDto> selectListByProduct(int productNo);
 	boolean delete(int reviewNo);
 	ReviewDto selectOne(int reviewNo);
 	boolean update(ReviewDto reviewDto);
+	boolean checkReviewExistence(String memberId, int productNo);
+	List<ReviewDto> list(PaginationVO vo);
+	int countAllList(PaginationVO vo);
+	int countMemberList(PaginationVO vo,String memberId);
 
 }

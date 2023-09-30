@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.kh.cuddly.VO.PaginationVO;
 import com.kh.cuddly.dao.QnaDao;
 import com.kh.cuddly.dto.QnaDto;
 
@@ -23,7 +24,12 @@ public class QnaController {
 	QnaDao qnaDao;
 	
 	@GetMapping("/write")
-	public String write() {
+	public String write(HttpSession session,int productNo,Model model) {
+		
+		
+		model.addAttribute("productNo",productNo);
+		
+		
 		
 		return "/WEB-INF/views/qna/insert.jsp";
 	}
@@ -38,7 +44,7 @@ public class QnaController {
 		
 		qnaDao.insert(qnaDto);
 		
-		return "redirect:/cuddly/qna/write";
+		return "redirect:/cuddly/product/detail?productNo="+qnaDto.getProductNo();
 
 	}
 	
@@ -60,7 +66,18 @@ public class QnaController {
 		
 		qnaDao.update(qnaDto);
 		
-		return "redirect:/cuddly/qna/change?qnaNo="+qnaNo;
+		return "redirect:/cuddly/qna/memberList?memberId="+qnaDto.getMemberId();
+		
+	}
+	
+	@RequestMapping("/delete")
+	public String delete(int qnaNo,HttpSession session) {
+		
+		String memberId = (String) session.getAttribute("name");
+		
+		qnaDao.delete(qnaNo);
+		
+		return "redirect:/cuddly/qna/memberList?memberId="+memberId;
 		
 	}
 	
@@ -75,8 +92,18 @@ public class QnaController {
 	}
 	
 	@RequestMapping("/memberList")
-	public String memberList(Model model,String memberId) {
-		List<QnaDto> list = qnaDao.selectList();
+	public String memberList(Model model,HttpSession session,
+			@ModelAttribute(name = "vo") PaginationVO vo,String memberId) {
+		
+		memberId = (String) session.getAttribute("name");
+		
+		int count = qnaDao.countList(vo,memberId);
+		
+		vo.setCount(count);
+		vo.setSize(5);
+		
+		
+		List<QnaDto> list = qnaDao.memberList(memberId,vo);
 		
 		model.addAttribute("list",list);
 		

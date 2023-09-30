@@ -13,6 +13,24 @@ var optionList = [0];
 	optionList.push(${productOptionDto.productOptionStock});
 </c:forEach>
 
+function optionUpdate(){
+
+	var formData = $("#update").serialize();
+	
+	$.ajax({
+		url:'edit',
+		mothod:'post',
+		data : formData, 
+        dataType: 'text',
+        success: function(data){
+        	if(data != 'null'){
+        		alert("옵션 수정이 완료되었습니다.");
+        		location.reload();
+        	}
+        }
+	});
+}
+
 function changeOption(value){
 	
 	var getindex = value.selectedIndex;
@@ -20,6 +38,7 @@ function changeOption(value){
 	
 	var Myelement = document.getElementById("optionValue");
 	Myelement.value = getValue;
+	
 
 }
 
@@ -34,9 +53,12 @@ function addOption(){
         success: function (data) {
         	if(data == 'null'){
         		alert("옵션명이 없습니다");
-        	}else if(data == 'fail'){
+        	}
+        	else if(data == 'fail'){
         		alert("이미 등록 된 옵션입니다.");
-        	}else{
+        	}
+        	else{
+        		alert("옵션 등록이 완료되었습니다.");
         		location.reload();
         	}
         },
@@ -64,7 +86,7 @@ function addOption(){
 			<h3>${productDto.productPrice}</h3><br>
 		</div> 
 		
-	<form action="editUpdate" method="post" enctype="multipart/form-data">
+	<form id="update" onsubmit="return false();" action="editUpdate" method="post" enctype="multipart/form-data">
 		
 		<div class="flex-container w-100">
 			<input type="hidden" name="productNo" value="${productDto.productNo}">
@@ -85,7 +107,7 @@ function addOption(){
         	</div>
         	
         	<div class="row w-100" style="float:right">
-            	<button class="btn btn-positive" type="submit">옵션수정</button>
+            	<button class="btn btn-positive" type="submit" onclick="optionUpdate();">옵션수정</button>
         	</div>	
         </div>
 	</form>
