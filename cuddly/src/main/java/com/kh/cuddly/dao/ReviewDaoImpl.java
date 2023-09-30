@@ -196,7 +196,7 @@ public class ReviewDaoImpl implements ReviewDao{
 	@Override 
 	public boolean checkReviewExistence(String memberId, int productNo) {
 	
-		String sql = "select r.*,a.ATTACH_NO from review r join attach a on r.review_no=a.attach_no where r.member_id=? and r.product_no=?";
+		String sql = "select r.*,a.ATTACH_NO from review r LEFT OUTER join REVIEW_IMAGE ri ON r.REVIEW_NO = ri.REVIEW_NO LEFT OUTER JOIN attach a on ri.ATTACH_NO =a.attach_no where r.member_id=? and r.product_no=?";
 		
 		Object[] data= {memberId, productNo};
 		

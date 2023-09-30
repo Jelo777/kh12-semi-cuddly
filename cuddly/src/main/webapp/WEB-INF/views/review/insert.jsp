@@ -47,6 +47,24 @@
                     },
                 });
             });
+            
+            $(".star").click(function() {
+            	
+                var selectedRating = $(this).data("rating");
+                $("#reviewGrade").val(selectedRating);
+
+            	//solid/far가 채워진 거 regular/fas가 빈 거
+         
+                // 이전 별 아이콘들을 모두 solid로 변경
+                $(".star").removeClass("fas").addClass("far");
+
+                // 현재 별 아이콘과 그 이전 별 아이콘들을 solid로 변경
+                $(this).removeClass("far").addClass("fas");
+                $(this).prevAll(".star").removeClass("far").addClass("fas");
+            });
+
+            
+            
         });        
     </script>
 
@@ -72,21 +90,25 @@
 
 
 
-<form action="write" method="post" enctype="multipart/form-data">
-<!--	리뷰 이미지 : <input type="file" name="attach" accept="image/*"><br><br>-->
-	<input type="hidden" name="productNo" value="${productNo}">
-	별점 : <input type="text" name="reviewGrade"><br><br>
-	리뷰 내용 : <input type="text" name="reviewContent"><br><br>
-	<input type="file" class="file-chooser" name="attach" accept="image/*"><br><br>
-	<img class="now" src=" "
-                                                    width="200" height="200"><br><br>
-	<button class="btn-save">사진 등록</button><br><br>
-	
+  <form action="write" method="post" enctype="multipart/form-data">
+        <input type="hidden" name="productNo" value="${productNo}">
+        
+       <i class="star far fa-star yellow" data-rating="1"></i>
+<i class="star far fa-star yellow" data-rating="2"></i>
+<i class="star far fa-star yellow" data-rating="3"></i>
+<i class="star far fa-star yellow" data-rating="4"></i>
+<i class="star far fa-star yellow" data-rating="5"></i>
+<input type="hidden" name="reviewGrade" id="reviewGrade" value="0"> <!-- 초기값 -->
 
-	<button type="submit">리뷰 등록</button>
-
-
-</form>
+        
+        <br><br>
+        
+        <input type="text" name="reviewContent" placeholder="리뷰 내용"><br><br>
+        <input type="file" class="file-chooser" name="attach" accept="image/*"><br><br>
+        <img class="now" src="" width="200" height="200"><br><br>
+        <button class="btn-save">사진 등록</button><br><br>
+        <button type="submit">리뷰 등록</button>
+    </form>
 
 
 </body>
