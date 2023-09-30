@@ -90,21 +90,22 @@
 
   <form action="write" method="post" enctype="multipart/form-data">
         <input type="hidden" name="productNo" value="${productNo}">
-        
+        <h1>
        <i class="star far fa-star yellow" data-rating="1"></i>
 <i class="star far fa-star yellow" data-rating="2"></i>
 <i class="star far fa-star yellow" data-rating="3"></i>
 <i class="star far fa-star yellow" data-rating="4"></i>
 <i class="star far fa-star yellow" data-rating="5"></i>
 <input type="hidden" name="reviewGrade" id="reviewGrade" value="0"> <!-- 초기값 -->
-
+</h1>
         
        <div class="row">
         <textarea placeholder="리뷰 내용" name="reviewContent" class="form-input w-100" rows="4"></textarea>
         </div>
         <input type="file" class="form-input w-100 file-chooser" name="attach" accept="image/*"><br><br>
-        <img class="now" src="" width="200" height="200"><br><br>
-        <button class="btn-save">사진 등록</button><br><br>
+        <img class="now" src="" width="200" height="200">
+        <div class="row">
+        <button class="btn-save">사진 등록</button></div>
         <button type="submit">리뷰 등록</button>
     </form>
     </div>
