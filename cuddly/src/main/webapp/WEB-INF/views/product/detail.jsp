@@ -14,16 +14,15 @@
 
 		// 옵션 선택 여부 확인
 		if (optionSelect.val() === "옵션 선택" || cartCount.val() === "") {
-			
+
 			$("#optionSelect").removeClass("fail")
 			$("#optionSelect").addClass("fail")
-			$(".fail-feedback").css("display","block")
-			
+			$(".fail-feedback").css("display", "block")
+
 			return;
 		}
 
 		var selectedCount = cartCount.val();
-		
 
 		var selectedOptionText = optionSelect.find(":selected").text();
 		var selectedOptionDiv = $("<div class='optionList'></div>");
@@ -60,10 +59,10 @@
 
 		optionSelect.val("옵션 선택");
 		cartCount.val("1");
-		
+
 		$(".cartCount,.form-input").removeClass("fail")
-		$(".fail-feedback").css("display","none");
-		$(".fail2-feedback").css("display","none");
+		$(".fail-feedback").css("display", "none");
+		$(".fail2-feedback").css("display", "none");
 	}
 
 	$(function() {
@@ -115,12 +114,11 @@
 				});
 
 		$("[name=action]").click(function(e) {
-			var a= $(".hiddenSelect").val()==null;
-			if ($(".hiddenSelect").val()==null) {
-				$(".fail2-feedback").css("display","block");
+			var a = $(".hiddenSelect").val() == null;
+			if ($(".hiddenSelect").val() == null) {
+				$(".fail2-feedback").css("display", "block");
 				e.preventDefault();
-			}
-			else if ($(this).val() == "cart") {
+			} else if ($(this).val() == "cart") {
 				var userConfirmed = confirm("장바구니로 이동하시겠습니까?");
 				if (!userConfirmed) {
 					/*  $(document).ready(function() {
@@ -157,21 +155,23 @@
 	//등급별 가격 찍어주는 스크립트
 	$(function() {
 		$(".level").hide();
-		
-		var level=$("#memberLevel").val();
+
+		var level = $("#memberLevel").val();
 		var originPrice = $(".price").data("price");
 		var goldPrice = originPrice * 0.9;
 		var silverPrice = originPrice * 0.95;
 		var bronzePrice = originPrice;
-        
-        if(level=="골드") $(".price").text(goldPrice + "원");
-        else if(level=="실버") $(".price").text(silverPrice + "원");
-        else price = $(".price").text(bronzePrice + "원");
-		
-		
+
+		if (level == "골드")
+			$(".price").text(goldPrice + "원");
+		else if (level == "실버")
+			$(".price").text(silverPrice + "원");
+		else
+			price = $(".price").text(bronzePrice + "원");
+
 		$(".price-btn").click(function(e) {
-			$(".gold").text("골드 : " + goldPrice+ "원" );
-			$(".silver").text("실버 : " + silverPrice+ "원");
+			$(".gold").text("골드 : " + goldPrice + "원");
+			$(".silver").text("실버 : " + silverPrice + "원");
 			$(".bronze").text("브론즈 : " + bronzePrice + "원");
 			$(".level").show();
 		});
@@ -182,15 +182,33 @@
 
 	});
 </script>
+<script>
+	//상품문의 관련된 스크립트
+	$(function() {
+		$(".qna-write-form").hide();//문의작성란 숨겨놓기
+		$(".qna-answer").hide();//문의답변 숨겨놓기
+		
+		$(".qna-list").click(function() {
+			$(this).next(".qna-answer").show();
+		});
+
+		$(".qna-write").click(function() {
+			$(".qna-write-form").show();
+		});
+
+	});
+</script>
 <style>
-	.price-by-level{
-	        font-size: 24px;
-	        text-align: center;
-	        background-color: white;
-	        box-shadow: 0px 0px 1px 0px #2d3436;
-	    }
+.price-by-level {
+	font-size: 24px;
+	text-align: center;
+	background-color: white;
+	box-shadow: 0px 0px 1px 0px #2d3436;
+}
 </style>
 <input id="memberLevel" type="hidden" value="${sessionScope.level}">
+
+
 <div class="container w-900">
 	<div class="flex-container">
 		<div class="col-2">
@@ -208,13 +226,14 @@
 			<div class="row left ms-20">
 				<label style="font-size: 22px;">${creatorName}</label>
 			</div>
-			
+
 			<div class="row left ms-20 flex-container">
 				<div class="row w-50 left">
 					<h2 class="price" data-price="${productDto.productPrice}">가격</h2>
 				</div>
 				<div class="row w-50">
-					<label class="price-btn" style="box-shadow: 0px 0px 1px 0px #2d3436;">등급별 가격 확인</label>
+					<label class="price-btn"
+						style="box-shadow: 0px 0px 1px 0px #2d3436;">등급별 가격 확인</label>
 				</div>
 			</div>
 
@@ -246,13 +265,13 @@
 								<option class="select" value="${optionList.productOptionNo}">${optionList.productOptionName}</option>
 							</c:forEach>
 						</select>
-							<div class="fail-feedback">옵션을 선택하세요</div>
+						<div class="fail-feedback">옵션을 선택하세요</div>
 					</div>
 					<div class="row left ms-20">
 						<input type="number" min="1" id="cartCount"
 							class="cartCount form-input w-50" value="1">
-						<button class="btn" type="button" onclick="addSelectedOption();" name="add">
-							옵션추가</button>
+						<button class="btn" type="button" onclick="addSelectedOption();"
+							name="add">옵션추가</button>
 						<div id="selectedOptions"></div>
 					</div>
 					<div class="fail2-feedback">옵션을 최소 하나이상 추가해주세요</div>
@@ -273,13 +292,13 @@
 	<div id="productDetail"
 		class="flex-container form-input form-underline">
 		<h3 class="col-3">
-			<a class="link" href="#productDetail">상품상세</a>
+			<a class="link" href="#productDetail"><label class="purple">상품상세</label></a>
 		</h3>
 		<h3 class="col-3">
 			<a class="link" href="#reviewList">리뷰</a>
 		</h3>
 		<h3 class="col-3">
-			<a class="link" href="#reviewList">상품문의</a>
+			<a class="link" href="#qnaList">상품문의</a>
 		</h3>
 	</div>
 
@@ -289,12 +308,22 @@
 			width="100%" height="100%">
 	</div>
 
-	<div id="reviewList" class="flex-container form-input form-underline">
 
-		<h3 class="col-3"><a class="link" href="#productDetail">상품상세</a></h3>
-		<h3 class="col-3"><a class="link" href="#reviewList">리뷰</a></h3>
-		<h3 class="col-3"><a class="link" href="#reviewList">상품문의</a></h3>
-		<a href="/cuddly/qna/write?productNo=${productDto.productNo}">문의하기</a>
+
+	<div class="row left" id="reviewList">
+		<h2>리뷰</h2>
+	</div>
+	<div class="flex-container form-input form-underline">
+
+		<h3 class="col-3">
+			<a class="link" href="#productDetail">상품상세</a>
+		</h3>
+		<h3 class="col-3">
+			<a class="link" href="#reviewList"><label class="purple">리뷰</label></a>
+		</h3>
+		<h3 class="col-3">
+			<a class="link" href="#qnaList">상품문의</a>
+		</h3>
 
 	</div>
 
@@ -315,8 +344,28 @@
 		</div>
 	</c:forEach>
 
+	<div class="row left" id="qnaList">
+		<h2>Q&A</h2>
+	</div>
+	<div class="row right">
+		<button type="button" class="btn qna-write">문의하기</button>
+	</div>
 
-	<div id="qnaList" class="flex-container form-input form-underline">
+	<div class="row qna-write-form">
+		<form action="/cuddly/qna/write" method="post">
+			<input type="hidden" name="productNo" value="${productDto.productNo}">
+			<input type="hidden" name="memberId" value="${sessionScope.name}">
+			<div class="row">
+				<input class="form-input w-100" name="qnaContent"
+					placeholder="상품문의내용입력">
+			</div>
+			<div class="row">
+				<button class="btn btn-positive w-100">작성</button>
+			</div>
+		</form>
+	</div>
+
+	<div class="flex-container form-input form-underline">
 		<h3 class="col-3">
 			<a class="link" href="#productDetail">상품상세</a>
 		</h3>
@@ -324,25 +373,38 @@
 			<a class="link" href="#reviewList">리뷰</a>
 		</h3>
 		<h3 class="col-3">
-			<a class="link" href="#reviewList">상품문의</a>
+			<a class="link" href="#qnaList"><label class="purple">상품문의</label></a>
 		</h3>
 	</div>
 
-	<c:forEach var="qnaListDto" items="${qnaList}">
-		<div class="flex-container" style="border: 1px solid #636e72;">
-			<div class="w-25" style="padding: 1em;">
-				<img
-					src="/cuddly/image/product/main?productNo=${productDto.productNo}"
-					width="100%" height="100%">
-			</div>
-			<div class="w-75" style="padding: 1em;">
-				<div class="row left">${qnaListDto.qnaContent}
-					${qnaListDto.memberId}</div>
-				<div class="row left">${qnaListDto.qnaAnswer}</div>
-			</div>
-		</div>
-	</c:forEach>
-
+	<table class="table table-border">
+		<tr>
+			<th>답변상태</th>
+			<th>문의내용</th>
+			<th>작성자</th>
+			<th>작성일</th>
+		</tr>
+		<c:forEach var="qnaListDto" items="${qnaList}">
+			<tr class="qna-list">
+				<td><c:choose>
+						<c:when test="${qnaListDto.qnaAnswer==null}">
+						답변미완료
+					</c:when>
+						<c:otherwise>
+						답변완료
+					</c:otherwise>
+					</c:choose></td>
+				<td>${qnaListDto.qnaContent}</td>
+				<td>${qnaListDto.memberId}</td>
+				<td>${qnaListDto.qnaDate}</td>
+			</tr>
+			<c:if test="${qnaListDto.qnaAnswer!=null}">
+				<tr class="qna-answer">
+					<td colspan="4">${qnaListDto.qnaAnswer}</td>
+				</tr>
+			</c:if>
+		</c:forEach>
+	</table>
 
 </div>
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>

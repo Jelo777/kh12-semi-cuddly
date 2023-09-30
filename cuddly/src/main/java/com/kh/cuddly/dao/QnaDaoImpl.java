@@ -80,12 +80,8 @@ public class QnaDaoImpl implements QnaDao{
 
 	@Override
 	public List<QnaDto> selectList() {
-		
 		String sql = "select * from qna order by qna_date desc";
-		
 		List<QnaDto> list = jdbcTemplate.query(sql, qnaMapper);
-		
-		
 		return list;
 	}
 	
@@ -123,7 +119,7 @@ public class QnaDaoImpl implements QnaDao{
 	
 	@Override
 	public List<QnaDto> selectList(int productNo) {
-		String sql = "select * from qna where product_no = ?";
+		String sql = "select * from qna where product_no = ? order by qna_date desc";
 		Object[] data = {productNo};
 		return jdbcTemplate.query(sql, qnaMapper, data);
 	}

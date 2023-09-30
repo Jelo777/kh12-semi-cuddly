@@ -82,22 +82,16 @@ public class ProductController {
 			List<ProductDto> list = productDao.selectListByCreator(vo);
 			model.addAttribute("creatorDto", creatorDto);
 			model.addAttribute("list", list);
-			
-			System.out.println("count1 = " + vo.getCount());
 		}
 		else if(vo.isItem()) {
 			vo.setCount(productDao.countList(vo));
 			List<ProductDto> list = productDao.selectListByProductItem(vo);
 			model.addAttribute("list", list);
-			
-			System.out.println("count2 = " + vo.getCount());
 		}
 		else {
 			vo.setCount(productDao.countList(vo));
 			List<ProductDto> list = productDao.selectList(vo);
 			model.addAttribute("list", list);
-			
-			System.out.println("count3 = " + vo.getCount());
 		}
 		
 		return "/WEB-INF/views/product/list.jsp";
