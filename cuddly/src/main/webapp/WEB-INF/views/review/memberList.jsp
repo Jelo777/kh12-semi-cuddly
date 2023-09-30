@@ -3,34 +3,66 @@
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>  
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 
+<style>
+
+.card {
+	/* border: 1px solid #2d3436; */
+	box-shadow: 0px 0px 0px 1px black;
+	border-radius: 0.2em;
+}
+
+
+
+</style>
+
+
+
+
 <h1>나의 리뷰</h1>
 <c:forEach var="reviewDto" items="${list}">
-<div>
-	작성자 : ${reviewDto.memberId} / 별점 : ${reviewDto.reviewGrade} <br><br>
-	<c:choose>
+
+<div class="container w-700">
+			<div class="flex-container card">
+			<div class="row w-25">
+		<c:choose>
 	<c:when test="${reviewDto.image}">
-		<img src="/cuddly/image/review/image?reviewNo=${reviewDto.reviewNo}" width="200" height="200">
+		<img src="/cuddly/image/review/image?reviewNo=${reviewDto.reviewNo}" width="150" height="150">
 	</c:when>
 	<c:otherwise>
 		<img src="https://dummyimage.com/50x50/000/fff">
 	</c:otherwise>
 	</c:choose>
-	<br><br>리뷰 내용 : ${reviewDto.reviewContent}
-	<br><br>
-	<a href="/cuddly/product/detail?productNo=${reviewDto.productNo}"><img src="/cuddly/image/product/main?productNo=${reviewDto.productNo}" width="100" height="100"></a>
-	<br><br>
-	상품명:${reviewDto.productName}
-	<br><br>
-	크리에이터:${reviewDto.creatorName}
-	<br><br>
-	상품 가격 : ${reviewDto.productPrice}
-	
+	</div>
+	<div class="row w-75">
+	<div class="row left title">
+	상품명:${reviewDto.productName}  <span class="star-rating">
+                        <c:forEach var="i" begin="1" end="${reviewDto.reviewGrade}">
+                            <i class="fas fa-star yellow"></i>
+                        </c:forEach>
+                        <c:forEach var="i" begin="1" end="${5-reviewDto.reviewGrade}">
+                        <i class="far fa-star yellow"></i>
+                        </c:forEach>
+                    </span>
+	</div>
+	<hr>
+	<div class="row left">리뷰 내용 : ${reviewDto.reviewContent}
+	</div>
+	<!--<div class="row"><a href="/cuddly/product/detail?productNo=${reviewDto.productNo}"><img src="/cuddly/image/product/main?productNo=${reviewDto.productNo}" width="100" height="100"></a>
+	</div>
 	<div class="row">
+	크리에이터:${reviewDto.creatorName}
+	</div>
+	<div class="row">
+	상품 가격 : ${reviewDto.productPrice}
+	</div>  -->
+	<div class="row right">
 	<a href="/cuddly/review/edit?reviewNo=${reviewDto.reviewNo}">수정하기</a>
 	<a href="/cuddly/review/delete?reviewNo=${reviewDto.reviewNo}">삭제하기</a>
 	</div>
-	<hr>
 </div>
+</div>
+</div>
+
 </c:forEach>
 
 

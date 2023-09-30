@@ -11,9 +11,7 @@
 	border-radius: 0.2em;
 }
 
-.row {
-	padding: 0.5em 1em;
-}
+
 </style>
 
 
@@ -23,8 +21,7 @@
 
 $(function(){
 
-	
-	
+
 	
 })
 
@@ -62,22 +59,19 @@ $(function(){
 					<div class="row right">주문 날짜: ${detail.ordersDate}</div>
 					<div class="row left">총 주문 가격: ${detail.ordersPrice}원</div>
 					<div class="row right">
-					
-					
 					<c:choose>
 					<c:when test="${detail.two}">
 						<a href="/cuddly/orders/detail?ordersNo=${detail.ordersNo}">
 							외 ${detail.orderCount}건 더보기</a>
-					
 							</c:when>
-							
 					<c:otherwise>
-					
 					<c:if test="${!detail.reviewEx}">
 					<a href="/cuddly/review/write?productNo=${detail.productNo}">리뷰쓰기</a>
 					</c:if>
 					</c:otherwise>
 							</c:choose>
+							
+							
 					</div>
 				</div>
 				<hr>

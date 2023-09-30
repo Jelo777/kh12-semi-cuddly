@@ -47,6 +47,23 @@
                     },
                 });
             });
+            
+            
+			$(".star").click(function() {
+            	
+                var selectedRating = $(this).data("rating");
+                $("#reviewGrade").val(selectedRating);
+
+            	//solid/far가 채워진 거 regular/fas가 빈 거
+         
+                // 이전 별 아이콘들을 모두 solid로 변경
+                $(".star").removeClass("fas").addClass("far");
+
+                // 현재 별 아이콘과 그 이전 별 아이콘들을 solid로 변경
+                $(this).removeClass("far").addClass("fas");
+                $(this).prevAll(".star").removeClass("far").addClass("fas");
+            });
+            
         });        
     </script>
 
@@ -67,7 +84,6 @@
 							</div>
 						</div>
 					</div>
-</div>
 
 
 
@@ -76,9 +92,22 @@
 <!--	리뷰 이미지 : <input type="file" name="attach" accept="image/*"><br><br>-->
 	<input type="hidden" name="productNo" value="${reviewDto.productNo}">
 	<input type="hidden" name="reviewNo" value="${reviewDto.reviewNo}">
-	별점 : <input type="text" name="reviewGrade" value="${reviewDto.reviewGrade}"><br><br>
-	리뷰 내용 : <input type="text" name="reviewContent" value="${reviewDto.reviewContent}"><br><br>
-	<input type="file" class="file-chooser" name="attach" accept="image/*"><br><br>
+	
+	<h1>
+	<span class="star-rating">
+    <c:forEach var="i" begin="1" end="${reviewDto.reviewGrade}">
+    <i class="star fas fa-star yellow" data-rating="${i}"></i>
+     </c:forEach>
+     <c:forEach var="i" begin="${reviewDto.reviewGrade+1}" end="5">
+     <i class="star far fa-star yellow" data-rating="${i}"></i>
+     </c:forEach>
+     </span>
+     </h1>
+	<input type="hidden" name="reviewGrade" id="reviewGrade" value="${reviewDto.reviewGrade}"> <!-- 초기값 -->
+	<div class="row">
+	<textarea placeholder="리뷰 내용" name="reviewContent" class="form-input w-100" rows="4" >${reviewDto.reviewContent}</textarea>
+	</div>
+	<input type="file" class="form-input w-100 file-chooser" name="attach" accept="image/*"><br><br>
 	
 	<c:choose>
 	<c:when test="${reviewDto.image}">
@@ -98,8 +127,8 @@
 	
 
 
-
 </form>
+</div>
 
 
 

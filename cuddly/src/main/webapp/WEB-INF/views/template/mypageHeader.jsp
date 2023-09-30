@@ -136,22 +136,6 @@ $(document).ready(function() {
 	        			<div class="row left ms-20 mt-30">
 	        				<h2><a class="link" href="/cuddly/faq/list">공지사항</a></h2>
 	        			</div>        		
-        			
-        			
-        			
-        			
-        			
-        			
-        			
-        			
-        			
-        			
-        			
-        			
-        			
-        			
-        			
-        			
         		</div>
          	
          	</div>
@@ -221,7 +205,7 @@ $(document).ready(function() {
 					<h3><a class="link" href="/cuddly/member/mypage/wishlist">관심상품</a></h3>
 				</div>
 				<div class="row left">
-					<h3><a class="link" href="/cuddly/qna/memberList?memberId=${sessionScope.name}">상품문의</a></h3>
+					<h3><a class="link" href="/cuddly/qna/memberList">상품문의</a></h3>
 				</div>
 				
 				<div>

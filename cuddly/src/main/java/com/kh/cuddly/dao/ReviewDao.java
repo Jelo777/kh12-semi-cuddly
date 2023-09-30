@@ -22,7 +22,7 @@ public interface ReviewDao {
 	ReviewDto selectOne(int reviewNo);
 	boolean update(ReviewDto reviewDto);
 	boolean checkReviewExistence(String memberId, int productNo);
-	List<ReviewDto> list(PaginationVO vo);
+	List<ReviewInfoDto> list(PaginationVO vo);
 	int countAllList(PaginationVO vo);
 	int countMemberList(PaginationVO vo,String memberId);
 

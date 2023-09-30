@@ -60,7 +60,7 @@ public class FaqController {
 	   
 	    
 	    if (category != null && !category.isEmpty()) {
-	        list = faqDao.selectCategory(category);
+	        list = faqDao.selectCategory(vo, category);
 	    } else if (keyword != null && !keyword.isEmpty()) {
 	        list = faqDao.selectListByTitle(keyword);
 	    } else {

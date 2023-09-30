@@ -27,6 +27,17 @@
 	padding:0.5em;
 
 }
+.card {
+	/* border: 1px solid #2d3436; */
+	box-shadow: 0px 0px 0px 1px black;
+	border-radius: 0.2em;
+}
+.last{
+
+	margin-top: 0px;
+}
+
+
 </style>
 
 <script>
@@ -113,65 +124,63 @@
 </script>
 
 
-	<h1>주문할 상품 정보</h1>
+	<h1>주문</h1>
 
-
-<br>
-<br>
-<h4>주문자정보</h4>
+<div class="container w-600">
+<h3 class="row left">주문자정보</h3>
 <br>
 
 <div class="row">
 	<label>이름: </label> ${memberDto.memberName}
 </div>
+<hr>
 <div class="row">
 	<label>이메일: </label> ${memberDto.memberEmail}
 </div>
+<hr>
 <div class="row">
 	<label>전화번호: </label> ${memberDto.memberContact}
 </div>
 
-<br>
-<br>
 
+
+
+	
+	
+
+	<h3 class="row left"> 배송지 정보</h3>
 <form action="insert" method="post">
-
-<div class="container w-700 addrBox">
-
-	<h1>배송지 정보</h1>
-	
-	
-
+<div class="container w-600 addrBox">
 <div class="row right">
 	<button type ="button" class="btn btn-positive w-200 btn-addressList">배송지 목록</button></div>
 
 
 	<div class="row">
-		<input type="hidden" class="no form-input" name ="addrNo" value="" placeholder="번호" readonly>
+		<input type="hidden" class="no form-input" name ="addrNo" value="${addressDto.addressNo}" placeholder="번호" readonly>
 	</div>
 
 	<div class="row">
-		<input class="name form-input"  value="" placeholder="수령인" readonly>
+		<input class="name form-input"  value="${addressDto.addressName}" placeholder="수령인" readonly>
 	</div>
 
 	<div class="row">
-		<input class="contact form-input" value="" placeholder="연락처" readonly>
+		<input class="contact form-input" value="${addressDto.addressContact}" placeholder="연락처" readonly>
 	</div>
 
 	<div class="row">
-		<input class="post form-input" value="" placeholder="우편번호" readonly>
+		<input class="post form-input" value="${addressDto.addressPost}" placeholder="우편번호" readonly>
 	</div>
 
 	<div class="row">
-		<input class="addr1 form-input" value="" placeholder="기본주소" readonly>
+		<input class="addr1 form-input" value="${addressDto.addressAddr1}" placeholder="기본주소" readonly>
 	</div>
 
 	<div class="row">
-		<input class="addr2 form-input" value="" placeholder="상세주소" readonly>
+		<input class="addr2 form-input" value="${addressDto.addressAddr2}" placeholder="상세주소" readonly>
 	</div>
 
 	<div class="row">
-		<input class="coment form-input"  name="addrComent" value="" placeholder="요청사항">
+		<input class="coment form-input"  name="addrComent" value="${addressDto.addressComent}" placeholder="요청사항">
 	</div>
 	<h1 class="row fail-feedback">배송지를 선택해주세요.</h1>
 	</div>
@@ -208,44 +217,40 @@
 	<!--         </div> -->
 	<!--          <br><br> -->
 
-
-	<h1>주문할 상품 정보</h1>
+	
+	<h3 class="row left">주문할 상품 정보</h3>
 
 	<c:forEach var="product" items="${ordersProductDto}" varStatus="loop">
+	<div class="row container w-600 card">
+	<div class="flex-container">
+		<div class="row w-30">
 		<input type="hidden" name="details[${loop.index}].optionNo"
 			value="${product.productOptionNo}">
 		<input type="hidden" name="cartNo" value="${product.cartNo}">
-		<div class="row">
 			<img src="/cuddly/image/product/main?productNo=${product.productNo}"
 				width="200" height="200"> <input type="hidden"
 				name="details[${loop.index}].productNo" value="${product.productNo}">
 		</div>
-
-		<div class="row">
+		<div class="w-75">
+		<div class="row left title">
 			<label>상품 이름:</label>${product.productName}
 		</div>
-
-		<div class="row">
+		<div class="row left">
 			<label>크리에이터:</label>${product.creatorName}
 		</div>
-
-		<div class="row">
-			<label>상품 가격:</label>${product.productPrice}
+		<hr>
+		<div class="row left">
+			<label>상품 가격:</label>${product.cartPrice}
 		</div>
-
-		<div class="row">
-			<label>옵션:</label>${product.productOptionName}
 		</div>
-
-		<div class="row">
-			<label>수량:</label>${product.cartCount} <input type="hidden"
+		</div>
+		<div class="row left last">
+			<label>옵션:</label>${product.productOptionName} / <label>수량:</label>${product.cartCount} <input type="hidden"
 				name="details[${loop.index}].ordersDetailCount"
 				value="${product.cartCount}">
 		</div>
-		<br>
-		<br>
+		</div>
 	</c:forEach>
-
 
 
 	<div class="row">
@@ -256,7 +261,6 @@
 		<h1>결제 정보</h1>
 	</div>
 
-	<input type="hidden" name="addressNo" value="${addressDto.addressNo}">
 	<input type="hidden" name="ordersPrice" value="${total}">결제
 	금액:${total}
 
@@ -271,7 +275,9 @@
 
 
 	<button class="btn btn-order">주문하기</button>
+	
 </form>
+</div>
 
 
 

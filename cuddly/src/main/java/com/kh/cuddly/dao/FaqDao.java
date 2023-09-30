@@ -18,10 +18,10 @@ public interface FaqDao {
 	boolean update(FaqDto faqDto);
 	boolean delete(int faqNo);
 	List<FaqDto> selectList(String category, String keyword);
-	List<FaqDto> selectCategory(String category);
+	List<FaqDto> selectCategory(FaqlistVO vo, String category);
 	int countList(FaqlistVO vo);
 	List<FaqDto> selectListByPage(FaqlistVO vo);
 	List<FaqDto> selectListByTitle(String keyword);
-	List<FaqDto> selectList2(int faqNo);
+
 	
 }

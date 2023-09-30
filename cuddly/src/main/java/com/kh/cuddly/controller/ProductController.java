@@ -83,6 +83,11 @@ public class ProductController {
 			model.addAttribute("creatorDto", creatorDto);
 			model.addAttribute("list", list);
 		}
+		else if(vo.isItem()) {
+			vo.setCount(productDao.countList(vo));
+			List<ProductDto> list = productDao.selectListByProductItem(vo);
+			model.addAttribute("list", list);
+		}
 		else {
 			vo.setCount(productDao.countList(vo));
 			List<ProductDto> list = productDao.selectList(vo);

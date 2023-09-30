@@ -99,19 +99,25 @@ public class ReviewDaoImpl implements ReviewDao{
 	
 	
 	@Override
-	public List<ReviewDto> list(PaginationVO vo) {
+	public List<ReviewInfoDto> list(PaginationVO vo) {
 		
 //		String sql = "select r.*,rm.attach_no from "
 //				+ "review r left outer join "
 //				+ "review_image rm on r.review_no = rm.review_no"
 //				+ " order by r.review_no desc";
 		
+//		String sql = "select * from ("
+//				+ "select rownum rn, TMP.* from ("
+//				+ "select r.*,rm.attach_no from "
+//				+ "review r left outer join "
+//				+ "review_image rm on r.review_no = rm.review_no"
+//				+ " order by r.review_no desc"
+//				+ ")TMP"
+//				+ ") where rn between ? and ?";
+		
 		String sql = "select * from ("
 				+ "select rownum rn, TMP.* from ("
-				+ "select r.*,rm.attach_no from "
-				+ "review r left outer join "
-				+ "review_image rm on r.review_no = rm.review_no"
-				+ " order by r.review_no desc"
+				+ "review_all_list"
 				+ ")TMP"
 				+ ") where rn between ? and ?";
 		
@@ -119,7 +125,7 @@ public class ReviewDaoImpl implements ReviewDao{
 		
 	
 		
-		return jdbcTemplate.query(sql, reviewMapper,data);
+		return jdbcTemplate.query(sql, reviewInfoMapper,data);
 	}
 	
 	@Override
@@ -147,7 +153,7 @@ public class ReviewDaoImpl implements ReviewDao{
 		return list.isEmpty() ? null: list.get(0);
 	}
 	
-	@Override
+	@Override 
 	public List<ReviewDto> selectListByProduct(int productNo) {
 		String sql = "SELECT r.*, rm.attach_no "
 					+ "FROM review r LEFT OUTER JOIN review_image rm "
@@ -185,9 +191,9 @@ public class ReviewDaoImpl implements ReviewDao{
 	@Override
 	public boolean update(ReviewDto reviewDto) { 
 		
-		String sql = "update review set review_content=? where review_no=?";
+		String sql = "update review set review_grade=?,review_content=? where review_no=?";
 		
-		Object[] data = {reviewDto.getReviewContent(),reviewDto.getReviewNo()};
+		Object[] data = {reviewDto.getReviewGrade(),reviewDto.getReviewContent(),reviewDto.getReviewNo()};
 		
 		
 		return jdbcTemplate.update(sql,data)>0;
@@ -196,7 +202,7 @@ public class ReviewDaoImpl implements ReviewDao{
 	@Override 
 	public boolean checkReviewExistence(String memberId, int productNo) {
 	
-		String sql = "select r.*,a.ATTACH_NO from review r join attach a on r.review_no=a.attach_no where r.member_id=? and r.product_no=?";
+		String sql = "select r.*,a.ATTACH_NO from review r LEFT OUTER join REVIEW_IMAGE ri ON r.REVIEW_NO = ri.REVIEW_NO LEFT OUTER JOIN attach a on ri.ATTACH_NO =a.attach_no where r.member_id=? and r.product_no=?";
 		
 		Object[] data= {memberId, productNo};
 		

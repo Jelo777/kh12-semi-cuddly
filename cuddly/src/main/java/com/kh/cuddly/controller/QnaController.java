@@ -23,29 +23,12 @@ public class QnaController {
 	@Autowired
 	QnaDao qnaDao;
 	
-	@GetMapping("/write")
-	public String write(HttpSession session,int productNo,Model model) {
-		
-		
-		model.addAttribute("productNo",productNo);
-		
-		
-		
-		return "/WEB-INF/views/qna/insert.jsp";
-	}
-	
-	@PostMapping("/write")
-	public String write(@ModelAttribute QnaDto qnaDto,
-			HttpSession session) {
-		
+	@RequestMapping("/write")
+	public String write(@ModelAttribute QnaDto qnaDto) {
 		int qnaNo = qnaDao.sequence();
-		
 		qnaDto.setQnaNo(qnaNo);
-		
 		qnaDao.insert(qnaDto);
-		
-		return "redirect:/cuddly/product/detail?productNo="+qnaDto.getProductNo();
-
+		return "redirect:/cuddly/product/detail?productNo="+qnaDto.getProductNo() + "#qnaList";
 	}
 	
 	@GetMapping("/change")
@@ -93,9 +76,9 @@ public class QnaController {
 	
 	@RequestMapping("/memberList")
 	public String memberList(Model model,HttpSession session,
-			@ModelAttribute(name = "vo") PaginationVO vo,String memberId) {
+			@ModelAttribute(name = "vo") PaginationVO vo) {
 		
-		memberId = (String) session.getAttribute("name");
+		String memberId = (String) session.getAttribute("name");
 		
 		int count = qnaDao.countList(vo,memberId);
 		

@@ -109,14 +109,12 @@
         </select>
         <input type="search" name="keyword" required placeholder="검색어 입력" value="${param.keyword}">
         <button type="submit">검색</button>
+        
+        
     </div>
 </form>
 
-  <div class="row right">
-            <button type="submit" class="btn btn-positive">
-            	<i class="fa-solid fa-pen"></i>
-            	작성
-           	</button>
+  
 
 
 
