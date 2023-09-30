@@ -93,9 +93,9 @@ public class QnaController {
 	
 	@RequestMapping("/memberList")
 	public String memberList(Model model,HttpSession session,
-			@ModelAttribute(name = "vo") PaginationVO vo,String memberId) {
+			@ModelAttribute(name = "vo") PaginationVO vo) {
 		
-		memberId = (String) session.getAttribute("name");
+		String memberId = (String) session.getAttribute("name");
 		
 		int count = qnaDao.countList(vo,memberId);
 		

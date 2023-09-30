@@ -191,6 +191,8 @@
 	    }
 </style>
 <input id="memberLevel" type="hidden" value="${sessionScope.level}">
+
+
 <div class="container w-900">
 	<div class="flex-container">
 		<div class="col-2">
@@ -269,9 +271,8 @@
 		</div>
 	</div>
 
-
-	<div id="productDetail"
-		class="flex-container form-input form-underline">
+ 
+	<div id="productDetail" class="flex-container form-input form-underline">
 		<h3 class="col-3">
 			<a class="link" href="#productDetail">상품상세</a>
 		</h3>
@@ -279,7 +280,7 @@
 			<a class="link" href="#reviewList">리뷰</a>
 		</h3>
 		<h3 class="col-3">
-			<a class="link" href="#reviewList">상품문의</a>
+			<a class="link" href="#qnaList">상품문의</a>
 		</h3>
 	</div>
 
@@ -289,12 +290,16 @@
 			width="100%" height="100%">
 	</div>
 
-	<div id="reviewList" class="flex-container form-input form-underline">
+
+
+	<div class="row left" id="reviewList">
+		<h2>리뷰</h2>
+	</div>
+	<div class="flex-container form-input form-underline">
 
 		<h3 class="col-3"><a class="link" href="#productDetail">상품상세</a></h3>
 		<h3 class="col-3"><a class="link" href="#reviewList">리뷰</a></h3>
-		<h3 class="col-3"><a class="link" href="#reviewList">상품문의</a></h3>
-		<a href="/cuddly/qna/write?productNo=${productDto.productNo}">문의하기</a>
+		<h3 class="col-3"><a class="link" href="#qnaList">상품문의</a></h3>
 
 	</div>
 
@@ -315,8 +320,13 @@
 		</div>
 	</c:forEach>
 
-
-	<div id="qnaList" class="flex-container form-input form-underline">
+	<div class="row left"  id="qnaList">
+		<h2>Q&A</h2>
+	</div>
+	<div class="row left">
+		<a class="link" href="/cuddly/qna/write?productNo=${productDto.productNo}">문의하기</a>
+	</div>
+	<div class="flex-container form-input form-underline">
 		<h3 class="col-3">
 			<a class="link" href="#productDetail">상품상세</a>
 		</h3>
@@ -324,7 +334,7 @@
 			<a class="link" href="#reviewList">리뷰</a>
 		</h3>
 		<h3 class="col-3">
-			<a class="link" href="#reviewList">상품문의</a>
+			<a class="link" href="#qnaList">상품문의</a>
 		</h3>
 	</div>
 
@@ -342,7 +352,6 @@
 			</div>
 		</div>
 	</c:forEach>
-
 
 </div>
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
