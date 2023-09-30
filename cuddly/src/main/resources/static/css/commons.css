@@ -723,3 +723,11 @@ textarea.form-input.fixed {
             background: white;
             padding: 20px;
         }
+        
+ /* 카드형식 테두리 */
+ .card{
+    border: 1px solid #2d3436;
+    border-radius: 10px;
+    padding-top: 12px;
+    padding-bottom: 5px;
+}
