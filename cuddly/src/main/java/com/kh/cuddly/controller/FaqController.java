@@ -52,14 +52,15 @@ public class FaqController {
 	                      @RequestParam(required = false) String category,
 	                      @RequestParam(required = false) String keyword,
 	                      Model model) {
+
 	    int count = faqDao.countList(vo);
 	    vo.setCount(count);
 
 	    List<FaqDto> list;
-	 
+	   
 	    
-	    if (category != null && !category.isEmpty()) {//카테고리별 목
-	        list = faqDao.selectCategory(vo,category);
+	    if (category != null && !category.isEmpty()) {
+	        list = faqDao.selectCategory(vo, category);
 	    } else if (keyword != null && !keyword.isEmpty()) {
 	        list = faqDao.selectListByTitle(keyword);
 	    } else {

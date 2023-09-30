@@ -89,6 +89,7 @@ public class FaqDaoImpl implements FaqDao{
 	@Override
 	public List<FaqDto> selectCategory(FaqlistVO vo, String category) {
 		
+		
 		String sql = "select * from ("
 				+ "select rownum rn, TMP.* from ("
 				+ "select * from faq where faq_category = ? "
