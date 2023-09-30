@@ -162,21 +162,25 @@
 	$(function() {
 		$(".level").hide();
 		
-		var level = ${sessionScope.level};
-		var price = $(".price").data("price");
-
+		var level=$("#memberLevel").val();
+		var originPrice = $(".price").data("price");
+		var goldPrice = originPrice * 0.9;
+		var silverPrice = originPrice * 0.95;
+		var bronzePrice = originPrice;
+        
+        if(level=="골드") $(".price").text(goldPrice + "원");
+        else if(level=="실버") $(".price").text(silverPrice + "원");
+        else price = $(".price").text(bronzePrice + "원");
 		
-		$(".price").text(level + " : " + price + "원");
 		
-		
-		$(".price").hover(function(e) {
-			$(".gold").text("골드 : " + price * 90 / 100 + "원" );
-			$(".silver").text("실버 : " + price * 95 / 100 + "원");
-			$(".bronze").text("브론즈 : " + price + "원");
+		$(".price-btn").click(function(e) {
+			$(".gold").text("골드 : " + goldPrice+ "원" );
+			$(".silver").text("실버 : " + silverPrice+ "원");
+			$(".bronze").text("브론즈 : " + bronzePrice + "원");
 			$(".level").show();
 		});
 
-		$(".price").mouseleave(function() {
+		$(".price-btn").mouseleave(function() {
 			$(".level").hide();
 		});
 
@@ -190,7 +194,7 @@
 	        box-shadow: 0px 0px 1px 0px #2d3436;
 	    }
 </style>
-
+<input id="memberLevel" type="hidden" value="${sessionScope.level}">
 <div class="container w-900">
 	<div class="flex-container">
 		<div class="col-2">
@@ -209,11 +213,16 @@
 				<label style="font-size: 22px;">${creatorName}</label>
 			</div>
 			
-			<div class="row left ms-20">
-				<h2 class="price" data-price="${productDto.productPrice}">가격</h2>
+			<div class="row left ms-20 flex-container">
+				<div class="row w-50 left">
+					<h2 class="price" data-price="${productDto.productPrice}">가격</h2>
+				</div>
+				<div class="row w-50">
+					<label class="price-btn" style="box-shadow: 0px 0px 1px 0px #2d3436;">등급별 가격 확인</label>
+				</div>
 			</div>
 
-			<div class="price-by-level">
+			<div class="price-by-level m-20">
 				<div class="row">
 					<label class="level gold">골드</label>
 				</div>
