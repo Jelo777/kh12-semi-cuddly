@@ -434,27 +434,25 @@ public class AdminController {
 	                      @RequestParam(required = false) String category,
 	                      @RequestParam(required = false) String keyword,
 	                      Model model) {
+		   int count = faqDao.countList(vo);
+		    vo.setCount(count);
 
-	    int count = faqDao.countList(vo);
-	    vo.setCount(count);
+		    List<FaqDto> list;
+		 
+		    
+		    if (category != null && !category.isEmpty()) {//카테고리별 목
+		        list = faqDao.selectCategory(vo,category);
+		    } else if (keyword != null && !keyword.isEmpty()) {
+		        list = faqDao.selectListByTitle(keyword);
+		    } else {
+		        list = faqDao.selectListByPage(vo);
+		    }
 
-	    List<FaqDto> list;
-	   
+		    model.addAttribute("list", list);
+		    
+		    
 
-	    if (category != null && !category.isEmpty()) {
-	        list = faqDao.selectCategory(category);
-	    } else if (keyword != null && !keyword.isEmpty()) {
-	        list = faqDao.selectListByTitle(keyword);
-	    } else {
-	        list = faqDao.selectListByPage(vo);
-	    }
-
-	    model.addAttribute("list", list);
-
-	    return "/WEB-INF/views/admin/faq/list.jsp";
-	}
+		    return "/WEB-INF/views/admin/faq/list.jsp";
+		}
 }
-
-
-
 
