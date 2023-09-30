@@ -114,10 +114,10 @@ public class ReviewController {
 		int count = reviewDao.countAllList(vo);
 		
 		vo.setCount(count);
-		vo.setSize(5);
+		vo.setSize(6);
 		
 		
-		List<ReviewDto> list = reviewDao.list(vo);
+		List<ReviewInfoDto> list = reviewDao.list(vo);
 		
 		
 		model.addAttribute("list",list);

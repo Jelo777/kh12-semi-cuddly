@@ -3,15 +3,35 @@
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>  
 <jsp:include page="/WEB-INF/views/template/mypageHeader.jsp"></jsp:include>
  
+ <style>
+.card {
+	/* border: 1px solid #2d3436; */
+	box-shadow: 0px 0px 0px 1px black;
+	border-radius: 0.2em;
+}
+
+.link{
+ margin-top: 150px;}
+
+
+</style>
+ 
+ 
  <div class="row"><h1>나의 문의</h1></div>
  <c:forEach var="qnaDto" items="${list}">
-<div class="row">
+<div class="container w-600">
+			<div class="flex-container card">
+				<div class="row w-50">
 	<a href="/cuddly/product/detail?productNo=${qnaDto.productNo}">
-	<button type="button"><img src="/cuddly/image/product/main?productNo=${qnaDto.productNo}" width="200" height="200"></button></a></div>
-	
-	<div class="row">작성자 : ${qnaDto.memberId}</div>
-	<div class="row">문의 내용 : ${qnaDto.qnaContent}</div>
-	<div class="row">
+	<button type="button">
+	<img src="/cuddly/image/product/main?productNo=${qnaDto.productNo}" width="200" height="200">
+	</button></a>
+	</div>
+	<div class="w-75">
+	<div class="row left title">
+	문의 내용 : ${qnaDto.qnaContent} </div>
+	<hr>
+	<div class="row left">
 	<c:choose>
     <c:when test="${qnaDto.qnaAnswer != null}">
        
@@ -23,15 +43,18 @@
     </c:otherwise>
 </c:choose>
 </div>
-<div class="row right">
-작성일자 : ${qnaDto.qnaDate}
-</div>
-	<div class="row">
+<div class="row right link">
 	<a href="/cuddly/qna/change?qnaNo=${qnaDto.qnaNo}">수정하기</a>
 	<a href="/cuddly/qna/delete?qnaNo=${qnaDto.qnaNo}">삭제하기</a>
 	</div>
+	
+	</div>
+</div>
+</div>
+<div class="row right">
+작성일자 : ${qnaDto.qnaDate}
+</div>
 
-	<hr>
 
 </c:forEach>
 

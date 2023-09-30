@@ -343,20 +343,14 @@ public class OrdersController {
 		
 		List<OrderDetailJoinDto2> list = ordersDao.selectListOrders2(vo,memberId);
 		
-
+		
 		for(OrderDetailJoinDto2 dto : list) {
-			
-			
 			dto.setReviewEx(reviewDao.checkReviewExistence(memberId, dto.getProductNo()));
-			
 		}
 		
 		
-
+		
 		model.addAttribute("list", list);
-		
-		
-		
 		return "/WEB-INF/views/orders/list.jsp";
 	}
 	
