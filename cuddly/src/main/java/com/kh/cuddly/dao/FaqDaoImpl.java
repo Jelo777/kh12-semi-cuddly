@@ -54,8 +54,7 @@ public class FaqDaoImpl implements FaqDao{
 	
 	@Override
 	public List<FaqDto> selectList() {
-		String sql = "select faq_no, faq_id, faq_title, faq_content, faq_date, faq_category "
-				+ "from faq order by faq_no desc";
+		String sql = "select * from faq order by faq_no desc";
 		return jdbcTemplate.query(sql, faqListMapper);
 	}
 
@@ -88,11 +87,18 @@ public class FaqDaoImpl implements FaqDao{
 
 
 	@Override
-	public List<FaqDto> selectCategory(String faqCategory) {
-		String sql = "select * from faq where faq_category = ?";
-		Object[] data = {faqCategory};
+	public List<FaqDto> selectCategory(FaqlistVO vo, String category) {
+		
+		String sql = "select * from ("
+				+ "select rownum rn, TMP.* from ("
+				+ "select * from faq where faq_category = ? "
+				+ "order by faq_no desc"
+				+ ")TMP"
+				+ ") where rn between ? and ?";
+		Object[] data = {category, vo.getStartRow(), vo.getFinishRow()};
 		return jdbcTemplate.query(sql, faqMapper, data);
 	}
+	
 	
 	@Override
 	public int countList(FaqlistVO vo) {
@@ -127,6 +133,7 @@ public class FaqDaoImpl implements FaqDao{
 			String sql = "select * from ("
 								+ "select rownum rn, TMP.* from ("
 								+ "select * from faq where faq_category =? "
+								+ "order by faq_no desc"
 								+ ")TMP"
 							+ ") where rn between ? and ?";
 			Object[] data = {vo.getCategory(), vo.getStartRow(), vo.getFinishRow()};
@@ -136,6 +143,7 @@ public class FaqDaoImpl implements FaqDao{
 			String sql = "select * from ("
 							+ "select rownum rn, TMP.* from ("
 							+ "select * from faq "
+							+ "order by faq_no desc"
 							+ ")TMP"
 						+ ") where rn between ? and ?";
 			Object[] data = {vo.getStartRow(), vo.getFinishRow()};
@@ -151,13 +159,7 @@ public class FaqDaoImpl implements FaqDao{
 	}
 
 
-	@Override
-	public List<FaqDto> selectList2(int faqNo) {
-		String sql = "SELECT * FROM faq ORDER BY faq_no ASC";
-		return jdbcTemplate.query(sql, faqListMapper);
-	}
-
-	
-
 }
+
+
 	
