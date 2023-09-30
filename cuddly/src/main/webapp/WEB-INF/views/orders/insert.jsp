@@ -230,7 +230,7 @@
 		</div>
 
 		<div class="row">
-			<label>상품 가격:</label>${product.productPrice}
+			<label>상품 가격:</label>${product.cartPrice}
 		</div>
 
 		<div class="row">

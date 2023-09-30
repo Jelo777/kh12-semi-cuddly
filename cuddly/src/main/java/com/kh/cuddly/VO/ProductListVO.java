@@ -11,6 +11,7 @@ public class ProductListVO {
 	private String target="product_no";
 	private String keyword;
 	private String creator;
+	private String item;
 	private int page = 1;//현재 페이지 번호(기본:1)
 	private int size = 8;//보여줄 상품 개수(기본:8)
 	private int count;//전체 글 수
@@ -22,6 +23,10 @@ public class ProductListVO {
 	
 	public boolean isCreator() {
 		return creator != null;
+	}
+	
+	public boolean isItem() {
+		return item != null;
 	}
 	
 	public int getBegin() {
@@ -50,6 +55,12 @@ public class ProductListVO {
 		else if(isCreator()) {
 			return "target="+target+"&sort="+sort+"&creator="+creator+"&page="+(getBegin()-1)+"&size="+size;
 		}
+		else if(isItem()) {
+			return "target="+target+"&sort="+sort+"&item="+item+"&page="+(getBegin()-1)+"&size="+size;
+		}
+		else if(isItem() && keyword!=null) {
+			return "target="+target+"&sort="+sort+"&item="+item+"&keyword="+keyword+"&page="+(getBegin()-1)+"&size="+size;
+		}
 		else {
 			return "target="+target+"&sort="+sort+"&page="+(getBegin()-1)+"&size="+size;
 		}
@@ -61,6 +72,12 @@ public class ProductListVO {
 		}
 		else if(isCreator()) {
 			return "target="+target+"&sort="+sort+"&creator="+creator+"&page="+(getEnd()+1)+"&size="+size;
+		}
+		else if(isItem()) {
+			return "target="+target+"&sort="+sort+"&item="+ item+"&page="+(getEnd()+1)+"&size="+size;
+		}
+		else if(isItem() && keyword!=null) {
+			return "target="+target+"&sort="+sort+"&item="+ item+"&keyword="+keyword+"&page="+(getEnd()+1)+"&size="+size;
 		}
 		else {
 			return "target="+target+"&sort="+sort+"&page="+(getEnd()+1)+"&size="+size;
@@ -74,6 +91,12 @@ public class ProductListVO {
 		else if(isCreator()) {
 			return "target="+target+"&sort="+sort+"&creator="+creator+"&page="+page+"&size="+size;
 		}
+		else if(isItem()) {
+			return "target="+target+"&sort="+sort+"&item="+item+"&page="+page+"&size="+size;
+		}
+		else if(isItem()&&keyword!=null) {
+			return "target="+target+"&sort="+sort+"&item="+item+"&keyword="+keyword+"&page="+page+"&size="+size;
+		}
 		else {
 			return "target="+target+"&sort="+sort+"&page="+page+"&size="+size;
 		}
@@ -85,6 +108,12 @@ public class ProductListVO {
 		}
 		else if(isCreator()) {
 			return "target=product_price&sort=asc&creator="+creator+"&page="+page+"&size="+size;
+		}
+		else if(isItem()) {
+			return "target=product_price&sort=asc&item="+item+"&page="+page+"&size="+size;
+		}
+		else if(isItem()&&keyword!=null) {
+			return "target=product_price&sort=asc&item="+item+"&keyword="+keyword+"&page="+page+"&size="+size;
 		}
 		else {
 			return "target=product_price&sort=asc&page="+page+"&size="+size;
@@ -98,6 +127,12 @@ public class ProductListVO {
 		else if(isCreator()) {
 			return "target=product_price&sort=desc&creator="+creator+"&page="+page+"&size="+size;
 		}
+		else if(isItem()) {
+			return "target=product_price&sort=desc&item="+item+"&page="+page+"&size="+size;
+		}
+		else if(isItem()&&keyword!=null) {
+			return "target=product_price&sort=desc&item="+item+"&keyword="+keyword+"&page="+page+"&size="+size;
+		}
 		else {
 			return "target=product_price&sort=desc&page="+page+"&size="+size;
 		}
@@ -110,6 +145,12 @@ public class ProductListVO {
 		else if(isCreator()) {
 			return "target=product_no&sort=desc&creator="+creator+"&page="+page+"&size="+size;
 		}
+		else if(isItem()) {
+			return "target=product_no&sort=desc&item="+item+"&page="+page+"&size="+size;
+		}
+		else if(isItem()&&keyword!=null) {
+			return "target=product_no&sort=desc&item="+item+"&keyword="+keyword+"&page="+page+"&size="+size;
+		}
 		else {
 			return "target=product_no&sort=desc&page="+page+"&size="+size;
 		}
@@ -121,6 +162,12 @@ public class ProductListVO {
 		}
 		else if(isCreator()) {
 			return "target=wishlist_count&sort=desc&creator="+creator+"&page="+page+"&size="+size;
+		}
+		else if(isItem()) {
+			return "target=wishlist_count&sort=desc&item="+item+"&page="+page+"&size="+size;
+		}
+		else if(isItem()&&keyword!=null) {
+			return "target=wishlist_count&sort=desc&item="+item+"&keyword="+keyword+"&page="+page+"&size="+size;
 		}
 		else {
 			return "target=wishlist_count&sort=desc&page="+page+"&size="+size;

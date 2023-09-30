@@ -155,13 +155,54 @@ public class ProductDaoImpl implements ProductDao{
 	}
 	
 	@Override
+	public List<ProductDto> selectListByProductItem(ProductListVO vo) {
+		if(vo.getKeyword()==null) {
+			String sql = "select * from( "
+					+ "select rownum rn, TMP.* from( "
+					+ "SELECT p.*, (SELECT COUNT(*) FROM wishlist w WHERE w.product_no = p.product_no) AS wishlist_count "
+					+ "FROM product p "
+					+ "where product_item = ? "
+					+ "ORDER BY " + vo.getTarget() + " " + vo.getSort()
+					+")TMP"
+					+ ") where rn between ? and ?";
+			Object[] data = {vo.getItem() ,vo.getStartRow(), vo.getFinishRow()};
+			return jdbcTemplate.query(sql, productMapper, data);
+		}
+		else {
+			String sql = "select * from( "
+					+ "select rownum rn, TMP.* from( "
+					+ "SELECT p.*, (SELECT COUNT(*) FROM wishlist w WHERE w.product_no = p.product_no) AS wishlist_count "
+					+ "FROM product p "
+					+ "where product_item = ? "
+					+ "and instr(product_name, ?) > 0 "
+					+ "ORDER BY " + vo.getTarget() + " " + vo.getSort()
+					+")TMP"
+					+ ") where rn between ? and ?";
+			Object[] data = {vo.getItem(),vo.getKeyword() ,vo.getStartRow(), vo.getFinishRow()};
+			return jdbcTemplate.query(sql, productMapper, data);
+		}
+	}
+	
+	@Override
 	public int countList(ProductListVO vo) {
-		if(vo.isSearch()) {
+		
+		if(vo.isItem()&&vo.getKeyword()!=null) {
+			String sql = "select count(*) from product where product_item = ? "
+					+ "and instr(product_name, ?)>0";
+			Object[] data = {vo.getItem(), vo.getKeyword()};
+			return jdbcTemplate.queryForObject(sql, int.class, data);
+		}
+		else if(vo.isItem()) {
+			String sql = "select count(*) from product where product_item = ?";
+			Object[] data = {vo.getItem()};
+			return jdbcTemplate.queryForObject(sql, int.class, data);
+		}
+		else if(vo.isSearch()) {
 			String sql = "select count(*) from product where instr(product_name, ?) >0";
 			Object[] data = {vo.getKeyword()};
 			return jdbcTemplate.queryForObject(sql, int.class, data);
 		}
-		if(vo.isCreator()) {
+		else if(vo.isCreator()) {
 			String sql = "select count(*) "
 						+ "from product inner join creator_product "
 						+ "on creator_product.product_no = product.product_no "

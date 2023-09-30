@@ -17,6 +17,7 @@ public interface ProductDao {
 	
 	List<ProductDto> selectList(ProductListVO vo);//상품리스트/ 정렬 포함
 	List<ProductDto> selectListByCreator(ProductListVO vo);//크리에이터별 상품/ 정렬 
+	List<ProductDto> selectListByProductItem(ProductListVO vo);//품목별 정렬
 
 	int countList(ProductListVO vo);//페이징을 위한 상품 개수 가져오기
 	
