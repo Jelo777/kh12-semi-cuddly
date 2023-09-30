@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import com.kh.cuddly.VO.PaginationVO;
 import com.kh.cuddly.dto.OrderDetailJoinDto;
 import com.kh.cuddly.dto.OrderDetailJoinDto2;
 import com.kh.cuddly.dto.OrdersDto;
@@ -108,16 +109,31 @@ public class OrdersDaoImpl implements OrdersDao{
 		return jdbcTemplate.query(sql, orderDetailjoinMapper, data);
 		
 	}
-	
+	 
 	@Override
-	public List<OrderDetailJoinDto2> selectListOrders2(String memberId){	//주문 목록
+	public List<OrderDetailJoinDto2> selectListOrders2(PaginationVO vo,String memberId){	//주문 목록
 		
-		String sql = "select * from orders_detail_list1 where member_id=? order by orders_no desc";
+//		String sql = "select * from orders_detail_list1 where member_id=? order by orders_no desc";
 		
-		Object[] data = {memberId};
+		String sql = "select * from ("
+				+ "select rownum rn, TMP.* from ("
+				+ "select * from orders_detail_list1 where member_id=? order by orders_no desc"
+				+ ")TMP"
+				+ ") where rn between ? and ?";
+		
+		Object[] data = {memberId,vo.getStartRow(), vo.getFinishRow()};
 		
 		return jdbcTemplate.query(sql, orderDetailjoinMapper2, data);
 		
+	}
+	
+	@Override
+	public int countList(PaginationVO vo,String memberId) {
+		String sql = "select count(*) from orders_detail_list1 where member_id=?";
+		
+		Object[] data = {memberId};
+		
+		return jdbcTemplate.queryForObject(sql, int.class,data);
 	}
 	
 	

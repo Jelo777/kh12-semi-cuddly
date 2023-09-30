@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import com.kh.cuddly.VO.PaginationVO;
 import com.kh.cuddly.dto.AttachDto;
 import com.kh.cuddly.dto.QnaDto;
 import com.kh.cuddly.mapper.AttachMapper;
@@ -46,7 +47,7 @@ public class QnaDaoImpl implements QnaDao{
 	@Override
 	public boolean update(QnaDto qnaDto) {
 		
-		String sql = "update qna set qna_content=?,qna_date=sysdate where qna_no=?";
+		String sql = "update qna set qna_content=? where qna_no=?";
 		
 		Object[] data = {qnaDto.getQnaContent(),qnaDto.getQnaNo()};
 		
@@ -80,7 +81,7 @@ public class QnaDaoImpl implements QnaDao{
 	@Override
 	public List<QnaDto> selectList() {
 		
-		String sql = "select * from qna order by qna_no asc";
+		String sql = "select * from qna order by qna_date desc";
 		
 		List<QnaDto> list = jdbcTemplate.query(sql, qnaMapper);
 		
@@ -89,11 +90,17 @@ public class QnaDaoImpl implements QnaDao{
 	}
 	
 	@Override
-	public List<QnaDto> selectList(String memberId) {
+	public List<QnaDto> memberList(String memberId,PaginationVO vo) {
 		
-		String sql = "select * from qna where member_id=? order by qna_no asc";
 		
-		Object[] data = {memberId};
+		
+		String sql = "select * from ("
+				+ "select rownum rn, TMP.* from ("
+				+ "select * from qna where member_id=? order by qna_date desc"
+				+ ")TMP"
+				+ ") where rn between ? and ?";
+		
+		Object[] data = {memberId,vo.getStartRow(), vo.getFinishRow()};
 		
 		List<QnaDto> list = jdbcTemplate.query(sql, qnaMapper, data);
 		
@@ -119,6 +126,26 @@ public class QnaDaoImpl implements QnaDao{
 		String sql = "select * from qna where product_no = ?";
 		Object[] data = {productNo};
 		return jdbcTemplate.query(sql, qnaMapper, data);
+	}
+	
+	@Override
+	public boolean delete(int qnaNo) {
+		
+		String sql = "delete qna where qna_no=?";
+		
+		Object[] data = {qnaNo};
+		
+		return jdbcTemplate.update(sql,data)>0;
+		
+	}
+	
+	@Override
+	public int countList(PaginationVO vo,String memberId) {
+		String sql = "select count(*) from qna where member_id=?";
+		
+		Object[] data = {memberId};
+		
+		return jdbcTemplate.queryForObject(sql, int.class,data);
 	}
 	
 }

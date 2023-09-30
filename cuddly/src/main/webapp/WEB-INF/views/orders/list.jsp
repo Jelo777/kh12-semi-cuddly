@@ -3,12 +3,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
 <title>주문 목록</title>
-</head>
 <style>
 .card {
 	/* border: 1px solid #2d3436; */
@@ -21,7 +16,30 @@
 }
 </style>
 
+
+
 <body>
+<script>
+
+$(function(){
+
+	
+	
+	
+})
+
+
+</script>
+
+
+
+
+
+
+
+
+
+
 	<h1>나의 주문 목록</h1>
 
 	<c:forEach var="detail" items="${list}">
@@ -42,6 +60,7 @@
 					</div>
 					<div class="row left">주문 가격: ${detail.ordersDetailPrice}</div>
 					<div class="row right">주문 날짜: ${detail.ordersDate}</div>
+					<div class="row left">총 주문 가격: ${detail.ordersPrice}원</div>
 					<div class="row right">
 					
 					
@@ -54,18 +73,45 @@
 							
 					<c:otherwise>
 					
+					<c:if test="${!detail.reviewEx}">
 					<a href="/cuddly/review/write?productNo=${detail.productNo}">리뷰쓰기</a>
-					
+					</c:if>
 					</c:otherwise>
 							</c:choose>
-							
-							
 					</div>
 				</div>
 				<hr>
 			</div>
 		</div>
 	</c:forEach>
+	
+	<div class="row page-navigator mv-30">
+    <!-- 이전 버튼 -->
+    <c:if test="${!vo.first}">
+        <a href="list?${vo.getPrevQueryString()}"> <i
+            class="fa-solid fa-angle-left"></i>
+        </a>
+    </c:if>
+
+    <!-- 숫자 버튼 -->
+    <c:forEach var="i" begin="${vo.begin}" end="${vo.end}" step="1">
+        <c:choose>
+            <c:when test="${vo.page == i}">
+                <a class="on">${i}</a>
+            </c:when>
+            <c:otherwise>
+                <a href="list?${vo.getQueryString(i)}">${i}</a>
+            </c:otherwise>
+        </c:choose>
+    </c:forEach>
+
+    <!-- 다음 버튼 -->
+    <c:if test="${!vo.last}">
+        <a href="list?${vo.getNextQueryString()}"> <i
+            class="fa-solid fa-angle-right"></i>
+        </a>
+    </c:if>
+</div>
 
 
 </body>

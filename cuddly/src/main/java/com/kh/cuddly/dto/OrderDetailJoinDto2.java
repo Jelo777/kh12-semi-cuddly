@@ -19,5 +19,7 @@ public class OrderDetailJoinDto2 {
 	private String memberId;
 	private int orderCount;
 	private boolean two;
+	private boolean reviewEx;
+	private int ordersPrice;
 
 }

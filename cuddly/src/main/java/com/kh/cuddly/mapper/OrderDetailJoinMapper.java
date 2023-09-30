@@ -26,6 +26,7 @@ public class OrderDetailJoinMapper implements RowMapper<OrderDetailJoinDto>{
 		orderDetailDto.setProductNo(rs.getInt("product_no"));
 		orderDetailDto.setProductOptionName(rs.getString("product_option_name"));
 		orderDetailDto.setMemberId(rs.getString("member_id"));
+		orderDetailDto.setOrdersPrice(rs.getInt("orders_price"));
 		
 		
 		return orderDetailDto;
