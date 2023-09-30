@@ -47,6 +47,23 @@
                     },
                 });
             });
+            
+            
+			$(".star").click(function() {
+            	
+                var selectedRating = $(this).data("rating");
+                $("#reviewGrade").val(selectedRating);
+
+            	//solid/far가 채워진 거 regular/fas가 빈 거
+         
+                // 이전 별 아이콘들을 모두 solid로 변경
+                $(".star").removeClass("fas").addClass("far");
+
+                // 현재 별 아이콘과 그 이전 별 아이콘들을 solid로 변경
+                $(this).removeClass("far").addClass("fas");
+                $(this).prevAll(".star").removeClass("far").addClass("fas");
+            });
+            
         });        
     </script>
 
@@ -76,8 +93,17 @@
 <!--	리뷰 이미지 : <input type="file" name="attach" accept="image/*"><br><br>-->
 	<input type="hidden" name="productNo" value="${reviewDto.productNo}">
 	<input type="hidden" name="reviewNo" value="${reviewDto.reviewNo}">
-	별점 : <input type="text" name="reviewGrade" value="${reviewDto.reviewGrade}"><br><br>
-	리뷰 내용 : <input type="text" name="reviewContent" value="${reviewDto.reviewContent}"><br><br>
+	
+	<span class="star-rating">
+    <c:forEach var="i" begin="1" end="${reviewDto.reviewGrade}">
+    <i class="star fas fa-star yellow" data-rating="${i}"></i>
+     </c:forEach>
+     <c:forEach var="i" begin="${reviewDto.reviewGrade+1}" end="5">
+     <i class="star far fa-star yellow" data-rating="${i}"></i>
+     </c:forEach>
+     </span>
+	<input type="hidden" name="reviewGrade" id="reviewGrade" value="${reviewDto.reviewGrade}"> <!-- 초기값 -->
+	<div class="row">리뷰 내용 : <input type="text" name="reviewContent" value="${reviewDto.reviewContent}"></div>
 	<input type="file" class="file-chooser" name="attach" accept="image/*"><br><br>
 	
 	<c:choose>

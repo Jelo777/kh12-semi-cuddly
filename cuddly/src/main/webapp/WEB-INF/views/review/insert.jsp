@@ -85,8 +85,6 @@
 							</div>
 						</div>
 					</div>
-</div>
-
 
 
 
@@ -101,14 +99,15 @@
 <input type="hidden" name="reviewGrade" id="reviewGrade" value="0"> <!-- 초기값 -->
 
         
-        <br><br>
-        
-        <input type="text" name="reviewContent" placeholder="리뷰 내용"><br><br>
-        <input type="file" class="file-chooser" name="attach" accept="image/*"><br><br>
+       <div class="row">
+        <textarea placeholder="리뷰 내용" name="reviewContent" class="form-input w-100" rows="4"></textarea>
+        </div>
+        <input type="file" class="form-input w-100 file-chooser" name="attach" accept="image/*"><br><br>
         <img class="now" src="" width="200" height="200"><br><br>
         <button class="btn-save">사진 등록</button><br><br>
         <button type="submit">리뷰 등록</button>
     </form>
+    </div>
 
 
 </body>

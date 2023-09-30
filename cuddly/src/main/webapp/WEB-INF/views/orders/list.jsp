@@ -11,9 +11,7 @@
 	border-radius: 0.2em;
 }
 
-.row {
-	padding: 0.5em 1em;
-}
+
 </style>
 
 

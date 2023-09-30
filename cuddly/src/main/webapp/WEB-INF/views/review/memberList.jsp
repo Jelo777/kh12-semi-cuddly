@@ -35,7 +35,14 @@
 	</div>
 	<div class="row w-75">
 	<div class="row left title">
-	상품명:${reviewDto.productName} / 별점 : ${reviewDto.reviewGrade}
+	상품명:${reviewDto.productName}  <span class="star-rating">
+                        <c:forEach var="i" begin="1" end="${reviewDto.reviewGrade}">
+                            <i class="fas fa-star yellow"></i>
+                        </c:forEach>
+                        <c:forEach var="i" begin="1" end="${5-reviewDto.reviewGrade}">
+                        <i class="far fa-star yellow"></i>
+                        </c:forEach>
+                    </span>
 	</div>
 	<hr>
 	<div class="row left">리뷰 내용 : ${reviewDto.reviewContent}
