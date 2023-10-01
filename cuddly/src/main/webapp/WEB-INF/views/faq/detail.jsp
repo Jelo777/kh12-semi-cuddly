@@ -50,6 +50,15 @@
     <div class="row right">
     
 
+        
+       <c:if test="${sessionScope.level == '관리자'}">
+		<a href="edit?faqNo=${faqDto.faqNo}" class="btn btn-positive">		
+   			 <i class="fa-solid fa-edit"></i>
+   			 수정
+		</a>
+		</c:if>
+	
+
         <a href="list" class="btn">
             <i class="fa-solid fa-list"></i>
             목록

@@ -53,6 +53,10 @@
             목록
         </a>
               
+              
+              
+              
+    
 		<a href="edit?faqNo=${faqDto.faqNo}" class="btn btn-positive">		
    			 <i class="fa-solid fa-edit"></i>
    			 수정
