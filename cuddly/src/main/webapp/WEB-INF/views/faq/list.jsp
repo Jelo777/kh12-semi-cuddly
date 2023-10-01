@@ -1,31 +1,33 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var category = new URLSearchParams(window.location.search).get('category');
+        if (category) {
+            document.querySelector('h2').textContent = category;
+        }
+    });
+</script>
 
-	
-	<div class="row">
-		<h2>FAQ관리</h2>
-	</div>
-	
-	<br><br>
 
-	
-	<c:if test="${sessionScope.name != null}">
 
+<div class="row">
+    <h2>FAQ</h2>
+</div>
+<br><br>
+
+<c:if test="${sessionScope.name != null}">
+
+	<div class="row left"> 
+    <a class="link" href="list?category=공지사항">공지사항</a>
+    <a class="link" href="list?category=기타">기타</a>
+    <a class="link" href="list?category=주문결제">주문결제</a>
+    <a class="link" href="list?category=회원정보">회원정보</a>
 </c:if>
 
-<div class="row left category-links">
-    <select name="category" onchange="location = this.value;">
-        <option value="">카테고리 선택</option>
-        <option value="list?category=공지사항">공지사항</option>
-        <option value="list?category=기타">기타</option>
-        <option value="list?category=주문결제">주문결제</option>
-        <option value="list?category=회원정보">회원정보</option>
-    </select>
-</div>
 
 
 
@@ -101,22 +103,18 @@
 </div>
 
 
-<form action="list" method="get">
-    <div class="row search-container">
-        <select name="type" required>
-            <option value="board_title">제목</option>
-            <option value="board_writer">작성자</option>
-        </select>
-        <input type="search" name="keyword" required placeholder="검색어 입력" value="${param.keyword}">
-        <button type="submit">검색</button>
-        
-        
-    </div>
-</form>
 
+ <form action="list" method="get">
+        <div class="row search-container">
+     
+            <input type="search" name="keyword" required placeholder="검색어 입력" value="${param.keyword}">
+            <button type="submit">검색</button>
+        </div>
+        
+    </form>
   
 
-
+</form>
 
 
 <jsp:include page="/WEB-INF/views/template/adminFooter.jsp"></jsp:include>
