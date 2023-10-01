@@ -52,9 +52,9 @@ $(function(){
 
     //페이지 이탈 방지
     //- window에 beforeunload 이벤트 설정
-    $(window).on("beforeunload", function(){
-        return false;
-    });
+//    $(window).on("beforeunload", function(){
+//        return false;
+//    });
 
     //-form 전송할 때는 beforeunload 이벤트를 제거
     $(".address-insert-form").submit(function(e){

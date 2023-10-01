@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <jsp:include page="/WEB-INF/views/template/mypageHeader.jsp"></jsp:include>
  <script src="/js/address.js"></script>
- <script src="/js/addressMypageInsert.js"></script>
+ <script src="/js/addressInsert.js"></script>
  <style>
 	.card{
             /* border:1px solid; */
@@ -199,8 +199,8 @@
 		<h3 class="addressComent">요구사항</h3>
 	</div>
 </div>
-<div class="w-25 mt-20">
-	<div class="row right me-30 mt-30">
+<div class="w-25 mt-20 me-30">
+	<div class="row right me-50 mt-30">
 		<h5>
 			<button type ="button" style="width:150px; font-size:16px;" class="btn btn-negative btn-delete">삭제하기</button>
 		</h5>
