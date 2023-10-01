@@ -2,17 +2,11 @@ package com.kh.cuddly.controller;
 
 import java.io.File;
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
-import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.ByteArrayResource;
-import org.springframework.http.ContentDisposition;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,7 +14,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.kh.cuddly.VO.FaqlistVO;
@@ -180,32 +173,9 @@ public class AdminController {
 
 		return "redirect:/cuddly/admin/product/list";
 	}
-	
 
-	@ResponseBody
-	@RequestMapping("/product/main") // 상품 메인 이미지
-	public ResponseEntity<ByteArrayResource> productMainImage(@RequestParam int productNo) throws IOException {
 
-		AttachDto attachDto = productDao.findProductMainImage(productNo);
-		if (attachDto == null) {
-			return ResponseEntity.notFound().build();
-		}
-
-		String home = System.getProperty("user.home");
-		File dir = new File(home, "upload");
-		File target = new File(dir, String.valueOf(attachDto.getAttachNo()));
-
-		byte[] data = FileUtils.readFileToByteArray(target);
-		ByteArrayResource resource = new ByteArrayResource(data);
-
-		return ResponseEntity.ok().header(HttpHeaders.CONTENT_ENCODING, StandardCharsets.UTF_8.name())
-				.contentLength(attachDto.getAttachSize()).header(HttpHeaders.CONTENT_DISPOSITION, ContentDisposition
-						.attachment().filename(attachDto.getAttachName(), StandardCharsets.UTF_8).build().toString())
-				.body(resource);
-	}
-	
-
-	@GetMapping("/product/edit")
+	@GetMapping("/product/option")
 	public String edit(@RequestParam int productNo, Model model) {
 		ProductDto productDto = productDao.selectOne(productNo);
 		model.addAttribute("productDto", productDto);
@@ -216,42 +186,19 @@ public class AdminController {
 		List<ProductOptionDto> list = productOptionDao.selectListByProductNo(productNo);//상품과 연결된 옵션 검색
 		model.addAttribute("list", list);
 		
-		return "/WEB-INF/views/admin/product/edit.jsp";
+		return "/WEB-INF/views/admin/product/option.jsp";
 	}
 	
-
-	@PostMapping("/product/editUpdate")//옵션수정
+	@PostMapping("/product/optionUpdate")//옵션수정
 	public String editUpdate(@ModelAttribute ProductOptionDto productOptionDto,
 			@RequestParam int productNo) {
 		
 		productOptionDao.update(productOptionDto);
 		
-		return "redirect:edit?productNo="+productNo;
+		return "redirect:option?productNo="+productNo;
 	}
 	
-	@PostMapping("/product/edit")//옵션추가
-	@ResponseBody
-	public String edit(@ModelAttribute ProductOptionDto productOptionDto,
-									@RequestParam int productNo) {
-
-		if(productOptionDto.getProductOptionName().equals("")){//옵션명 입력창이 비었으면
-			return "null";
-		}
-		
-		boolean findName = productOptionDao.findOptionName(productOptionDto);//옵션입력창에 값이 이미 있으면
-		if(findName) {
- 			return "fail";
-		}
-		
-		int productOptionNo = productOptionDao.sequence();
-
-		productOptionDto.setProductOptionNo(productOptionNo);
-		productOptionDto.setProductNo(productNo);
-		productOptionDao.insert(productOptionDto);
-		
-		return "success";
-		
-	}
+	
 	
 
 	@RequestMapping("/product/list")//관리자페이지 상품목록
