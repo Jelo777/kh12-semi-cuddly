@@ -334,7 +334,9 @@ public class OrdersController {
 	
 	
 	@RequestMapping("/list")
-	public String orderList(Model model,@ModelAttribute(name = "vo") PaginationVO vo,String memberId) {
+	public String orderList(Model model,@ModelAttribute(name = "vo") PaginationVO vo,HttpSession session) {
+		
+		String memberId = (String) session.getAttribute("name");
 		
 		int count = ordersDao.countList(vo,memberId);
 		
