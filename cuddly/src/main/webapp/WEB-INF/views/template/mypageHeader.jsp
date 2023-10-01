@@ -196,10 +196,10 @@ $(document).ready(function() {
 				</div>
 				
 				<div class="row left">
-					<h3><a class="link" href="/cuddly/orders/list?memberId=${sessionScope.name}">구매내역</a></h3>
+					<h3><a class="link" href="/cuddly/orders/list">구매내역</a></h3>
 				</div>
 				<div class="row left">
-					<h3><a class="link" href="/cuddly/review/memberList?memberId=${sessionScope.name}">나의 리뷰</a></h3>
+					<h3><a class="link" href="/cuddly/review/memberList">나의 리뷰</a></h3>
 				</div>
 				<div class="row left">
 					<h3><a class="link" href="/cuddly/member/mypage/wishlist">관심상품</a></h3>
