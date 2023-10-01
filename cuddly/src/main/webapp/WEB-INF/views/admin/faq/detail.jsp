@@ -9,6 +9,10 @@
     <div class="row">
         <h2>${faqDto.faqNo}번게시글</h2>
     </div>
+    
+    
+
+
     <div class="row">
         <table class="table table-border">
             <thead>

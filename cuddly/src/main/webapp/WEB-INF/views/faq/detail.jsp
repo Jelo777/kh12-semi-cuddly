@@ -8,6 +8,7 @@
 <div class="container w-800">
     <div class="row">
         <h2>${faqDto.faqNo}번게시글</h2>
+       
     </div>
     <div class="row">
         <table class="table table-border">
@@ -57,7 +58,13 @@
    			 수정
 		</a>
 		</c:if>
-	
+		
+		<c:if test="${sessionScope.level == '관리자'}">
+		    <a href="delete?faqNo=${faqDto.faqNo}" class="btn">
+  	 		 <i class="fa-solid fa-delete"></i>
+   			 삭제
+		</a>
+		</c:if>
 
         <a href="list" class="btn">
             <i class="fa-solid fa-list"></i>
