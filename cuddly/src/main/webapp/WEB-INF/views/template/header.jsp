@@ -163,6 +163,7 @@ ul.menu > li > ul > li{
 						</h2>
 					</div>
 				</div>
+
 			</div>
 
 
@@ -180,6 +181,7 @@ ul.menu > li > ul > li{
 					<a href="/cuddly"> <img src="/images/cuddlyb.png" width="230"
 						height="50"><br>
 					</a>
+
 				</div>
 				<div>
 					<!--             		<form action="/cuddly/search"> -->
