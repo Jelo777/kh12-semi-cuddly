@@ -18,7 +18,7 @@ function optionUpdate(){
 	var formData = $("#update").serialize();
 	
 	$.ajax({
-		url:'edit',
+		url:'optionUpdate',
 		mothod:'post',
 		data : formData, 
         dataType: 'text',
@@ -46,7 +46,7 @@ function addOption(){
 	var formData = $("#edit").serialize();
 	
 	$.ajax({
-        url:'edit',
+        url:'/cuddly/rest/admin/product/option/insert',
         method : 'POST', 
         data : formData, 
         dataType: 'text',
@@ -86,7 +86,7 @@ function addOption(){
 			<h3>${productDto.productPrice}</h3><br>
 		</div> 
 		
-	<form id="update" onsubmit="return false();" action="editUpdate" method="post" enctype="multipart/form-data">
+	<form id="update" onsubmit="return false();" action="optionUpdate" method="post" enctype="multipart/form-data">
 		
 		<div class="flex-container w-100">
 			<input type="hidden" name="productNo" value="${productDto.productNo}">

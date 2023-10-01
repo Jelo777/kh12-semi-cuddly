@@ -46,7 +46,7 @@
 								</c:otherwise>
 							</c:choose>
 							
-							<a href="edit?productNo=${adminProductListDto.productNo}">
+							<a href="option?productNo=${adminProductListDto.productNo}">
 								<button style="float:right">수정</button>
 							</a>
 						</td>
