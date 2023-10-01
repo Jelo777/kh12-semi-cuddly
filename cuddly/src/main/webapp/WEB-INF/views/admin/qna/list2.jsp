@@ -9,6 +9,7 @@
 
 function editAnswer(){
 	var check = document.getElementById('answer').readOnly;
+	
 	if(check == true){
 		document.getElementById('answer').readOnly = false;
 		document.getElementById("answer").focus();
@@ -18,7 +19,7 @@ function editAnswer(){
 		var value = $("#testForm").serialize();
 		
 		$.ajax({
-			url:"/cuddly/admin/rest/qna/answer/update",
+			url:"/cuddly/rest/admin/qna/answer/update",
 			method:"post",
 			data : value,
 			success:function(response){
@@ -36,7 +37,7 @@ function update(e){
 	var value = $(e).serialize();
 	
 	$.ajax({
-		url:"/cuddly/admin/rest/qna/answer/update",
+		url:"/cuddly/rest/admin/qna/answer/update",
 		method:"post",
 		data : value,
 		success:function(response){
