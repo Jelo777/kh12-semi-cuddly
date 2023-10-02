@@ -180,32 +180,32 @@ public class ProductDaoImpl implements ProductDao{
 	public int countList(ProductListVO vo) {
 		
 		if(vo.isItem()&&vo.getKeyword()!=null) {
-			String sql = "select count(*) from product where product_item = ? "
+			String sql = "select count(*) from product_list_view where product_item = ? "
 					+ "and instr(product_name, ?)>0";
 			Object[] data = {vo.getItem(), vo.getKeyword()};
 			return jdbcTemplate.queryForObject(sql, int.class, data);
 		}
 		else if(vo.isItem()) {
-			String sql = "select count(*) from product where product_item = ?";
+			String sql = "select count(*) from product_list_view where product_item = ?";
 			Object[] data = {vo.getItem()};
 			return jdbcTemplate.queryForObject(sql, int.class, data);
 		}
 		else if(vo.isSearch()) {
-			String sql = "select count(*) from product where instr(product_name, ?) >0";
+			String sql = "select count(*) from product_list_view where instr(product_name, ?) >0";
 			Object[] data = {vo.getKeyword()};
 			return jdbcTemplate.queryForObject(sql, int.class, data);
 		}
 		else if(vo.isCreator()) {
 			String sql = "select count(*) "
-						+ "from product inner join creator_product "
-						+ "on creator_product.product_no = product.product_no "
+						+ "from product_list_view p inner join creator_product "
+						+ "on creator_product.product_no = p.product_no "
 						+ "left outer join creator on creator_product.creator_no = creator.creator_no "
 						+ "where creator.creator_name = ?";
 			Object[] data = {vo.getCreator()};
 			return jdbcTemplate.queryForObject(sql, int.class, data);
 		}
 		else {
-			String sql = "select count(*) from product";
+			String sql = "select count(*) from product_list_view";
 			return jdbcTemplate.queryForObject(sql, int.class);
 		}
 	}

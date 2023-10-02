@@ -15,6 +15,7 @@ public class AdminProductListMapper implements RowMapper<AdminProductListDto>{
 	public AdminProductListDto mapRow(ResultSet rs, int rowNum) throws SQLException {
 		AdminProductListDto adminProductListDto = new AdminProductListDto();
 		adminProductListDto.setOptionCount(rs.getInt("option_count"));
+		adminProductListDto.setSoldoutCount(rs.getInt("soldout_count"));
 		adminProductListDto.setProductNo(rs.getInt("product_no"));
 		adminProductListDto.setProductName(rs.getString("product_name"));
 		adminProductListDto.setProductDate(rs.getDate("product_date"));
