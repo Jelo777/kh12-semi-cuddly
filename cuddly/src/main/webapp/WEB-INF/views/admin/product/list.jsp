@@ -39,7 +39,10 @@
 						<td>
 							<c:choose>
 								<c:when test="${adminProductListDto.optionCount == 0}">
-									<span>옵션 미등록</span>
+									<span class="red">옵션 미등록</span>
+								</c:when>
+								<c:when test="${adminProductListDto.optionCount==adminProductListDto.soldoutCount}">
+									<span class="red">품절</span>
 								</c:when>
 								<c:otherwise>
 									<span>등록된 옵션수 : ${adminProductListDto.optionCount}</span>

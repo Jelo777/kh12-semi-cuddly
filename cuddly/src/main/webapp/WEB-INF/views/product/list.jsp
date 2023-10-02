@@ -25,7 +25,7 @@
 	<c:forEach var="productListDto" items="${list}">
 		<a class="link" href="detail?productNo=${productListDto.productNo}">
 			<div class="inline-flex-container allow-wrap left">
-				<table class="">
+				<table>
 					<tr>
 						<td><img src="/cuddly/image/product/main?productNo=${productListDto.productNo}"
 						onerror="this.src='https://dummyimage.com/200x200/000/fff;'" 
@@ -35,7 +35,9 @@
 						<td>${productListDto.productNo}</td>
 					</tr>
 					<tr>
-						<td>${productListDto.productName}</td>
+						<td>
+							${productListDto.productName}
+						</td>
 					</tr>
 					<tr>
 						<td>${productListDto.productPrice}</td>
