@@ -9,6 +9,10 @@
     font-family: sans-serif;
 }
 
+/* 헤더 아이콘 색상*/
+.headerIcon{
+    color: #BEADFA;
+}
 
 /*
     컨테이너(Container)
@@ -46,6 +50,55 @@
 .w-1200 { width:1200px; }
 
 /*
+    간격 스타일(spacing)
+    - margin, padding을 자주 사용하는 것들 위주로 클래스화
+    - 기본 간격은 10px이며 10px 단위로 설정 가능하도록 구현
+    - margin은 m, padding은 p로 설정
+*/
+
+.m-10 { margin: 10px; }
+.m-20 { margin: 20px; }
+.m-30 { margin: 30px; }
+.m-40 { margin: 40px; }
+.m-50 { margin: 50px; }
+
+.mh-10 { margin:0px 10px; }
+.mh-20 { margin:0px 20px; }
+.mh-30 { margin:0px 30px; }
+.mh-40 { margin:0px 40px; }
+.mh-50 { margin:0px 50px; }
+
+.mv-10 { margin:10px 0px; }
+.mv-20 { margin:20px 0px; }
+.mv-30 { margin:30px 0px; }
+.mv-40 { margin:40px 0px; }
+.mv-50 { margin:50px 0px; }
+
+.mt-10 { margin-top: 10px; }
+.mt-20 { margin-top: 20px; }
+.mt-30 { margin-top: 30px; }
+.mt-40 { margin-top: 40px; }
+.mt-50 { margin-top: 50px; }
+
+.mb-10 { margin-bottom: 10px; }
+.mb-20 { margin-bottom: 20px; }
+.mb-30 { margin-bottom: 30px; }
+.mb-40 { margin-bottom: 40px; }
+.mb-50 { margin-bottom: 50px; }
+
+.ms-10 { margin-left: 10px; }
+.ms-20 { margin-left: 20px; }
+.ms-30 { margin-left: 30px; }
+.ms-40 { margin-left: 40px; }
+.ms-50 { margin-left: 50px; }
+
+.me-10 { margin-right: 10px;}
+.me-20 { margin-right: 20px;}
+.me-30 { margin-right: 30px;}
+.me-40 { margin-right: 40px;}
+.me-50 { margin-right: 50px;}
+
+/*
     컨테이너에 배치할 태그의 자리를 row라고 부른다
 */
 .row {
@@ -68,27 +121,325 @@
     text-align: right;
 }
 
+
+/* 
+	메뉴는 계층형 구조를 가지는 가장 대표적인 도구
+
+		1차메뉴
+			-2차메뉴
+				-3차메뉴
+				-3차메뉴
+				-3차메뉴
+			-2차메뉴
+				-3차메뉴
+				-3차메뉴
+				-3차메뉴
+			-2차메뉴
+		1차메뉴
+			-2차메뉴
+				-3차메뉴
+				-3차메뉴
+				-3차메뉴
+			-2차메뉴
+				-3차메뉴
+				-3차메뉴
+				-3차메뉴
+			-2차메뉴
+		ul
+			li-a
+				-ul
+					-li - a
+					-li - a
+					-li - a
+					-li - a
+
+*/
+
+/* 디자인 초기화 */
+ul.menu,
+ul.menu ul{
+	list-style:none;
+	margin: 0px;
+    padding: 0px;
+}
+ul.menu a{
+	color: inherit;
+	text-decoration: none;
+}
+
+/*1차 메뉴의 배치를 가로 배치로 변경 */
+ul.menu > li{
+	display: inline-block;
+}
+
+/* 색상 변경 및 크기 설정 */
+ul.menu,
+ul.menu ul{
+	font-size:24px;
+	background-color: white;
+}
+ul.menu li{
+	color:black;
+	background-color: white;
+	width: 150px;
+}
+
+/* 메뉴에 마우스가 올라가면 하이트라이트 효과 */
+ul.menu li:hover{
+	color: #BEADFA;
+}
+
+/* 
+	1차메뉴의 아래쪽에 2차메뉴가 위치하도록 position 변경
+*/
+/*메뉴 안에 있는 모든 li는 relative로 설정 */
+ ul.menu li{ 
+	position:relative;
+}
+/*메뉴 안에 있는 모든 ul은 absolute로 설정 */
+ul.menu ul{  
+	position:absolute;
+	z-index: 99999;
+	top:100%;
+	left: 0;
+}
+
+/* 2차 이상의 메뉴를 숨김 처리 */
+ ul.menu > li ul{
+	display: none;
+}
+ /* 
+ 	마우스가 올라간 메뉴 항목의 하위메뉴를 표시 
+ */
+ul.menu li:hover > ul{ /*ul인 menu안의 li에 마우스를 올리면 ul의 display가 block처리 된다 */
+	display: block;
+}
+
+/* a 태그에 말줄임표 처리 구현 */
+ul.menu a{
+ /* 
+	overflow로 인해 발생하는 추가 공간을 해결하기 위해 높이 설정
+		-추가 공간이 생기는 이유는 overflow를 처리하기 위해 내부적으로 생성
+		-display를 inline-block으로 설정하고 세로 정렬을 지정하면 해결
+		-vertical-align은 어떤 값을 주더라도 문제가 해결된다
+		-버그에 가깝다
+*/
+display: inline-block;
+ vertical-align: top;
+width: 100%;
+padding: 0.5em;
+/* 말줄임표 처리를 위한 디자인(반드시 폭이 있어야함) */
+text-overflow: ellipsis;
+overflow: hidden;
+white-space: nowrap;
+}
+
+/* overlow로 인해 발생하는 추가 공간을 해결하기 위해 높이 설정 */
+  
+/* 3차 이상의 메뉴는 하단이 아니라 우측에 나오도록 변경 */
+ul.menu >li >ul >li ul{
+	top:0;
+	left: 100%;
+}
+
+/* 확장 스타일: 메뉴를 상단에 고정 처리 */
+ul.menu.fixed{
+	position: fixed;
+	left: 0;
+	right: 0;
+	top: 0;
+}
+
+/* 추가 : 메뉴 Flex로 변경 */
+ul.menu {
+    display: flex;
+}
+ul.menu > .menu-right {
+    margin-left: auto;
+}
+
+/*2차메뉴 폰트사이즈*/
+ul.menu > li > ul > li{
+	font-size: 18px;
+}
+
+
+/* 
+링크 스타일
+	-방문한 링크는 :visited로 선택가능
+*/
+a.link,
+a.link:visited{
+	text-decoration: none;
+	color: #2d3436;
+}
+a.link:hover
+{
+	color: #BEADFA;
+}
+
+
+/* 폰트크기 */
+/* 상품명 */
+.productName{
+	font-size: 18px;
+	font-weight: bold;
+}
+/*크리에이터명*/
+.creatorName{
+	font-size: 16px;
+	margin: 10px 0px;
+}
+/*상품가격*/
+.productPrice{
+	font-size: 22px;
+	font-weight: bold;
+}
+
+/*테이블형식 상품 글자 간격조절*/
+table {
+  border-collapse: separate;
+  border-spacing: 0 8px;
+}
+
+
+ /* 이미지 디자인 */
+.image.image-circle{
+	border-radius: 50%;
+}
+.image.image-round{
+	border-radius:10px;
+}
+.image.image-border,
+.image.image-hover:hover{
+	 /* border: 3px solid black; */
+	box-shadow: 0 0 0 1px red ;
+}
+.image.image-blur{
+	opacity: 0.6;
+}
+.image.image-blur:hover{
+	opacity: 1;
+}
+.image.image-lift{
+	box-shadow: 0 0 3px 1px #2d3436;
+}
+.image.image-leaf{
+	border-top-left-radius: 50%;
+	border-bottom-right-radius: 50%;
+}
+.image.image-invert{
+	filter: invert(100%);
+}
+.image.image-grayscale{
+	filter: grayscale(100%);
+}
+
+
+/*버튼 디자인*/
+.btn{
+	/*a 태그 때문에 추가한 속성 */
+    display: inline-block;
+    text-decoration: none;
+    vertical-align: bottom;
+ 
+ 	font-size: 15px;
+ 	padding: 0.7em 1.2em;
+ 	border: 1px solid #BEADFA;
+    border-radius: 5em;
+    color: #BEADFA;
+}
+
+.btn.btn-more{
+  	width : 300px;
+  	height: 40px;
+    outline: none; /*outline은 입력 창 선택 시 강조 효과*/
+    line-height: 1.6em;
+    border: 1px solid #BEADFA;
+    color: #BEADFA;
+}
+
+.btn.btn-positive {
+    border-color: #BEADFA;
+    background-color: #BEADFA;
+    color: white;
+}
+.btn.btn-negative {
+    border-color: #e17055;
+    background-color: #e17055;
+    color: white;
+}
+
+
+
+.form-input{
+    font-size: 15px;
+  	height: 40px;
+    outline: none; /*outline은 입력 창 선택 시 강조 효과*/
+    border: 1px solid #BEADFA;
+    border-radius: 5em;
+    line-height: 1.2em;
+    font-style: #BEADFA;
+}
+
+/*아오 왜 돋보기 안들어가냐고*/
+.form-input.find-input{
+	  	width : 400px;
+	background-image: url(glass.png);
+	background-color: #FFFEFC;
+}
+
+.form-input.underline-input{
+	border-top: none;
+    border-left: none;
+    border-right: none;
+    border-radius: 0px;
+    padding-left: 0px;
+    padding-right: 0px;
+    background-color: #FFFEFC;
+}
+
+/*로그인&회원가입 폼*/
+ .form-border{
+	width : 500px;
+	height: auto;
+	border: 2px solid #BEADFA;
+	border-radius: 15px;
+	background-color: #FFFEFC;
+	
+	display: flex;
+    justify-content: center;
+/*    align-items: center;*/
+ }
+
+
+
+/***********************진행중********************************************/
+
+
+
+
 /*
     입력창 디자인
     - 글자가 핵심이므로 글자 크기를 정하고 나머지를 비율(em)로 설정
 */
-.form-input, 
-.btn 
-{
-    /* a 태그 때문에 추가한 속성 */
-    display: inline-block;
-    text-decoration: none;
-    vertical-align: bottom;
+/*.form-input, */
+/*.btn */
+/*{*/
+/*     a 태그 때문에 추가한 속성 */
+/*    display: inline-block;*/
+/*    text-decoration: none;*/
+/*    vertical-align: bottom;*/
 
-    font-size: 20px;
-    padding: 0.5em 1em;
-    outline: none; /*outline은 입력 창 선택 시 강조 효과 */
-    border: 1px solid #636e72;
-    border-radius: 0.1em;
-    line-height: 1.2em;
-}
+/*    font-size: 20px;*/
+/*    padding: 0.5em 1em;*/
+/*    outline: none; outline은 입력 창 선택 시 강조 효과 */
+/*    border: 1px solid #636e72;*/
+/*    border-radius: 0.1em;*/
+/*    line-height: 1.2em;*/
+/*}*/
 .form-input:focus {/*선택된 상태를 focus라 한다 */
-    border-color: #2d3436;
+/*    border-color: #2d3436;*/
 }
 
 /*
@@ -170,54 +521,7 @@ textarea.form-input.fixed {
     color: white;
 }
 
-/*
-    간격 스타일(spacing)
-    - margin, padding을 자주 사용하는 것들 위주로 클래스화
-    - 기본 간격은 10px이며 10px 단위로 설정 가능하도록 구현
-    - margin은 m, padding은 p로 설정
-*/
 
-.m-10 { margin: 10px; }
-.m-20 { margin: 20px; }
-.m-30 { margin: 30px; }
-.m-40 { margin: 40px; }
-.m-50 { margin: 50px; }
-
-.mh-10 { margin:0px 10px; }
-.mh-20 { margin:0px 20px; }
-.mh-30 { margin:0px 30px; }
-.mh-40 { margin:0px 40px; }
-.mh-50 { margin:0px 50px; }
-
-.mv-10 { margin:10px 0px; }
-.mv-20 { margin:20px 0px; }
-.mv-30 { margin:30px 0px; }
-.mv-40 { margin:40px 0px; }
-.mv-50 { margin:50px 0px; }
-
-.mt-10 { margin-top: 10px; }
-.mt-20 { margin-top: 20px; }
-.mt-30 { margin-top: 30px; }
-.mt-40 { margin-top: 40px; }
-.mt-50 { margin-top: 50px; }
-
-.mb-10 { margin-bottom: 10px; }
-.mb-20 { margin-bottom: 20px; }
-.mb-30 { margin-bottom: 30px; }
-.mb-40 { margin-bottom: 40px; }
-.mb-50 { margin-bottom: 50px; }
-
-.ms-10 { margin-left: 10px; }
-.ms-20 { margin-left: 20px; }
-.ms-30 { margin-left: 30px; }
-.ms-40 { margin-left: 40px; }
-.ms-50 { margin-left: 50px; }
-
-.me-10 { margin-right: 10px;}
-.me-20 { margin-right: 20px;}
-.me-30 { margin-right: 30px;}
-.me-40 { margin-right: 40px;}
-.me-50 { margin-right: 50px;}
 
 
 /*
@@ -405,167 +709,7 @@ textarea.form-input.fixed {
     left:50%;
     transform: translate(-50%, -50%);
 }
- /* 
-            메뉴는 계층형 구조를 가지는 가장 대표적인 도구
-
-            1차메뉴
-                -2차메뉴
-                    -3차메뉴
-                    -3차메뉴
-                    -3차메뉴
-                -2차메뉴
-                    -3차메뉴
-                    -3차메뉴
-                    -3차메뉴
-                -2차메뉴
-            1차메뉴
-                -2차메뉴
-                    -3차메뉴
-                    -3차메뉴
-                    -3차메뉴
-                -2차메뉴
-                    -3차메뉴
-                    -3차메뉴
-                    -3차메뉴
-                -2차메뉴
-            ul
-                li-a
-                    -ul
-                        -li - a
-                        -li - a
-                        -li - a
-                        -li - a
-
-
-
-
-
-
-
-
-
-
-
-        */
-        /* 디자인 초기화 */
-        ul.menu,
-        ul.menu ul{
-            list-style:none;
-            margin: 0px;
-            padding: 0px;
-        }
-        ul.menu a{
-            color: inherit;
-            text-decoration: none;
-        }
-        /*1차 메뉴의 배치를 가로 배치로 변경 */
-        ul.menu > li{
-            display: inline-block;
-        }
-        /* 색상 변경 및 크기 설정 */
-        
-        ul.menu,
-        ul.menu ul{
-            font-size:24px;
-            background-color: white;
-        }
-        ul.menu li{
-            color:black;
-            background-color: white;
-            width: 150px;
-
-        }
-
-        /* 메뉴에 마우스가 올라가면 하이트라이트 효과 */
-        ul.menu li:hover{
-            background-color: #636e72;
-
-        }
-        /* 
-            1차메뉴의 아래쪽에 2차메뉴가 위치하도록 position 변경
-
-        */
-        ul.menu li{ /*메뉴 안에 있는 모든 li는 relative로 설정 */
-            position:relative;
-        }
-        ul.menu ul{  /*메뉴 안에 있는 모든 ul은 absolute로 설정 */
-            position:absolute;
-            z-index: 99999;
-            top:100%;
-            left: 0;
-        }
-        /* 
-            2차 이상의 메뉴를 숨김 처리
-
-        */
-        ul.menu > li ul{
-            display: none;
-        }
-        /* 
-            마우스가 올라간 메뉴 항목의 하위메뉴를 표시
-        */
-        ul.menu li:hover > ul{ /*ul인 menu안의 li에 마우스를 올리면 ul의 display가 block처리 된다 */
-            display: block;
-        }
-
-        /* 
-            a 태그에 말줄임표 처리 구현
-        */
-        ul.menu a{
-            /* 
-                overflow로 인해 발생하는 추가 공간을 해결하기 위해 높이 설정
-                -추가 공간이 생기는 이유는 overflow를 처리하기 위해 내부적으로 생성
-                -display를 inline-block으로 설정하고 세로 정렬을 지정하면 해결
-                -vertical-align은 어떤 값을 주더라도 문제가 해결된다
-                -버그에 가깝다
-            */
-            display: inline-block;
-            vertical-align: top;
-            width: 100%;
-            padding: 0.5em;
-            /* 말줄임표 처리를 위한 디자인(반드시 폭이 있어야함) */
-            text-overflow: ellipsis;
-            overflow: hidden;
-            white-space: nowrap;
-        }
-
-        /* 
-            overlow로 인해 발생하는 추가 공간을 해결하기 위해 높이 설정
-        */
-  
-        /* 
-            3차 이상의 메뉴는 하단이 아니라 우측에 나오도록 변경
-        */
-        ul.menu >li >ul >li ul{
-            top:0;
-            left: 100%;
-        }
-        /* 
-            확장 스타일: 메뉴를 상단에 고정 처리
-        */
-        ul.menu.fixed{
-            position: fixed;
-            left: 0;
-            right: 0;
-            top: 0;
-        }
-
-
-
-        /* 
-            링크 스타일
-            -방문한 링크는 :visited로 선택가능
-        */
-
-        a.link,
-        a.link:visited{
-            text-decoration: none;
-            color: #2d3436;
-        }
-        a.link:hover
-        {
-            color: #0984e3;
-        }
+ 
  
          /* 
             float 요소를 배치할 수 있는 전용 공간
@@ -574,7 +718,7 @@ textarea.form-input.fixed {
         */
         .float-container::after{
             content:"";
-            display: block;/* width:100%도 가능*/
+            display: block; /*width:100%도 가능*/
             clear: both;
             
         }
@@ -628,39 +772,7 @@ textarea.form-input.fixed {
         }
 
 
-                /* 
-            이미지 디자인
-        */
-        .image.image-circle{
-            border-radius: 50%;
-        }
-        .image.image-round{
-            border-radius:10px;
-        }
-        .image.image-border,
-        .image.image-hover:hover{
-            /* border: 3px solid black; */
-            box-shadow: 0 0 0 1px red ;
-        }
-        .image.image-blur{
-            opacity: 0.6;
-        }
-        .image.image-blur:hover{
-            opacity: 1;
-        }
-        .image.image-lift{
-            box-shadow: 0 0 3px 1px #2d3436;
-        }
-        .image.image-leaf{
-            border-top-left-radius: 50%;
-            border-bottom-right-radius: 50%;
-        }
-        .image.image-invert{
-            filter: invert(100%);
-        }
-        .image.image-grayscale{
-            filter: grayscale(100%);
-        }
+       
 
         /*
     성공/실패에 대한 스타일 구현
