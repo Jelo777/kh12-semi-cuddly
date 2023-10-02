@@ -111,7 +111,7 @@ ul.menu > li > ul > li{
 								</h3>
 							</c:when>
 							<c:otherwise>
-								<h3>${sessionScope.name}님환영해요!</h3>
+								<h3>${sessionScope.name}님 환영해요!</h3>
 							</c:otherwise>
 						</c:choose>
 					</div>
@@ -137,10 +137,10 @@ ul.menu > li > ul > li{
                             	<a class="link" href="/cuddly/product/list?item=패션"> - 패션</a>
                             </h3>
                             <h3>
-                            	<a class="link" href="/cuddly/product/list?item=문구/오피스"> - 문구/오피스</a>
+                            	<a class="link" href="/cuddly/product/list?item=문구/오피스"> - 문구 / 오피스</a>
                             </h3>
                             <h3>
-                            	<a class="link" href="/cuddly/product/list?item=홈데코/리빙"> - 홈데코/리빙</a>
+                            	<a class="link" href="/cuddly/product/list?item=홈데코/리빙"> - 홈데코 / 리빙</a>
                             </h3>
                             <h3>
                             	<a class="link" href="/cuddly/product/list?item=폰악세서리"> - 폰악세서리</a>
@@ -159,7 +159,7 @@ ul.menu > li > ul > li{
 
 					<div class="row left ms-20 mt-30">
 						<h2>
-							<a class="link" href="/cuddly/faq/list">공지사항</a>
+							<a class="link" href="/cuddly/faq/list"> FAQ </a>
 						</h2>
 					</div>
 				</div>
@@ -208,19 +208,22 @@ ul.menu > li > ul > li{
 					<a href="/cuddly/product/list">전체상품</a>
 					<ul>
 						<li><a href="/cuddly/product/list?item=패션">패션</a></li>
-						<li><a href="/cuddly/product/list?item=문구/오피스">문구/오피스</a></li>
-						<li><a href="/cuddly/product/list?item=홈데코/리빙">홈데코/리빙</a></li>
-						<li><a href="/cuddly/product/list?item=폰악세서리">폰악세서리</a></li>
+						<li><a href="/cuddly/product/list?item=문구/오피스">문구 / 오피스</a></li>
+						<li><a href="/cuddly/product/list?item=홈데코/리빙">홈데코 / 리빙</a></li>
+						<li><a href="/cuddly/product/list?item=폰악세서리">폰 악세서리</a></li>
 						<li><a href="/cuddly/product/list?item=기타">기타</a></li>
 					</ul>
 				</li>
 				<li class="center"><a href="/cuddly/review/list">리뷰</a></li>
-				<li class="center"><a href="/cuddly/faq/list">FAQ</a></li>
-
+				<li class="center"><a href="/cuddly/faq/list">공지사항</a></li>
+				
 				<%-- 관리자인 경우 추가 메뉴 출력 --%>
+	
 				<c:if test="${sessionScope.level == '관리자'}">
 					<li><a href="/cuddly/admin/product/list">관리자메뉴</a></li>
 				</c:if>
+
+			
 			</ul>
 		</nav>
 

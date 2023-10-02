@@ -7,7 +7,7 @@
 
 <div class="container w-800">
     <div class="row">
-        <h2>${faqDto.faqNo}번게시글</h2>
+        <h2>${param.category}</h2>
        
     </div>
     <div class="row">
