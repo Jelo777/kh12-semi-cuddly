@@ -327,6 +327,7 @@
 		</c:forEach>
 				<button type="button" style="width: 150px; font-size: 16px;" 
 					class="btn btn-exit mt-30">나가기</button>
+				<a href="/cuddly/member/address/list">새로 작성하기</a>
 	</div>
 </div>
 

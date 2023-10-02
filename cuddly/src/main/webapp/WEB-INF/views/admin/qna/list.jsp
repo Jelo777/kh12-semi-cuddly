@@ -7,31 +7,50 @@
 
 <script>
 
-function editAnswer(){
-	var check = document.getElementById('answer').readOnly;
-	
-	if(check == true){
-		document.getElementById('answer').readOnly = false;
-		document.getElementById("answer").focus();
-	}
-	else{
+$(function(){
 
-		var value = $("#testForm").serialize();
+	$(".edit-answer").click(function(e){
+
 		
-		$.ajax({
-			url:"/cuddly/rest/admin/qna/answer/update",
-			method:"post",
-			data : value,
-			success:function(response){
-				if(response){
-					location.reload();			
-				}else{
-					alert('업데이트 실패');
-				}
-			}
-		});
-	}
-}
+		 var qnaForm = $(this).closest("form");
+         var answerInput = qnaForm.find(".qna-answer");
+         
+         
+
+         if ($(answerInput).prop("readonly")) {
+             $(answerInput).prop("readonly", false).focus();
+         } 
+         
+         
+         else {
+             $.ajax({
+                 url: "/cuddly/rest/admin/qna/answer/update",
+                 method: "post",
+                 data: qnaForm.serialize(),
+                 success: function (response) {
+                     if (response) {
+                         location.reload();
+                     } else {
+                         alert('업데이트 실패');
+                     }
+                 }
+             });
+         }
+		
+		
+		
+		
+	})
+	
+	
+	
+	
+	
+})
+
+
+
+
 
 function update(e){
 	var value = $(e).serialize();
@@ -99,7 +118,7 @@ function update(e){
 					
 				<c:otherwise>
 					<div class="row left">
-						답변 : <input id="answer" name="qnaAnswer" autocomplete="off" 
+						답변 : <input class="qna-answer" id="answer" name="qnaAnswer" autocomplete="off" 
 										readonly="readonly" value="${qnaDto.qnaAnswer}" style="border:none; width:400px">
 					</div>
 				</c:otherwise>
@@ -118,10 +137,10 @@ function update(e){
 				
 		</div>
 		
-		</form>
 		<div class="row right">
-			<button class="btn btn-positive" onclick="editAnswer();">수정</button>
+			<button class="btn btn-positive edit-answer" type="button">수정</button>
 		</div>
+		</form>
 	
 	</c:forEach>
 	

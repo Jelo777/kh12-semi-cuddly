@@ -31,18 +31,18 @@ public class QnaController {
 		return "redirect:/cuddly/product/detail?productNo="+qnaDto.getProductNo() + "#qnaList";
 	}
 	
-	@GetMapping("/change")
-	public String edit(HttpSession session, Model model, int qnaNo) {
-		
-		QnaDto qnaDto = qnaDao.selectOne(qnaNo);
-		
-		model.addAttribute("qnaDto",qnaDto);
-		
-		return "/WEB-INF/views/qna/edit.jsp";
-		
-	}
+//	@GetMapping("/change")
+//	public String edit(HttpSession session, Model model, int qnaNo) {
+//		
+//		QnaDto qnaDto = qnaDao.selectOne(qnaNo);
+//		
+//		model.addAttribute("qnaDto",qnaDto);
+//		
+//		return "/WEB-INF/views/qna/edit.jsp";
+//		
+//	}
 	
-	@PostMapping("/change")
+	@RequestMapping("/change")
 	public String edit(@ModelAttribute QnaDto qnaDto, int qnaNo) {
 		
 		qnaDto.setQnaNo(qnaNo);
