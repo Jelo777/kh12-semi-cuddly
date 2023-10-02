@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.kh.cuddly.VO.FaqlistVO;
 import com.kh.cuddly.dao.FaqDao;
 import com.kh.cuddly.dto.FaqDto;
-import com.kh.cuddly.error.NoResultException;
+import com.kh.cuddly.error.NoTargetException;
 
 
 
@@ -115,7 +115,7 @@ public class FaqController {
 			return "redirect:detail?faqNo=" + faqDto.getFaqNo();
 		}
 		else {
-			throw new NoResultException("존재하지 않는 글");
+			throw new NoTargetException("존재하지 않는 글");
 		}
 	}
 }

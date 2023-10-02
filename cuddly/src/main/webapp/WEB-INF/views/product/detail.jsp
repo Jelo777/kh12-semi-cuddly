@@ -347,9 +347,11 @@
 	<div class="row left" id="qnaList">
 		<h2>Q&A</h2>
 	</div>
-	<div class="row right">
-		<button type="button" class="btn qna-write">문의하기</button>
-	</div>
+	<c:if test="${sessionScope.name != null}">
+		<div class="row right">
+			<button type="button" class="btn qna-write">문의하기</button>
+		</div>
+	</c:if>
 
 	<div class="row qna-write-form">
 		<form action="/cuddly/qna/write" method="post">
