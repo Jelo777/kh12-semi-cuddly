@@ -25,9 +25,7 @@
 <link rel="stylesheet" type="text/css" href="/css/reset.css">
 <link rel="stylesheet" type="text/css" href="/css/layout.css">
 <link rel="stylesheet" type="text/css" href="/css/commons.css">
-
 <!-- <link rel="stylesheet" type="text/css" href="/css/test.css"> -->
-
 
 <style>
 hr {
@@ -56,9 +54,6 @@ hr {
 	display: block;
 }
 
-ul.menu > li > ul > li{
-	font-size: 18px;
-}
 </style>
 
 <!-- jquery cdn -->
@@ -94,13 +89,14 @@ ul.menu > li > ul > li{
 				<div class="sidebar">
 					<div class="row right me-10">
 
-						<a class="link" href="/cuddly/member/mypage"> <i
-							class="fa-solid fa-circle-user fa-2x"></i>
-						</a> <i class="fa-regular fa-circle-xmark fa-2x"></i>
+						<a class="link" href="/cuddly/member/mypage"> 
+							<i class="fa-solid fa-circle-user fa-2x"></i>
+						</a> 
+							<i class="fa-regular fa-circle-xmark fa-2x"></i>
 
 					</div>
 					<div class="row">
-						<img src="/images/cuddlys.png" width="200" height="50">
+						<img src="/images/cuddlys.png" width="200" height="45">
 					</div>
 
 					<div class="row left ms-20 mt-30">
@@ -167,10 +163,10 @@ ul.menu > li > ul > li{
 			</div>
 
 
-			<div class="w-100 left">
+			<div class="center w-20">
 				<div class="logo mt-20 ms-30">
-					<label for="sidebar-toggle" class="sidebar-menu"> <i
-						class="fa-solid fa-bars fa-2x"></i>
+					<label for="sidebar-toggle" class="sidebar-menu">
+						<i class="fa-solid fa-bars fa-2x"></i>
 					</label>
 				</div>
 			</div>
@@ -178,20 +174,19 @@ ul.menu > li > ul > li{
 
 			<div class="w-100 center">
 				<div class="row">
-					<a href="/cuddly"> <img src="/images/cuddlyb.png" width="230"
-						height="50"><br>
+					<a href="/cuddly"> 
+						<img src="/images/cuddlyb.png" width="300" height="62" class="mb-20"><br>
 					</a>
-
 				</div>
-				<div>
-					<!--             		<form action="/cuddly/search"> -->
-					<!-- 						<input class="form-input" name="keyword"> -->
-					<!-- 						<button class="btn">검색</button> -->
-					<!-- 					</form> -->
+				<div class="row">
+					<form action="/cuddly/search">
+						<input class="form-input find-input" name="keyword" placeholder="   찾으시는 상품 혹은 크리에이터를 입력하세요.">
+						<button class="btn btn-positive">검색</button>
+					</form>
 				</div>
 			</div>
 
-			<div class="w-100 right">
+			<div class="center w-20">
 				<div class="etc mt-20">
 					<i class="purple fa-brands fa-gratipay fa-2x"></i>
 					 <a class="link" 
@@ -223,7 +218,9 @@ ul.menu > li > ul > li{
 
 				<%-- 관리자인 경우 추가 메뉴 출력 --%>
 				<c:if test="${sessionScope.level == '관리자'}">
-					<li><a href="/cuddly/admin/product/list">관리자메뉴</a></li>
+					<li class="menu-right">
+						<a href="/cuddly/admin/product/list">관리자메뉴</a>
+					</li>
 				</c:if>
 			</ul>
 		</nav>

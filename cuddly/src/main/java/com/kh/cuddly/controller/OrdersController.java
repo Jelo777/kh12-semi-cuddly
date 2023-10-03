@@ -332,6 +332,9 @@ public class OrdersController {
 	public String cartList(Model model,HttpSession session,@ModelAttribute(name = "vo") PaginationVO vo) {
 		
 		String memberId = (String) session.getAttribute("name");
+		if(memberId==null) {
+			return "redirect:/cuddly/member/login";
+		}
 		
 		int count = cartDao.countList(vo,memberId);
 		
@@ -348,7 +351,7 @@ public class OrdersController {
 	public String orderList(Model model,@ModelAttribute(name = "vo") PaginationVO vo,HttpSession session) {
 		
 		String memberId = (String) session.getAttribute("name");
-		
+
 		int count = ordersDao.countList(vo,memberId);
 		
 		vo.setCount(count);

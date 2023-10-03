@@ -81,7 +81,7 @@
 
 
 
-	<div class="row">
+	<div class="row mt-50">
 		<h2>신상품</h2>
 	</div>
 	<c:forEach var="productListDto" items="${sortByNew}" end="3">
@@ -92,20 +92,25 @@
 						<td><img
 							src="/cuddly/image/product/main?productNo=${productListDto.productNo}"
 							onerror="this.src='https://dummyimage.com/200x200/000/fff;'"
-							width="200" height="200"></td>
+							width="200" height="200"
+							class="image image-round"></td>
+					</tr>
+<!-- 					<tr> -->
+<%-- 						<td>${productListDto.productNo}</td> --%>
+<!-- 					</tr> -->
+					<tr>
+						<td class="productName">${productListDto.productName}</td>
 					</tr>
 					<tr>
-						<td>${productListDto.productNo}</td>
+						<td class="creatorName mt-50">크리에이터명</td>
 					</tr>
+					<tr></tr>
 					<tr>
-						<td>${productListDto.productName}</td>
+						<td class="productPrice">${productListDto.productPrice}원</td>
 					</tr>
-					<tr>
-						<td>${productListDto.productPrice}</td>
-					</tr>
-					<tr>
-						<td>${productListDto.productDate}</td>
-					</tr>
+<!-- 					<tr> -->
+<%-- 						<td>${productListDto.productDate}</td> --%>
+<!-- 					</tr> -->
 				</table>
 			</div>
 		</a>
@@ -113,11 +118,11 @@
 	<div class="row">
 		<a class="link"
 			href="cuddly/product/list?${vo.getQueryStringNew()}">
-			<h3 class="btn">신상품 더보기</h3>
+			<h3 class="btn btn-more">신상품 더보기</h3>
 		</a>
 	</div>
 
-	<div class="row">
+	<div class="row mt-50">
 		<h2>베스트상품</h2>
 	</div>
 	<c:forEach var="productListDto" items="${sortByBest}" end="3">
@@ -128,20 +133,25 @@
 						<td><img
 							src="/cuddly/image/product/main?productNo=${productListDto.productNo}"
 							onerror="this.src='https://dummyimage.com/200x200/000/fff;'"
-							width="200" height="200"></td>
+							width="200" height="200"
+							class="image image-round"></td>
+					</tr>
+<!-- 					<tr> -->
+<%-- 						<td>${productListDto.productNo}</td> --%>
+<!-- 					</tr> -->
+					<tr>
+						<td class="productName">${productListDto.productName}</td>
 					</tr>
 					<tr>
-						<td>${productListDto.productNo}</td>
+						<td class="creatorName">크리에이터명</td>
 					</tr>
+					<tr></tr>
 					<tr>
-						<td>${productListDto.productName}</td>
+						<td class="productPrice">${productListDto.productPrice}원</td>
 					</tr>
-					<tr>
-						<td>${productListDto.productPrice}</td>
-					</tr>
-					<tr>
-						<td>${productListDto.productDate}</td>
-					</tr>
+<!-- 					<tr> -->
+<%-- 						<td>${productListDto.productDate}</td> --%>
+<!-- 					</tr> -->
 				</table>
 			</div>
 		</a>
@@ -149,7 +159,7 @@
 	<div class="row">
 		<a class="link"
 			href="cuddly/product/list?${vo.getQueryStringPopular()}">
-			<h3 class="btn">베스트상품 더보기</h3>
+			<h3 class="btn btn-more">베스트상품 더보기</h3>
 		</a>
 	</div>
 </div>

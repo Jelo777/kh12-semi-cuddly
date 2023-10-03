@@ -4,22 +4,23 @@
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 
 <form action="login" method="post" autocomplete="off">
-	<div class="container w-400">
+	<div class="container form-border mt-30">
+	<div class= "center w-400">
 	
 		<div class="row">
-			<h2>로그인</h2>
+			<img src="/images/cuddlys.png" class="mt-40">
 		</div>
 		<div class="row">
-			<input type="text"  name="memberId" class="form-input w-100" placeholder="아이디 입력">
+			<input type="text"  name="memberId" class="form-input underline-input w-100 mt-20" placeholder="아이디 입력">
 		</div>
 		<div class="row">
-			<input type="password" name="memberPw" class="form-input w-100" placeholder="비밀번호 입력">
+			<input type="password" name="memberPw" class="form-input underline-input w-100 mb-30" placeholder="비밀번호 입력">
 		</div>
 		<div class="row">
-			<button type="submit" class="btn btn-positive w-100">로그인</button>
+			<button type="submit" class="btn btn-positive w-100 mb-10">로그인</button>
 		</div>
 		<div class="row flex-container">
-			<div class="w-100 left">
+			<div class="w-100 left"> 
 				<a class="link" href="/cuddly/member/join">회원가입</a>
 			</div>
 			<div class="w-100 right">
@@ -30,9 +31,10 @@
 			</div>
 		</div>
 	</div>
+	</div>
 </form>
 	<c:if test="${param.error !=null}">
-		<h3>아이디 또는 비밀번호가 일치하지 않습니다</h3>
+		<h3 class="mt-30"style="color:red">아이디 또는 비밀번호가 일치하지 않습니다</h3>
 	</c:if>	
 
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
