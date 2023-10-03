@@ -1,33 +1,37 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
+<jsp:include page="/WEB-INF/views/template/mypageHeader.jsp"></jsp:include>
 
-<div class="container w-1000">
+<div class="container w-900">
 	<div class="row">
-		<h1>관심상품</h1>
+		<h2 class="mv-30">관심상품</h2>
 	</div>
+	
 	<c:forEach var="wishlistListDto" items="${wishlistList}">
 		<a class="link" href="/cuddly/product/detail?productNo=${wishlistListDto.productNo}">
 			<div class="inline-flex-container allow-wrap left">
-				<table>
+				<table class="mh-10 mb-20">
 					<tr>
 						<td>
 						<img src="/cuddly/admin/image?productNo=${wishlistListDto.productNo}"
-							width="200" height="200"></td>
+							width="200" height="200" class="image image-round"></td>
+					</tr>
+<!-- 					<tr> -->
+<%-- 						<td>${wishlistListDto.productNo}</td> --%>
+<!-- 					</tr> -->
+					<tr>
+						<td class="productName">${wishlistListDto.productName}</td>
 					</tr>
 					<tr>
-						<td>${wishlistListDto.productNo}</td>
+						<td class="creatorName">크리에이터명</td>
 					</tr>
 					<tr>
-						<td>${wishlistListDto.productName}</td>
+						<td class="productPrice">${wishlistListDto.productPrice}</td>
 					</tr>
-					<tr>
-						<td>${wishlistListDto.productPrice}</td>
-					</tr>
-					<tr>
-						<td>${wishlistListDto.productDate}</td>
-					</tr>
+<!-- 					<tr> -->
+<%-- 						<td>${wishlistListDto.productDate}</td> --%>
+<!-- 					</tr> -->
 				</table>
 			</div>
 		</a>
@@ -35,4 +39,4 @@
 </div>
 
 
-<jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
+<jsp:include page="/WEB-INF/views/template/mypageFooter.jsp"></jsp:include>

@@ -29,41 +29,25 @@
 <!-- <link rel="stylesheet" type="text/css" href="/css/test.css"> -->
 
 <style>
-	hr{
-	background:#F3F0FE;
-	height:3px;
-	border:0;
-	}
-
-
-	.sidebar{
-	
+	.sidebar{	
 		position: absolute;
 		top : 100px;
 		bottom :100px;
 		z-index: 99999;
 		width :250px;
-		height : 500px;
+		height : 600px;
 		background: white;
 		box-shadow: 0 0 0 1px #2d3436;
 		
 		
 	}
 	#sidebar-toggle + .sidebar{
-	
 		display:none;
 	}
 	#sidebar-toggle:checked +.sidebar{
 /* 		left:200px; */
-		display:block;
-	
+		display:block;	
 	}
-
-
-
-
-
-
 
 
 </style>
@@ -110,32 +94,69 @@ $(document).ready(function() {
         			<div class="row left ms-20 mt-30">
 	        			<c:choose>
 		        			<c:when test="${sessionScope.name==null}">
-		        				<h3><a class="link" href="/cuddly/member/login">로그인이 필요해요!</a></h3>
+		        				<h3 class="mv-30 ms-20">
+		        					<a class="link" href="/cuddly/member/login">로그인이 필요해요!</a>
+		        				</h3>
 		        			</c:when>
 							<c:otherwise>
-								<h3>${sessionScope.name}님 환영해요!</h3>
+								<h3 class="mv-30 ms-20">${sessionScope.name}님 환영해요!</h3>
 							</c:otherwise>
 						</c:choose>
         			</div>
         			
        				<div class="row left ms-20 mt-30">
-        				<h2><a class="link" href="/cuddly">홈</a></h2>
+        				<h2 class="ms-30">
+        					<a class="link" href="/cuddly">홈</a>
+        				</h2>
         			</div>
         			
-        			<div class="row left ms-20 mt-30">
-        				<h2><a class="link" href="/cuddly/product/creator">크리에이터</a></h2>
-        			</div>
+        			<hr class="mb-20 w-80">
         			
         			<div class="row left ms-20 mt-30">
-        				<h2><a class="link" href="/cuddly/product/list">전체상품</a></h2>
+        				<h2 class="ms-30">
+        					<a class="link" href="/cuddly/product/creator">크리에이터</a>
+        				</h2>
         			</div>
         			
-        			<div class="row left ms-20 mt-30">
-        				<h2><a class="link" href="/cuddly/review/list">리뷰</a></h2>
-        			</div>
+        			<hr class="mb-20 w-80">
         			
         			<div class="row left ms-20 mt-30">
-        				<h2><a class="link" href="/cuddly/faq/list">공지사항</a></h2>
+        				<h2 class="ms-30">
+        					<a class="link" href="/cuddly/product/list">전체상품</a>
+        				</h2>
+        				<div class="row left">
+							<h3 class="mt-10 ms-30">
+                            	<a class="link" href="/cuddly/product/list?item=패션"> - 패션</a>
+                            </h3>
+                            <h3 class="mt-10 ms-30">
+                            	<a class="link" href="/cuddly/product/list?item=문구/오피스"> - 문구/오피스</a>
+                            </h3>
+                            <h3 class="mt-10 ms-30">
+                            	<a class="link" href="/cuddly/product/list?item=홈데코/리빙"> - 홈데코/리빙</a>
+                            </h3>
+                            <h3 class="mt-10 ms-30">
+                            	<a class="link" href="/cuddly/product/list?item=폰악세서리"> - 폰악세서리</a>
+                            </h3>
+                            <h3 class="mt-10 ms-30">
+                            	<a class="link" href="/cuddly/product/list?item=기타"> - 기타</a>
+                            </h3>
+                        </div>
+        			</div>
+        			
+        			<hr class="mb-20 w-80">
+        			
+        			<div class="row left ms-20 mt-30">
+        				<h2 class="ms-30">
+        					<a class="link" href="/cuddly/review/list">리뷰</a>
+        				</h2>
+        			</div>
+        			
+        			<hr class="mb-20 w-80">
+        			
+        			<div class="row left ms-20 mt-30">
+        				<h2 class="ms-30">
+        					<a class="link" href="/cuddly/faq/list">공지사항</a>
+        				</h2>
         			</div>
         			
         		</div>
@@ -172,7 +193,7 @@ $(document).ready(function() {
 					</a>
 					<a class="link" href="/cuddly/orders/cartList?memberId=${sessionScope.name}">
 						<i class="fa-solid fa-cart-shopping fa-2x headerIcon"></i>
-					</a> 
+					</a>
 					
 					<a class="link" href="/cuddly/member/mypage"> 
 						<i class="fa-solid fa-circle-user fa-2x headerIcon"></i>
@@ -212,25 +233,34 @@ $(document).ready(function() {
 	<section>
 		<aside>
 			<div class="flex-container vertical center w-200">
+			
 				<div class="row mv-30">
 					<h2>관리자 페이지</h2>
 				</div>
 				
 				<div class="row">
-				<hr>
+					<hr>
 				</div>
 				
-				<div class="row">
-					<h3><a href="/cuddly/admin/product/list" class="link">상품관리</a></h3>
+				<div class="row left">
+					<h3 class="ms-20">
+						<a href="/cuddly/admin/product/list" class="link">상품관리</a>
+					</h3>
 				</div>
-				<div class="row">
-					<h3><a href="/cuddly/admin/qna/list" class="link">상품문의</a></h3>
+				<div class="row left">
+					<h3 class="ms-20">
+						<a href="/cuddly/admin/qna/list" class="link">상품문의</a>
+					</h3>
 				</div>
-				<div class="row">
-					<h3><a href="/cuddly/admin/faq/list" class="link">FAQ관리</a></h3>
+				<div class="row left">
+					<h3 class="ms-20">
+						<a href="/cuddly/admin/faq/list" class="link">FAQ관리</a>
+					</h3>
 				</div>
-				<div class="row">
-					<h3><a href="/cuddly/admin/member/list" class="link">회원관리</a></h3>
+				<div class="row left">
+					<h3 class="ms-20">
+						<a href="/cuddly/admin/member/list" class="link">회원관리</a>
+					</h3>
 				</div>
 				
 			</div>

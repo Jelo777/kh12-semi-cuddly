@@ -4,7 +4,7 @@
     
 
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-<jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
+<jsp:include page="/WEB-INF/views/template/mypageHeader.jsp"></jsp:include>
 
 </head>
 <body>
@@ -70,17 +70,19 @@
 
 <div class="container w-600">
 					<div class="row">
-						<div class="flex-container card">
-							<div class="w-25 flex-container align-center">
+						<div class="flex-container card mt-30">
+							<div class="w-25 ms-10 mb-10">
 								<a href="/cuddly/product/detail?productNo=${productDto.productNo}">
 								<img src="/cuddly/image/product/main?productNo=${productDto.productNo}"
-									width="150" height="200">
+												width="150" height="150" class="image image-round">
 								</a>
 							</div>
 							<div class="w-75">
-								<div class="row left title"> 상품명 : ${productDto.productName}</div>
+								<div class="row left title">
+									<span class="productName ms-10">상품명 : ${productDto.productName}</span>
+								</div>
 								<div class="row left">
-									가격 : <label class="price">${productDto.productPrice}</label>
+									<span class="productPrice ms-10">가격 : <label class="price">${productDto.productPrice}</label></span>
 								</div>
 							</div>
 						</div>
@@ -91,25 +93,42 @@
   <form action="write" method="post" enctype="multipart/form-data">
         <input type="hidden" name="productNo" value="${productNo}">
         <h1>
-       <i class="star far fa-star yellow" data-rating="1"></i>
-<i class="star far fa-star yellow" data-rating="2"></i>
-<i class="star far fa-star yellow" data-rating="3"></i>
-<i class="star far fa-star yellow" data-rating="4"></i>
-<i class="star far fa-star yellow" data-rating="5"></i>
-<input type="hidden" name="reviewGrade" id="reviewGrade" value="0"> <!-- 초기값 -->
-</h1>
+			<i class="star far fa-star yellow" data-rating="1"></i>
+			<i class="star far fa-star yellow" data-rating="2"></i>
+			<i class="star far fa-star yellow" data-rating="3"></i>
+			<i class="star far fa-star yellow" data-rating="4"></i>
+			<i class="star far fa-star yellow" data-rating="5"></i>
+			<input type="hidden" name="reviewGrade" id="reviewGrade" value="0"> <!-- 초기값 -->
+		</h1>
         
        <div class="row">
-        <textarea placeholder="리뷰 내용" name="reviewContent" class="form-input w-100" rows="4"></textarea>
+        	<textarea placeholder="리뷰 내용" name="reviewContent" class="form-input text-input w-100" rows="4"></textarea>
         </div>
-        <input type="file" class="form-input w-100 file-chooser" name="attach" accept="image/*"><br><br>
-        <img class="now" src="" width="200" height="200">
-        <div class="row">
-        <button class="btn-save">사진 등록</button></div>
-        <button type="submit">리뷰 등록</button>
+        
+        <div class="flex-container">
+        	<div class="row w-33">
+        	<img class="now" src="" width="200" height="200">
+        	</div>
+        	<div class="row ms-10">
+        		<br>
+        		<br>
+        		<br>
+        		<br>
+        		<br>
+        		<br>
+        		<input type="file" class="form-input w-95 file-chooser ms-10" name="attach" accept="image/*">
+        		<button class="btn-save btn btn-positive w-95 mt-10 ms-10">사진 등록</button>
+        	</div>
+        </div>
+        	<div class="row">
+        		<button type="submit" class="btn btn-positive w-100">리뷰 등록</button>
+        	</div>
+     
     </form>
     </div>
 
 
 </body>
 </html>
+
+<jsp:include page="/WEB-INF/views/template/mypageFooter.jsp"></jsp:include>

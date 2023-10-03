@@ -28,12 +28,6 @@
 <!-- <link rel="stylesheet" type="text/css" href="/css/test.css"> -->
 
 <style>
-hr {
-	background: #F3F0FE;
-	height: 3px;
-	border: 0;
-}
-
 .sidebar {
 	position: absolute;
 	top: 100px;
@@ -102,59 +96,67 @@ hr {
 					<div class="row left ms-20 mt-30">
 						<c:choose>
 							<c:when test="${sessionScope.name==null}">
-								<h3>
+								<h3 class="mv-30 ms-20">
 									<a class="link" href="/cuddly/member/login">로그인이 필요해요!</a>
 								</h3>
 							</c:when>
 							<c:otherwise>
-								<h3>${sessionScope.name}님환영해요!</h3>
+								<h3 class="mv-30 ms-20">${sessionScope.name}님환영해요!</h3>
 							</c:otherwise>
 						</c:choose>
 					</div>
 
 					<div class="row left ms-20 mt-30">
-						<h2>
+						<h2 class="ms-30">
 							<a class="link" href="/cuddly">홈</a>
 						</h2>
 					</div>
+					
+					<hr class="mb-20 w-80">
 
 					<div class="row left ms-20 mt-30">
-						<h2>
+						<h2 class="ms-30">
 							<a class="link" href="/cuddly/product/creator">크리에이터</a>
 						</h2>
 					</div>
+					
+					<hr class="mb-20 w-80">
 
 					<div class="row left ms-20 mt-30">
-						<h2>
+						<h2 class="ms-30">
 							<a class="link" href="/cuddly/product/list">전체상품</a>
 						</h2>
 						<div class="row left">
-							<h3>
+							<h3 class="mt-10 ms-30">
                             	<a class="link" href="/cuddly/product/list?item=패션"> - 패션</a>
                             </h3>
-                            <h3>
+                            <h3 class="mt-10 ms-30">
                             	<a class="link" href="/cuddly/product/list?item=문구/오피스"> - 문구/오피스</a>
                             </h3>
-                            <h3>
+                            <h3 class="mt-10 ms-30">
                             	<a class="link" href="/cuddly/product/list?item=홈데코/리빙"> - 홈데코/리빙</a>
                             </h3>
-                            <h3>
+                            <h3 class="mt-10 ms-30">
                             	<a class="link" href="/cuddly/product/list?item=폰악세서리"> - 폰악세서리</a>
                             </h3>
-                            <h3>
+                            <h3 class="mt-10 ms-30">
                             	<a class="link" href="/cuddly/product/list?item=기타"> - 기타</a>
                             </h3>
                         </div>
 					</div>
+					
+					<hr class="mb-20 w-80">
 
 					<div class="row left ms-20 mt-30">
-						<h2>
+						<h2 class="ms-30">
 							<a class="link" href="/cuddly/review/list">리뷰</a>
 						</h2>
 					</div>
+					
+					<hr class="mb-20 w-80">
 
 					<div class="row left ms-20 mt-30">
-						<h2>
+						<h2 class="ms-30">
 							<a class="link" href="/cuddly/faq/list">공지사항</a>
 						</h2>
 					</div>

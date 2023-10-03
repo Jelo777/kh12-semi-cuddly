@@ -36,6 +36,9 @@
 .w-33, .col-3 {width: 33.3333%;}
 .w-50, .col-2 {width: 50%;}
 .w-75 {width: 75%;}
+.w-80 {width:80%;}
+.w-90 {width:90%;}
+.w-95 {width:95%;}
 .w-100 { width:100%; }
 
 .w-300 { width:300px; }
@@ -55,6 +58,8 @@
     - 기본 간격은 10px이며 10px 단위로 설정 가능하도록 구현
     - margin은 m, padding은 p로 설정
 */
+
+.pv-30{ padding: 30px 0px;}
 
 .m-10 { margin: 10px; }
 .m-20 { margin: 20px; }
@@ -176,6 +181,7 @@ ul.menu > li{
 ul.menu,
 ul.menu ul{
 	font-size:24px;
+	font-weight: bold;
 	background-color: white;
 }
 ul.menu li{
@@ -288,12 +294,17 @@ a.link:hover
 /*크리에이터명*/
 .creatorName{
 	font-size: 16px;
-	margin: 10px 0px;
 }
 /*상품가격*/
 .productPrice{
-	font-size: 22px;
+	font-size: 20px;
 	font-weight: bold;
+}
+
+/* 옵션,수량 */
+.optionName{
+	font-size: 14px;
+	color: darkgray;
 }
 
 /*테이블형식 상품 글자 간격조절*/
@@ -344,30 +355,38 @@ table {
     vertical-align: bottom;
  
  	font-size: 15px;
- 	padding: 0.7em 1.2em;
  	border: 1px solid #BEADFA;
     border-radius: 5em;
     color: #BEADFA;
+}
+
+/*작은 버튼*/
+.btn.btn-small{
+	font-size: 10px;
+	padding: 0.4em 1em;
+    color: white;
 }
 
 .btn.btn-more{
   	width : 300px;
   	height: 40px;
     outline: none; /*outline은 입력 창 선택 시 강조 효과*/
-    line-height: 1.6em;
+    line-height: 2.5em;
     border: 1px solid #BEADFA;
     color: #BEADFA;
 }
 
 .btn.btn-positive {
+	padding: 0.6em 1.4em;
     border-color: #BEADFA;
     background-color: #BEADFA;
     color: white;
 }
 .btn.btn-negative {
-    border-color: #e17055;
-    background-color: #e17055;
-    color: white;
+	padding: 0.7em 1.4em;
+    border-color: #BEADFA;
+    background-color: white;
+    color: #BEADFA;
 }
 
 
@@ -377,14 +396,15 @@ table {
   	height: 40px;
     outline: none; /*outline은 입력 창 선택 시 강조 효과*/
     border: 1px solid #BEADFA;
-    border-radius: 5em;
+    
     line-height: 1.2em;
     font-style: #BEADFA;
 }
 
 /*아오 왜 돋보기 안들어가냐고*/
 .form-input.find-input{
-	  	width : 400px;
+	width : 400px;
+	border-radius: 5em;
 	background-image: url(glass.png);
 	background-color: #FFFEFC;
 }
@@ -393,11 +413,15 @@ table {
 	border-top: none;
     border-left: none;
     border-right: none;
-    border-radius: 0px;
     padding-left: 0px;
     padding-right: 0px;
     background-color: #FFFEFC;
 }
+
+.form-input.text-input{
+	border-color: darkgray;
+}
+
 
 /*로그인&회원가입 폼*/
  .form-border{
@@ -411,6 +435,21 @@ table {
     justify-content: center;
 /*    align-items: center;*/
  }
+
+/* 라인 */
+hr{
+	background:#F3F0FE;
+	height:3px;
+	border:0;
+	}
+
+ /* 카드형식 테두리 */
+ .card{
+    border: 2px solid #BEADFA;
+    border-radius: 10px;
+    padding-top: 10px;
+    padding-bottom: 2px;
+}
 
 
 
@@ -447,17 +486,7 @@ table {
     - 기본 스타일에 옵션을 추가하듯이 추가 클래스를 작성하여 적용
 */
 
-/* 
-    2개 클래스가 모두 적용된 경우만 디자인하도록 설정
-*/
-.form-input.form-underline {
-    border-top: none;
-    border-left: none;
-    border-right: none;
-    border-radius: 0px;
-    padding-left: 0px;
-    padding-right: 0px;
-}
+
 
 /*
     입력창 변형 스타일
@@ -504,22 +533,7 @@ textarea.form-input.fixed {
     filter:brightness(98%);
 }
 
-/*
-    버튼은 역할에 따라 구분
-    - 긍정버튼 - 페이지의 목적을 달성할 수 있도록 하는 버튼
-    - 중립버튼 - 페이지의 목적과 아무 상관 없는 버튼(기본값)
-    - 부정버튼 - 페이지의 목적을 달성할 수 없도록 하는 버튼
-*/
-.btn.btn-positive {
-    border-color: #BEADFA;
-    background-color: #BEADFA;
-    color: white;
-}
-.btn.btn-negative {
-    border-color: #e17055;
-    background-color: #e17055;
-    color: white;
-}
+
 
 
 
@@ -837,10 +851,3 @@ textarea.form-input.fixed {
             padding: 20px;
         }
         
- /* 카드형식 테두리 */
- .card{
-    border: 1px solid #2d3436;
-    border-radius: 10px;
-    padding-top: 12px;
-    padding-bottom: 5px;
-}

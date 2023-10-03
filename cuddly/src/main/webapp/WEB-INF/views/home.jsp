@@ -81,12 +81,12 @@
 
 
 
-	<div class="row mt-50">
-		<h2>신상품</h2>
+	<div class="row">
+		<h2 class=" mt-50">신상품</h2>
 	</div>
 	<c:forEach var="productListDto" items="${sortByNew}" end="3">
 		<a class="link" href="cuddly/product/detail?productNo=${productListDto.productNo}">
-			<div class="inline-flex-container allow-wrap left">
+			<div class="inline-flex-container allow-wrap left mh-10">
 				<table class="">
 					<tr>
 						<td><img
@@ -122,12 +122,12 @@
 		</a>
 	</div>
 
-	<div class="row mt-50">
-		<h2>베스트상품</h2>
+	<div class="row">
+		<h2 class=" mt-50">베스트상품</h2>
 	</div>
 	<c:forEach var="productListDto" items="${sortByBest}" end="3">
 		<a class="link" href="cuddly/product/detail?productNo=${productListDto.productNo}">
-			<div class="inline-flex-container allow-wrap left">
+			<div class="inline-flex-container allow-wrap left mh-10">
 				<table class="">
 					<tr>
 						<td><img
