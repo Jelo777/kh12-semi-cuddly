@@ -28,41 +28,25 @@
 <!-- <link rel="stylesheet" type="text/css" href="/css/test.css"> -->
 
 <style>
-	hr{
-	background:#F3F0FE;
-	height:3px;
-	border:0;
-	}
-
-
 	.sidebar{
-	
 		position: absolute;
 		top : 100px;
 		bottom :100px;
 		z-index: 99999;
 		width :250px;
-		height : 500px;
+		height : 600px;
 		background: white;
-		box-shadow: 0 0 0 1px #2d3436;
-		
-		
+		box-shadow: 0 0 0 1px #2d3436;	
 	}
-	#sidebar-toggle + .sidebar{
 	
+	#sidebar-toggle + .sidebar{	
 		display:none;
 	}
+	
 	#sidebar-toggle:checked +.sidebar{
 /* 		left:200px; */
 		display:block;
-	
 	}
-
-
-
-
-
-
 
 
 </style>
@@ -100,9 +84,9 @@ $(document).ready(function() {
 							<i class="fa-solid fa-circle-user fa-2x"></i>
 						</a>	
 							
-	        			<i class="fa-regular fa-circle-xmark fa-2x"></i>
-	        			
-	        		</div>        		
+	        			<i class="fa-regular fa-circle-xmark fa-2x"></i>        			
+	        		</div>     
+	        		   		
         		<div class="row">
 	            	<img src="/images/cuddlys.png" width="200" height="45">
             	</div>
@@ -110,32 +94,69 @@ $(document).ready(function() {
 	        			<div class="row left ms-20 mt-30">
 	        			<c:choose>
 		        			<c:when test="${sessionScope.name==null}">
-		        				<h3><a class="link" href="/cuddly/member/login">로그인이 필요해요!</a></h3>
+		        				<h3 class="mv-30 ms-20">
+		        					<a class="link" href="/cuddly/member/login">로그인이 필요해요!</a>
+		        				</h3>
 		        			</c:when>
 							<c:otherwise>
-								<h3>${sessionScope.name}님 환영해요!</h3>
+								<h3 class="mv-30 ms-20">${sessionScope.name}님 환영해요!</h3>
 							</c:otherwise>
 						</c:choose>
 	        			</div>
         			
 	        			<div class="row left ms-20 mt-30">
-	        				<h2><a class="link" href="/cuddly">홈</a></h2>
+	        				<h2 class="ms-30">
+	        					<a class="link" href="/cuddly">홈</a>
+	        				</h2>
 	        			</div>
 	        			
-	        			<div class="row left ms-20 mt-30">
-	        				<h2><a class="link" href="/cuddly/product/creator">크리에이터</a></h2>
-	        			</div>
+	        			<hr class="mb-20 w-80">
 	        			
 	        			<div class="row left ms-20 mt-30">
-	        				<h2><a class="link" href="/cuddly/product/list">전체상품</a></h2>
+	        				<h2 class="ms-30">
+	        					<a class="link" href="/cuddly/product/creator">크리에이터</a>
+	        				</h2>
 	        			</div>
 	        			
-	        			<div class="row left ms-20 mt-30">
-	        				<h2><a class="link" href="/cuddly/review/list">리뷰</a></h2>
-	        			</div>
+	        			<hr class="mb-20 w-80">
 	        			
 	        			<div class="row left ms-20 mt-30">
-	        				<h2><a class="link" href="/cuddly/faq/list">공지사항</a></h2>
+	        				<h2 class="mv-20 ms-30">
+	        					<a class="link" href="/cuddly/product/list">전체상품</a>
+	        				</h2>
+	        				<div class="row left">
+							<h3 class="mt-10 ms-30">
+                            	<a class="link" href="/cuddly/product/list?item=패션"> - 패션</a>
+                            </h3>
+                            <h3 class="mt-10 ms-30">
+                            	<a class="link" href="/cuddly/product/list?item=문구/오피스"> - 문구/오피스</a>
+                            </h3>
+                            <h3 class="mt-10 ms-30">
+                            	<a class="link" href="/cuddly/product/list?item=홈데코/리빙"> - 홈데코/리빙</a>
+                            </h3>
+                            <h3 class="mt-10 ms-30">
+                            	<a class="link" href="/cuddly/product/list?item=폰악세서리"> - 폰악세서리</a>
+                            </h3>
+                            <h3 class="mt-10 ms-30">
+                            	<a class="link" href="/cuddly/product/list?item=기타"> - 기타</a>
+                            </h3>
+                        </div>
+	        		</div>
+	        		
+	        		<hr class="mb-20 w-80">
+	        			
+	        			<div class="row left ms-20 mt-30">
+	        				<h2 class="ms-30">
+	        					<a class="link" href="/cuddly/review/list">리뷰</a>
+	        				</h2>
+	        			</div>
+	        			
+	        			<hr class="mb-20 w-80">
+	        			
+	        			<div class="row left ms-20 mt-30">
+	        				<h2 class="ms-30">
+	        					<a class="link" href="/cuddly/faq/list">공지사항</a>
+	        				</h2>
 	        			</div>        		
         		</div>
          	
@@ -207,10 +228,33 @@ $(document).ready(function() {
 	<hr>
 	<section>
 		<aside>
-             <div class="flex-container vertical center">
+             <div class="flex-container vertical center w-200">
              
-		     	<div class="row left mv-30">
-					<h1>마이페이지</h1>
+		     	<div class="row left">
+					<h2 class="mt-30 ms-20">마이페이지</h2>
+				</div>
+				
+					<hr class="mb-20 w-80">
+				
+				<div class="row left">
+					<h3 class="ms-20">
+						<a class="link" href="/cuddly/orders/list">구매내역</a>
+					</h3>
+				</div>
+				<div class="row left">
+					<h3 class="ms-20">
+						<a class="link" href="/cuddly/review/memberList">나의 리뷰</a>
+					</h3>
+				</div>
+				<div class="row left">
+					<h3 class="ms-20">
+						<a class="link" href="/cuddly/member/mypage/wishlist">관심상품</a>
+					</h3>
+				</div>
+				<div class="row left">
+					<h3 class="ms-20">
+						<a class="link" href="/cuddly/qna/memberList">상품문의</a>
+					</h3>
 				</div>
 				
 				<div>
@@ -218,36 +262,29 @@ $(document).ready(function() {
 				</div>
 				
 				<div class="row left">
-					<h3><a class="link" href="/cuddly/orders/list">구매내역</a></h3>
+					<h3 class="ms-20">
+						<a class="link" href="/cuddly/member/change">개인정보수정</a>
+					</h3>
 				</div>
 				<div class="row left">
-					<h3><a class="link" href="/cuddly/review/memberList">나의 리뷰</a></h3>
+					<h3 class="ms-20">
+						<a class="link" href="/cuddly/member/password">비밀번호 변경</a>
+					</h3>
 				</div>
 				<div class="row left">
-					<h3><a class="link" href="/cuddly/member/mypage/wishlist">관심상품</a></h3>
+					<h3 class="ms-20">
+						<a class="link" href="/cuddly/member/address/list">배송지 관리</a>
+					</h3>
 				</div>
 				<div class="row left">
-					<h3><a class="link" href="/cuddly/qna/memberList">상품문의</a></h3>
-				</div>
-				
-				<div>
-					<hr>
-				</div>
-				
-				<div class="row left">
-					<h3><a class="link" href="/cuddly/member/change">개인정보수정</a></h3>
+					<h3 class="ms-20">
+						<a class="link" href="/cuddly/member/logout">로그아웃</a>
+					</h3>
 				</div>
 				<div class="row left">
-					<h3><a class="link" href="/cuddly/member/password">비밀번호 변경</a></h3>
-				</div>
-				<div class="row left">
-					<h3><a class="link" href="/cuddly/member/address/list">배송지 관리</a></h3>
-				</div>
-				<div class="row left">
-					<h3><a class="link" href="/cuddly/member/logout">로그아웃</a></h3>
-				</div>
-				<div class="row left">
-					<h3><a class="link" href="/cuddly/member/exit">탈퇴</a></h3>
+					<h3 class="ms-20">
+						<a class="link" href="/cuddly/member/exit">탈퇴</a>
+					</h3>
 				</div>
 				
 				

@@ -1,52 +1,49 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>  
-<jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
+<jsp:include page="/WEB-INF/views/template/mypageHeader.jsp"></jsp:include>
 
 <style>
-
-.card {
-	/* border: 1px solid #2d3436; */
-	box-shadow: 0px 0px 0px 1px black;
-	border-radius: 0.2em;
-}
-
-
 
 </style>
 
 
-
-
-<h1>나의 리뷰</h1>
-<c:forEach var="reviewDto" items="${list}">
-
-<div class="container w-700">
-			<div class="flex-container card">
+<div class="container w-600">
+	<div class="row">
+		<h2 class="mv-30">나의 리뷰</h2>
+	</div>
+	
+	<c:forEach var="reviewDto" items="${list}">
+		<div class="flex-container card mt-30">
 			<div class="row w-25">
-		<c:choose>
-	<c:when test="${reviewDto.image}">
-		<img src="/cuddly/image/review/image?reviewNo=${reviewDto.reviewNo}" width="150" height="150">
-	</c:when>
-	<c:otherwise>
-		<img src="https://dummyimage.com/50x50/000/fff">
-	</c:otherwise>
-	</c:choose>
-	</div>
-	<div class="row w-75">
-	<div class="row left title">
-	상품명:${reviewDto.productName}  <span class="star-rating">
-                        <c:forEach var="i" begin="1" end="${reviewDto.reviewGrade}">
-                            <i class="fas fa-star yellow"></i>
-                        </c:forEach>
-                        <c:forEach var="i" begin="1" end="${5-reviewDto.reviewGrade}">
-                        <i class="far fa-star yellow"></i>
-                        </c:forEach>
-                    </span>
-	</div>
-	<hr>
-	<div class="row left">리뷰 내용 : ${reviewDto.reviewContent}
-	</div>
+				<c:choose>
+					<c:when test="${reviewDto.image}">
+						<img src="/cuddly/image/review/image?reviewNo=${reviewDto.reviewNo}" width="150" height="150" class="image image-round ms-10">
+					</c:when>
+					<c:otherwise>
+						<img src="https://dummyimage.com/150x150/000/fff" class="image image-round ms-10">
+					</c:otherwise>
+				</c:choose>
+			</div>
+			
+		<div class="row w-75">
+			<div class="row left title">
+				<span class="ms-20">상품명 : ${reviewDto.productName}</span>  
+				<span class="star-rating">
+					<c:forEach var="i" begin="1" end="${reviewDto.reviewGrade}">
+						<i class="fas fa-star yellow"></i>
+					</c:forEach>
+					<c:forEach var="i" begin="1" end="${5-reviewDto.reviewGrade}">
+						<i class="far fa-star yellow"></i>
+					</c:forEach>
+				</span>
+			</div>
+			
+	<hr class="w-90">
+	
+			<div class="row left">
+				<span class="ms-20">리뷰 내용 : ${reviewDto.reviewContent}</span>
+			</div>
 	<!--<div class="row"><a href="/cuddly/product/detail?productNo=${reviewDto.productNo}"><img src="/cuddly/image/product/main?productNo=${reviewDto.productNo}" width="100" height="100"></a>
 	</div>
 	<div class="row">
@@ -55,15 +52,21 @@
 	<div class="row">
 	상품 가격 : ${reviewDto.productPrice}
 	</div>  -->
+	<br>
+	<br>
 	<div class="row right">
-	<a href="/cuddly/review/edit?reviewNo=${reviewDto.reviewNo}">수정하기</a>
-	<a href="/cuddly/review/delete?reviewNo=${reviewDto.reviewNo}">삭제하기</a>
+		<a href="/cuddly/review/edit?reviewNo=${reviewDto.reviewNo}" class="link">
+			<button class="btn btn-positive btn-small">수정하기</button>
+		</a>
+		<a href="/cuddly/review/delete?reviewNo=${reviewDto.reviewNo}" class="link">
+			<button class="btn btn-negative btn-small me-10">삭제하기</button>
+		</a>
 	</div>
-</div>
 </div>
 </div>
 
 </c:forEach>
+</div>
 
 
 <div class="row page-navigator mv-30">
@@ -91,8 +94,10 @@
         <a href="memberList?${vo.getNextQueryString()}"> <i
             class="fa-solid fa-angle-right"></i>
         </a>
-    </c:if>
+    </c:if> 
 </div>
 
 </body>
 </html>
+
+<jsp:include page="/WEB-INF/views/template/mypageFooter.jsp"></jsp:include>
