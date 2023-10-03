@@ -26,6 +26,7 @@
 <link rel="stylesheet" type="text/css" href="/css/layout-sidebar.css">
 <link rel="stylesheet" type="text/css" href="/css/commons.css">
 <!-- <link rel="stylesheet" type="text/css" href="/css/test.css"> -->
+
 <style>
 	hr{
 	background:#F3F0FE;
@@ -103,7 +104,7 @@ $(document).ready(function() {
 	        			
 	        		</div>        		
         		<div class="row">
-	            	<img src="/images/cuddlys.png" width="200" height="50"><br>
+	            	<img src="/images/cuddlys.png" width="200" height="45">
             	</div>
         			
 	        			<div class="row left ms-20 mt-30">
@@ -140,7 +141,7 @@ $(document).ready(function() {
          	
          	</div>
          
-            <div class="w-100 left">
+            <div class="center w-20">
                 <div class="logo mt-20 ms-30">
                 	<label for ="sidebar-toggle" class="sidebar-menu">
 						<i class="fa-solid fa-bars fa-2x"></i>
@@ -151,42 +152,57 @@ $(document).ready(function() {
             <div class="w-100 center">
             	<div class="">
 	               	<a href="/cuddly">
-	            		<img src="/images/cuddlyb.png" width="230" height="50"><br>
+	            		<img src="/images/cuddlyb.png" width="300" height="62" class="mb-20"><br>
 	            	</a>
-					<input class="form-input w-100 mb-20"> 
 				</div>
+				<div class="row">
+					<form action="/cuddly/search">
+						<input class="form-input find-input" name="keyword" placeholder="   찾으시는 상품 혹은 크리에이터를 입력하세요.">
+						<button class="btn btn-positive">검색</button>
+					</form>
+				</div>		
             </div>
             
-            <div class="w-100 right">
+            <div class="center w-20">
 		        <div class="etc mt-20">
+
 					<a class="link" href="/cuddly/member/mypage/wishlist">
-						<i class="fa-brands fa-gratipay fa-2x"></i> 
+						<i class="fa-brands fa-gratipay fa-2x headerIcon"></i> 
 					</a>
 					<a class="link" href="/cuddly/orders/cartList?memberId=${sessionScope.name}">
-						<i class="fa-solid fa-cart-shopping fa-2x"></i>
+						<i class="fa-solid fa-cart-shopping fa-2x headerIcon"></i>
 					</a> 
-					
 					<a class="link" href="/cuddly/member/mypage"> 
-						<i class="fa-solid fa-circle-user fa-2x"></i>
-					</a>
+						<i class="fa-solid fa-circle-user fa-2x headerIcon"></i>
 					</a>
 				</div>
             </div>
         
 	</header>
 	<nav>
-		<ul class="menu">
-			<li><a href="/cuddly/product/creator">크리에이터</a></li>
-			<li><a href="#">굿즈</a></li>
-			<li><a href="#">문구</a></li>
-			<li><a href="#">엑세서리</a></li>
-			
-			<%-- 관리자인 경우 추가 메뉴 출력 --%>
-			<c:if test="${sessionScope.level == '관리자'}">
-				<li><a href="/cuddly/admin/product/list">관리자메뉴</a></li>
-			</c:if>
-			
-		</ul>
+		<nav>
+			<ul class="menu left">
+				<li class="center"><a href="/cuddly/product/creator">크리에이터</a></li>
+				<li class="center">
+					<a href="/cuddly/product/list">전체상품</a>
+					<ul>
+						<li><a href="/cuddly/product/list?item=패션">패션</a></li>
+						<li><a href="/cuddly/product/list?item=문구/오피스">문구/오피스</a></li>
+						<li><a href="/cuddly/product/list?item=홈데코/리빙">홈데코/리빙</a></li>
+						<li><a href="/cuddly/product/list?item=폰악세서리">폰악세서리</a></li>
+						<li><a href="/cuddly/product/list?item=기타">기타</a></li>
+					</ul>
+				</li>
+				<li class="center"><a href="/cuddly/review/list">리뷰</a></li>
+				<li class="center"><a href="/cuddly/faq/list">FAQ</a></li>
+
+				<%-- 관리자인 경우 추가 메뉴 출력 --%>
+				<c:if test="${sessionScope.level == '관리자'}">
+					<li class="menu-right">
+						<a href="/cuddly/admin/product/list">관리자메뉴</a>
+					</li>
+				</c:if>
+			</ul>
 	</nav>
 	<hr>
 	<section>
