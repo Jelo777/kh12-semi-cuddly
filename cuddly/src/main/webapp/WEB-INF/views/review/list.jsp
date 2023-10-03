@@ -4,79 +4,89 @@
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 
 <style>
-.card {
-    border: 1px solid black; 
-    border-radius: 0.2em;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); 
-}
-
-.img {
-    padding: 0.5em;
-}
-
 
 </style>
 
 <script>
 
-	
-
 </script>
 
 
-<h1>전체 리뷰</h1>
+<h1 class="mb-30">전체 리뷰</h1>
 
 
 <c:forEach var="reviewDto" items="${list}">
 
-<div class="inline-flex-container allow-wrap left">
-<div class="container w-300 card">
-<div class="row">
-	<c:choose>
-	<c:when test="${reviewDto.image}">
-		<img src="/cuddly/image/review/image?reviewNo=${reviewDto.reviewNo}" width="250" height="200">
-	</c:when>
-	<c:otherwise>
-		<img src="https://dummyimage.com/50x50/000/fff">
-	</c:otherwise>
-	</c:choose>
-	</div>
-	<div class="row flex-container auto-width">
-						<div class="left felx-container">
-	 <span class="star-rating">
+	<div class="inline-flex-container allow-wrap left">
+		<div class="container w-300 card m-10">
+		
+			<div class="row">
+				<c:choose>
+					<c:when test="${reviewDto.image}">
+						<img src="/cuddly/image/review/image?reviewNo=${reviewDto.reviewNo}" 
+									width="250" height="250" class="image image-round">
+					</c:when>
+					<c:otherwise>
+						<img src="https://dummyimage.com/250x250/000/fff" class="image image-round">
+					</c:otherwise>
+				</c:choose>
+			</div>
+			
+			<div class="row flex-container auto-width">
+				<div class="left felx-container">
+	 				<span class="star-rating ms-10">
                         <c:forEach var="i" begin="1" end="${reviewDto.reviewGrade}">
                             <i class="fas fa-star yellow"></i>
                         </c:forEach>
                         <c:forEach var="i" begin="1" end="${5-reviewDto.reviewGrade}">
-                        <i class="far fa-star yellow"></i>
+                        	<i class="far fa-star yellow"></i>
                         </c:forEach>
-                    </span></div>
-	 <div class="right">
-	 작성자 : ${reviewDto.memberId} 
-	 </div>
-	 </div>
-	<div class="row left">리뷰 내용 : ${reviewDto.reviewContent}</div>
+                    </span>
+				</div>
+				<div class="right">
+					<span class="me-10">${reviewDto.memberId}</span> 
+				</div>
+			</div>
+			
+			<div class="row left">
+				<span class="ms-10" style="font-size:20px">${reviewDto.reviewContent}</span>
+			</div>
 	
-	<div class="row flex-container auto-width">
-						<div class="left felx-container">
-	<a href="/cuddly/product/detail?productNo=${reviewDto.productNo}"><img class="img" src="/cuddly/image/product/main?productNo=${reviewDto.productNo}" width="100" height="100"></a>
+			<div class="row flex-container">
+				<div class="w-40">
+					<a href="/cuddly/product/detail?productNo=${reviewDto.productNo}">
+						<img src="/cuddly/image/product/main?productNo=${reviewDto.productNo}" 
+										width="100" height="100"  class="img image image-round ms-10">
+					</a>
+				</div>
+				<div class="w-100">
+					<div class="row left">
+						<span class="ms-10">${reviewDto.productName}</span>
+					</div>
+					<div class="row left">
+						<span class="ms-10" style="color:darkgray">${reviewDto.creatorName}</span>
+					</div>
+					<div class="row right">
+						<span class="ms-10 me-10">${reviewDto.productPrice}원</span>
+					</div>
+				</div>
+			</div>
+			<c:choose>
+			<c:when test="${reviewDto.memberId == sessionScope.name}">
+				<div class="row">
+					<a href="/cuddly/review/edit?reviewNo=${reviewDto.reviewNo}" class="btn btn-positive btn-small">수정하기</a>
+					<a href="/cuddly/review/delete?reviewNo=${reviewDto.reviewNo}" class="btn btn-negative btn-small">삭제하기</a>
+				</div>
+			</c:when>
+			<c:otherwise>
+				<div class="row">
+					<br><br>
+				</div>
+			</c:otherwise>
+			</c:choose>
 	</div>
-	<div class="row left">
-	상품명:${reviewDto.productName}	
-	<br><br>
-	크리에이터:${reviewDto.creatorName}
-	<br><br>
-	가격 : ${reviewDto.productPrice}
+		</div>
 	</div>
-	</div>
-	<c:if test="${reviewDto.memberId == sessionScope.name}">
-	<div class="row">
-	<a href="/cuddly/review/edit?reviewNo=${reviewDto.reviewNo}">수정하기</a>
-	<a href="/cuddly/review/delete?reviewNo=${reviewDto.reviewNo}">삭제하기</a>
-	</div>
-	</c:if>
-</div>
-</div>
 </c:forEach>
 
 	<div class="row page-navigator mv-30">
