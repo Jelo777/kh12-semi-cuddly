@@ -166,11 +166,15 @@ $(document).ready(function() {
             
             <div class="center w-20">
 		        <div class="etc mt-20">
-					<i class="fa-brands fa-gratipay fa-2x headerIcon"></i>
+
+					<a class="link" href="/cuddly/member/mypage/wishlist">
+						<i class="fa-brands fa-gratipay fa-2x headerIcon"></i> 
+					</a>
 					<a class="link" href="/cuddly/orders/cartList?memberId=${sessionScope.name}">
 						<i class="fa-solid fa-cart-shopping fa-2x headerIcon"></i>
-					</a>
-					<a class="link" href="/cuddly/member/mypage">
+					</a> 
+					
+					<a class="link" href="/cuddly/member/mypage"> 
 						<i class="fa-solid fa-circle-user fa-2x headerIcon"></i>
 					</a>
 				</div>

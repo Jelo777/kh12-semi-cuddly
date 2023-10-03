@@ -42,7 +42,7 @@ import com.kh.cuddly.dto.OrdersAdminDto;
 import com.kh.cuddly.dto.ProductDto;
 import com.kh.cuddly.dto.ProductOptionDto;
 import com.kh.cuddly.dto.QnaDto;
-import com.kh.cuddly.error.NoResultException;
+import com.kh.cuddly.error.NoTargetException;
 
 @Controller
 @RequestMapping("/cuddly/admin")
@@ -361,7 +361,7 @@ public class AdminController {
 			return "redirect:detail?faqNo=" + faqDto.getFaqNo();
 		}
 		else {
-			throw new NoResultException("존재하지 않는 글");
+			throw new NoTargetException("존재하지 않는 글");
 		}
 	}
 	

@@ -24,6 +24,8 @@
 
 		var selectedCount = cartCount.val();
 
+		
+
 		var selectedOptionText = optionSelect.find(":selected").text();
 		var selectedOptionDiv = $("<div class='optionList'></div>");
 		selectedOptionDiv.text("선택한 옵션: " + selectedOptionText + ", 수량: "
@@ -262,7 +264,9 @@
 						<select id="optionSelect" class="form-input w-100">
 							<option>옵션 선택</option>
 							<c:forEach var="optionList" items="${optionList}">
-								<option class="select" value="${optionList.productOptionNo}">${optionList.productOptionName}</option>
+								<option value="${optionList.productOptionName}" data-stock="${optionList.productOptionStock}">
+					                ${optionList.productOptionName} (재고: ${optionList.productOptionStock})
+					            </option>
 							</c:forEach>
 						</select>
 						<div class="fail-feedback">옵션을 선택하세요</div>
@@ -347,9 +351,11 @@
 	<div class="row left" id="qnaList">
 		<h2>Q&A</h2>
 	</div>
-	<div class="row right">
-		<button type="button" class="btn qna-write">문의하기</button>
-	</div>
+	<c:if test="${sessionScope.name != null}">
+		<div class="row right">
+			<button type="button" class="btn qna-write">문의하기</button>
+		</div>
+	</c:if>
 
 	<div class="row qna-write-form">
 		<form action="/cuddly/qna/write" method="post">
