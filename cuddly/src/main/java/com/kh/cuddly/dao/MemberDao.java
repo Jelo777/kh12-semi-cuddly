@@ -12,6 +12,7 @@ public interface MemberDao {
 	boolean updateMemberPw(String memberId, String changePw);
 	boolean updateMemberInfo(MemberDto memberDto);
 	boolean updateMemberLevel(MemberDto memberDto);//관리자용 회원 등급수정
+	boolean updateMemberTotalPrice(MemberDto memberDto);//누적금액 변경
 	boolean delete(String memberId);
 	MemberDto selectOneByEmail(String memberEmail);
 

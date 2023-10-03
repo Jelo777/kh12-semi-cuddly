@@ -149,7 +149,6 @@ public class MemberController {
 		String memberId=(String)session.getAttribute("name");
 		MemberDto memberDto =memberDao.selectOne(memberId);
 		if(memberDto.getMemberPw().equals(memberPw)) {
-			
 			memberDao.delete(memberId);
 			session.removeAttribute("name");
 			return "redirect:exitFinish";

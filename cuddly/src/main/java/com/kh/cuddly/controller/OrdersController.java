@@ -51,7 +51,6 @@ public class OrdersController {
 	@Autowired
 	OrdersDetailDao ordersDetailDao;
 	
-	
 	@Autowired
 	CartDao cartDao;
 	
@@ -61,13 +60,14 @@ public class OrdersController {
 	@Autowired
 	MemberDao memberdao;
 	
-  @Autowired
+	@Autowired
 	MemberDao memberDao;
 	
 	@Autowired
 	AddressDao addressDao;
 	
-	@Autowired QnaDao qnaDao;
+	@Autowired 
+	QnaDao qnaDao;
 	
 	@Autowired
 	ReviewDao reviewDao;
@@ -195,12 +195,27 @@ public class OrdersController {
 			else if(memberLevel.equals("실버")) {
 				price = (int) (price*0.95);
 			}
-			
+			                                                                      
 			int count = detail.getOrdersDetailCount();
 			int total = price * count;
 			
 			detail.setOrdersDetailPrice(total);
+			
+		    //회원 누적금액 업데이트
+			MemberDto memberDto = memberDao.selectOne(memberId);
+		    int beforeMemberTotalPrice = memberDto.getMemberTotalprice();
+		    int resultPrice = beforeMemberTotalPrice+total;
+		    memberDto.setMemberTotalprice(resultPrice);
 		    
+		    if(resultPrice>=50000) {
+		    	memberDto.setMemberLevel("실버");
+		    }
+		    if(resultPrice>=100000) {
+		    	memberDto.setMemberLevel("골드");
+		    }
+		    
+		    memberDao.updateMemberLevel(memberDto);
+		    memberDao.updateMemberTotalPrice(memberDto);
 	        
 	        ordersDetailDao.insert(detail);	    
 	    }
@@ -288,10 +303,6 @@ public class OrdersController {
 		
 		 return "redirect:/cuddly/orders/cartList?memberId"+memberId;
 	}
-	
-
-	
-
 	
 	
 	@RequestMapping("/detail")
