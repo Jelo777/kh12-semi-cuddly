@@ -188,14 +188,13 @@ hr {
 
 			<div class="center w-20">
 				<div class="etc mt-20">
-					<a class="link" href="/cuddly/member/mypage/wishlist">
-						<i class="fa-brands fa-gratipay fa-2x headerIcon"></i> 
-					</a>
-					<a class="link" href="/cuddly/orders/cartList?memberId=${sessionScope.name}">
-						<i class="fa-solid fa-cart-shopping fa-2x headerIcon"></i>
-					</a> 			
-					<a class="link" href="/cuddly/member/mypage"> 
-						<i class="fa-solid fa-circle-user fa-2x headerIcon"></i>
+					<i class="purple fa-brands fa-gratipay fa-2x"></i>
+					 <a class="link" 
+					 	href="/cuddly/orders/cartList?memberId=${sessionScope.name}">
+					 	<i class="purple fa-solid fa-cart-shopping fa-2x"></i></a> 
+						<a class="link"
+						href="/cuddly/member/mypage"> 
+						<i class="purple fa-solid fa-circle-user fa-2x"></i>
 					</a>
 				</div>
 			</div>
