@@ -238,6 +238,10 @@ public class MemberController {
 	@RequestMapping("/mypage/wishlist")
 	public String wishlist(HttpSession session, Model model) {
 		String memberId = (String) session.getAttribute("name");
+		if(memberId==null) {
+			return "redirect:/cuddly/member/login";
+		}
+		
 		model.addAttribute("wishlistList", wishlistDao.findByMemberId(memberId));
 		return "/WEB-INF/views/member/wishlist.jsp";
 	}
