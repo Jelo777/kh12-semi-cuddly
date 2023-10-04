@@ -220,11 +220,13 @@ public class OrdersController {
 		    int resultPrice = beforeMemberTotalPrice+total;
 		    memberDto.setMemberTotalprice(resultPrice);
 		    
-		    if(resultPrice>=50000) {
-		    	memberDto.setMemberLevel("실버");
-		    }
-		    if(resultPrice>=100000) {
-		    	memberDto.setMemberLevel("골드");
+		    if(!memberDto.getMemberLevel().equals("관리자")) {
+		    	if(resultPrice>=50000) {
+		    		memberDto.setMemberLevel("실버");
+		    	}
+		    	if(resultPrice>=100000) {
+		    		memberDto.setMemberLevel("골드");
+		    	}
 		    }
 		    
 		    memberDao.updateMemberLevel(memberDto);
