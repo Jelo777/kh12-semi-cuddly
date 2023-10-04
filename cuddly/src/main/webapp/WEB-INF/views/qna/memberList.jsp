@@ -108,11 +108,11 @@
 			<input type="hidden" name="qnaNo" value="${qnaDto.qnaNo}">
 			<input type="hidden" name="memberId" value="${sessionScope.name}">
 			<div class="row">
-				<input class="form-input w-100" name="qnaContent"
+				<input class="form-input w-95 mh-10" name="qnaContent"
 					placeholder="상품문의내용입력" value="${qnaDto.qnaContent}">
 			</div>
 			<div class="row">
-				<button class="btn btn-positive w-100" id="wrt" type="button">작성</button>
+				<button class="btn btn-positive w-95 mh-10" id="wrt" type="button">작성</button>
 			</div>
 		</form>
 	</div>

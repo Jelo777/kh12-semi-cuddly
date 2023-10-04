@@ -11,10 +11,12 @@
 			<img src="/images/cuddlys.png" class="mt-40">
 		</div>
 		<div class="row">
-			<input type="text"  name="memberId" class="form-input underline-input w-100 mt-20" placeholder="아이디 입력">
+			<input type="text"  name="memberId" 
+							class="form-input underline-input w-100 mt-20 member-input" placeholder="아이디 입력">
 		</div>
 		<div class="row">
-			<input type="password" name="memberPw" class="form-input underline-input w-100 mb-30" placeholder="비밀번호 입력">
+			<input type="password" name="memberPw" 
+							class="form-input underline-input w-100 mb-30 member-input" placeholder="비밀번호 입력">
 		</div>
 		<div class="row">
 			<button type="submit" class="btn btn-positive w-100 mb-10">로그인</button>
