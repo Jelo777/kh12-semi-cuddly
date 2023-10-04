@@ -8,11 +8,10 @@
 
 </head>
 <body>
-
  <script>
         //목표 : 설정하기 버튼을 누르면 선택된 파일을 업로드하고 이미지 변경
         $(function(){
-            $(".btn-save").click(function(e){
+            $(".file-chooser").change(function(e){
             	
             	e.preventDefault();
 
@@ -117,7 +116,7 @@
         		<br>
         		<br>
         		<input type="file" class="form-input w-95 file-chooser ms-10" name="attach" accept="image/*">
-        		<button class="btn-save btn btn-positive w-95 mt-10 ms-10">사진 등록</button>
+<!--         		<button class="btn-save btn btn-positive w-95 mt-10 ms-10">사진 등록</button> -->
         	</div>
         </div>
         	<div class="row">

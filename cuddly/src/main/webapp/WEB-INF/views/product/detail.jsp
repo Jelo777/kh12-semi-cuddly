@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 
 
@@ -253,7 +254,7 @@
 				<i class="fa-solid fa-heart red"></i> <span>좋아요 개수</span>
 			</div>
 			<div class="row left ms-20">등록일 : ${productDto.productDate}</div>
-			<div class="row left ms-20">평점 : ${reviewAvg}</div>
+			<div class="row left ms-20">평점 : <fmt:formatNumber value="${reviewAvg}" pattern="0.0"/></div>
 			<div class="flex-container">
 				<form id="orderForm" action="/cuddly/orders/cartInsert">
 					<input type="hidden" name="productNo"
