@@ -41,12 +41,12 @@ $(function(){
 				<div class="float-right me-20">
 							<c:choose>
 								<c:when test="${detail.two}">
-									<a href="/cuddly/orders/detail?ordersNo=${detail.ordersNo}" class="link">
+									<a href="/cuddly/orders/detail?ordersNo=${detail.ordersNo}" class="link" style="font-weight: bold; color:#BEADFA">
 										외 ${detail.orderCount}건 더보기</a>
 								</c:when>
 							<c:otherwise>
 								<c:if test="${!detail.reviewEx}">
-									<a href="/cuddly/review/write?productNo=${detail.productNo}" class="link">
+									<a href="/cuddly/review/write?productNo=${detail.productNo}" class="link" style="font-weight: bold; color:#BEADFA">
 									리뷰쓰기</a>
 								</c:if>
 							</c:otherwise>
@@ -71,7 +71,7 @@ $(function(){
 					</div>
 					<div class="row float-container">
 						<div class="float-left ms-10">
-						 	<span class="creatorName">크리에이터: ${detail.creatorName}</span>
+						 	<span class="creatorName">${detail.creatorName}</span>
 						</div>
 						<div class="float-right">
 							<span class="optionName me-10">옵션 : ${detail.productOptionName} / 수량: ${detail.ordersDetailCount}</span>

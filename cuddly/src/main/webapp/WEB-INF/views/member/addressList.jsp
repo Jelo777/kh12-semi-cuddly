@@ -5,10 +5,6 @@
  <script src="/js/address.js"></script>
  <script src="/js/addressInsert.js"></script>
  <style>
-	.card{
-            /* border:1px solid; */
-            box-shadow: 0 0 0 1px #2d3436;
-	}
 	.position-center{
 	
 		position: fixed;
@@ -172,37 +168,39 @@
 	
 	});
 	
-	
-
-
-
-
 
 </script>
+
+<h2 class="mv-30">배송지 목록</h2>
+	
 <script id="address-template" type="text/template">
 
-<div class="flex-container card mt-50 view-container">
-<div class="w-75 mt-20">
-	<div class="row left ms-30">
-		<h1 class="addressName">이름</h1>
+<div class="flex-container card mb-30 view-container">
+<div class="w-80">
+	<div class="row left">
+		<span class="addressName ms-10 productName">이름</span>
 		<span class="addressDefault"></span>
 	</div>
-	<div class="row left ms-30">
-		<h3 class="addressContact">전화번호</h3>
+	<div class="row left">
+		<span class="addressContact ms-10">전화번호</span>
 	</div>
-	<div class="row left ms-30">
-		<h3 class="addressPost">우편번호</h3>
-		<h3 class="addressAddr1">기본주소</h3>
-		<h3 class="addressAddr2">상세주소</h3>
+	<div class="row left">
+		<div class="row left">
+			<span class="addressPost ms-10" style="font-size:14px">우편번호</span>
+		</div>
+		<div class="row left">
+			<span class="addressAddr1 ms-10 mv-10">기본주소</span>
+			<span class="addressAddr2">상세주소</span>
+		</div>
 	</div>  
-	<div class="row left ms-30">
-		<h3 class="addressComent">요구사항</h3>
+	<div class="row left">
+		<span class="addressComent ms-10" style="font-size:14px">요구사항</span>
 	</div>
 </div>
-<div class="w-25 mt-20 me-30">
-	<div class="row right me-50 mt-30">
+<div class="w-20">
+	<div class="row right mt-30">
 		<h5>
-			<button type ="button" style="width:150px; font-size:16px;" class="btn btn-negative btn-delete">삭제하기</button>
+			<button type ="button" class="btn btn-positive btn-small btn-delete me-10">삭제하기</button>
 		</h5>
 	</div>
 </div>
@@ -219,13 +217,12 @@
 	</div>
 	<div class="row">
 		<button type="button" class="btn btn-positive w-400">배송지 등록하기</button>
-	
 	</div>
+	
 	<div class="row position-center w-700" >
 		 <form class="address-insert-form" autocomplete="off">
-
 	        <div class="container w-400">
-	
+	        
 	            <div class="row">
 	                <h1>배송지 등록</h1>
 	            </div>
@@ -244,49 +241,31 @@
 	
 	            <div class="row left">
 	                <input type="text" class="form-input post-search" name="addressPost" 
-	                        placeholder="우편번호" size="6" maxlength="6" readonly>
+	                       			 placeholder="우편번호" size="6" maxlength="6" readonly>
 	                <button type="button" class="btn post-search">
 	                    <i class="fa-solid fa-magnifying-glass"></i>
 	                </button>
 	                <input type="text" class="form-input w-100 mt-10 post-search" 
-	                         name="addressAddr1" placeholder="기본주소" readonly>
+	                         		name="addressAddr1" placeholder="기본주소" readonly>
 	                
 	                <input type="text" class="form-input w-100 mt-10" 
-	                        name="addressAddr2" placeholder="상세주소">
+	                        		name="addressAddr2" placeholder="상세주소">
 	                <div class="fail-feedback">모든 주소를 작성하세요</div>
 	            </div>
+	            
 				<div>
 					<label>기본배송지로 설정</label><input class="checkbox" type="checkbox"  checked>
 					<input type="hidden" name="addressDefault" value="Y">
 				</div>
 				
-		
 	            <div class="row">
 	                <button type="submit" class="btn btn-positive w-100">등록하기</button>
 	                <button type="button" class="btn btn-negative w-100">취소하기</button>
 	            </div>
+	            
 	        </div>
-
     	</form>
-	
-	
 	</div>
-
-
-
-
-
-
-
-
-
 </div>
 
 <jsp:include page="/WEB-INF/views/template/mypageFooter.jsp"></jsp:include>
-
-
-
-
-
-
-

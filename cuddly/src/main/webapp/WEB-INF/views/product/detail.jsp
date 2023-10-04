@@ -374,16 +374,16 @@
 								</option>
 							</c:forEach>
 						</select>
-						<div class="fail-feedback left ms-20">옵션을 선택하세요</div>
+						<div class="fail-feedback left ms-40 mt-5">옵션을 선택하세요</div>
 					</div>
 					
 					<div class="row flex-container left">
 						<input type="number" min="1" id="cartCount"
 							class="cartCount form-input find-input w-50 ms-20 center" value="1">
-						<div class="fail3-feedback" style="display: none; color:red">선택할 수 있는 수량을 넘었습니다.</div>	
 						<button class="btn btn-more w-100 ms-10" type="button" onclick="addSelectedOption();"
 							name="add">옵션추가</button>
 					</div>
+						<div class="fail3-feedback left ms-40" style="display: none; color:#d63031">선택할 수 있는 수량을 넘었습니다.</div>	
 					
 						<div id="selectedOptions" class="left ms-20"></div>
 						
@@ -443,8 +443,8 @@
 	</div>
 
 	<c:forEach var="reviewListDto" items="${reviewList}">
-		<div class="flex-container card">
-			<div class="w-75 mh-10 mb-10">
+		<div class="flex-container card mb-10">
+			<div class="w-80 mh-10 mb-10">
 				<div class="float-container">
 					<div class="float-left productName mv-10">${productDto.productName}</div>
 					<div class="float-right mv-10">${reviewListDto.reviewDate}</div>
@@ -456,10 +456,10 @@
 				
 				<div class="row left">${reviewListDto.reviewContent}</div>
 			</div>
-			<div class="w-25 me-10 mb-10">
+			<div class="w-20 me-10 mb-10">
 				<img
 					src="/cuddly/image/review/image?reviewNo=${reviewListDto.reviewNo}"
-					width="100%" height="100%" class="image image-round">
+					width="150px" height="150px" class="image image-round">
 			</div>
 		</div>
 	</c:forEach>
