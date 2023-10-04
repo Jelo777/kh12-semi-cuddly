@@ -11,8 +11,8 @@
 		<div class="float-container card mt-50">
 
 				<div class="row left float-container">
-					<h3 class="ms-20 float-left">${memberDto.memberName}님</h3>
-					<h1 class="btn btn-positive btn-small float-left">${memberDto.memberLevel}</h1>
+					<h2 class="ms-20 float-left">${memberDto.memberName}님</h2>
+					<h1 class="btn btn-positive btn-small float-left ms-10">${memberDto.memberLevel}</h1>
 				</div>
 				
 				<div class="row left">

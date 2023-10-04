@@ -179,7 +179,7 @@ $(document).ready(function() {
             	</div>
             	<div class="row">
             		<form action="/cuddly/search">
-						<input class="form-input find-input" name="keyword" placeholder="   찾으시는 상품 혹은 크리에이터를 입력하세요.">
+						<input class="form-input find-input ps-20" name="keyword" placeholder="찾으시는 상품 혹은 크리에이터를 입력하세요.">
 						<button class="btn btn-positive">검색</button>
 					</form>
 				</div>
