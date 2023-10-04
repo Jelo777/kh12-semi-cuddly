@@ -41,7 +41,14 @@
 						</td>
 					</tr>
 					<tr>
-						<td><fmt:formatNumber value="${productListDto.productPrice}" pattern="#,###"/>원</td>
+						<td>
+							${productListDto.creatorName}
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<fmt:formatNumber value="${productListDto.productPrice}" pattern="#,###"/>원
+						</td>
 					</tr>
 					<tr>
 						<td>${productListDto.productDate}</td>

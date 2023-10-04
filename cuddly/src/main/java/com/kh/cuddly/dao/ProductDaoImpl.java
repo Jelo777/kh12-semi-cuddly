@@ -9,7 +9,9 @@ import org.springframework.stereotype.Repository;
 import com.kh.cuddly.VO.ProductListVO;
 import com.kh.cuddly.dto.AttachDto;
 import com.kh.cuddly.dto.ProductDto;
+import com.kh.cuddly.dto.ProductListDto;
 import com.kh.cuddly.mapper.AttachMapper;
+import com.kh.cuddly.mapper.ProductListMapper;
 import com.kh.cuddly.mapper.ProductMapper;
 
 @Repository
@@ -23,6 +25,9 @@ public class ProductDaoImpl implements ProductDao{
 	
 	@Autowired
 	private AttachMapper attachMapper;
+	
+	@Autowired
+	private ProductListMapper productListMapper;
 	
 	@Override
 	public int sequence() {
@@ -94,36 +99,36 @@ public class ProductDaoImpl implements ProductDao{
 	
 	
 	@Override
-	public List<ProductDto> selectList(ProductListVO vo) {
+	public List<ProductListDto> selectList(ProductListVO vo) {
 		if(!vo.isSearch()) {
 			String sql = "select * from( "
 						+ "select rownum rn, TMP.* from( "
-						+ "select * from product_list_view "
+						+ "select * from product_list_c_view "
 						+ "ORDER BY " + vo.getTarget() + " " + vo.getSort()
 						+")TMP"
 					+ ") where rn between ? and ?";
 			Object[] data = {vo.getStartRow(), vo.getFinishRow()};
-			return jdbcTemplate.query(sql, productMapper, data);
+			return jdbcTemplate.query(sql, productListMapper, data);
 		}
 		else {
 			String sql = "select * from( "
 						+ "select rownum rn, TMP.* from( "
-						+ "select * from product_list_view "
+						+ "select * from product_list_c_view "
 						+ "where instr(product_name,?)>0 "
 						+ "ORDER BY " + vo.getTarget() + " " + vo.getSort()
 						+")TMP"
 					+ ") where rn between ? and ?";
 			Object[] data = {vo.getKeyword() ,vo.getStartRow(), vo.getFinishRow()};
-			return jdbcTemplate.query(sql, productMapper, data);
+			return jdbcTemplate.query(sql, productListMapper, data);
 		}
 	}
 	
 	@Override
-	public List<ProductDto> selectListByCreator(ProductListVO vo) {
+	public List<ProductListDto> selectListByCreator(ProductListVO vo) {
 		if(vo.getTarget().equals("wishlist_count")) {
 			String sql = "select * from( "
 						+ "select rownum rn, TMP.* from( "
-							+ "SELECT * FROM product_list_view p INNER JOIN CREATOR_PRODUCT cp "
+							+ "SELECT * FROM product_list_c_view p INNER JOIN CREATOR_PRODUCT cp "
 							+ "ON cp.PRODUCT_NO = p.product_no "
 							+ "LEFT OUTER JOIN creator c ON cp.CREATOR_NO = c.CREATOR_NO "
 							+ "where c.creator_name = ? "
@@ -131,12 +136,12 @@ public class ProductDaoImpl implements ProductDao{
 							+")TMP"
 						+ ") where rn between ? and ?";
 			Object[] data = {vo.getCreator(), vo.getStartRow(), vo.getFinishRow()}; 
-			return jdbcTemplate.query(sql, productMapper, data);
+			return jdbcTemplate.query(sql, productListMapper, data);
 		}
 		else{
 			String sql = "select * from( "
 					+ "select rownum rn, TMP.* from( "
-						+ "SELECT * FROM product_list_view p INNER JOIN CREATOR_PRODUCT cp "
+						+ "SELECT * FROM product_list_c_view p INNER JOIN CREATOR_PRODUCT cp "
 						+ "ON cp.PRODUCT_NO = p.product_no "
 						+ "LEFT OUTER JOIN creator c ON cp.CREATOR_NO = c.CREATOR_No "
 						+ "where c.creator_name = ? "
@@ -144,27 +149,27 @@ public class ProductDaoImpl implements ProductDao{
 						+")TMP"
 					+ ") where rn between ? and ?";
 			Object[] data = {vo.getCreator(), vo.getStartRow(), vo.getFinishRow()}; 
-			return jdbcTemplate.query(sql, productMapper, data);
+			return jdbcTemplate.query(sql, productListMapper, data);
 		}
 	}
 	
 	@Override
-	public List<ProductDto> selectListByProductItem(ProductListVO vo) {
+	public List<ProductListDto> selectListByProductItem(ProductListVO vo) {
 		if(vo.getKeyword()==null) {
 			String sql = "select * from( "
 						+ "select rownum rn, TMP.* from( "
-						+ "select * from product_list_view "
+						+ "select * from product_list_c_view "
 						+ "where product_item = ? "
 						+ "ORDER BY " + vo.getTarget() + " " + vo.getSort()
 						+")TMP"
 					+ ") where rn between ? and ?";
 			Object[] data = {vo.getItem() ,vo.getStartRow(), vo.getFinishRow()};
-			return jdbcTemplate.query(sql, productMapper, data);
+			return jdbcTemplate.query(sql, productListMapper, data);
 		}
 		else {
 			String sql = "select * from( "
 						+ "select rownum rn, TMP.* from( "
-						+ "select * from product_list_view "
+						+ "select * from product_list_c_view "
 						+ "where product_item = ? "
 						+ "and "
 						+ "instr(product_name, ?)>0"
@@ -172,7 +177,7 @@ public class ProductDaoImpl implements ProductDao{
 						+")TMP"
 					+ ") where rn between ? and ?";
 			Object[] data = {vo.getItem(),vo.getKeyword() ,vo.getStartRow(), vo.getFinishRow()};
-			return jdbcTemplate.query(sql, productMapper, data);
+			return jdbcTemplate.query(sql, productListMapper, data);
 		}
 	}
 	
@@ -180,24 +185,24 @@ public class ProductDaoImpl implements ProductDao{
 	public int countList(ProductListVO vo) {
 		
 		if(vo.isItem()&&vo.getKeyword()!=null) {
-			String sql = "select count(*) from product_list_view where product_item = ? "
+			String sql = "select count(*) from product_list_c_view where product_item = ? "
 					+ "and instr(product_name, ?)>0";
 			Object[] data = {vo.getItem(), vo.getKeyword()};
 			return jdbcTemplate.queryForObject(sql, int.class, data);
 		}
 		else if(vo.isItem()) {
-			String sql = "select count(*) from product_list_view where product_item = ?";
+			String sql = "select count(*) from product_list_c_view where product_item = ?";
 			Object[] data = {vo.getItem()};
 			return jdbcTemplate.queryForObject(sql, int.class, data);
 		}
 		else if(vo.isSearch()) {
-			String sql = "select count(*) from product_list_view where instr(product_name, ?) >0";
+			String sql = "select count(*) from product_list_c_view where instr(product_name, ?) >0";
 			Object[] data = {vo.getKeyword()};
 			return jdbcTemplate.queryForObject(sql, int.class, data);
 		}
 		else if(vo.isCreator()) {
 			String sql = "select count(*) "
-						+ "from product_list_view p inner join creator_product "
+						+ "from product_list_c_view p inner join creator_product "
 						+ "on creator_product.product_no = p.product_no "
 						+ "left outer join creator on creator_product.creator_no = creator.creator_no "
 						+ "where creator.creator_name = ?";
@@ -205,7 +210,7 @@ public class ProductDaoImpl implements ProductDao{
 			return jdbcTemplate.queryForObject(sql, int.class, data);
 		}
 		else {
-			String sql = "select count(*) from product_list_view";
+			String sql = "select count(*) from product_list_c_view";
 			return jdbcTemplate.queryForObject(sql, int.class);
 		}
 	}
