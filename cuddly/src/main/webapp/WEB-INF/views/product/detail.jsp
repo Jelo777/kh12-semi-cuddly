@@ -19,6 +19,7 @@
 			$("#optionSelect").removeClass("fail")
 			$("#optionSelect").addClass("fail")
 			$(".fail-feedback").css("display", "block")
+			cartCount.val(stock);
 
 			return;
 		}
@@ -131,7 +132,7 @@
 	 				
 				  $(this).addClass("fail");
 				  $(".fail3-feedback").css("display", "block");
-				  
+				  $(this).val(stock);
 				  
 			  }
 				
