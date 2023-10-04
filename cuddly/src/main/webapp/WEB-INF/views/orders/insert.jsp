@@ -3,6 +3,7 @@
 	pageEncoding="UTF-8"%>
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 <style>
 .card {
@@ -254,7 +255,7 @@
 
 
 	<div class="row">
-		<label>총가격:</label>${total}
+		<label>총가격:</label><fmt:formatNumber value="${total}" pattern="#,###원" />
 	</div>
 
 	<div class="row">
@@ -262,7 +263,7 @@
 	</div>
 
 	<input type="hidden" name="ordersPrice" value="${total}">결제
-	금액:${total}
+	금액:<fmt:formatNumber value="${total}" pattern="#,###원" />
 
 
 

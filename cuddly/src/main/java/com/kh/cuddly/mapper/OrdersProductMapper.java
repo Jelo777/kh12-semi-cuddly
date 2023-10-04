@@ -27,6 +27,7 @@ public class OrdersProductMapper implements RowMapper<OrdersProductDto>{
 		ordersProductDto.setMemberId(rs.getString("member_id"));
 		ordersProductDto.setCartDate(rs.getDate("cart_date"));
 		ordersProductDto.setCartPrice(rs.getInt("cart_price"));
+		ordersProductDto.setProductOptionStock(rs.getInt("product_option_stock"));
 		
 		return ordersProductDto;
 		

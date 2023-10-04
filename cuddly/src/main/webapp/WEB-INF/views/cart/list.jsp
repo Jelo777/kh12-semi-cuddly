@@ -24,6 +24,8 @@
 		$(function() {
 			//전체선택과 개별체크박스에 대한 이벤트 구현
 			
+			
+			
 			$(".btn").click(function(e){
 				
 				if($("input[type=checkbox]:checked").length==0){
@@ -49,11 +51,39 @@
 				
 			})
 			
+			//재고가 0인 상품 주문 막기
+// 		$(".order").click(function (e) {
+			
+			
+//     var allValid = true; // 모든 선택된 항목이 초기에는 유효하다고 가정합니다
+    
+//     // 선택된 체크박스 요소를 순회합니다
+//     $(".check-item:checked").each(function (index) {
+//         var stock = parseInt($(this).closest(".row").find(".stock").data("stock")); // 재고를 가져옵니다
+//         var count = parseInt($(this).closest(".row").find(".count").data("count")); // 카운트를 가져옵니다
+
+//         // 현재 선택된 항목에 대해 재고가 카운트보다 적은지 확인합니다
+//         if (stock < count) {
+//             allValid = false; // 하나 이상의 선택된 항목이 유효하지 않음을 나타냅니다
+//             return false; // 루프를 조기에 종료합니다
+//         }
+//     });
+
+//     // 적어도 하나의 선택된 항목이 유효하지 않은 경우 기본 동작(예: 폼 제출)을 방지합니다
+//     if (!allValid) {
+//         e.preventDefault();
+//         $(".fail2-feedback").css("display","block")
+//     }
+// });
+
+			
+			
 			
 			
 
 			//전체선택
 			$(".check-all").change(function() { //모두선택이 체크박스가 변하면
+				$(".fail2-feedback").css("display","none")
 				var check = $(this).prop("checked"); //모두선택이 체크된 상태일 때 true 아니면 false
 				$(".check-all, .check-item").prop("checked", check); //다른 체크박스들을 모두선택 체크박스의 상태로 바꿔라
 				recalculateTotal();
@@ -62,6 +92,8 @@
 			//개별체크박스
 			$(".check-item").change(
 					function() {
+						$(".fail-feedback").css("display","none")
+						$(".fail2-feedback").css("display","none")
 						//var allCheck = 개별체크박스개수 == 체크된개별체크박스개수;
 						//var allCheck = $(".check-item").length == $(".check-item:checked").length;
 						var allCheck = $(".check-item").length == $(
@@ -120,12 +152,12 @@
 								<div class="row left title"> 상품명 : ${cart.productName}</div>
 								<div class="row flex-container auto-width">
 								<div class="left felx-container"> 크리에이터 : ${cart.creatorName}</div>
-								<div class="right">옵션 : ${cart.productOptionName} / 수량: ${cart.cartCount}</div></div>
+								<div class="right count" data-count="${cart.cartCount}">옵션 : ${cart.productOptionName} / 수량: ${cart.cartCount}</div></div>
 								<div class="row left">
 									가격 : <label class="price" data-cart-price="${cart.cartPrice}"><fmt:formatNumber value="${cart.cartPrice}" pattern="#,###원" /></label>
 								</div>
 								<div class="row right">추가 날짜 : ${cart.cartDate}</div>
-								<div class="row right">
+								<div class="row right stock" data-stock="${cart.productOptionStock}">
 								</div>
 							</div>
 						</div>
@@ -137,7 +169,10 @@
 	<h1 class="fail-feedback">
 	선택된 상품이 없습니다.
 	</h1>
-	<button type="submit" class="btn">주문하기</button>
+	<h1 class="fail2-feedback">
+	주문하시려는 상품의 재고를 확인해주세요
+	</h1>
+	<button type="submit" class="btn order">주문하기</button>
 	<button class="btn" value="delete">선택삭제</button>
 			</form>
 	</div>

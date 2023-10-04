@@ -18,5 +18,6 @@ public class OrdersProductDto {
 	private String memberId;
 	private Date cartDate;
 	private int cartPrice;
+	private int productOptionStock;
 
 }

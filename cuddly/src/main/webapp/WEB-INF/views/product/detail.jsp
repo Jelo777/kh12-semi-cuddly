@@ -15,6 +15,8 @@
 		var optionSelect = $("#optionSelect");
 		var cartCount = $("#cartCount");
 		var selectedOptions = $("#selectedOptions");
+		
+		
 
 		// 옵션 선택 여부 확인
 		if (optionSelect.val() === "옵션 선택" || cartCount.val() === "") {
@@ -23,22 +25,30 @@
 			$("#optionSelect").addClass("fail")
 			$(".fail-feedback").css("display", "block")
 			cartCount.val(stock);
-
 			return;
 		}
 		
 		var selectedOption = optionSelect.find(":selected");
 		var stock = selectedOption.data("stock");
+		
 		var selectedCount = cartCount.val();
+		
+		selectedOption.removeData("stock").data("stock", stock - selectedCount);
 		
 		if(selectedCount>stock){
 			
 			$(this).addClass("fail");
 			$(".fail3-feedback").css("display", "block");
 			return;
-			
+		}
+		else if(selectedCount<=0){
+			$("#cartCount").addClass("fail");
+			return;
 			
 		}
+		
+			
+		
 		
 		
 
@@ -80,6 +90,9 @@
 		$(".cartCount,.form-input").removeClass("fail")
 		$(".fail-feedback").css("display", "none");
 		$(".fail2-feedback").css("display", "none");
+		
+		
+		
 	}
 
 	$(function() {
@@ -116,9 +129,13 @@
 						        
 		        if (optionStock !== undefined && optionStock !== null) {
 		            $("#cartCount").attr("max", optionStock);
+		            $("#cartCount").attr("min", 1);
 		        } else {
 		            $("#cartCount").removeAttr("max");
 		        }
+		        
+		        
+		        
 		    });
 		  
 		  
@@ -175,7 +192,12 @@
 				});
 
 		$("[name=action]").click(function(e) {
+			
+			$("#cartCount").removeClass("fail");
+			
 			var a = $(".hiddenSelect").val() == null;
+			
+			$("#cartCount").attr("type", "text");
 			
 			if ($(".hiddenSelect").val() == null) {
 				$(".fail2-feedback").css("display", "block");
@@ -184,6 +206,8 @@
 		
 			else if ($(this).val() == "cart") {
 				var userConfirmed = confirm("장바구니로 이동하시겠습니까?");
+				
+				
 				if (!userConfirmed) {
 					/*  $(document).ready(function() {
 						 $("[name=action]").val("cancel")
@@ -196,20 +220,30 @@
 
 				}
 			}
+			
 
 		});
 
 		$(document).on("click", ".option-remove", function(e) {
 
-			var index = $(this).data("index") - 1;
-			$(this).closest(".optionList").remove();
+			 var index = $(this).data("index") - 1;
+			  var removedOptionNo = $("[name='cartList[" + index + "].optionNo']").val();
+			  var removedCount = $("[name='cartList[" + index + "].cartCount']").val();
+			  
+			  var selectedOption = $("#optionSelect option[value='" + removedOptionNo + "']");
+			  var currentStock = selectedOption.data("stock");
 
-			console.log("index: " + index);
+			  selectedOption.removeData("stock").data("stock", currentStock + parseInt(removedCount));
+
+			  $(this).closest(".optionList").remove();
 
 			$("[name='cartList[" + index + "].optionNo']").remove();
 			$("[name='cartList[" + index + "].cartCount']").remove();
-
+			
 			count--;
+			
+			
+
 
 		});
 
@@ -413,7 +447,7 @@
 			<div class="w-75 mh-10 mb-10">
 				<div class="float-container">
 					<div class="float-left productName mv-10">${productDto.productName}</div>
-					<div class="float-right mv-10"">${reviewListDto.reviewDate}</div>
+					<div class="float-right mv-10">${reviewListDto.reviewDate}</div>
 				</div>
 				<div class="float-container">
 					<div class="float-left mv-10">${reviewListDto.memberId}</div>

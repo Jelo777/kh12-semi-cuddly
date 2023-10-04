@@ -206,12 +206,7 @@ public class OrdersController {
 			
 			detail.setOrdersDetailPrice(total);
 			
-			//재고 처리
-			ProductOptionDto productOptionDto = productOptionDao.selectOne(detail.getOptionNo());
-			int originStock = productOptionDto.getProductOptionStock();
-			int remainStock = originStock - count;
-			productOptionDto.setProductOptionStock(remainStock);
-			productOptionDao.update(productOptionDto);
+			
 			
 			
 		    //회원 누적금액 업데이트
@@ -266,6 +261,15 @@ public class OrdersController {
 	        int cartNo = cartDao.sequence();
 	        insert.setCartNo(cartNo);
 	        insert.setMemberId(memberId);
+	        
+	        int count = insert.getCartCount();
+	        
+	      //재고 처리
+			ProductOptionDto productOptionDto = productOptionDao.selectOne(insert.getOptionNo());
+			int originStock = productOptionDto.getProductOptionStock();
+			int remainStock = originStock - count;
+			productOptionDto.setProductOptionStock(remainStock);
+			productOptionDao.update(productOptionDto);
 
 	        int originPrice = cartDao.price(insert.getOptionNo());
 	        int price;
@@ -310,6 +314,16 @@ public class OrdersController {
 		String memberId = (String) session.getAttribute("name");
 		
 		for(int deleteNo : cartNo) {
+		CartDto cartDto = cartDao.selectOne(deleteNo);
+		
+		int count = cartDto.getCartCount();
+		
+	   //재고 되돌리기
+		ProductOptionDto productOptionDto = productOptionDao.selectOne(cartDto.getOptionNo());
+		int originStock = productOptionDto.getProductOptionStock();
+		int remainStock = originStock + count;
+		productOptionDto.setProductOptionStock(remainStock);
+		productOptionDao.update(productOptionDto);
 		
 		
 		cartDao.cartDelete(deleteNo);
