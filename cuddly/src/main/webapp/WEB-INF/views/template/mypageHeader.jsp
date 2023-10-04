@@ -201,6 +201,7 @@ $(document).ready(function() {
         
 	</header>
 	<nav>
+<<<<<<< HEAD
 		<nav>
 			<ul class="menu left">
 				<li class="center"><a href="/cuddly/product/creator">크리에이터</a></li>
@@ -224,6 +225,20 @@ $(document).ready(function() {
 					</li>
 				</c:if>
 			</ul>
+=======
+		<ul class="menu">
+			<li><a href="/cuddly/product/creator">크리에이터</a></li>
+			<li><a href="#">굿즈</a></li>
+			<li><a href="#">문구</a></li>
+			<li><a href="#">액세서리</a></li>
+			
+			<%-- 관리자인 경우 추가 메뉴 출력 --%>
+			<c:if test="${sessionScope.level == '관리자'}">
+				<li><a href="/cuddly/admin/product/list">관리자메뉴</a></li>
+			</c:if>
+			
+		</ul>
+>>>>>>> branch 'daeun' of https://github.com/Jelo777/kh12-semi-cuddly.git
 	</nav>
 	<hr>
 	<section>

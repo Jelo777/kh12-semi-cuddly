@@ -26,7 +26,11 @@
 	</div>
 	
 	<div class="row right">
+<<<<<<< HEAD
 		<a href="list" class="btn btn-positive">
+=======
+		<a href="list" class="btn">
+>>>>>>> branch 'daeun' of https://github.com/Jelo777/kh12-semi-cuddly.git
 			<i class="fa-solid fa-list"></i>
 			목록
 		</a>
