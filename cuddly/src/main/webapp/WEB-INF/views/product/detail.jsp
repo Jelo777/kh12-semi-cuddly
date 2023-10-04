@@ -15,6 +15,8 @@
 		var optionSelect = $("#optionSelect");
 		var cartCount = $("#cartCount");
 		var selectedOptions = $("#selectedOptions");
+		
+		
 
 		// 옵션 선택 여부 확인
 		if (optionSelect.val() === "옵션 선택" || cartCount.val() === "") {
@@ -23,22 +25,30 @@
 			$("#optionSelect").addClass("fail")
 			$(".fail-feedback").css("display", "block")
 			cartCount.val(stock);
-
 			return;
 		}
 		
 		var selectedOption = optionSelect.find(":selected");
 		var stock = selectedOption.data("stock");
+		
 		var selectedCount = cartCount.val();
+		
+		selectedOption.removeData("stock").data("stock", stock - selectedCount);
 		
 		if(selectedCount>stock){
 			
 			$(this).addClass("fail");
 			$(".fail3-feedback").css("display", "block");
 			return;
-			
+		}
+		else if(selectedCount<=0){
+			$("#cartCount").addClass("fail");
+			return;
 			
 		}
+		
+			
+		
 		
 		
 
@@ -80,6 +90,9 @@
 		$(".cartCount,.form-input").removeClass("fail")
 		$(".fail-feedback").css("display", "none");
 		$(".fail2-feedback").css("display", "none");
+		
+		
+		
 	}
 
 	$(function() {
@@ -116,9 +129,13 @@
 						        
 		        if (optionStock !== undefined && optionStock !== null) {
 		            $("#cartCount").attr("max", optionStock);
+		            $("#cartCount").attr("min", 1);
 		        } else {
 		            $("#cartCount").removeAttr("max");
 		        }
+		        
+		        
+		        
 		    });
 		  
 		  
@@ -175,7 +192,12 @@
 				});
 
 		$("[name=action]").click(function(e) {
+			
+			$("#cartCount").removeClass("fail");
+			
 			var a = $(".hiddenSelect").val() == null;
+			
+			$("#cartCount").attr("type", "text");
 			
 			if ($(".hiddenSelect").val() == null) {
 				$(".fail2-feedback").css("display", "block");
@@ -184,6 +206,8 @@
 		
 			else if ($(this).val() == "cart") {
 				var userConfirmed = confirm("장바구니로 이동하시겠습니까?");
+				
+				
 				if (!userConfirmed) {
 					/*  $(document).ready(function() {
 						 $("[name=action]").val("cancel")
@@ -196,20 +220,30 @@
 
 				}
 			}
+			
 
 		});
 
 		$(document).on("click", ".option-remove", function(e) {
 
-			var index = $(this).data("index") - 1;
-			$(this).closest(".optionList").remove();
+			 var index = $(this).data("index") - 1;
+			  var removedOptionNo = $("[name='cartList[" + index + "].optionNo']").val();
+			  var removedCount = $("[name='cartList[" + index + "].cartCount']").val();
+			  
+			  var selectedOption = $("#optionSelect option[value='" + removedOptionNo + "']");
+			  var currentStock = selectedOption.data("stock");
 
-			console.log("index: " + index);
+			  selectedOption.removeData("stock").data("stock", currentStock + parseInt(removedCount));
+
+			  $(this).closest(".optionList").remove();
 
 			$("[name='cartList[" + index + "].optionNo']").remove();
 			$("[name='cartList[" + index + "].cartCount']").remove();
-
+			
 			count--;
+			
+			
+
 
 		});
 
@@ -340,16 +374,16 @@
 								</option>
 							</c:forEach>
 						</select>
-						<div class="fail-feedback left ms-20">옵션을 선택하세요</div>
+						<div class="fail-feedback left ms-40 mt-5">옵션을 선택하세요</div>
 					</div>
 					
 					<div class="row flex-container left">
 						<input type="number" min="1" id="cartCount"
 							class="cartCount form-input find-input w-50 ms-20 center" value="1">
-						<div class="fail3-feedback" style="display: none; color:red">선택할 수 있는 수량을 넘었습니다.</div>	
 						<button class="btn btn-more w-100 ms-10" type="button" onclick="addSelectedOption();"
 							name="add">옵션추가</button>
 					</div>
+						<div class="fail3-feedback left ms-40" style="display: none; color:#d63031">선택할 수 있는 수량을 넘었습니다.</div>	
 					
 						<div id="selectedOptions" class="left ms-20"></div>
 						
@@ -409,11 +443,11 @@
 	</div>
 
 	<c:forEach var="reviewListDto" items="${reviewList}">
-		<div class="flex-container card">
-			<div class="w-75 mh-10 mb-10">
+		<div class="flex-container card mb-10">
+			<div class="w-80 mh-10 mb-10">
 				<div class="float-container">
 					<div class="float-left productName mv-10">${productDto.productName}</div>
-					<div class="float-right mv-10"">${reviewListDto.reviewDate}</div>
+					<div class="float-right mv-10">${reviewListDto.reviewDate}</div>
 				</div>
 				<div class="float-container">
 					<div class="float-left mv-10">${reviewListDto.memberId}</div>
@@ -422,14 +456,28 @@
 				
 				<div class="row left">${reviewListDto.reviewContent}</div>
 			</div>
-			<div class="w-25 me-10 mb-10">
+			<div class="w-20 me-10 mb-10">
 				<img
 					src="/cuddly/image/review/image?reviewNo=${reviewListDto.reviewNo}"
-					width="100%" height="100%" class="image image-round">
+					width="150px" height="150px" class="image image-round">
 			</div>
 		</div>
 	</c:forEach>
 
+	
+
+	<div class="flex-container form-input form-underline underline-input mb-10">
+		<h3 class="col-3">
+			<a class="link" href="#productDetail">상품상세</a>
+		</h3>
+		<h3 class="col-3">
+			<a class="link" href="#reviewList">리뷰</a>
+		</h3>
+		<h3 class="col-3">
+			<a class="link" href="#qnaList"><label class="purple">상품문의</label></a>
+		</h3>
+	</div>
+	
 	<div class="float-container">
 		<div class="float-left" id="qnaList">
 			<h2 class="mt-30">Q&A</h2>
@@ -454,47 +502,41 @@
 			</div>
 		</form>
 	</div>
-
-	<div class="flex-container form-input form-underline underline-input mb-10">
-		<h3 class="col-3">
-			<a class="link" href="#productDetail">상품상세</a>
-		</h3>
-		<h3 class="col-3">
-			<a class="link" href="#reviewList">리뷰</a>
-		</h3>
-		<h3 class="col-3">
-			<a class="link" href="#qnaList"><label class="purple">상품문의</label></a>
-		</h3>
-	</div>
-
-	<table class="table table-border">
-		<tr>
-			<th>답변상태</th>
-			<th>문의내용</th>
-			<th>작성자</th>
-			<th>작성일</th>
-		</tr>
-		<c:forEach var="qnaListDto" items="${qnaList}">
-			<tr class="qna-list">
-				<td><c:choose>
-						<c:when test="${qnaListDto.qnaAnswer==null}">
-						답변미완료
-					</c:when>
-						<c:otherwise>
-						답변완료
-					</c:otherwise>
-					</c:choose></td>
-				<td>${qnaListDto.qnaContent}</td>
-				<td>${qnaListDto.memberId}</td>
-				<td>${qnaListDto.qnaDate}</td>
-			</tr>
-			<c:if test="${qnaListDto.qnaAnswer!=null}">
-				<tr class="qna-answer">
-					<td colspan="4">${qnaListDto.qnaAnswer}</td>
+	
+	<div class="row">
+		<table class="table table-slit table-hover">
+			<thead>
+				<tr>
+					<th>답변상태</th>
+					<th>문의내용</th>
+					<th>작성자</th>
+					<th>작성일</th>
 				</tr>
-			</c:if>
-		</c:forEach>
-	</table>
+			</thead>
+			<tbody>
+				<c:forEach var="qnaListDto" items="${qnaList}">
+					<tr class="qna-list">
+						<td><c:choose>
+								<c:when test="${qnaListDto.qnaAnswer==null}">
+								답변미완료
+							</c:when>
+								<c:otherwise>
+								답변완료
+							</c:otherwise>
+							</c:choose></td>
+						<td>${qnaListDto.qnaContent}</td>
+						<td>${qnaListDto.memberId}</td>
+						<td>${qnaListDto.qnaDate}</td>
+					</tr>
+					<c:if test="${qnaListDto.qnaAnswer!=null}">
+						<tr class="qna-answer">
+							<td colspan="4">${qnaListDto.qnaAnswer}</td>
+						</tr>
+					</c:if>
+				</c:forEach>
+			</tbody>
+		</table>
+	</div>
 
 </div>
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>

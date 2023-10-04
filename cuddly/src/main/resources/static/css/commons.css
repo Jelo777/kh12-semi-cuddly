@@ -58,7 +58,7 @@
     - 기본 간격은 10px이며 10px 단위로 설정 가능하도록 구현
     - margin은 m, padding은 p로 설정
 */
-
+.p-10{padding:10px;}
 .pv-30{ padding: 30px 0px;}
 .ps-20{ padding-left: 20px;}
 
@@ -81,6 +81,7 @@
 .mv-40 { margin:40px 0px; }
 .mv-50 { margin:50px 0px; }
 
+.mt-5 {margin-top: 5px;}
 .mt-10 { margin-top: 10px; }
 .mt-20 { margin-top: 20px; }
 .mt-30 { margin-top: 30px; }
@@ -363,7 +364,7 @@ table {
  	font-size: 15px;
  	border: 1px solid #BEADFA;
     border-radius: 5em;
-    color: #BEADFA;
+    background-color: #BEADFA;
 }
 
 /*작은 버튼*/
@@ -419,7 +420,10 @@ table {
     border-right: none;
     padding-left: 0px;
     padding-right: 0px;
-    background-color: none;
+}
+
+.form-input.underline-input.member-input{
+    background-color: #FFFEFC;
 }
 
 .form-input.text-input{
