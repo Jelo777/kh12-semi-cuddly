@@ -9,6 +9,9 @@
 	var count = 0;
 
 	function addSelectedOption() {
+		
+		
+		$(".fail3-feedback").css("display", "none");
 		var optionSelect = $("#optionSelect");
 		var cartCount = $("#cartCount");
 		var selectedOptions = $("#selectedOptions");
