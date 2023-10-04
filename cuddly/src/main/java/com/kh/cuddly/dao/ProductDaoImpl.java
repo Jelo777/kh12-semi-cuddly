@@ -125,7 +125,7 @@ public class ProductDaoImpl implements ProductDao{
 						+ "select rownum rn, TMP.* from( "
 							+ "SELECT * FROM product_list_view p INNER JOIN CREATOR_PRODUCT cp "
 							+ "ON cp.PRODUCT_NO = p.product_no "
-							+ "LEFT OUTER JOIN creator c ON cp.CREATOR_NO = c.CREATOR_NO"
+							+ "LEFT OUTER JOIN creator c ON cp.CREATOR_NO = c.CREATOR_NO "
 							+ "where c.creator_name = ? "
 							+ "ORDER BY " + vo.getTarget() + " " + vo.getSort()
 							+")TMP"
@@ -138,7 +138,7 @@ public class ProductDaoImpl implements ProductDao{
 					+ "select rownum rn, TMP.* from( "
 						+ "SELECT * FROM product_list_view p INNER JOIN CREATOR_PRODUCT cp "
 						+ "ON cp.PRODUCT_NO = p.product_no "
-						+ "LEFT OUTER JOIN creator c ON cp.CREATOR_NO = c.CREATOR_NO"
+						+ "LEFT OUTER JOIN creator c ON cp.CREATOR_NO = c.CREATOR_No "
 						+ "where c.creator_name = ? "
 						+ "ORDER BY p." + vo.getTarget() + " " + vo.getSort()
 						+")TMP"
