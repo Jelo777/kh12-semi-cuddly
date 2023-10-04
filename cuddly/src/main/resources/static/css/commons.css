@@ -419,7 +419,10 @@ table {
     border-right: none;
     padding-left: 0px;
     padding-right: 0px;
-    background-color: none;
+}
+
+.form-input.underline-input.member-input{
+    background-color: #FFFEFC;
 }
 
 .form-input.text-input{
