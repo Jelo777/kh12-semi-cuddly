@@ -23,4 +23,6 @@ public interface OrdersDao {
 	
 	List<OrderDetailJoinDto2> selectListOrders2(PaginationVO vo,String memberId);
 	int countList(PaginationVO vo,String memberId);
+	
+	OrderDetailJoinDto selectOneByProductNo(String memberId,int ProductNo);
 }
