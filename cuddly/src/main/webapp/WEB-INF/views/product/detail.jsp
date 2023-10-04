@@ -89,6 +89,20 @@
 				$(".fa-heart").next("span").text(response.count);
 			}
 		});
+		
+		
+		  $("#optionSelect").change(function() {
+		        var selectedOption = $(this).find(":selected");
+		        var optionStock = selectedOption.data("stock");
+
+		        if (optionStock !== undefined && optionStock !== null) {
+		            $("#cartCount").attr("max", optionStock);
+		        } else {
+		            $("#cartCount").removeAttr("max");
+		        }
+		    });
+		
+		
 
 		$(".fa-heart").click(
 				function() {
@@ -263,7 +277,7 @@
 						<select id="optionSelect" class="form-input w-100">
 							<option>옵션 선택</option>
 							<c:forEach var="optionList" items="${optionList}">
-								<option class="select" value="${optionList.productOptionNo}">${optionList.productOptionName}</option>
+								<option class="select" value="${optionList.productOptionNo}" data-stock="${optionList.productOptionStock }">${optionList.productOptionName}</option>
 							</c:forEach>
 						</select>
 						<div class="fail-feedback">옵션을 선택하세요</div>
