@@ -9,6 +9,9 @@
 	var count = 0;
 
 	function addSelectedOption() {
+		
+		
+		$(".fail3-feedback").css("display", "none");
 		var optionSelect = $("#optionSelect");
 		var cartCount = $("#cartCount");
 		var selectedOptions = $("#selectedOptions");
@@ -19,11 +22,25 @@
 			$("#optionSelect").removeClass("fail")
 			$("#optionSelect").addClass("fail")
 			$(".fail-feedback").css("display", "block")
+			cartCount.val(stock);
 
 			return;
 		}
-
+		
+		var selectedOption = optionSelect.find(":selected");
+		var stock = selectedOption.data("stock");
 		var selectedCount = cartCount.val();
+		
+		if(selectedCount>stock){
+			
+			$(this).addClass("fail");
+			$(".fail3-feedback").css("display", "block");
+			return;
+			
+			
+		}
+		
+		
 
 		var selectedOptionText = optionSelect.find(":selected").text();
 		var selectedOptionDiv = $("<div class='optionList'></div>");
@@ -39,7 +56,6 @@
 
 		optionItem.data("index", count);
 
-		console.log(count);
 
 		for (var i = 0; i < count; i++) {
 
@@ -70,6 +86,8 @@
 
 		var params = new URLSearchParams(location.search);
 		var productNo = params.get("productNo");
+		
+
 
 		$.ajax({
 			url : "/cuddly/rest/wishlist/check",
@@ -102,6 +120,33 @@
 		            $("#cartCount").removeAttr("max");
 		        }
 		    });
+		  
+		  
+		  
+		  
+		  $("#cartCount").change(function(){
+			  
+				  $(this).removeClass("fail");
+				  $(".fail3-feedback").css("display", "none");
+			  	var optionSelect = $("#optionSelect");
+				var selectedOption = optionSelect.find(":selected");
+				var stock = selectedOption.data("stock");
+			  
+			  if($(this).val()>stock){
+	 				
+				  $(this).addClass("fail");
+				  $(".fail3-feedback").css("display", "block");
+				  $(this).val(stock);
+				  
+			  }
+				
+				
+			  
+			  
+			  
+		  })
+		  
+		  
 		
 		
 
@@ -293,7 +338,8 @@
 					</div>
 					<div class="row flex-container left ms-20">
 						<input type="number" min="1" id="cartCount"
-							class="cartCount form-input w-100 me-10" value="1">
+							class="cartCount form-input w-50" value="1">
+						<div class="fail3-feedback" style="display: none; color:red">선택할 수 있는 수량을 넘었습니다.</div>	
 						<button class="btn w-100 ms-10" type="button" onclick="addSelectedOption();"
 							name="add">옵션추가</button>
 						<div id="selectedOptions"></div>
