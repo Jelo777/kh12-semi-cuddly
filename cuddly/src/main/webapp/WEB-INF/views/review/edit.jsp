@@ -115,7 +115,7 @@
 									width="200" height="200">
 				</c:when>
 				<c:otherwise>
-					<img class="now image image-round" src="/images/reviewImage.pngf">
+					<img class="now image image-round" src="/images/reviewImage.png" width="200" height="200">
 				</c:otherwise>
 			</c:choose>
 		</div>

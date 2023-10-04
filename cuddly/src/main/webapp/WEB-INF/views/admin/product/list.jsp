@@ -20,7 +20,7 @@
 			<div class="inline-flex-container allow-wrap left">
 				<table class="">
 					<tr>
-						<td><img src="/cuddly/admin/product/main?productNo=${adminProductListDto.productNo}" width="200" height="200"></td>
+						<td><img src="/cuddly/image/product/main?productNo=${adminProductListDto.productNo}" width="200" height="200"></td>
 					</tr>
 					<tr>
 						<td>상품번호 : ${adminProductListDto.productNo}</td>
