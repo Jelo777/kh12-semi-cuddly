@@ -9,18 +9,15 @@
 		<div class="float-container card mt-50">
 
     <div class="row">
-<<<<<<< HEAD
+
 <table class="table table-striped">
      
         
-        
-=======
-        <h2>${param.category}</h2>
+
        
     </div>
     <div class="row">
-        <table class="table table-border">
->>>>>>> branch 'daeun' of https://github.com/Jelo777/kh12-semi-cuddly.git
+     
             <thead>
                 <tr>
                     <th>no</th>
@@ -67,28 +64,12 @@
 
 
     <div class="row right">
-<<<<<<< HEAD
-        <a href="list" class="btn btn-positive">
-=======
-    
+
 
         
-       <c:if test="${sessionScope.level == '관리자'}">
-		<a href="edit?faqNo=${faqDto.faqNo}" class="btn btn-positive">		
-   			 <i class="fa-solid fa-edit"></i>
-   			 수정
-		</a>
-		</c:if>
-		
-		<c:if test="${sessionScope.level == '관리자'}">
-		    <a href="delete?faqNo=${faqDto.faqNo}" class="btn">
-  	 		 <i class="fa-solid fa-delete"></i>
-   			 삭제
-		</a>
-		</c:if>
 
-        <a href="list" class="btn">
->>>>>>> branch 'daeun' of https://github.com/Jelo777/kh12-semi-cuddly.git
+
+        <a href="list" class="btn btn-positive">
             <i class="fa-solid fa-list"></i>
             목록
         </a>
