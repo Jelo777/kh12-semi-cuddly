@@ -57,7 +57,7 @@ public class InterceptorConfiguration implements WebMvcConfigurer{
 						"/cuddly/product/detail",
 						"/cuddly/review/write"
 						);
-		
+		//자기가 구매하지 않은 상품 리뷰 차단
 		registry.addInterceptor(reviewInterceptor)
 				.addPathPatterns(
 						"/cuddly/review/write"
