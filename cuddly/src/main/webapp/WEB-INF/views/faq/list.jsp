@@ -36,7 +36,7 @@
 
 
 	<div class="row">
-		<table class="table table-stripe">
+		<table class="table table-slit table-hover">
 			<thead>
 				<tr>
 					<th>no</th>

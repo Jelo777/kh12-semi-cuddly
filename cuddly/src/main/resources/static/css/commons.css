@@ -563,7 +563,7 @@ textarea.form-input.fixed {
 .table > tfoot > tr > th, 
 .table > tfoot > tr > td 
 {
-    padding:0.25em;
+    padding:0.5em;
 }
 
 /*
@@ -582,11 +582,14 @@ textarea.form-input.fixed {
     border: 1px solid #2d3436;
 }
 
+.table > thead > tr > th{
+	background-color: rgb(238, 232, 250);
+}
 /*
     확장 스타일 - 마우스 반응 테이블
 */
 .table.table-hover > tbody > tr:hover {
-    background-color: #dfe6e9;
+    background-color: rgb(253, 252, 254);
 }
 
 /*
@@ -603,19 +606,20 @@ textarea.form-input.fixed {
     확장 스타일 - 옆트임 테이블
 */
 .table.table-slit {
-    border-top: 1px solid #2d3436;
-    border-bottom: 1px solid #2d3436;
+    border-top: 1px solid #C2C2C2;
+    border-bottom: 1px solid #C2C2C2;
 }
 .table.table-slit > thead {
-    border-bottom: 1px solid #2d3436;
+    border-bottom: 1px solid #C2C2C2;
 }
 .table.table-slit > tfoot {
-    border-top: 1px solid #2d3436;
+    border-top: 1px solid #C2C2C2;
 }
 
 .table.table-slit > tbody > tr :not(tr:last-child) {
-    border-bottom: 1px dotted #2d3436;
+    border-bottom: 1px dotted #C2C2C2;
 }
+
 
 .important{
     font-weight: bold;
