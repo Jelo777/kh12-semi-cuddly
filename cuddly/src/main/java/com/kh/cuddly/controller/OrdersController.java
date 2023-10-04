@@ -23,6 +23,7 @@ import com.kh.cuddly.dao.MemberDao;
 import com.kh.cuddly.dao.OrdersDao;
 import com.kh.cuddly.dao.OrdersDetailDao;
 import com.kh.cuddly.dao.ProductDao;
+import com.kh.cuddly.dao.ProductOptionDao;
 import com.kh.cuddly.dao.QnaDao;
 import com.kh.cuddly.dao.ReviewDao;
 import com.kh.cuddly.dto.AddressDto;
@@ -35,6 +36,7 @@ import com.kh.cuddly.dto.OrderDetailJoinDto2;
 import com.kh.cuddly.dto.OrdersDetailDto;
 import com.kh.cuddly.dto.OrdersDto;
 import com.kh.cuddly.dto.OrdersProductDto;
+import com.kh.cuddly.dto.ProductOptionDto;
 
 
 
@@ -71,6 +73,9 @@ public class OrdersController {
 	
 	@Autowired
 	ReviewDao reviewDao;
+	
+	@Autowired
+	ProductOptionDao productOptionDao;
 	
 	
 	
@@ -200,6 +205,14 @@ public class OrdersController {
 			int total = price * count;
 			
 			detail.setOrdersDetailPrice(total);
+			
+			//재고 처리
+			ProductOptionDto productOptionDto = productOptionDao.selectOne(detail.getOptionNo());
+			int originStock = productOptionDto.getProductOptionStock();
+			int remainStock = originStock - count;
+			productOptionDto.setProductOptionStock(remainStock);
+			productOptionDao.update(productOptionDto);
+			
 			
 		    //회원 누적금액 업데이트
 			MemberDto memberDto = memberDao.selectOne(memberId);

@@ -24,7 +24,7 @@
 						<td class="productName">${wishlistListDto.productName}</td>
 					</tr>
 					<tr>
-						<td class="creatorName">크리에이터명</td>
+						<td class="creatorName">${wishlistListDto.creatorName}</td>
 					</tr>
 					<tr>
 						<td class="productPrice">${wishlistListDto.productPrice}</td>
