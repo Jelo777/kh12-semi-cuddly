@@ -398,14 +398,13 @@ table {
   	height: 40px;
     outline: none; /*outline은 입력 창 선택 시 강조 효과*/
     border: 2px solid #BEADFA;
-    
+    border-radius: 0.2em;
     line-height: 1.2em;
     font-style: #BEADFA;
 }
 
 /*아오 왜 돋보기 안들어가냐고*/
 .form-input.find-input{
-	width : 400px;
 	border-radius: 5em;
 	background-image: url(glass.png);
 	background-color: #FFFEFC;

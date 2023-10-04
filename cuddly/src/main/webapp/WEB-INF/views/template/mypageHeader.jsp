@@ -48,7 +48,9 @@
 		display:block;
 	}
 
-
+.find-input{
+	width: 400px;
+}
 </style>
 
 <!-- jquery cdn -->
