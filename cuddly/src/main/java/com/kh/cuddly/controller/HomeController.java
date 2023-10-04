@@ -12,7 +12,7 @@ import com.kh.cuddly.VO.ProductListVO;
 import com.kh.cuddly.dao.CreatorDao;
 import com.kh.cuddly.dao.ProductDao;
 import com.kh.cuddly.dto.CreatorDto;
-import com.kh.cuddly.dto.ProductDto;
+import com.kh.cuddly.dto.ProductListDto;
 
 @RequestMapping("/cuddly")
 @Controller
@@ -27,10 +27,10 @@ public class HomeController {
 	public String home(Model model,@ModelAttribute(name = "vo") ProductListVO vo,
 					@ModelAttribute(name = "vo2") ProductListVO vo2
 					) {
-		List<ProductDto> sortByNew = productDao.selectList(vo);
+		List<ProductListDto> sortByNew = productDao.selectList(vo);
 		
 		vo2.setTarget("wishlist_count");
-		List<ProductDto> sortByBest = productDao.selectList(vo2);
+		List<ProductListDto> sortByBest = productDao.selectList(vo2);
 		model.addAttribute("sortByNew", sortByNew);
 		model.addAttribute("sortByBest", sortByBest);
 		return "/WEB-INF/views/home.jsp";
@@ -42,7 +42,7 @@ public class HomeController {
 		int count = productDao.countList(vo);
 		String keyword = vo.getKeyword();
 		vo.setCount(count);
-		List<ProductDto> productList = productDao.selectList(vo);
+		List<ProductListDto> productList = productDao.selectList(vo);
 		List<CreatorDto> creatorList = creatorDao.selectList(keyword);
 		
 		if(productList.size()==0) productList = null;

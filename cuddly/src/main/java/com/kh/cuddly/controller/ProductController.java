@@ -19,6 +19,7 @@ import com.kh.cuddly.dao.QnaDao;
 import com.kh.cuddly.dao.ReviewDao;
 import com.kh.cuddly.dto.CreatorDto;
 import com.kh.cuddly.dto.ProductDto;
+import com.kh.cuddly.dto.ProductListDto;
 import com.kh.cuddly.dto.ProductOptionDto;
 import com.kh.cuddly.dto.QnaDto;
 import com.kh.cuddly.dto.ReviewDto;
@@ -79,18 +80,18 @@ public class ProductController {
 		if(vo.isCreator()) {
 			vo.setCount(productDao.countList(vo));
 			CreatorDto creatorDto = creatorDao.selectOne(vo.getCreator());
-			List<ProductDto> list = productDao.selectListByCreator(vo);
+			List<ProductListDto> list = productDao.selectListByCreator(vo);
 			model.addAttribute("creatorDto", creatorDto);
 			model.addAttribute("list", list);
 		}
 		else if(vo.isItem()) {
 			vo.setCount(productDao.countList(vo));
-			List<ProductDto> list = productDao.selectListByProductItem(vo);
+			List<ProductListDto> list = productDao.selectListByProductItem(vo);
 			model.addAttribute("list", list);
 		}
 		else {
 			vo.setCount(productDao.countList(vo));
-			List<ProductDto> list = productDao.selectList(vo);
+			List<ProductListDto> list = productDao.selectList(vo);
 			model.addAttribute("list", list);
 		}
 		
