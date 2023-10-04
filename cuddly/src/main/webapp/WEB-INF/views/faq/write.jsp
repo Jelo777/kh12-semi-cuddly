@@ -39,7 +39,7 @@
             	작성
            	</button>
            	
-       	  	<a href="list" class="btn">
+       	  	<a href="list" class="btn btn-positive">
             	<i class="fa-solid fa-list"></i>
             	목록
             	</a>

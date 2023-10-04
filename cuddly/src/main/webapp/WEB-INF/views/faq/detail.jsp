@@ -1,22 +1,32 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 
-<div class="container w-800">
+<div class="container w-700">
+	
+		<div class="float-container card mt-50">
+
     <div class="row">
-        <h2>${faqDto.faqNo}번게시글</h2>
+<<<<<<< HEAD
+<table class="table table-striped">
+     
+        
+        
+=======
+        <h2>${param.category}</h2>
+       
     </div>
     <div class="row">
         <table class="table table-border">
+>>>>>>> branch 'daeun' of https://github.com/Jelo777/kh12-semi-cuddly.git
             <thead>
                 <tr>
-                    <th>글 번호</th>
-                    <th>카테고리</th>
-                    <th>제목</th>
-                    <th>작성일</th>
+                    <th>no</th>
+                    <th>category</th>
+                    <th>title</th>
+                    <th>date</th>
                 </tr>
             </thead>
             <tbody>
@@ -29,38 +39,75 @@
             </tbody>
         </table>
     </div>
+</div>
+</div>
+   
+<div class="container w-700">
 
-    <div class="row">
-        <table class="table table-border">
+    <div class="row left">
+<div class="float-container card mt-50">
+<table class="table table-striped">
+
             <tbody>
                 <tr>
 
-        
-                <tr height="150">
-                
-                    <td>${faqDto.faqContent}</td>
+                    <td height="300">${faqDto.faqContent}</td>
+                    
                 </tr>
-               
             </tbody>
         </table>
     </div>
-    
+    </div>
+
+    	
+   
+
+
+
 
 
     <div class="row right">
+<<<<<<< HEAD
+        <a href="list" class="btn btn-positive">
+=======
     
 
+        
+       <c:if test="${sessionScope.level == '관리자'}">
+		<a href="edit?faqNo=${faqDto.faqNo}" class="btn btn-positive">		
+   			 <i class="fa-solid fa-edit"></i>
+   			 수정
+		</a>
+		</c:if>
+		
+		<c:if test="${sessionScope.level == '관리자'}">
+		    <a href="delete?faqNo=${faqDto.faqNo}" class="btn">
+  	 		 <i class="fa-solid fa-delete"></i>
+   			 삭제
+		</a>
+		</c:if>
+
         <a href="list" class="btn">
+>>>>>>> branch 'daeun' of https://github.com/Jelo777/kh12-semi-cuddly.git
             <i class="fa-solid fa-list"></i>
             목록
         </a>
-              
-	
-     
-
-  
-
         
+        <c:if test="${sessionScope.level == '관리자'}">
+        <a href="edit?faqNo=${faqDto.faqNo}" class="btn btn-positive">
+            <i class="fa-solid fa-edit"></i>
+            수정
+        </a>
+        </c:if>
+        
+        <c:if test="${sessionScope.level == '관리자'}">
+        <a href="delete?faqNo=${faqDto.faqNo}" class="btn btn-positive">
+            <i class="fa-solid fa-delete"></i>
+            삭제
+        </a>
+        </c:if>
     </div>
 </div>
 
+
+<jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
