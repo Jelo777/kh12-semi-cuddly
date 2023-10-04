@@ -288,6 +288,10 @@ a.link:hover
 
 
 /* 폰트크기 */
+/* 기본 폰트 크기 */
+.etcFontSize{
+	font-size: 16px;
+	}
 /* 상품명 */
 .productName{
 	font-size: 18px;
@@ -405,7 +409,7 @@ table {
 
 /*아오 왜 돋보기 안들어가냐고*/
 .form-input.find-input{
-	width : 400px;
+	width : 25em;
 	border-radius: 5em;
 	background-image: url(glass.png);
 	background-color: #FFFEFC;
@@ -417,7 +421,7 @@ table {
     border-right: none;
     padding-left: 0px;
     padding-right: 0px;
-    background-color: #FFFEFC;
+    background-color: none;
 }
 
 .form-input.text-input{
@@ -461,34 +465,6 @@ hr{
 
 
 
-
-/*
-    입력창 디자인
-    - 글자가 핵심이므로 글자 크기를 정하고 나머지를 비율(em)로 설정
-*/
-/*.form-input, */
-/*.btn */
-/*{*/
-/*     a 태그 때문에 추가한 속성 */
-/*    display: inline-block;*/
-/*    text-decoration: none;*/
-/*    vertical-align: bottom;*/
-
-/*    font-size: 20px;*/
-/*    padding: 0.5em 1em;*/
-/*    outline: none; outline은 입력 창 선택 시 강조 효과 */
-/*    border: 1px solid #636e72;*/
-/*    border-radius: 0.1em;*/
-/*    line-height: 1.2em;*/
-/*}*/
-.form-input:focus {/*선택된 상태를 focus라 한다 */
-/*    border-color: #2d3436;*/
-}
-
-/*
-    입력창의 변형(확장) 스타일
-    - 기본 스타일에 옵션을 추가하듯이 추가 클래스를 작성하여 적용
-*/
 
 
 

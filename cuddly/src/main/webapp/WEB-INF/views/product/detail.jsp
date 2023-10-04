@@ -266,15 +266,13 @@
 .price-by-level,
 .price-btn {
 	background-color: white;
-	border: 1px solid #BEADFA;
+	border: 2px solid #BEADFA;
 	border-radius: 0.3em;
 	padding: 5px;
 }
-.price-by-level {
-	font-size: 24px;
-	text-align: center;
-}
+
 </style>
+
 <input id="memberLevel" type="hidden" value="${sessionScope.level}">
 
 
@@ -284,73 +282,87 @@
 			<div class="row">
 				<img
 					src="/cuddly/image/product/main?productNo=${productDto.productNo}"
-					width="100%" height="100%">
+					width="100%" height="100%" class="image image-round">
 			</div>
 		</div>
 
 		<div class="col-2">
-			<div class="row left ms-20">
-				<h1>${productDto.productName}</h1>
+			<div class="row left">
+				<h1 class="ms-20 mt-10">${productDto.productName}</h1>
 			</div>
-			<div class="row left ms-20">
-				<label style="font-size: 22px;">${creatorName}</label>
+			<div class="row left">
+				<label style="font-size: 20px;" class="ms-20">${creatorName}</label>
 			</div>
 
-			<div class="row left ms-20 flex-container">
-				<div class="row w-50 left">
-					<h2 class="price" data-price="${productDto.productPrice}">가격</h2>
+			<div class="float-container">
+				<div class="row float-left">
+					<h2 class="price ms-20" data-price="${productDto.productPrice}">가격</h2>
 				</div>
-				<div class="row w-50">
+				<div class="row float-right">
 					<label class="price-btn">등급별 가격 확인</label>
 				</div>
 			</div>
 
-			<div class="price-by-level m-20">
+			<div class="price-by-level m-10">
 				<div class="row left">
-					<label class="level gold">골드</label>
+					<label class="level gold etcFontSize">골드</label>
 				</div>
 				<div class="row left">
-					<label class="level silver">실버</label>
+					<label class="level silver etcFontSize">실버</label>
 				</div>
 				<div class="row left">
-					<label class="level bronze">브론즈</label>
+					<label class="level bronze etcFontSize">브론즈</label>
 				</div>
 			</div>
+			
+			<hr class="w-95 right">
 
-			<div class="row left ms-20">
-				<i class="fa-solid fa-heart red"></i> <span>좋아요 개수</span>
+			<div class="row left">
+				<i class="fa-solid fa-heart red ms-20"></i> <span>좋아요 개수</span>
 			</div>
-			<div class="row left ms-20">등록일 : ${productDto.productDate}</div>
-			<div class="row left ms-20">평점 : <fmt:formatNumber value="${reviewAvg}" pattern="0.0"/></div>
+			<div class="row left">
+				<span class="ms-20">등록일 : ${productDto.productDate}</span>
+			</div>
+			<div class="row left">
+				<span class="ms-20">평점 : <fmt:formatNumber value="${reviewAvg}" pattern="0.0"/></span>
+			</div>
+			
+			<hr class="w-95 right">
+			
 				<form id="orderForm" action="/cuddly/orders/cartInsert">
-					<input type="hidden" name="productNo"
-						value="${productDto.productNo}">
-					<div class="row ms-20">
-						<select id="optionSelect" class="form-input w-100">
-							<option>옵션 선택</option>
+					<input type="hidden" name="productNo" value="${productDto.productNo}">
+					<div class="row">
+						<select id="optionSelect" class="form-input find-input ms-20" style="width:430px">
+							<option>  옵션 선택</option>
 							<c:forEach var="optionList" items="${optionList}">
 								<option class="select" value="${optionList.productOptionNo}" data-stock="${optionList.productOptionStock }">
 									${optionList.productOptionName} (재고 : ${optionList.productOptionStock})
 								</option>
 							</c:forEach>
 						</select>
-						<div class="fail-feedback">옵션을 선택하세요</div>
+						<div class="fail-feedback left ms-20">옵션을 선택하세요</div>
 					</div>
-					<div class="row flex-container left ms-20">
+					
+					<div class="row flex-container left">
 						<input type="number" min="1" id="cartCount"
-							class="cartCount form-input w-50" value="1">
+							class="cartCount form-input find-input w-50 ms-20 center" value="1">
 						<div class="fail3-feedback" style="display: none; color:red">선택할 수 있는 수량을 넘었습니다.</div>	
-						<button class="btn w-100 ms-10" type="button" onclick="addSelectedOption();"
+						<button class="btn btn-more w-100 ms-10" type="button" onclick="addSelectedOption();"
 							name="add">옵션추가</button>
-						<div id="selectedOptions"></div>
 					</div>
+					
+						<div id="selectedOptions" class="left ms-20"></div>
+						
 					<div class="fail2-feedback">옵션을 최소 하나이상 추가해주세요</div>
-					<div class="row ms-20">
-						<button class="btn w-100" name="action" value="order"
+					
+					<hr class="w-95 right">
+					
+					<div class="row">
+						<button class="btn btn-positive w-95 ms-20" name="action" value="order"
 							type="submit">주문</button>
 					</div>
-					<div class="row ms-20">
-						<button class="btn btn-positive btn-cart w-100" name="action"
+					<div class="row">
+						<button class="btn btn-positive btn-cart w-95 ms-20" name="action"
 							value="cart" type="submit">장바구니</button>
 					</div>
 				</form>
@@ -359,7 +371,7 @@
 
 
 	<div id="productDetail"
-		class="flex-container form-input form-underline">
+		class="flex-container form-input form-underline underline-input mt-30">
 		<h3 class="col-3">
 			<a class="link" href="#productDetail"><label class="purple">상품상세</label></a>
 		</h3>
@@ -380,9 +392,9 @@
 
 
 	<div class="row left" id="reviewList">
-		<h2>리뷰</h2>
+		<h2 class="mt-30">리뷰</h2>
 	</div>
-	<div class="flex-container form-input form-underline">
+	<div class="flex-container form-input form-underline underline-input mb-10">
 
 		<h3 class="col-3">
 			<a class="link" href="#productDetail">상품상세</a>
@@ -397,30 +409,37 @@
 	</div>
 
 	<c:forEach var="reviewListDto" items="${reviewList}">
-		<div class="flex-container" style="border: 1px solid #636e72;">
-			<div class="w-75" style="padding: 1em;">
-				<div class="row left">${productDto.productName}
-					${reviewListDto.reviewGrade}</div>
-				<div class="row left">${reviewListDto.memberId}
-					${reviewListDto.reviewDate}</div>
+		<div class="flex-container card">
+			<div class="w-75 mh-10 mb-10">
+				<div class="float-container">
+					<div class="float-left productName mv-10">${productDto.productName}</div>
+					<div class="float-right mv-10"">${reviewListDto.reviewDate}</div>
+				</div>
+				<div class="float-container">
+					<div class="float-left mv-10">${reviewListDto.memberId}</div>
+					<div class="float-right mv-10">별 찍을 자리 : ${reviewListDto.reviewGrade}</div>
+				</div>
+				
 				<div class="row left">${reviewListDto.reviewContent}</div>
 			</div>
-			<div class="w-25" style="padding: 1em;">
+			<div class="w-25 me-10 mb-10">
 				<img
 					src="/cuddly/image/review/image?reviewNo=${reviewListDto.reviewNo}"
-					width="100%" height="100%">
+					width="100%" height="100%" class="image image-round">
 			</div>
 		</div>
 	</c:forEach>
 
-	<div class="row left" id="qnaList">
-		<h2>Q&A</h2>
-	</div>
-	<c:if test="${sessionScope.name != null}">
-		<div class="row right">
-			<button type="button" class="btn qna-write">문의하기</button>
+	<div class="float-container">
+		<div class="float-left" id="qnaList">
+			<h2 class="mt-30">Q&A</h2>
 		</div>
-	</c:if>
+		<c:if test="${sessionScope.name != null}">
+			<div class="float-right">
+				<button type="button" class="btn btn-positive qna-write mt-20">문의하기</button>
+			</div>
+		</c:if>
+	</div>
 
 	<div class="row qna-write-form">
 		<form action="/cuddly/qna/write" method="post">
@@ -436,7 +455,7 @@
 		</form>
 	</div>
 
-	<div class="flex-container form-input form-underline">
+	<div class="flex-container form-input form-underline underline-input mb-10">
 		<h3 class="col-3">
 			<a class="link" href="#productDetail">상품상세</a>
 		</h3>

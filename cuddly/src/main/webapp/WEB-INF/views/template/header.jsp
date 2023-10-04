@@ -25,7 +25,7 @@
 <link rel="stylesheet" type="text/css" href="/css/reset.css">
 <link rel="stylesheet" type="text/css" href="/css/layout.css">
 <link rel="stylesheet" type="text/css" href="/css/commons.css">
-<link rel="stylesheet" type="text/css" href="/css/test.css">
+<!-- <link rel="stylesheet" type="text/css" href="/css/test.css"> -->
 
 <style>
 .sidebar {
