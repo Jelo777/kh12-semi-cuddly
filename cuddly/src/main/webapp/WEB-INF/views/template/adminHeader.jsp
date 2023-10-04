@@ -155,7 +155,7 @@ $(document).ready(function() {
         			
         			<div class="row left ms-20 mt-30">
         				<h2 class="ms-30">
-        					<a class="link" href="/cuddly/faq/list">공지사항</a>
+        					<a class="link" href="/cuddly/faq/list">FAQ</a>
         				</h2>
         			</div>
         			
