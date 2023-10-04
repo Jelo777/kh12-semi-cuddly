@@ -25,7 +25,7 @@
 <link rel="stylesheet" type="text/css" href="/css/reset.css">
 <link rel="stylesheet" type="text/css" href="/css/layout.css">
 <link rel="stylesheet" type="text/css" href="/css/commons.css">
-<link rel="stylesheet" type="text/css" href="/css/test.css">
+<!-- <link rel="stylesheet" type="text/css" href="/css/test.css"> -->
 
 <style>
 .sidebar {
@@ -48,6 +48,9 @@
 	display: block;
 }
 
+.find-input{
+	width: 400px;
+}
 </style>
 
 <!-- jquery cdn -->
@@ -101,11 +104,7 @@
 								</h3>
 							</c:when>
 							<c:otherwise>
-<<<<<<< HEAD
 								<h3 class="mv-30 ms-20">${sessionScope.name}님환영해요!</h3>
-=======
-								<h3>${sessionScope.name}님 환영해요!</h3>
->>>>>>> branch 'daeun' of https://github.com/Jelo777/kh12-semi-cuddly.git
 							</c:otherwise>
 						</c:choose>
 					</div>
@@ -136,13 +135,9 @@
                             </h3>
                             <h3 class="mt-10 ms-30">
                             	<a class="link" href="/cuddly/product/list?item=문구/오피스"> - 문구/오피스</a>
-                            <h3>
-                            	<a class="link" href="/cuddly/product/list?item=문구/오피스"> - 문구 / 오피스</a>
                             </h3>
                             <h3 class="mt-10 ms-30">
                             	<a class="link" href="/cuddly/product/list?item=홈데코/리빙"> - 홈데코/리빙</a>
-                            <h3>
-                            	<a class="link" href="/cuddly/product/list?item=홈데코/리빙"> - 홈데코 / 리빙</a>
                             </h3>
                             <h3 class="mt-10 ms-30">
                             	<a class="link" href="/cuddly/product/list?item=폰악세서리"> - 폰악세서리</a>
@@ -166,8 +161,6 @@
 					<div class="row left ms-20 mt-30">
 						<h2 class="ms-30">
 							<a class="link" href="/cuddly/faq/list">공지사항</a>
-						<h2>
-							<a class="link" href="/cuddly/faq/list"> FAQ </a>
 						</h2>
 					</div>
 				</div>
@@ -192,7 +185,8 @@
 				</div>
 				<div class="row">
 					<form action="/cuddly/search">
-						<input class="form-input find-input ps-20" name="keyword" placeholder="찾으시는 상품 혹은 크리에이터를 입력하세요.">
+						<input class="form-input find-input ps-20" name="keyword"
+						placeholder="찾으시는 상품 혹은 크리에이터를 입력하세요.">
 						<button class="btn btn-positive">검색</button>
 					</form>
 				</div>
@@ -219,24 +213,21 @@
 					<a href="/cuddly/product/list">전체상품</a>
 					<ul>
 						<li><a href="/cuddly/product/list?item=패션">패션</a></li>
-						<li><a href="/cuddly/product/list?item=문구/오피스">문구 / 오피스</a></li>
-						<li><a href="/cuddly/product/list?item=홈데코/리빙">홈데코 / 리빙</a></li>
-						<li><a href="/cuddly/product/list?item=폰악세서리">폰 악세서리</a></li>
+						<li><a href="/cuddly/product/list?item=문구/오피스">문구/오피스</a></li>
+						<li><a href="/cuddly/product/list?item=홈데코/리빙">홈데코/리빙</a></li>
+						<li><a href="/cuddly/product/list?item=폰악세서리">폰악세서리</a></li>
 						<li><a href="/cuddly/product/list?item=기타">기타</a></li>
 					</ul>
 				</li>
 				<li class="center"><a href="/cuddly/review/list">리뷰</a></li>
-				<li class="center"><a href="/cuddly/faq/list">공지사항</a></li>
-				
+				<li class="center"><a href="/cuddly/faq/list">FAQ</a></li>
+
 				<%-- 관리자인 경우 추가 메뉴 출력 --%>
-	
 				<c:if test="${sessionScope.level == '관리자'}">
 					<li class="menu-right">
 						<a href="/cuddly/admin/product/list">관리자메뉴</a>
 					</li>
 				</c:if>
-
-			
 			</ul>
 		</nav>
 

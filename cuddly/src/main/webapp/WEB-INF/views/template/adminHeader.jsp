@@ -49,7 +49,9 @@
 		display:block;	
 	}
 
-
+	.find-input{
+		width: 400px;
+	}
 </style>
 
 <!-- jquery cdn -->
@@ -250,11 +252,6 @@ $(document).ready(function() {
 				<div class="row left">
 					<h3 class="ms-20">
 						<a href="/cuddly/admin/qna/list" class="link">상품문의</a>
-					</h3>
-				</div>
-				<div class="row left">
-					<h3 class="ms-20">
-						<a href="/cuddly/admin/faq/list" class="link">FAQ관리</a>
 					</h3>
 				</div>
 				<div class="row left">

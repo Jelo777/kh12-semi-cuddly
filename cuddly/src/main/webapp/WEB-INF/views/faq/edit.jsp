@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<jsp:include page="/WEB-INF/views/template/adminHeader.jsp"></jsp:include>
+<jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 
 
 
@@ -8,19 +8,17 @@
 <input type="hidden" name="faqNo" value="${faqDto.faqNo}">
 
 
-<div class="container w-600">
+<div class="container w-800">
 	<div class="row">
-		<h1>Faq 게시글 수정</h1>
+		<h2>Faq 게시글 수정</h2>
 	</div>
 	
 	
 	<div class="row left">
-		<label>제목</label>
-		<input class="form-input w-100" type="text" name="faqTitle" value="${faqDto.faqTitle}" required>
+		<input class="form-input underline-input w-100" type="text" name="faqTitle" value="${faqDto.faqTitle}" required>
 	</div>
 	
 	<div class="row left">
-		<label>내용</label>
 		<textarea class="form-input w-100" name="faqContent" 
 			style="min-height:250px" required>${faqDto.faqContent}</textarea>
 	</div>
