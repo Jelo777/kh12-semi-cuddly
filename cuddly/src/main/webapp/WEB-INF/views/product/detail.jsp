@@ -464,6 +464,20 @@
 		</div>
 	</c:forEach>
 
+	
+
+	<div class="flex-container form-input form-underline underline-input mb-10">
+		<h3 class="col-3">
+			<a class="link" href="#productDetail">상품상세</a>
+		</h3>
+		<h3 class="col-3">
+			<a class="link" href="#reviewList">리뷰</a>
+		</h3>
+		<h3 class="col-3">
+			<a class="link" href="#qnaList"><label class="purple">상품문의</label></a>
+		</h3>
+	</div>
+	
 	<div class="float-container">
 		<div class="float-left" id="qnaList">
 			<h2 class="mt-30">Q&A</h2>
@@ -488,47 +502,41 @@
 			</div>
 		</form>
 	</div>
-
-	<div class="flex-container form-input form-underline underline-input mb-10">
-		<h3 class="col-3">
-			<a class="link" href="#productDetail">상품상세</a>
-		</h3>
-		<h3 class="col-3">
-			<a class="link" href="#reviewList">리뷰</a>
-		</h3>
-		<h3 class="col-3">
-			<a class="link" href="#qnaList"><label class="purple">상품문의</label></a>
-		</h3>
-	</div>
-
-	<table class="table table-border">
-		<tr>
-			<th>답변상태</th>
-			<th>문의내용</th>
-			<th>작성자</th>
-			<th>작성일</th>
-		</tr>
-		<c:forEach var="qnaListDto" items="${qnaList}">
-			<tr class="qna-list">
-				<td><c:choose>
-						<c:when test="${qnaListDto.qnaAnswer==null}">
-						답변미완료
-					</c:when>
-						<c:otherwise>
-						답변완료
-					</c:otherwise>
-					</c:choose></td>
-				<td>${qnaListDto.qnaContent}</td>
-				<td>${qnaListDto.memberId}</td>
-				<td>${qnaListDto.qnaDate}</td>
-			</tr>
-			<c:if test="${qnaListDto.qnaAnswer!=null}">
-				<tr class="qna-answer">
-					<td colspan="4">${qnaListDto.qnaAnswer}</td>
+	
+	<div class="row">
+		<table class="table table-slit table-hover">
+			<thead>
+				<tr>
+					<th>답변상태</th>
+					<th>문의내용</th>
+					<th>작성자</th>
+					<th>작성일</th>
 				</tr>
-			</c:if>
-		</c:forEach>
-	</table>
+			</thead>
+			<tbody>
+				<c:forEach var="qnaListDto" items="${qnaList}">
+					<tr class="qna-list">
+						<td><c:choose>
+								<c:when test="${qnaListDto.qnaAnswer==null}">
+								답변미완료
+							</c:when>
+								<c:otherwise>
+								답변완료
+							</c:otherwise>
+							</c:choose></td>
+						<td>${qnaListDto.qnaContent}</td>
+						<td>${qnaListDto.memberId}</td>
+						<td>${qnaListDto.qnaDate}</td>
+					</tr>
+					<c:if test="${qnaListDto.qnaAnswer!=null}">
+						<tr class="qna-answer">
+							<td colspan="4">${qnaListDto.qnaAnswer}</td>
+						</tr>
+					</c:if>
+				</c:forEach>
+			</tbody>
+		</table>
+	</div>
 
 </div>
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
