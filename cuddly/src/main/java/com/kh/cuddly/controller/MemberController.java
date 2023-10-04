@@ -241,7 +241,7 @@ public class MemberController {
 			return "redirect:/cuddly/member/login";
 		}
 		
-		model.addAttribute("wishlistList", wishlistDao.findByMemberId(memberId));
+		model.addAttribute("wishlistList", wishlistDao.wishlistByMemberId(memberId));
 		return "/WEB-INF/views/member/wishlist.jsp";
 	}
 	
