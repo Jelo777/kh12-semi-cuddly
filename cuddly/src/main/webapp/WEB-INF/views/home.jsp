@@ -102,10 +102,6 @@
 						<td class="productName">${productListDto.productName}</td>
 					</tr>
 					<tr>
-						<td class="creatorName mt-50">크리에이터명</td>
-					</tr>
-					<tr></tr>
-					<tr>
 						<td class="productPrice">${productListDto.productPrice}원</td>
 					</tr>
 <!-- 					<tr> -->
@@ -142,10 +138,6 @@
 					<tr>
 						<td class="productName">${productListDto.productName}</td>
 					</tr>
-					<tr>
-						<td class="creatorName">크리에이터명</td>
-					</tr>
-					<tr></tr>
 					<tr>
 						<td class="productPrice">${productListDto.productPrice}원</td>
 					</tr>
