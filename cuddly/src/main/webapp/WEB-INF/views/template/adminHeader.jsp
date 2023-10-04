@@ -87,13 +87,8 @@ $(document).ready(function() {
 	        			
 	        		</div>
         		
-<<<<<<< HEAD
 	        		<div class="row">
 		            	<img src="/images/cuddlys.png" width="200" height="45">
-=======
-	        		<div class="row left">
-		            	<img src="/images/cuddlys.png" width="200" height="50"><br>
->>>>>>> branch 'daeun' of https://github.com/Jelo777/kh12-semi-cuddly.git
 	            	</div>
         			
         			<div class="row left ms-20 mt-30">
@@ -208,7 +203,6 @@ $(document).ready(function() {
         
 	</header>
 	<nav>
-<<<<<<< HEAD
 		<nav>
 			<ul class="menu left">
 				<li class="center"><a href="/cuddly/product/creator">크리에이터</a></li>
@@ -232,23 +226,6 @@ $(document).ready(function() {
 					</li>
 				</c:if>
 			</ul>
-=======
-		<ul class="menu">
-			<li><a href="/cuddly/product/creator">크리에이터</a></li>
-			<li><a href="#">굿즈</a></li>
-			<li><a href="#">문구</a></li>
-			<li><a href="#">액세서리</a></li>
-	
-	
-	
-			<%-- 관리자인 경우 추가 메뉴 출력 --%>
-			<div class="row right"></div>
-			<c:if test="${sessionScope.level == '관리자'}">
-				<li><a href="/cuddly/admin/product/list">관리자메뉴</a></li>
-			</c:if>
-			
-		</ul>
->>>>>>> branch 'daeun' of https://github.com/Jelo777/kh12-semi-cuddly.git
 	</nav>
 	
 	<hr>
@@ -275,7 +252,6 @@ $(document).ready(function() {
 						<a href="/cuddly/admin/qna/list" class="link">상품문의</a>
 					</h3>
 				</div>
-<<<<<<< HEAD
 				<div class="row left">
 					<h3 class="ms-20">
 						<a href="/cuddly/admin/faq/list" class="link">FAQ관리</a>
@@ -285,10 +261,6 @@ $(document).ready(function() {
 					<h3 class="ms-20">
 						<a href="/cuddly/admin/member/list" class="link">회원관리</a>
 					</h3>
-=======
-				<div class="row">
-					<h3><a href="/cuddly/admin/member/list" class="link">회원관리</a></h3>
->>>>>>> branch 'daeun' of https://github.com/Jelo777/kh12-semi-cuddly.git
 				</div>
 				
 			</div>

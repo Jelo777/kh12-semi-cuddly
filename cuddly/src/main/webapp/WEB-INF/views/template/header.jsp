@@ -134,21 +134,15 @@
 							<h3 class="mt-10 ms-30">
                             	<a class="link" href="/cuddly/product/list?item=패션"> - 패션</a>
                             </h3>
-<<<<<<< HEAD
                             <h3 class="mt-10 ms-30">
                             	<a class="link" href="/cuddly/product/list?item=문구/오피스"> - 문구/오피스</a>
-=======
                             <h3>
                             	<a class="link" href="/cuddly/product/list?item=문구/오피스"> - 문구 / 오피스</a>
->>>>>>> branch 'daeun' of https://github.com/Jelo777/kh12-semi-cuddly.git
                             </h3>
-<<<<<<< HEAD
                             <h3 class="mt-10 ms-30">
                             	<a class="link" href="/cuddly/product/list?item=홈데코/리빙"> - 홈데코/리빙</a>
-=======
                             <h3>
                             	<a class="link" href="/cuddly/product/list?item=홈데코/리빙"> - 홈데코 / 리빙</a>
->>>>>>> branch 'daeun' of https://github.com/Jelo777/kh12-semi-cuddly.git
                             </h3>
                             <h3 class="mt-10 ms-30">
                             	<a class="link" href="/cuddly/product/list?item=폰악세서리"> - 폰악세서리</a>
@@ -170,13 +164,10 @@
 					<hr class="mb-20 w-80">
 
 					<div class="row left ms-20 mt-30">
-<<<<<<< HEAD
 						<h2 class="ms-30">
 							<a class="link" href="/cuddly/faq/list">공지사항</a>
-=======
 						<h2>
 							<a class="link" href="/cuddly/faq/list"> FAQ </a>
->>>>>>> branch 'daeun' of https://github.com/Jelo777/kh12-semi-cuddly.git
 						</h2>
 					</div>
 				</div>
