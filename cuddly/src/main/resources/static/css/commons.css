@@ -81,6 +81,7 @@
 .mv-40 { margin:40px 0px; }
 .mv-50 { margin:50px 0px; }
 
+.mt-5 {margin-top: 5px;}
 .mt-10 { margin-top: 10px; }
 .mt-20 { margin-top: 20px; }
 .mt-30 { margin-top: 30px; }
@@ -363,7 +364,7 @@ table {
  	font-size: 15px;
  	border: 1px solid #BEADFA;
     border-radius: 5em;
-    color: #BEADFA;
+    background-color: #BEADFA;
 }
 
 /*작은 버튼*/

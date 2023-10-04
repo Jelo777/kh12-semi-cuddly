@@ -50,8 +50,8 @@
 				</div>
 			</div>
 			
-			<div class="row left">
-				<span style="font-size:20px">${reviewDto.reviewContent}</span>
+			<div class="row">
+				<textarea style="width:270px; border:none; resize:none;" row="4">${reviewDto.reviewContent}</textarea>
 			</div>
 	
 			<div class="row flex-container">

@@ -8,16 +8,16 @@
  <form class="password-form" action="password" method="post" autocomplete="off">
 		<div class="container w-400">
 			<div class="row">
-				<h1>비밀번호 변경</h1>
+				<h2 class="mv-30">비밀번호 변경</h2>
 			</div>
 			
 			<div class="row">
-				<input class="form-input w-100" type="text" name="originPw" 
+				<input class="form-input underline-input w-100 center" type="text" name="originPw" 
                 placeholder="현재비밀번호">
 			</div>
             
             <div class="row">
-                <input class="form-input w-100" type="text" name="changePw" 
+                <input class="form-input underline-input w-100 center" type="text" name="changePw" 
                 placeholder="바꿀 비밀번호">
                 <div class="success-feedback">올바른 비밀번호 형식입니다</div>
                 <div class="fail-feedback">잘못된 비밀번호 형식입니다</div>
@@ -25,7 +25,7 @@
             </div>
                 
             <div class="row">
-                <input class="form-input w-100" type ="text" id="changePw-check" 
+                <input class="form-input underline-input w-100 center" type ="text" id="changePw-check" 
                 placeholder="비밀번호 확인">
                 <div class="success-feedback">비밀번호가 일치합니다</div>
                 <div class="fail-feedback">바꿀 비밀번호와 일치하지 않습니다</div>
@@ -33,7 +33,7 @@
             </div>
 
             <div class="row">
-                <button type="submit" class="btn btn-positive w-100">변경하기</button>
+                <button type="submit" class="btn btn-positive w-100 mt-20">변경하기</button>
             </div>
 		
 		</div>
