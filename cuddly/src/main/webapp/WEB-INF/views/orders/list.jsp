@@ -82,7 +82,7 @@ $(function(){
 						<span class="creatorName me-10">상품가격:  <fmt:formatNumber value="${detail.ordersDetailPrice}" pattern="#,###원" /></span>
 					</div>	
 					<div class="row right">
-						<span class="productPrice me-10">총 주문가격:  <fmt:formatNumber value="${detail.ordersDetailPrice}" pattern="#,###원" /></span>
+						<span class="productPrice me-10">총 주문가격:  <fmt:formatNumber value="${detail.ordersPrice}" pattern="#,###원" /></span>
 					</div>
 				</div>
 				<hr>
