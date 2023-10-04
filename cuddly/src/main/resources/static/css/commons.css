@@ -402,16 +402,14 @@ table {
   	height: 40px;
     outline: none; /*outline은 입력 창 선택 시 강조 효과*/
     border: 2px solid #BEADFA;
-    
+    border-radius: 0.2em;
     line-height: 1.2em;
     font-style: #BEADFA;
 }
 
-/*아오 왜 돋보기 안들어가냐고*/
+/*라운드 검색창*/
 .form-input.find-input{
-	width : 25em;
 	border-radius: 5em;
-	background-image: url(glass.png);
 	background-color: #FFFEFC;
 }
 
@@ -539,7 +537,7 @@ textarea.form-input.fixed {
 .table > tfoot > tr > th, 
 .table > tfoot > tr > td 
 {
-    padding:0.25em;
+    padding:0.5em;
 }
 
 /*
@@ -558,40 +556,44 @@ textarea.form-input.fixed {
     border: 1px solid #2d3436;
 }
 
+.table > thead > tr > th{
+	background-color: rgb(238, 232, 250);
+}
 /*
     확장 스타일 - 마우스 반응 테이블
 */
 .table.table-hover > tbody > tr:hover {
-    background-color: #dfe6e9;
+    background-color: rgb(253, 252, 254);
 }
 
 /*
     확장 스타일 - 줄무늬 테이블
 */
 .table.table-stripe > thead {
-    background-color: #dfe6e9;
+    background-color: rgb(238, 232, 250);
 }
 .table.table-stripe > tbody > tr:nth-child(2n) {
-    background-color: #dfe6e9;
+    background-color: rgb(238, 232, 250);
 }
 
 /*
     확장 스타일 - 옆트임 테이블
 */
 .table.table-slit {
-    border-top: 1px solid #2d3436;
-    border-bottom: 1px solid #2d3436;
+    border-top: 1px solid #C2C2C2;
+    border-bottom: 1px solid #C2C2C2;
 }
 .table.table-slit > thead {
-    border-bottom: 1px solid #2d3436;
+    border-bottom: 1px solid #C2C2C2;
 }
 .table.table-slit > tfoot {
-    border-top: 1px solid #2d3436;
+    border-top: 1px solid #C2C2C2;
 }
 
 .table.table-slit > tbody > tr :not(tr:last-child) {
-    border-bottom: 1px dotted #2d3436;
+    border-bottom: 1px dotted #C2C2C2;
 }
+
 
 .important{
     font-weight: bold;
