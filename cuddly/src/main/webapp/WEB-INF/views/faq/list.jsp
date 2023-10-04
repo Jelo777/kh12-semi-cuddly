@@ -3,6 +3,68 @@
 
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 
+<style>
+    /* Add your custom CSS styles here */
+    body {
+        background-color: #f5f5f5; /* Light gray background */
+    }
+
+    .row {
+        margin-bottom: 20px;
+    }
+
+    .link {
+        text-decoration: none;
+        color: #6a0dad; /* Purple color for links */
+    }
+
+    .table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    .table th, .table td {
+        border: 1px solid #ccc;
+        padding: 8px;
+    }
+
+    .on {
+        font-weight: bold;
+        color: #6a0dad; /* Purple color for active elements */
+    }
+
+    .search-container {
+        display: flex;
+        align-items: center;
+        margin-bottom: 20px;
+    }
+
+    input[type="search"] {
+        flex: 1;
+        padding: 8px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+    }
+
+    button[type="submit"] {
+        padding: 8px 16px;
+        border: none;
+        background-color: #BEADFA; /* Purple color for buttons */
+        color: #fff;
+        cursor: pointer;
+        border-radius: 4px;
+    }
+    
+    
+</style>
+
+<!-- Rest of your existing code -->
+
+
+
+
+
+
 <script>
     document.addEventListener('DOMContentLoaded', function() {
         var category = new URLSearchParams(window.location.search).get('category');
@@ -14,21 +76,33 @@
 
 
 
+
 <div class="row">
-    <h2>FAQ</h2>
+    <a class="link" href="list"><h2>FAQ</h2></a>
 </div>
 <br><br>
+
+
+<%-- 글쓰기는 로그인 상태인 경우에만 출력 --%>
+<c:if test="${sessionScope.level == '관리자'}">
+	<div class="row right">
+		<a href="write" class="btn btn-positive"> <i class="fa-solid fa-write"></i>
+			작성하기
+		</a>
+	</div>
+</c:if>
+
+
 
 <c:if test="${sessionScope.name != null}">
 
 	<div class="row left"> 
     <a class="link" href="list?category=공지사항">공지사항</a>
-    <a class="link" href="list?category=기타">기타</a>
     <a class="link" href="list?category=주문결제">주문결제</a>
     <a class="link" href="list?category=회원정보">회원정보</a>
+    <a class="link" href="list?category=기타">기타</a>
+    </div>
 </c:if>
-
-
 
 
 		
@@ -74,6 +148,22 @@
 	
 </div>
 
+
+ <form action="list" method="get">
+        <div class="row search-container">
+     
+     
+     
+            <input type="search" name="keyword" required placeholder="검색어 입력" value="${param.keyword}">
+            <button type="submit">검색</button>
+        </div>
+        
+        
+<div class="row right">
+ <a class="link" href="list"> FAQ 전체보기</a>
+</div>
+        
+        
 <div class="row page-navigator mv-30">
 	<!-- 이전 버튼 -->
 	<c:if test="${!vo.first}">
@@ -103,13 +193,8 @@
 </div>
 
 
-
- <form action="list" method="get">
-        <div class="row search-container">
-     
-            <input type="search" name="keyword" required placeholder="검색어 입력" value="${param.keyword}">
-            <button type="submit">검색</button>
-        </div>
+        
+        
         
     </form>
   

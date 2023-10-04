@@ -17,7 +17,7 @@
 <%-- 글쓰기는 로그인 상태인 경우에만 출력 --%>
 <c:if test="${sessionScope.level == '관리자'}">
 	<div class="row right">
-		<a href="write" class="btn"> <i class="fa-solid fa-write"></i>
+		<a href="write" class="btn btn-positive"> <i class="fa-solid fa-write"></i>
 			작성하기
 		</a>
 	</div>
