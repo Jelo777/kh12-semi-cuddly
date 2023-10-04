@@ -33,9 +33,10 @@
 				</c:choose>
 			</div>
 			
+			<div class="p-10">
 			<div class="row flex-container auto-width">
 				<div class="left felx-container">
-	 				<span class="star-rating ms-10">
+	 				<span class="star-rating">
                         <c:forEach var="i" begin="1" end="${reviewDto.reviewGrade}">
                             <i class="fas fa-star yellow"></i>
                         </c:forEach>
@@ -45,32 +46,33 @@
                     </span>
 				</div>
 				<div class="right">
-					<span class="me-10">${reviewDto.memberId}</span> 
+					<span>${reviewDto.memberId}</span> 
 				</div>
 			</div>
 			
 			<div class="row left">
-				<span class="ms-10" style="font-size:20px">${reviewDto.reviewContent}</span>
+				<span style="font-size:20px">${reviewDto.reviewContent}</span>
 			</div>
 	
 			<div class="row flex-container">
 				<div class="w-40">
 					<a href="/cuddly/product/detail?productNo=${reviewDto.productNo}">
 						<img src="/cuddly/image/product/main?productNo=${reviewDto.productNo}" 
-										width="100" height="100"  class="img image image-round ms-10">
+										width="100" height="100"  class="img image image-round">
 					</a>
 				</div>
 				<div class="w-100">
 					<div class="row left">
-						<span class="ms-10">${reviewDto.productName}</span>
+						<span>${reviewDto.productName}</span>
 					</div>
 					<div class="row left">
-						<span class="ms-10" style="color:darkgray">${reviewDto.creatorName}</span>
+						<span style="color:darkgray">${reviewDto.creatorName}</span>
 					</div>
 					<div class="row right">
-						<span class="ms-10 me-10"><fmt:formatNumber value="${reviewDto.productPrice}" pattern="#,###원" /></span>
+						<span><fmt:formatNumber value="${reviewDto.productPrice}" pattern="#,###원" /></span>
 					</div>
 				</div>
+			</div>
 			</div>
 			<c:choose>
 			<c:when test="${reviewDto.memberId == sessionScope.name}">
