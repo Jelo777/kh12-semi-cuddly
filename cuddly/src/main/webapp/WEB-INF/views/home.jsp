@@ -45,6 +45,11 @@
 		});
 	});
 </script>
+<style>
+	:root{
+       --swiper-theme-color:#BEADFA;
+    }
+</style>
 
 
 <div class="container w-900">
