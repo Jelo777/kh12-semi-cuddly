@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>  
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 
 <style>
 
@@ -67,7 +68,7 @@
 						<span class="ms-10" style="color:darkgray">${reviewDto.creatorName}</span>
 					</div>
 					<div class="row right">
-						<span class="ms-10 me-10">${reviewDto.productPrice}원</span>
+						<span class="ms-10 me-10"><fmt:formatNumber value="${reviewDto.productPrice}" pattern="#,###원" /></span>
 					</div>
 				</div>
 			</div>

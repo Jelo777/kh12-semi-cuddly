@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <style>
 
 	.card {
@@ -121,7 +122,7 @@
 								<div class="left felx-container"> 크리에이터 : ${cart.creatorName}</div>
 								<div class="right">옵션 : ${cart.productOptionName} / 수량: ${cart.cartCount}</div></div>
 								<div class="row left">
-									가격 : <label class="price" data-cart-price="${cart.cartPrice}">${cart.cartPrice}</label>
+									가격 : <label class="price" data-cart-price="${cart.cartPrice}"><fmt:formatNumber value="${cart.cartPrice}" pattern="#,###원" /></label>
 								</div>
 								<div class="row right">추가 날짜 : ${cart.cartDate}</div>
 								<div class="row right">
@@ -130,8 +131,8 @@
 						</div>
 					</div>
 				</c:forEach>
-	<div class="row">
-		총 가격:<label class="total">0</label>원
+	<div class="row"><h1>
+		총 가격:<label class="total">0</label>원</h1>
 	</div>
 	<h1 class="fail-feedback">
 	선택된 상품이 없습니다.

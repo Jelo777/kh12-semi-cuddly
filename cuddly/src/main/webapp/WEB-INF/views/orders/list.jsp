@@ -2,9 +2,12 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <jsp:include page="/WEB-INF/views/template/mypageHeader.jsp"></jsp:include>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 
 <title>주문 목록</title>
 <style>
+
+
 
 </style>
 
@@ -43,7 +46,8 @@ $(function(){
 								</c:when>
 							<c:otherwise>
 								<c:if test="${!detail.reviewEx}">
-									<a href="/cuddly/review/write?productNo=${detail.productNo}" class="link">리뷰쓰기</a>
+									<a href="/cuddly/review/write?productNo=${detail.productNo}" class="link">
+									리뷰쓰기</a>
 								</c:if>
 							</c:otherwise>
 						</c:choose>							
@@ -75,10 +79,10 @@ $(function(){
 					</div>
 					<hr class="w-95 mb-20">
 					<div class="row right">
-						<span class="creatorName me-10">상품가격: ${detail.ordersDetailPrice}원</span>
+						<span class="creatorName me-10">상품가격:  <fmt:formatNumber value="${detail.ordersDetailPrice}" pattern="#,###원" /></span>
 					</div>	
 					<div class="row right">
-						<span class="productPrice me-10">총 주문가격: ${detail.ordersPrice}원</span>
+						<span class="productPrice me-10">총 주문가격:  <fmt:formatNumber value="${detail.ordersDetailPrice}" pattern="#,###원" /></span>
 					</div>
 				</div>
 				<hr>
