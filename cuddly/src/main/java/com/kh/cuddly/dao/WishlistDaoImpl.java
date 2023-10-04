@@ -6,8 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
-import com.kh.cuddly.dto.ProductDto;
+import com.kh.cuddly.dto.ProductListDto;
 import com.kh.cuddly.dto.WishlistDto;
+import com.kh.cuddly.mapper.ProductListMapper;
 import com.kh.cuddly.mapper.ProductMapper;
 import com.kh.cuddly.mapper.WishlistMapper;
 
@@ -22,6 +23,9 @@ public class WishlistDaoImpl implements WishlistDao {
 	
 	@Autowired
 	private ProductMapper productMapper;
+	
+	@Autowired
+	private ProductListMapper productListMapper;
 
 	@Override
 	public void insert(WishlistDto wishlistDto) {
@@ -55,14 +59,11 @@ public class WishlistDaoImpl implements WishlistDao {
 	}
 
 	@Override
-	public List<ProductDto> findByMemberId(String memberId) {
-		String sql = "select product.*"
-					+ "from wishlist left outer join product "
-					+ "on wishlist.product_no = product.product_no "
-					+ "where wishlist.member_id = ? "
-					+ "order by product.product_no desc";
+	public List<ProductListDto> wishlistByMemberId(String memberId) {
+		String sql = "select * from wishlist_view where member_id = ? "
+					+ "order by product_no desc";
 		Object[] data = {memberId};
-		return jdbcTemplate.query(sql, productMapper, data);
+		return jdbcTemplate.query(sql, productListMapper, data);
 	}
 
 	

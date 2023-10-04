@@ -277,7 +277,9 @@
 						<select id="optionSelect" class="form-input w-100">
 							<option>옵션 선택</option>
 							<c:forEach var="optionList" items="${optionList}">
-								<option class="select" value="${optionList.productOptionNo}" data-stock="${optionList.productOptionStock }">${optionList.productOptionName}</option>
+								<option class="select" value="${optionList.productOptionNo}" data-stock="${optionList.productOptionStock }">
+									${optionList.productOptionName} (재고 : ${optionList.productOptionStock})
+								</option>
 							</c:forEach>
 						</select>
 						<div class="fail-feedback">옵션을 선택하세요</div>
