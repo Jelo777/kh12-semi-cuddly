@@ -70,6 +70,7 @@
 
 .mh-10 { margin:0px 10px; }
 .mh-20 { margin:0px 20px; }
+.mh-24 { margin:0px 24px; }
 .mh-30 { margin:0px 30px; }
 .mh-40 { margin:0px 40px; }
 .mh-50 { margin:0px 50px; }
@@ -396,7 +397,7 @@ table {
     font-size: 15px;
   	height: 40px;
     outline: none; /*outline은 입력 창 선택 시 강조 효과*/
-    border: 1px solid #BEADFA;
+    border: 2px solid #BEADFA;
     
     line-height: 1.2em;
     font-style: #BEADFA;
@@ -446,13 +447,15 @@ hr{
 
  /* 카드형식 테두리 */
  .card{
-    border: 2px solid darkgray;
+    border: 3px solid lightgray;
     border-radius: 10px;
     padding-top: 10px;
     padding-bottom: 2px;
 }
 
-
+.selected-sort{
+	color : #BEADFA
+}
 
 /***********************진행중********************************************/
 
@@ -781,6 +784,13 @@ textarea.form-input.fixed {
             justify-content: center;
             align-items: center;
         }
+        
+        .flex-container.align-left,
+        .inline-flex-container.align-left{
+            justify-content: left;
+            align-items: left;
+        }
+        
         .flex-container.allow-wrap,
         .inline-flex-container.allow-wrap{
             flex-wrap: wrap;

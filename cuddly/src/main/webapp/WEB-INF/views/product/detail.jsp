@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 
 
@@ -8,6 +9,9 @@
 	var count = 0;
 
 	function addSelectedOption() {
+		
+		
+		$(".fail3-feedback").css("display", "none");
 		var optionSelect = $("#optionSelect");
 		var cartCount = $("#cartCount");
 		var selectedOptions = $("#selectedOptions");
@@ -18,11 +22,25 @@
 			$("#optionSelect").removeClass("fail")
 			$("#optionSelect").addClass("fail")
 			$(".fail-feedback").css("display", "block")
+			cartCount.val(stock);
 
 			return;
 		}
-
+		
+		var selectedOption = optionSelect.find(":selected");
+		var stock = selectedOption.data("stock");
 		var selectedCount = cartCount.val();
+		
+		if(selectedCount>stock){
+			
+			$(this).addClass("fail");
+			$(".fail3-feedback").css("display", "block");
+			return;
+			
+			
+		}
+		
+		
 
 		var selectedOptionText = optionSelect.find(":selected").text();
 		var selectedOptionDiv = $("<div class='optionList'></div>");
@@ -38,7 +56,6 @@
 
 		optionItem.data("index", count);
 
-		console.log(count);
 
 		for (var i = 0; i < count; i++) {
 
@@ -69,6 +86,8 @@
 
 		var params = new URLSearchParams(location.search);
 		var productNo = params.get("productNo");
+		
+
 
 		$.ajax({
 			url : "/cuddly/rest/wishlist/check",
@@ -88,6 +107,48 @@
 				$(".fa-heart").next("span").text(response.count);
 			}
 		});
+		
+		
+		  $("#optionSelect").change(function() {
+		        var selectedOption = $(this).find(":selected");
+		        var optionStock = selectedOption.data("stock");
+
+						        
+		        if (optionStock !== undefined && optionStock !== null) {
+		            $("#cartCount").attr("max", optionStock);
+		        } else {
+		            $("#cartCount").removeAttr("max");
+		        }
+		    });
+		  
+		  
+		  
+		  
+		  $("#cartCount").change(function(){
+			  
+				  $(this).removeClass("fail");
+				  $(".fail3-feedback").css("display", "none");
+			  	var optionSelect = $("#optionSelect");
+				var selectedOption = optionSelect.find(":selected");
+				var stock = selectedOption.data("stock");
+			  
+			  if($(this).val()>stock){
+	 				
+				  $(this).addClass("fail");
+				  $(".fail3-feedback").css("display", "block");
+				  $(this).val(stock);
+				  
+			  }
+				
+				
+			  
+			  
+			  
+		  })
+		  
+		  
+		
+		
 
 		$(".fa-heart").click(
 				function() {
@@ -115,10 +176,13 @@
 
 		$("[name=action]").click(function(e) {
 			var a = $(".hiddenSelect").val() == null;
+			
 			if ($(".hiddenSelect").val() == null) {
 				$(".fail2-feedback").css("display", "block");
 				e.preventDefault();
-			} else if ($(this).val() == "cart") {
+			} 
+		
+			else if ($(this).val() == "cart") {
 				var userConfirmed = confirm("장바구니로 이동하시겠습니까?");
 				if (!userConfirmed) {
 					/*  $(document).ready(function() {
@@ -154,7 +218,7 @@
 <script>
 	//등급별 가격 찍어주는 스크립트
 	$(function() {
-		$(".level").hide();
+		$(".price-by-level").hide();
 
 		var level = $("#memberLevel").val();
 		var originPrice = $(".price").data("price");
@@ -173,11 +237,11 @@
 			$(".gold").text("골드 : " + goldPrice + "원");
 			$(".silver").text("실버 : " + silverPrice + "원");
 			$(".bronze").text("브론즈 : " + bronzePrice + "원");
-			$(".level").show();
+			$(".price-by-level").show();
 		});
 
 		$(".price-btn").mouseleave(function() {
-			$(".level").hide();
+			$(".price-by-level").hide();
 		});
 
 	});
@@ -199,11 +263,16 @@
 	});
 </script>
 <style>
+.price-by-level,
+.price-btn {
+	background-color: white;
+	border: 1px solid #BEADFA;
+	border-radius: 0.3em;
+	padding: 5px;
+}
 .price-by-level {
 	font-size: 24px;
 	text-align: center;
-	background-color: white;
-	box-shadow: 0px 0px 1px 0px #2d3436;
 }
 </style>
 <input id="memberLevel" type="hidden" value="${sessionScope.level}">
@@ -232,19 +301,18 @@
 					<h2 class="price" data-price="${productDto.productPrice}">가격</h2>
 				</div>
 				<div class="row w-50">
-					<label class="price-btn"
-						style="box-shadow: 0px 0px 1px 0px #2d3436;">등급별 가격 확인</label>
+					<label class="price-btn">등급별 가격 확인</label>
 				</div>
 			</div>
 
 			<div class="price-by-level m-20">
-				<div class="row">
+				<div class="row left">
 					<label class="level gold">골드</label>
 				</div>
-				<div class="row">
+				<div class="row left">
 					<label class="level silver">실버</label>
 				</div>
-				<div class="row">
+				<div class="row left">
 					<label class="level bronze">브론즈</label>
 				</div>
 			</div>
@@ -253,8 +321,7 @@
 				<i class="fa-solid fa-heart red"></i> <span>좋아요 개수</span>
 			</div>
 			<div class="row left ms-20">등록일 : ${productDto.productDate}</div>
-			<div class="row left ms-20">평점 : ${reviewAvg}</div>
-			<div class="flex-container">
+			<div class="row left ms-20">평점 : <fmt:formatNumber value="${reviewAvg}" pattern="0.0"/></div>
 				<form id="orderForm" action="/cuddly/orders/cartInsert">
 					<input type="hidden" name="productNo"
 						value="${productDto.productNo}">
@@ -262,15 +329,18 @@
 						<select id="optionSelect" class="form-input w-100">
 							<option>옵션 선택</option>
 							<c:forEach var="optionList" items="${optionList}">
-								<option class="select" value="${optionList.productOptionNo}">${optionList.productOptionName}</option>
+								<option class="select" value="${optionList.productOptionNo}" data-stock="${optionList.productOptionStock }">
+									${optionList.productOptionName} (재고 : ${optionList.productOptionStock})
+								</option>
 							</c:forEach>
 						</select>
 						<div class="fail-feedback">옵션을 선택하세요</div>
 					</div>
-					<div class="row left ms-20">
+					<div class="row flex-container left ms-20">
 						<input type="number" min="1" id="cartCount"
 							class="cartCount form-input w-50" value="1">
-						<button class="btn" type="button" onclick="addSelectedOption();"
+						<div class="fail3-feedback" style="display: none; color:red">선택할 수 있는 수량을 넘었습니다.</div>	
+						<button class="btn w-100 ms-10" type="button" onclick="addSelectedOption();"
 							name="add">옵션추가</button>
 						<div id="selectedOptions"></div>
 					</div>
@@ -284,7 +354,6 @@
 							value="cart" type="submit">장바구니</button>
 					</div>
 				</form>
-			</div>
 		</div>
 	</div>
 

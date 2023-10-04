@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <jsp:include page="/WEB-INF/views/template/mypageHeader.jsp"></jsp:include>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <style>
 
 </style>
@@ -46,7 +47,7 @@
 					<hr class="w-95 mb-20">
 					<br>
 					<div class="row right">
-						<span class="productPrice me-10">주문 가격: ${detail.ordersDetailPrice}원</span>
+						<span class="productPrice me-10">주문 가격: <fmt:formatNumber value="${detail.ordersDetailPrice}" pattern="#,###원" /></span>
 					</div>
    				</div>
    				
@@ -56,7 +57,7 @@
 	</c:forEach>
 </div>
 			<div class="row">
-				<span class="productPrice">총 주문 가격: ${total}원</span>
+				<span class="productPrice">총 주문 가격: <fmt:formatNumber value="${total}" pattern="#,###원" /></span>
 			</div>
 
      

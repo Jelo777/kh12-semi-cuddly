@@ -1,9 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 <style>
 </style>
+
 <div class="container w-1000">
 	<c:if test="${creatorDto!=null}">
 	<div class="row">
@@ -11,7 +13,7 @@
 			src="/cuddly/image/creator?creatorNo=${creatorDto.creatorNo}"
 			onerror="this.src='https://dummyimage.com/200x200/000/fff;'"
 			width="200" height="200" />
-		<h1>${creatorDto.creatorName}</h1>
+		<h1 class="mv-20">${creatorDto.creatorName}</h1>
 	</div>
 	</c:if>
 	
@@ -24,27 +26,36 @@
 	
 	<c:forEach var="productListDto" items="${list}">
 		<a class="link" href="detail?productNo=${productListDto.productNo}">
-			<div class="inline-flex-container allow-wrap left">
-				<table>
+			<div class="inline-flex-container align-left">
+				<table class="m-20 left">
 					<tr>
-						<td><img src="/cuddly/image/product/main?productNo=${productListDto.productNo}"
-						onerror="this.src='https://dummyimage.com/200x200/000/fff;'" 
-						width="200"	height="200"></td>
+						<td>
+							<img src="/cuddly/image/product/main?productNo=${productListDto.productNo}"
+										onerror="this.src='https://dummyimage.com/200x200/000/fff;'" 
+										width="200"	height="200" class="image image-round">
+						</td>
+					</tr>
+<!-- 					<tr> -->
+<%-- 						<td>${productListDto.productNo}</td> --%>
+<!-- 					</tr> -->
+					<tr>
+						<td class="productName">${productListDto.productName}</td>
 					</tr>
 					<tr>
-						<td>${productListDto.productNo}</td>
+						<td class="creatorName">${productListDto.creatorName}</td>
 					</tr>
 					<tr>
 						<td>
-							${productListDto.productName}
+							<fmt:formatNumber value="${productListDto.productPrice}" pattern="#,###"/>원
 						</td>
+
 					</tr>
 					<tr>
-						<td>${productListDto.productPrice}</td>
+						<td class="productPrice"><fmt:formatNumber value="${productListDto.productPrice}" pattern="#,###"/>원</td>
 					</tr>
-					<tr>
-						<td>${productListDto.productDate}</td>
-					</tr>
+<!-- 					<tr> -->
+<%-- 						<td>${productListDto.productDate}</td> --%>
+<!-- 					</tr> -->
 				</table>
 			</div>
 		</a>
@@ -63,7 +74,7 @@
 </div>
 </c:if>
 <div class="row">
-	<a href="list"><label class="btn">전체목록</label></a>
+	<a href="list"><label class="btn btn-more">전체목록</label></a>
 </div>
 
 <div class="row page-navigator mv-30">
