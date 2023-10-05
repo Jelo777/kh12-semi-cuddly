@@ -7,10 +7,7 @@
 <title>주문 목록</title>
 <style>
 
-
-
 </style>
-
 
 
 <body>

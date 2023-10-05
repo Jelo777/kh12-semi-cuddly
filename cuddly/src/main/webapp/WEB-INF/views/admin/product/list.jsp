@@ -5,9 +5,10 @@
 
 <style>
 </style>
+
 <div class="container w-900">
 	<div class="row">
-		<h1>상품목록</h1>
+		<h2 class="mv-30">상품목록</h2>
 	</div>
 	
 	<div class= "row right">
@@ -20,10 +21,13 @@
 			<div class="inline-flex-container allow-wrap left">
 				<table class="">
 					<tr>
-						<td><img src="/cuddly/image/product/main?productNo=${adminProductListDto.productNo}" width="200" height="200"></td>
+						<td>
+							<img src="/cuddly/image/product/main?productNo=${adminProductListDto.productNo}" 
+											width="200" height="200" class="image image-round">
+						</td>
 					</tr>
 					<tr>
-						<td>상품번호 : ${adminProductListDto.productNo}</td>
+						<td>No. ${adminProductListDto.productNo}</td>
 					</tr>
 					<tr>
 						<td>상품명 : ${adminProductListDto.productName}</td>
@@ -37,21 +41,26 @@
 					
 					<tr>
 						<td>
-							<c:choose>
-								<c:when test="${adminProductListDto.optionCount == 0}">
-									<span class="red">옵션 미등록</span>
-								</c:when>
-								<c:when test="${adminProductListDto.optionCount==adminProductListDto.soldoutCount}">
-									<span class="red">품절</span>
-								</c:when>
-								<c:otherwise>
-									<span>등록된 옵션수 : ${adminProductListDto.optionCount}</span>
-								</c:otherwise>
-							</c:choose>
-							
-							<a href="option?productNo=${adminProductListDto.productNo}">
-								<button style="float:right">수정</button>
-							</a>
+							<div class="float-container">
+								<div class="float-left mt-10">
+									<c:choose>
+										<c:when test="${adminProductListDto.optionCount == 0}">
+											<span class="red">옵션 미등록</span>
+										</c:when>
+										<c:when test="${adminProductListDto.optionCount==adminProductListDto.soldoutCount}">
+											<span class="red">품절</span>
+										</c:when>
+										<c:otherwise>
+											<span>등록된 옵션수 : ${adminProductListDto.optionCount}</span>
+										</c:otherwise>
+									</c:choose>
+								</div>
+								<div class="float-right">
+									<a href="option?productNo=${adminProductListDto.productNo}">
+										<button class="btn btn-positive btn-small" style="float:right">수정</button>
+									</a>
+								</div>
+							</div>
 						</td>
 					</tr>
 				</table>
