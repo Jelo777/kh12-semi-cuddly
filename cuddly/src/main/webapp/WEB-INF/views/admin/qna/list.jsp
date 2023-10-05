@@ -94,10 +94,8 @@ function update(e){
 				<hr>
 				
 			<div class="row left">
-				<span>문의내용</span>
-				<div class="mt-10 textbox">
-					${qnaDto.qnaContent}
-				</div>
+				<span class="mb-10">문의내용</span>
+					<textarea class="w-100" style="border:none; resize: none">${qnaDto.qnaContent}</textarea>
 			</div>
 			
 			<hr>
