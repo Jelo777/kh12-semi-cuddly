@@ -3,6 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <jsp:include page="/WEB-INF/views/template/mypageHeader.jsp"></jsp:include>
 <form action="exit" method="post" autocomplete="off">
+  
 	<div class="container w-400">
 
 		<div class="row">
@@ -11,7 +12,8 @@
 		
 		
 		<div class="row">
-			<input class="form-input underline-input w-100 mv-20" style="padding:20px" type="text" name="memberPw" placeholder="비밀번호 입력">
+
+			<input class="form-input underline-input w-100 mv-20" style="padding:20px" type="password" name="memberPw" placeholder="비밀번호 입력">
 			
 		</div>
 		<div class="row">

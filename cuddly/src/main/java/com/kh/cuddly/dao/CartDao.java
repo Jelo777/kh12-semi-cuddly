@@ -13,6 +13,10 @@ public interface CartDao {
 	List<OrdersProductDto> selectCartList(PaginationVO vo,String memberId);
 	boolean cartDelete(int cartNo);
 	int countList(PaginationVO vo,String memberId);
+	
 
 	CartDto selectOne(int cartNo);
+	
+//	CartDto selectOneByMemberId(String memberId,int cartNo);//인터셉터용 하나 만들게요.
+	List<CartDto> CartListByMemberId(String memberId);
 }

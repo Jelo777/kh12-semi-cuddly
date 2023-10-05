@@ -12,12 +12,12 @@
 			</div>
 			
 			<div class="row">
-				<input class="form-input underline-input w-100 center" type="text" name="originPw" 
+				<input class="form-input underline-input w-100 center" type="password" name="originPw" 
                 placeholder="현재비밀번호">
 			</div>
             
             <div class="row">
-                <input class="form-input underline-input w-100 center" type="text" name="changePw" 
+                <input class="form-input underline-input w-100 center" type="password" name="changePw" 
                 placeholder="바꿀 비밀번호">
                 <div class="success-feedback">올바른 비밀번호 형식입니다</div>
                 <div class="fail-feedback">잘못된 비밀번호 형식입니다</div>
@@ -25,7 +25,7 @@
             </div>
                 
             <div class="row">
-                <input class="form-input underline-input w-100 center" type ="text" id="changePw-check" 
+                <input class="form-input underline-input w-100 center" type ="password" id="changePw-check" 
                 placeholder="비밀번호 확인">
                 <div class="success-feedback">비밀번호가 일치합니다</div>
                 <div class="fail-feedback">바꿀 비밀번호와 일치하지 않습니다</div>
