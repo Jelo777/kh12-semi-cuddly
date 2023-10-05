@@ -192,7 +192,7 @@ $(document).ready(function() {
 					<a class="link" href="/cuddly/member/mypage/wishlist">
 						<i class="fa-brands fa-gratipay fa-2x headerIcon"></i> 
 					</a>
-					<a class="link" href="/cuddly/orders/cartList?memberId=${sessionScope.name}">
+					<a class="link" href="/cuddly/orders/cartList">
 						<i class="fa-solid fa-cart-shopping fa-2x headerIcon"></i>
 					</a> 
 					<a class="link" href="/cuddly/member/mypage"> 

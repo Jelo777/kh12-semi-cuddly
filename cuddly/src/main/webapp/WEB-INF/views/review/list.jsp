@@ -51,7 +51,7 @@
 			</div>
 			
 			<div class="row">
-				<textarea style="width:270px; border:none; resize:none;" row="4">${reviewDto.reviewContent}</textarea>
+				<textarea style="width:270px; border:none; resize:none;" row="4" readonly>${reviewDto.reviewContent}</textarea>
 			</div>
 	
 			<div class="row flex-container">
