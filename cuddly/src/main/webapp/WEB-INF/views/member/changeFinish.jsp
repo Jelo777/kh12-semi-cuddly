@@ -4,7 +4,7 @@
 
 	<div class="container w-300">
 		<div class="row">
-			<h1>변경 완료!</h1>
+			<h2 class="mv-50">변경 완료!</h2>
 		</div>
 	<div class="row">
 		<a href="/cuddly"><button class="btn btn-positive w-100">메인페이지</button></a>

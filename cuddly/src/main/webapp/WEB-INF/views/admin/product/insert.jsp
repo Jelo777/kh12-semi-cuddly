@@ -280,11 +280,18 @@
 	<div class="container w-600">
 		<form class="join-form" action="insert" method="post" autocomplete="off" 
 						enctype="multipart/form-data">
+						
 		<div class="row">
-			<h1>상품등록</h1>
+			<h2 class="mv-30">상품등록</h2>
 		</div>
+		
+		<div class="flex-container">
+			<div class="row w-20">
+				<span><br>카테고리</span>
+			</div>
 		<div class="row">
-			<select class="form-input w-100" name="productItem">
+		<div class="w-80">
+			<select class="form-input find-input" style="width:480px; padding-left:10px" name="productItem">
 				<option value="none">품목선택</option>
 				<option value="의류">의류</option>
 				<option value="스티커/지류">스티커/지류</option>
@@ -294,37 +301,74 @@
 				<option value="기타">기타</option>
 			</select>
 			<div class="fail-feedback left">품목을 선택하세요.</div>
-		</div>
-		<div class="row">
-			<input type="text" class="form-input w-100" name="creatorName" placeholder="크리에이터 입력">
+			</div>
+			<div class="row">
+			<input type="text" class="form-input find-input" style="width:480px; padding-left:10px" 
+							name="creatorName" placeholder="크리에이터 입력">
 			<div class="fail-feedback left">크리에이터를 입력하세요.</div>
+			</div>
 		</div>
+		</div>
+		
+		<hr>
+		
+	<div class="flex-container">
+	<div class="w-20">
+	<div class="row">
+		<span><br>상품이름</span>
+	</div>
+	<div class="row">
+		<span><br>판매가격</span>
+	</div>	
+	</div>
+	<div class="80">
 		<div class="row">
-			<input  type="text" class="form-input w-100" name="productName" placeholder="상품명 입력">
+			<input  type="text" class="form-input find-input w-100" 
+							style="width:480px; padding-left:10px" name="productName" placeholder="상품명 입력">
 			<div class="fail-feedback left">상품명을 입력하세요.</div>
 		</div>
 		<div class="row">
-			<input  type="number" class="form-input w-100" name="productPrice" placeholder="가격 입력">
+			<input  type="number" class="form-input find-input w-100" 
+							style="width:480px; padding-left:10px" name="productPrice" placeholder="가격 입력">
 			<div class="fail-feedback left">가격을 입력하세요.</div>
 		</div>
-		<div class="row left">
-			메인이미지
-			<input  type="file" class="form-input w-100" name="attachMain" accept="image/*" placeholder="대표이미지">
+		</div>
+	</div>	
+	
+	<hr>
+		
+		<div class="flex-container">
+		<div class="w-20">
+			<div class="row">
+				<span><br>메인이미지</span>
+			</div>
+			<div class="row">
+				<span><br>상세이미지</span>
+			</div>	
+	</div>
+	<div class="w-80">
+		<div class="row left file-btn">
+			<input  type="file" class="form-input find-input w-100" style="width:480px; padding:6px;" name="attachMain" accept="image/*" placeholder="대표이미지">
 			<div class="fail-feedback left">대표이미지를 등록하세요.</div>
 			<div class="fail2-feedback left">이미지 파일만 업로드 가능합니다.</div>
 		</div>
 		<div class="row left">
-			상세이미지
-			<input type="file" class="form-input w-100" name="attachDetail" accept="image/*" placeholder="상세이미지">
+			<input type="file" class="form-input find-input w-100" style="width:480px; padding:6px;" name="attachDetail" accept="image/*" placeholder="상세이미지">
 			<div class="fail-feedback left">상세이미지를 등록하세요.</div>
 			<div class="fail2-feedback left">이미지 파일만 업로드 가능합니다.</div>
 		</div>
+		</div>
+		</div>
+		
+		<hr>
+		
 		<div class="row">
 			<button class="btn btn-positive w-100 popUpOpen" name="insert">상품등록</button>
 		</div>
 
 	</form>
 	</div>
+</div>	
 	
 	<div id="modal" class="backdrop">
         <div class="modal-container w-300">

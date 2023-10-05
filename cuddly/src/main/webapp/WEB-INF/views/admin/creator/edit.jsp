@@ -50,7 +50,7 @@
 <div class="container w-400">
 
 	<div class="row">
-		<img class="image image-round"
+		<img class="image image-circle"
 			src="/cuddly/image/creator?creatorNo=${creatorDto.creatorNo}"
 			onerror="this.style.display='none';" width="200" height="200">
 		<h1 class="mv-20">${creatorDto.creatorName}</h1>
@@ -60,8 +60,8 @@
 	<form action="edit" method="post" enctype="multipart/form-data">
 		<input type="hidden" name="creatorNo" value="${creatorDto.creatorNo}">
 		<div class="row">
-			<input class="form-input w-100 file-chooser" type="file"
-				name="attach" accept="image/*">
+			<input class="form-input find-input w-100 file-chooser" type="file"
+							style="padding:6px;" name="attach" accept="image/*">
 		</div>
 		<div class="preview">
 			<div class="row">

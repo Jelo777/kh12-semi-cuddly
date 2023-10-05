@@ -11,7 +11,7 @@
 	function addSelectedOption() {
 		
 		
-		$(".fail3-feedback").css("display", "none");
+		
 		var optionSelect = $("#optionSelect");
 		var cartCount = $("#cartCount");
 		var selectedOptions = $("#selectedOptions");
@@ -33,12 +33,12 @@
 		
 		var selectedCount = cartCount.val();
 		
-		selectedOption.removeData("stock").data("stock", stock - selectedCount);
 		
 		if(selectedCount>stock){
 			
 			$(this).addClass("fail");
 			$(".fail3-feedback").css("display", "block");
+			cartCount.val(stock);
 			return;
 		}
 		else if(selectedCount<=0){
@@ -47,6 +47,7 @@
 			
 		}
 		
+		selectedOption.removeData("stock").data("stock", stock - selectedCount);
 			
 		
 		
@@ -90,7 +91,7 @@
 		$(".cartCount,.form-input").removeClass("fail")
 		$(".fail-feedback").css("display", "none");
 		$(".fail2-feedback").css("display", "none");
-		
+		$(".fail3-feedback").css("display", "none");
 		
 		
 	}
@@ -123,6 +124,13 @@
 		
 		
 		  $("#optionSelect").change(function() {
+			  
+			  $("#cartCount").val("1");
+			  $("#cartCount").removeClass("fail");
+			  $(".form-input").removeClass("fail")
+			  $(".fail3-feedback").css("display", "none");
+			  $(".fail-feedback").css("display", "none");
+				$(".fail2-feedback").css("display", "none");
 		        var selectedOption = $(this).find(":selected");
 		        var optionStock = selectedOption.data("stock");
 
@@ -130,6 +138,10 @@
 		        if (optionStock !== undefined && optionStock !== null) {
 		            $("#cartCount").attr("max", optionStock);
 		            $("#cartCount").attr("min", 1);
+		            
+		            
+		            
+		            
 		        } else {
 		            $("#cartCount").removeAttr("max");
 		        }
@@ -144,7 +156,10 @@
 		  $("#cartCount").change(function(){
 			  
 				  $(this).removeClass("fail");
+				  $(".form-input").removeClass("fail")
 				  $(".fail3-feedback").css("display", "none");
+				  $(".fail-feedback").css("display", "none");
+					$(".fail2-feedback").css("display", "none");
 			  	var optionSelect = $("#optionSelect");
 				var selectedOption = optionSelect.find(":selected");
 				var stock = selectedOption.data("stock");
@@ -153,7 +168,6 @@
 	 				
 				  $(this).addClass("fail");
 				  $(".fail3-feedback").css("display", "block");
-				  $(this).val(stock);
 				  
 			  }
 				
@@ -200,6 +214,9 @@
 			$("#cartCount").attr("type", "text");
 			
 			if ($(".hiddenSelect").val() == null) {
+				$("#cartCount").removeClass("fail");
+				$(".fail3-feedback").css("display", "none");
+				$("#cartCount").val("1");
 				$(".fail2-feedback").css("display", "block");
 				e.preventDefault();
 			} 
@@ -225,6 +242,12 @@
 		});
 
 		$(document).on("click", ".option-remove", function(e) {
+			 $(".form-input").removeClass("fail")
+			$("#cartCount").removeClass("fail");
+			$(".fail3-feedback").css("display", "none");
+			$(".fail-feedback").css("display", "none");
+			$(".fail2-feedback").css("display", "none");
+			$("#cartCount").val("1");  
 
 			 var index = $(this).data("index") - 1;
 			  var removedOptionNo = $("[name='cartList[" + index + "].optionNo']").val();
@@ -267,7 +290,7 @@
 		else
 			price = $(".price").text(bronzePrice + "원");
 
-		$(".price-btn").click(function(e) {
+		$(".price-btn").hover(function(e) {
 			$(".gold").text("골드 : " + goldPrice + "원");
 			$(".silver").text("실버 : " + silverPrice + "원");
 			$(".bronze").text("브론즈 : " + bronzePrice + "원");
@@ -304,6 +327,8 @@
 	border-radius: 0.3em;
 	padding: 5px;
 }
+
+
 
 </style>
 
@@ -370,7 +395,14 @@
 							<option>  옵션 선택</option>
 							<c:forEach var="optionList" items="${optionList}">
 								<option class="select" value="${optionList.productOptionNo}" data-stock="${optionList.productOptionStock }">
-									${optionList.productOptionName} (재고 : ${optionList.productOptionStock})
+									<c:choose>
+									<c:when test="${optionList.productOptionStock<=0}">
+									${optionList.productOptionName}<span> (품절)</span>
+									</c:when>
+									<c:otherwise>
+									${optionList.productOptionName}
+									</c:otherwise>
+									</c:choose>
 								</option>
 							</c:forEach>
 						</select>
@@ -451,10 +483,23 @@
 				</div>
 				<div class="float-container">
 					<div class="float-left mv-10">${reviewListDto.memberId}</div>
-					<div class="float-right mv-10">별 찍을 자리 : ${reviewListDto.reviewGrade}</div>
+					<div class="float-right mv-10"><span class="star-rating">
+                        <c:forEach var="i" begin="1" end="${reviewListDto.reviewGrade}">
+                            <i class="fas fa-star yellow"></i>
+                        </c:forEach>
+                        <c:forEach var="i" begin="1" end="${5-reviewListDto.reviewGrade}">
+                        	<i class="far fa-star yellow"></i>
+                        </c:forEach>
+                    </span></div>
 				</div>
 				
 				<div class="row left">${reviewListDto.reviewContent}</div>
+				 <c:if test="${reviewListDto.memberId == sessionScope.name}">
+				<div class="row left">
+					<a href="/cuddly/review/edit?reviewNo=${reviewListDto.reviewNo}" class="btn btn-positive btn-small">수정하기</a>
+					<a href="/cuddly/review/delete?reviewNo=${reviewListDto.reviewNo}" class="btn btn-negative btn-small">삭제하기</a>
+				</div>
+			</c:if>
 			</div>
 			<div class="w-20 me-10 mb-10">
 				<img

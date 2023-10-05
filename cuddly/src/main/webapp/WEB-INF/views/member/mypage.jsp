@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <jsp:include page="/WEB-INF/views/template/mypageHeader.jsp"></jsp:include>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 
 <style>
 
@@ -20,7 +21,8 @@
 				</div>
 
 				<div class="row float-right" >
-					<h1 class="me-20">누적금액:${memberDto.memberTotalprice}원</h1>
+					<h1 class="me-20">누적금액:<fmt:formatNumber value="${memberDto.memberTotalprice}" pattern="#,###원" /></h1>
+					
 				</div>		
 		</div>
 

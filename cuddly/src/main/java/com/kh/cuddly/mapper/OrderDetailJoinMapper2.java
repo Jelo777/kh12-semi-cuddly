@@ -29,6 +29,7 @@ public class OrderDetailJoinMapper2 implements RowMapper<OrderDetailJoinDto2>{
 		orderDetailDto2.setOrderCount(rs.getInt("order_count")-1);
 		orderDetailDto2.setTwo(rs.getInt("order_count")>1);
 		orderDetailDto2.setOrdersPrice(rs.getInt("orders_price"));
+		orderDetailDto2.setProductPrice(rs.getInt("product_price"));
 		
 		
 		

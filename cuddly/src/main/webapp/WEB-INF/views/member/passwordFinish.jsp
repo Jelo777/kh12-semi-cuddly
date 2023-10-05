@@ -4,7 +4,7 @@
 <jsp:include page="/WEB-INF/views/template/mypageHeader.jsp"></jsp:include>
 	<div class="container w-300">
 		<div class="row">
-			<h1>비밀번호가 변경되었습니다</h1>
+			<h2 class="mv-50">비밀번호가 변경되었습니다</h2>
 		</div>	
 		<div class="row">
 			<a href="/cuddly"><button class="btn btn-positive w-100">메인페이지</button></a>

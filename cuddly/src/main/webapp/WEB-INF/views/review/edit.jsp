@@ -122,7 +122,7 @@
 		
 		<div class="w-100">
 		
-        		<input type="file" class="form-input text-input w-100 file-chooser" name="attach" accept="image/*">
+        		<input type="file" class="form-input text-input w-100 file-chooser" style="padding:6px;" name="attach" accept="image/*">
         	
         	<div class="row">
 				<textarea placeholder="리뷰 내용" name="reviewContent" class="form-input text-input w-100" 

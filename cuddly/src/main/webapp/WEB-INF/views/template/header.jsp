@@ -83,7 +83,7 @@
 
 			<div class="row">
 				<input type="checkbox" style="display: none;" id="sidebar-toggle">
-				<div class="sidebar">
+				<div class="sidebar" style="padding-right:10px">
 					<div class="row right me-10">
 
 						<a class="link" href="/cuddly/member/mypage"> 
@@ -198,13 +198,12 @@
 					<a class="link" href="/cuddly/member/mypage/wishlist">
 						<i class="fa-brands fa-gratipay fa-2x headerIcon"></i> 
 					</a>
-					<a class="link" href="/cuddly/orders/cartList?memberId=${sessionScope.name}">
+					<a class="link" href="/cuddly/orders/cartList">
 						<i class="fa-solid fa-cart-shopping fa-2x headerIcon"></i>
 					</a>
 					
 					<a class="link" href="/cuddly/member/mypage"> 
 						<i class="fa-solid fa-circle-user fa-2x headerIcon"></i>
-
 					</a>
 				</div>
 			</div>
