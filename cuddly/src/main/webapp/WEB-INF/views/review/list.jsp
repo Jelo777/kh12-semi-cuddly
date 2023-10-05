@@ -63,10 +63,10 @@
 				</div>
 				<div class="w-100">
 					<div class="row left">
-						<span>${reviewDto.productName}</span>
+						<span class="ms-10">${reviewDto.productName}</span>
 					</div>
 					<div class="row left">
-						<span style="color:darkgray">${reviewDto.creatorName}</span>
+						<span style="color:darkgray" class="ms-10">${reviewDto.creatorName}</span>
 					</div>
 					<div class="row right">
 						<span><fmt:formatNumber value="${reviewDto.productPrice}" pattern="#,###원" /></span>
