@@ -35,21 +35,9 @@ $(function(){
                      }
                  }
              });
-         }
-		
-		
-		
-		
-	})
-	
-	
-	
-	
-	
+         }	
+	})	
 })
-
-
-
 
 
 function update(e){
@@ -72,28 +60,25 @@ function update(e){
 
 </script>
 
-	<div class="row">
-		<h1>상품문의</h1>
-	</div>
-
-<br><br>
-
 <div class="container w-600">
+	<div class="row">
+		<h2 class="mv-30">상품문의</h2>
+	</div>
 
 	<c:forEach var="qnaDto" items="${list}">
 	
 	<form id="testForm" onsubmit="update(this);">
-		<div class="float-container card">
+		<div class="float-container card mb-20">
 	
 			<div class="float-left w-25">
 				<a href="/cuddly/product/detail?productNo=${qnaDto.productNo}">
-					<img src = "/cuddly/image/product/main?productNo=${qnaDto.productNo}" width="120" height="120" 
-								class="image image-round">
+					<img src = "/cuddly/image/product/main?productNo=${qnaDto.productNo}" 
+								width="120" height="120" class="image image-round">
 				</a>
 			</div>
 			
 			<div class="row flex-container auto-width">
-				<span class="left">상품문의번호 : ${qnaDto.qnaNo}</span>
+				<span class="left">No. ${qnaDto.qnaNo}</span>
 				<span class="right me-10">작성일 : ${qnaDto.qnaDate}</span>
 			</div>
 			
@@ -108,42 +93,34 @@ function update(e){
 			<hr>
 				
 			<c:choose>
-		
 				<c:when test="${qnaDto.qnaAnswer == null}">
 					<div class="row left">
 						<input id="answer" name="qnaAnswer" autocomplete="off" placeholder="미등록" 
 									style="border:none; width:440px">
 					</div>
 				</c:when>
-					
 				<c:otherwise>
 					<div class="row left">
-						답변 : <input class="qna-answer" id="answer" name="qnaAnswer" autocomplete="off" 
-										readonly="readonly" value="${qnaDto.qnaAnswer}" style="border:none; width:400px">
+						<span>답변 
+							<input class="qna-answer" id="answer" name="qnaAnswer" autocomplete="off" 
+											readonly="readonly" value="${qnaDto.qnaAnswer}" style="border:none; width:400px">
+						</span>
 					</div>
 				</c:otherwise>
-				
 			</c:choose>
 			
-	 	</div>
-		
-		<div class="row float-left">
-		
-				<input type="hidden" name="qnaNo" value="${qnaDto.qnaNo}">
-				
-				<div class="row right">
-					<button class="btn btn-positive">등록</button>
+				<div class="row float-right">
+					<input type="hidden" name="qnaNo" value="${qnaDto.qnaNo}">
+					<button class="btn btn-positive btn-small me-10">등록</button>
 				</div>
-				
-		</div>
 		
-		<div class="row right">
-			<button class="btn btn-positive edit-answer" type="button">수정</button>
-		</div>
-		</form>
-	
+			<div class="row float-right">
+				<button class="btn btn-negative btn-small edit-answer me-10" type="button">수정</button>
+			</div>
+			
+	 	</div>
+	</form>
 	</c:forEach>
-	
 </div>
 
 <jsp:include page="/WEB-INF/views/template/adminFooter.jsp"></jsp:include>
