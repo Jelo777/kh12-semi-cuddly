@@ -293,11 +293,10 @@
 		<div class="w-80">
 			<select class="form-input find-input" style="width:480px; padding-left:10px" name="productItem">
 				<option value="none">품목선택</option>
-				<option value="의류">의류</option>
-				<option value="스티커/지류">스티커/지류</option>
-				<option value="폰악세서리">폰악세서리</option>
-				<option value="리빙">리빙</option>
+				<option value="패션">패션</option>
 				<option value="문구/오피스">문구/오피스</option>
+				<option value="홈데코/리빙">홈데코/리빙</option>
+				<option value="폰악세서리">폰악세서리</option>
 				<option value="기타">기타</option>
 			</select>
 			<div class="fail-feedback left">품목을 선택하세요.</div>

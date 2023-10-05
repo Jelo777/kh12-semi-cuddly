@@ -41,7 +41,6 @@ $("[name=join]").click(function() {
 			if(email.length == 0) return;
 			$(".btn-send").prop("disabled",true);
 			$(".btn-send").find(".fa-spinner").show();
-			$(".btn-send").find("span").text("이메일 보내는중이요");
 			
 			$.ajax({
 				url:"http://localhost:8080/cuddly/rest/cert/send",

@@ -9,7 +9,7 @@
 <div class="container w-1000">
 	<c:if test="${creatorDto!=null}">
 	<div class="row">
-		<img class="image image-round"
+		<img class="image image-circle"
 			src="/cuddly/image/creator?creatorNo=${creatorDto.creatorNo}"
 			onerror="this.src='https://dummyimage.com/200x200/000/fff;'"
 			width="200" height="200">

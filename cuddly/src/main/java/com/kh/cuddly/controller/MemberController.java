@@ -151,6 +151,7 @@ public class MemberController {
 		if(memberDto.getMemberPw().equals(memberPw)) {
 			memberDao.delete(memberId);
 			session.removeAttribute("name");
+			session.removeAttribute("level");
 			return "redirect:exitFinish";
 		}
 		else {
