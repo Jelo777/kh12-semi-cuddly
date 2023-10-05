@@ -8,31 +8,45 @@
 
 
 
+
+
+
+
+
+
 <div class="row">
-	<h2>FAQ관리</h2>
+    <a class="link" href="list"><h2>FAQ</h2></a>
+	<h3>  ${param.category}  </h3>
 </div>
+<br>
+<br>
 
 
 
 <%-- 글쓰기는 로그인 상태인 경우에만 출력 --%>
-<c:if test="${sessionScope.level == '관리자'}">
+
 	<div class="row right">
-		<a href="write" class="btn btn-positive"> <i class="fa-solid fa-write"></i>
+		<a href="admin/faq/write" class="btn btn-positive"> <i class="fa-solid fa-write"></i>
 			작성하기
 		</a>
 	</div>
-</c:if>
-
-<form action="list" method="post" autocomplete="off">
-	<div class="row">
 
 
+
+
+	<div class="row left"> 
+    <a class="link" href="list?category=공지사항">공지사항</a>
+    <a class="link" href="list?category=주문결제">주문결제</a>
+    <a class="link" href="list?category=회원정보">회원정보</a>
+    <a class="link" href="list?category=기타">기타</a>
+    </div>	
+
+	<form action="list" method="post" autocomplete="off">
 
 		<div class="row">
 			<table class="table table-stripe">
 				<thead>
 					<tr>
-
 						<th>no</th>
 						<th>title</th>
 						<th>writer</th>
@@ -43,17 +57,13 @@
 				<tbody>
 					<c:forEach var="faqDto" items="${list}">
 						<tr>
-							<c:if test="${sessionScope.level == '관리자'}">
-
-							</c:if>
-
-
-
 							<td>${faqDto.faqNo}</td>
+
 							<td align="left">
 								<!-- 제목을 누르면 상세페이지로 이동 --> <a class="link"
 								href="detail?faqNo=${faqDto.faqNo}"> ${faqDto.faqTitle} </a>
 							</td>
+
 							<td>관리자</td>
 							<td>${faqDto.faqDate}</td>
 							<td>${faqDto.faqCategory}</td>
@@ -66,15 +76,28 @@
 			</table>
 		</div>
 
-	</div>
+	
 
-	<div class="row page-navigator mv-30">
-		<!-- 이전 버튼 -->
-		<c:if test="${!vo.first}">
-			<a href="list?${vo.prevQueryString}"> <i
-				class="fa-solid fa-angle-left"></i>
-			</a>
-		</c:if>
+
+ <form action="list" method="get">
+        <div class="row search-container">
+     
+     
+     
+          
+<div class="row right">
+ <a class="link" href="list"> FAQ 전체보기</a>
+</div>
+        
+        
+<div class="row page-navigator mv-30">
+	<!-- 이전 버튼 -->
+	<c:if test="${!vo.first}">
+		<a href="list?${vo.prevQueryString}"> <i
+			class="fa-solid fa-angle-left"></i>
+		</a>
+	</c:if>
+
 
 		<!-- 숫자 버튼 -->
 		<c:forEach var="i" begin="${vo.begin}" end="${vo.end}" step="1">
@@ -95,10 +118,20 @@
 			</a>
 		</c:if>
 	</div>
+        
+    </form>
+
+	<form action="list" method="get">
+		<div class="row search-container">
+
+			<input type="search" name="keyword" required placeholder="검색어 입력"
+				value="${param.keyword}">
+			<button type="submit">검색</button>
+		</div>
+
+	</form>
+
+</form>
 
 
-
-
-
-
-	<jsp:include page="/WEB-INF/views/template/adminFooter.jsp"></jsp:include>
+<jsp:include page="/WEB-INF/views/template/adminFooter.jsp"></jsp:include>

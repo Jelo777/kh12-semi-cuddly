@@ -8,17 +8,22 @@
 	
 		<div class="float-container card mt-50">
 
-        <h2>${faqDto.faqNo}번 게시글</h2>
+    <div class="row">
+
+<table class="table table-striped">
+     
+        
+
+       
     </div>
     <div class="row">
-        <table class="table table-border">
-        
+     
             <thead>
                 <tr>
-                    <th>글 번호</th>
-                    <th>카테고리</th>
-                    <th>제목</th>
-                    <th>작성일</th>
+                    <th>no</th>
+                    <th>category</th>
+                    <th>title</th>
+                    <th>date</th>
                 </tr>
             </thead>
             <tbody>
@@ -31,32 +36,59 @@
             </tbody>
         </table>
     </div>
+</div>
+</div>
+   
+<div class="container w-700">
 
-    <div class="row">
-        <table class="table table-border">
+    <div class="row left">
+<div class="float-container card mt-50">
+<table class="table table-striped">
+
             <tbody>
                 <tr>
-              
-                    <td height="150">${faqDto.faqContent}</td>
+
+                    <td height="300">${faqDto.faqContent}</td>
+                    
                 </tr>
             </tbody>
         </table>
     </div>
+    </div>
+
+    	
+   
+
+
+
+
 
     <div class="row right">
+
+
+        
+
+
         <a href="list" class="btn btn-positive">
             <i class="fa-solid fa-list"></i>
             목록
         </a>
+        
+        <c:if test="${sessionScope.level == '관리자'}">
         <a href="edit?faqNo=${faqDto.faqNo}" class="btn btn-positive">
             <i class="fa-solid fa-edit"></i>
             수정
         </a>
+        </c:if>
+        
+        <c:if test="${sessionScope.level == '관리자'}">
         <a href="delete?faqNo=${faqDto.faqNo}" class="btn btn-positive">
             <i class="fa-solid fa-delete"></i>
             삭제
         </a>
+        </c:if>
     </div>
 </div>
+
 
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>

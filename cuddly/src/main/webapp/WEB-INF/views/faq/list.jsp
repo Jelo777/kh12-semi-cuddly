@@ -34,14 +34,12 @@
 
 
 
-<c:if test="${sessionScope.name != null}">
 	<div class="row left"> 
     <a class="link" href="list?category=공지사항">공지사항</a>
     <a class="link" href="list?category=주문결제">주문결제</a>
     <a class="link" href="list?category=회원정보">회원정보</a>
     <a class="link" href="list?category=기타">기타</a>
     </div>	
-</c:if>
 
 	<form action="list" method="post" autocomplete="off">
 
@@ -78,7 +76,7 @@
 			</table>
 		</div>
 
-	</div>
+	
 
 
  <form action="list" method="get">
