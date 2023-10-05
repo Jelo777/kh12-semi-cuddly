@@ -204,7 +204,6 @@
 					
 					<a class="link" href="/cuddly/member/mypage"> 
 						<i class="fa-solid fa-circle-user fa-2x headerIcon"></i>
-
 					</a>
 				</div>
 			</div>

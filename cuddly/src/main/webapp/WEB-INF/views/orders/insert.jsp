@@ -6,38 +6,19 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 <style>
-.card {
-	/* border:1px solid; */
-	box-shadow: 0 0 0 1px #2d3436;
-}
 
-
-.list {
-	box-shadow: 0 0 0 1px #2d3436;
-}
 
 .position-center{
-
 	position: fixed;
 	top:50%;
 	left:50%;
 	transform : translate(-50%,-50%);
 	background: white;
- 		box-shadow: 0 0 0 2px black;
 	display:none;
-	padding:0.5em;
-
+	padding: 1em;
+	border : 2px solid gray;
+	border-radius : 1em;
 }
-.card {
-	/* border: 1px solid #2d3436; */
-	box-shadow: 0px 0px 0px 1px black;
-	border-radius: 0.2em;
-}
-.last{
-
-	margin-top: 0px;
-}
-
 
 </style>
 
@@ -124,64 +105,66 @@
 	})
 </script>
 
-
-	<h1>주문</h1>
-
 <div class="container w-600">
-<h3 class="row left">주문자정보</h3>
-<br>
-
-<div class="row">
-	<label>이름: </label> ${memberDto.memberName}
-</div>
-<hr>
-<div class="row">
-	<label>이메일: </label> ${memberDto.memberEmail}
-</div>
-<hr>
-<div class="row">
-	<label>전화번호: </label> ${memberDto.memberContact}
-</div>
-
-
-
-
+	<div class="row">
+		<h2 class="mv-30">주문</h2>
+	</div>
 	
-	
+	<h3 class= "left">주문자정보</h3>
 
-	<h3 class="row left"> 배송지 정보</h3>
+<hr>
+	<div class="row left">
+		<label>이름: </label> ${memberDto.memberName}
+	</div>
+	<div class="row left">
+		<label>이메일: </label> ${memberDto.memberEmail}
+	</div>
+	<div class="row left">
+		<label>전화번호: </label> ${memberDto.memberContact}
+	</div>
+
+
 <form action="insert" method="post">
-<div class="container w-600 addrBox">
-<div class="row right">
-	<button type ="button" class="btn btn-positive w-200 btn-addressList">배송지 목록</button></div>
+	<div class="float-container">
+		<div class="float-left">
+			<h3 class="left mt-50"> 배송지 정보</h3>
+		</div>
+		<div class="float-right">
+			<button type ="button" class="btn btn-positive w-200 btn-addressList mt-30">배송지 목록</button>
+		</div>
+	</div>
+	
+	<hr>
+		<div class="container w-600 addrBox">
+			
 
+			<div class="row">
+				<input type="hidden" class="no form-input" name ="addrNo" 
+							value="${addressDto.addressNo}" placeholder="번호" readonly>
+			</div>
+
+			<div class="row">
+				<input class="name form-input text-input w-100" value="${addressDto.addressName}" placeholder="수령인" readonly>
+			</div>
 
 	<div class="row">
-		<input type="hidden" class="no form-input" name ="addrNo" value="${addressDto.addressNo}" placeholder="번호" readonly>
+		<input class="contact form-input text-input w-100" value="${addressDto.addressContact}" placeholder="연락처" readonly>
 	</div>
 
 	<div class="row">
-		<input class="name form-input"  value="${addressDto.addressName}" placeholder="수령인" readonly>
+		<input class="post form-input text-input w-100"  value="${addressDto.addressPost}" placeholder="우편번호" readonly>
 	</div>
 
 	<div class="row">
-		<input class="contact form-input" value="${addressDto.addressContact}" placeholder="연락처" readonly>
+		<input class="addr1 form-input text-input w-100" value="${addressDto.addressAddr1}" placeholder="기본주소" readonly>
 	</div>
 
 	<div class="row">
-		<input class="post form-input" value="${addressDto.addressPost}" placeholder="우편번호" readonly>
+		<input class="addr2 form-input text-input w-100" value="${addressDto.addressAddr2}" placeholder="상세주소" readonly>
 	</div>
 
 	<div class="row">
-		<input class="addr1 form-input" value="${addressDto.addressAddr1}" placeholder="기본주소" readonly>
-	</div>
-
-	<div class="row">
-		<input class="addr2 form-input" value="${addressDto.addressAddr2}" placeholder="상세주소" readonly>
-	</div>
-
-	<div class="row">
-		<input class="coment form-input"  name="addrComent" value="${addressDto.addressComent}" placeholder="요청사항">
+		<input class="coment form-input text-input w-100" name="addrComent" value="${addressDto.addressComent}" placeholder="요청사항">
 	</div>
 	<h1 class="row fail-feedback">배송지를 선택해주세요.</h1>
 	</div>
@@ -219,63 +202,69 @@
 	<!--          <br><br> -->
 
 	
-	<h3 class="row left">주문할 상품 정보</h3>
+	<h3 class="left mt-30">주문할 상품 정보</h3>
 
 	<c:forEach var="product" items="${ordersProductDto}" varStatus="loop">
-	<div class="row container w-600 card">
-	<div class="flex-container">
-		<div class="row w-30">
-		<input type="hidden" name="details[${loop.index}].optionNo"
-			value="${product.productOptionNo}">
-		<input type="hidden" name="cartNo" value="${product.cartNo}">
-			<img src="/cuddly/image/product/main?productNo=${product.productNo}"
-				width="200" height="200"> <input type="hidden"
-				name="details[${loop.index}].productNo" value="${product.productNo}">
+		<div class="row container w-600 card">
+			<div class="flex-container">
+				<div class="row w-30">
+					<input type="hidden" name="details[${loop.index}].optionNo"
+									value="${product.productOptionNo}">
+					<input type="hidden" name="cartNo" value="${product.cartNo}">
+					<img src="/cuddly/image/product/main?productNo=${product.productNo}"
+									width="150" height="150" class="image image-round ms-10"> 
+					<input type="hidden" name="details[${loop.index}].productNo" value="${product.productNo}">
+				</div>
+			<div class="w-75">
+				<div class="row left title">
+					<span class="ms-10 productName">${product.productName}</span>
+				</div>
+				<div class="float-container">
+					<div class="float-left">
+						<span class="ms-10 creatorName">${product.creatorName}</span>
+					</div>
+					<div class="float-right">
+						<span class="me-10">옵션:${product.productOptionName} / 수량:${product.cartCount} </span>
+						<input type="hidden" name="details[${loop.index}].ordersDetailCount" value="${product.cartCount}">
+					</div>
+				</div>
+				<hr class="w-95">
+				<div class="row right">
+<%-- 			<span class="me-10 productPrice">${product.cartPrice}원</span> --%>
+					<span class="me-10 productPrice"><fmt:formatNumber value="${product.productPrice}" pattern="#,###원" /></span>
+				</div>
+			</div>
 		</div>
-		<div class="w-75">
-		<div class="row left title">
-			<label>상품 이름:</label>${product.productName}
-		</div>
-		<div class="row left">
-			<label>크리에이터:</label>${product.creatorName}
-		</div>
-		<hr>
-		<div class="row left">
-			<label>상품 가격:</label>${product.productPrice}
-		</div>
-		</div>
-		</div>
-		<div class="row left last">
-			<label>옵션:</label>${product.productOptionName} / <label>수량:</label>${product.cartCount} <input type="hidden"
-				name="details[${loop.index}].ordersDetailCount"
-				value="${product.cartCount}">
-		</div>
+			
 		</div>
 	</c:forEach>
 
 
-	<div class="row">
-		<label>총가격:</label><fmt:formatNumber value="${total}" pattern="#,###원" />
+<!-- 	<div class="row"> -->
+<%-- 		<label>총가격:</label><fmt:formatNumber value="${total}" pattern="#,###원" /> --%>
+<!-- 	</div> -->
+
+	<div class="row left">
+		<h3 class="mt-20">결제 정보</h3>
+	</div>
+	<hr>
+
+	<div class="left productPrice mb-20">
+		<input type="hidden" name="ordersPrice" value="${total}">총결제 금액 : <fmt:formatNumber value="${total}" pattern="#,###원" />
 	</div>
 
-	<div class="row">
-		<h1>결제 정보</h1>
-	</div>
 
-	<input type="hidden" name="ordersPrice" value="${total}">결제
-	금액:<fmt:formatNumber value="${total}" pattern="#,###원" />
-
-
-
-	<div class="row">
+	<div class="row left">
 		<input type="checkbox" name="ordersPayment" value="네이버페이" class="payType">네이버 페이 
 		<input type="checkbox" name="ordersPayment" value="카카오페이" class="payType">카카오 페이 
 		<input type="checkbox" name="ordersPayment" value="무통장입금" class="payType">무통장 페이
 	</div>
-	<h1 class="fail2-feedback">결제 방식을 선택해주세요</h1>
+	<div class="row left">
+		<span class="fail2-feedback mb-10">결제 방식을 선택해주세요</span>
+	</div>
 
 
-	<button class="btn btn-order">주문하기</button>
+	<button class="btn btn-order btn-positive w-100">주문하기</button>
 	
 </form>
 </div>
@@ -283,52 +272,46 @@
 
 
 
-
-
-
-
-
-
 <div class="container w-700">
 	<div class="row position-center w-700">
 		<c:forEach var="addressDto" items="${list}">
-			<div class="flex-container card mt-10">
-				<div class="w-75 mt-20">
+			<div class="flex-container mt-10">
+				<div class="w-80">
 					<input type="hidden" class="addressNo"
 						value="${addressDto.addressNo}">
 					<div class="row left ms-10">
-						<h1 class="addressName">${addressDto.addressName}</h1>
+						<span class="addressName ms-10" style="font-size:20px; font-weight: bold;">${addressDto.addressName}</span>
 						<c:if test="${addressDto.addressDefault =='Y'}">
 								(기본배송지)
-								</c:if>
-	
+						</c:if>
 					</div>
 					<div class="row left ms-10">
-						<h5 class="addressPost">${addressDto.addressPost}</h5>
-						<h5 class="addressAddr1">${addressDto.addressAddr1}</h5>
-						<h5 class="addressAddr2">${addressDto.addressAddr2}</h5>
+						<span class="addressPost ms-10">${addressDto.addressPost}</span>
+						<span class="addressAddr1">${addressDto.addressAddr1}</span>
+						<span class="addressAddr2">${addressDto.addressAddr2}</span>
 					</div>
-					<div class="row left ms-10">
-						<h5 class="addressContact">${addressDto.addressContact}</h5>
+					<div class="row left">
+						<span class="addressContact ms-10">${addressDto.addressContact}</span>
 					</div>
-					<div class="row left ms-10">
-						<h5 class="addressComent">${addressDto.addressComent}</h5>
+					<div class="row left">
+						<span class="addressComent ms-10">${addressDto.addressComent}</span>
 					</div>
 				</div>
-				<div class="w-25 mt-20">
-					<div class="row right me-10">
-						<h5>
-							<button type="submit" style="width: 150px; font-size: 16px;"
-								class="btn btn-positive btn-select">선택</button>
-						</h5>
+				<div class="w-20">
+					<div class="row right">
+							<button type="submit"
+								class="btn btn-small btn-positive btn-select me-20">선 택</button>
 					</div>
 				</div>
-	
 			</div>
+			
+			<hr>
+			
 		</c:forEach>
-				<button type="button" style="width: 150px; font-size: 16px;" 
-					class="btn btn-exit mt-30">나가기</button>
-				<a href="/cuddly/member/address/list">새로 작성하기</a>
+				<button type="button" class="btn btn-exit btn-negative mt-30">나가기</button>
+				<a href="/cuddly/member/address/list">
+					<button class="btn btn-positive">배송지 추가</button>
+				</a>
 	</div>
 </div>
 

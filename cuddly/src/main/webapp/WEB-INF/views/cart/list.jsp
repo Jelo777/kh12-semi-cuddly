@@ -5,16 +5,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <style>
 
-	.card {
-            /* border: 1px solid #2d3436; */
-            box-shadow:0px 0px 0px 1px black;
-            border-radius: 0.2em;
-        }
-        
-      
-        
-        
-
 </style>
 <body>
 
@@ -133,56 +123,68 @@
 
 
 
-	<h1>장바구니 목록</h1>
-
-	<div id="selectAllDiv">
+<div class="container w-600">
+	<div class="row">
+		<h1  class="mv-30">장바구니 목록</h1>
+	</div>
+	
+	<div id="selectAllDiv" class="left">
 		<input type="checkbox" class="check-all">모두 선택
 
-		<div class="container w-600">
 			<form action="insert" method="get">
 				<c:forEach items="${cartList}" var="cart">
 					<div class="row">
 						<div class="flex-container card">
-						<div class="w-5">
-						<input type="checkbox" name="cartNo"
+							<div class="w-5">
+								<input type="checkbox" name="cartNo"
 										value="${cart.cartNo}" class="check-item">
-						</div>
+							</div>
 							<div class="w-25 flex-container align-center">
 								<a href="/cuddly/product/detail?productNo=${cart.productNo}">
-								<img src="/cuddly/image/product/main?productNo=${cart.productNo}"
-									width="150" height="200">
+									<img src="/cuddly/image/product/main?productNo=${cart.productNo}"
+													width="150" height="150" class="image image-round">
 								</a>
 								
 							</div>
 							<div class="w-75">
-								<div class="row left title"> 상품명 : ${cart.productName}</div>
+								<div class="row left title"> 
+									<span class="ms-10">상품명 : ${cart.productName}</span>
+								</div>
 								<div class="row flex-container auto-width">
-								<div class="left felx-container"> 크리에이터 : ${cart.creatorName}</div>
-								<div class="right count" data-count="${cart.cartCount}">옵션 : ${cart.productOptionName} / 수량: ${cart.cartCount}</div></div>
+									<div class="left felx-container">
+										<span class="ms-10">크리에이터 : ${cart.creatorName}</span>
+									</div>
+									<div class="right count" data-count="${cart.cartCount}">
+										<span class="me-10">옵션 : ${cart.productOptionName} / 수량: ${cart.cartCount}</span>
+									</div>
+								</div>
 								<div class="row left">
-									가격 : <label class="price" data-cart-price="${cart.productPrice}"><fmt:formatNumber value="${cart.productPrice}" pattern="#,###원" /></label>
+									<span class="ms-10">가격 : <label class="price" data-cart-price="${cart.productPrice}>
+											<fmt:formatNumber value="${cart.productPrice}" pattern="#,###원" /></label></span>
 								</div>
-								<div class="row right">추가 날짜 : ${cart.cartDate}</div>
-								<div class="row right stock" data-stock="${cart.productOptionStock}">
+								<div class="row right">
+									<span class="me-10">추가 날짜 : ${cart.cartDate}</span>
 								</div>
+								<div class="row right stock" data-stock="${cart.productOptionStock}"></div>
 							</div>
 						</div>
 					</div>
 				</c:forEach>
-	<div class="row"><h1>
-		총 가격:<label class="total">0</label>원</h1>
-	</div>
-	<h1 class="fail-feedback">
-	선택된 상품이 없습니다.
-	</h1>
-	<h1 class="fail2-feedback">
-	주문하시려는 상품의 재고를 확인해주세요
-	</h1>
-	<button type="submit" class="btn order">주문하기</button>
-	<button class="btn" value="delete">선택삭제</button>
+				<div class="row">
+					<h1 class="right">총 가격:<label class="total">0</label>원</h1>
+				</div>
+	
+				<h3 class="row left fail-feedback">선택된 상품이 없습니다.</h3>
+				<h3 class="row left fail2-feedback">주문하시려는 상품의 재고를 확인해주세요</h3>
+	
+				<div class="row">
+					<button class="btn btn-negative" value="delete">선택삭제</button>
+					<button type="submit" class="btn order btn-positive">주문하기</button>
+				</div>
 			</form>
 	</div>
 </div>
+
 	<div class="row page-navigator mv-30">
     <!-- 이전 버튼 -->
     <c:if test="${!vo.first}">

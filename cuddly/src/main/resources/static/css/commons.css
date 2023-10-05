@@ -41,6 +41,7 @@
 .w-95 {width:95%;}
 .w-100 { width:100%; }
 
+.w-200 { width:200px; }
 .w-300 { width:300px; }
 .w-400 { width:400px; }
 .w-500 { width:500px; }
@@ -390,7 +391,7 @@ table {
     color: white;
 }
 .btn.btn-negative {
-	padding: 0.7em 1.4em;
+	padding: 0.6em 1.4em;
     border-color: #BEADFA;
     background-color: white;
     color: #BEADFA;
@@ -420,6 +421,7 @@ table {
     border-right: none;
     padding-left: 0px;
     padding-right: 0px;
+    border-radius: 0em;
 }
 
 .form-input.underline-input.member-input{
@@ -462,6 +464,16 @@ hr{
 .selected-sort{
 	color : #BEADFA
 }
+
+/* 첨부파일 버튼*/
+input::file-selector-button{
+	font-size: 15px;
+	border-radius: 5em;
+	background-color: #BEADFA;
+	border: 1px solid #BEADFA;
+	color: white;
+}
+	
 
 /***********************진행중********************************************/
 

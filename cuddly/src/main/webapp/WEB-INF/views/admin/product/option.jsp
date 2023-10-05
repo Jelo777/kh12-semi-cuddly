@@ -1,7 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-    
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+
 <jsp:include page="/WEB-INF/views/template/adminHeader.jsp"></jsp:include>
 
 <script src="/js/adminInsertOptionCount.js"></script>
@@ -71,67 +72,91 @@ function addOption(){
 
 </script>
 
-	<div class="container w-600">
 		<div class="row">
-			<h1>${productDto.productName} 수정</h1>
+			<h2 class="mv-30">${productDto.productName} 수정</h2>
+		</div>
+
+	<div class="container w-200">
+		
+		<div class="row">
+			<img src="/cuddly/image/product/main?productNo=${productDto.productNo}" 
+							width="200" height="200" class="image image-round">
 		</div>
 		
-		<div class="row">
-			<img src="/cuddly/admin/product/main?productNo=${productDto.productNo}" width="200" height="200"><br><br>
+		<div class="row left">
+			<span class="productName">${productDto.productName}</span>
 		</div>
-		
-		<div class="row">
-			<h3>${productDto.productName}</h3><br>
-			<h3>${creatorDto.creatorName}</h3><br>
-			<h3>${productDto.productPrice}</h3><br>
-		</div> 
-		
+		<div class="row left">
+			<span class="creatorName">${creatorDto.creatorName}</span>
+		</div>	
+		<div class="row left">
+			<span class="productPrice">
+				<fmt:formatNumber value="${productDto.productPrice}" pattern="#,###원" />
+			</span>
+		</div>
+	</div>
+	
+	<div class="container w-600">	
 	<form id="update" onsubmit="return false();" action="optionUpdate" method="post" enctype="multipart/form-data">
 		
-		<div class="flex-container w-100">
+		<div class="flex-container">
 			<input type="hidden" name="productNo" value="${productDto.productNo}">
 			
-        	<div class="row w-100" style="float:left">
-            	<select name="productOptionNo" class="form-input w-100" onchange="changeOption(this);">
+        		<div class="w-60">
+        	<div class="row">
+            	<select name="productOptionNo" class="form-input find-input w-100" style="width:390px" onchange="changeOption(this);">
                 	<option>옵션선택</option>
                 	<c:forEach var="productOptionDto" items="${list}">
                 			<option value="${productOptionDto.productOptionNo}">${productOptionDto.productOptionName}</option>
                 	</c:forEach>
             	</select>
+            	</div>
         	</div>
         	
-        	<div class="row w-100" style="float:right">
+        	<div class="w-20">
+        	<div class="row">
             	<button type="button" class="editMinus">-</button>
             		<input name="productOptionStock" id="optionValue" type="text" class="editNumBox" min="0" value="0" size="1em">
             	<button type="button" class="editPlus">+</button>
+            	</div>
         	</div>
         	
-        	<div class="row w-100" style="float:right">
+        	<div class="w-20">
+        	<div class="row">
             	<button class="btn btn-positive" type="submit" onclick="optionUpdate();">옵션수정</button>
+            	</div>	
         	</div>	
         </div>
 	</form>
 	
+
 	<form id="edit" onsubmit="return false();" autocomplete="off">
-	<div class="flex-container w-100">
 		<input type="hidden" name="productNo" value="${productDto.productNo}">
 	
-        <div class="row w-100 let">
-            <input class="form-input" type="text" name="productOptionName" placeholder="옵션입력">
+	<div class="flex-container">
+		<div class=" w-60">
+        	<div class="row">
+            	<input class="form-input find-input" style="width:390px" type="text" name="productOptionName" placeholder="  옵션입력">
+        	</div>
+      	</div>
+        
+        <div class=" w-20">
+        	<div class="row">
+            	<button type="button" class="insertMinus">-</button>
+            		<input type="text" class="insertNumBox" name="productOptionStock" min="0" value="0" size="1em">
+            	<button type="button" class="insertPlus">+</button>
+        	</div>
         </div>
         
-        <div class="row w-100 right">
-            <button type="button" class="insertMinus">-</button>
-            <input type="text" class="insertNumBox" name="productOptionStock" min="0" value="0" size="1em">
-            <button type="button" class="insertPlus">+</button>
+        <div class=" w-20">
+        	<div class="row">
+            	<button class="btn btn-positive" type="submit" onclick="addOption();" >옵션추가</button>
+        	</div>
         </div>
         
-        <div class="row w-100 right">
-            <button class="btn btn-positive" type="submit" onclick="addOption();" >옵션추가</button>
-        </div>
  	</div>
 	</form> 
-
 	</div>
+
 
 <jsp:include page="/WEB-INF/views/template/adminFooter.jsp"></jsp:include>
