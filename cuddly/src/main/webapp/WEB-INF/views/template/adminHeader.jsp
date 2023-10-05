@@ -78,9 +78,9 @@ $(document).ready(function() {
 		
 	         <div class="row">
         		<input type="checkbox" style="display:none;" id="sidebar-toggle">
-        		<div class="sidebar">
-	        		<div class="row right me-10">
-	        		
+        		<div class="sidebar" style="padding-right:10px">
+	        		<div class="row right">
+
 	        			<a class="link" href="/cuddly/member/mypage">
 							<i class="fa-solid fa-circle-user fa-2x"></i>
 						</a>	

@@ -291,7 +291,7 @@
 			</div>
 		<div class="row">
 		<div class="w-80">
-			<select class="form-input find-input" style="width:480px" name="productItem">
+			<select class="form-input find-input" style="width:480px; padding-left:10px" name="productItem">
 				<option value="none">품목선택</option>
 				<option value="의류">의류</option>
 				<option value="스티커/지류">스티커/지류</option>
@@ -303,7 +303,8 @@
 			<div class="fail-feedback left">품목을 선택하세요.</div>
 			</div>
 			<div class="row">
-			<input type="text" class="form-input find-input" style="width:480px" name="creatorName" placeholder="  크리에이터 입력">
+			<input type="text" class="form-input find-input" style="width:480px; padding-left:10px" 
+							name="creatorName" placeholder="크리에이터 입력">
 			<div class="fail-feedback left">크리에이터를 입력하세요.</div>
 			</div>
 		</div>
@@ -322,11 +323,13 @@
 	</div>
 	<div class="80">
 		<div class="row">
-			<input  type="text" class="form-input find-input w-100" style="width:480px" name="productName" placeholder="  상품명 입력">
+			<input  type="text" class="form-input find-input w-100" 
+							style="width:480px; padding-left:10px" name="productName" placeholder="상품명 입력">
 			<div class="fail-feedback left">상품명을 입력하세요.</div>
 		</div>
 		<div class="row">
-			<input  type="number" class="form-input find-input w-100" style="width:480px" name="productPrice" placeholder="  가격 입력">
+			<input  type="number" class="form-input find-input w-100" 
+							style="width:480px; padding-left:10px" name="productPrice" placeholder="가격 입력">
 			<div class="fail-feedback left">가격을 입력하세요.</div>
 		</div>
 		</div>
