@@ -383,7 +383,7 @@
 				<span class="ms-20">등록일 : ${productDto.productDate}</span>
 			</div>
 			<div class="row left">
-				<span class="ms-20">평점 : <fmt:formatNumber value="${reviewAvg}" pattern="0.0"/></span>
+				<span class="ms-20"><i class="fa-solid fa-star yellow"></i> <fmt:formatNumber value="${reviewAvg}" pattern="0.0"/></span>
 			</div>
 			
 			<hr class="w-95 right">
@@ -504,6 +504,7 @@
 			<div class="w-20 me-10 mb-10">
 				<img
 					src="/cuddly/image/review/image?reviewNo=${reviewListDto.reviewNo}"
+					onerror="this.style.display='none'" alt=''
 					width="150px" height="150px" class="image image-round">
 			</div>
 		</div>
@@ -552,10 +553,10 @@
 		<table class="table table-slit table-hover">
 			<thead>
 				<tr>
-					<th>답변상태</th>
-					<th>문의내용</th>
-					<th>작성자</th>
-					<th>작성일</th>
+					<th width="10%">답변상태</th>
+					<th width="6%">문의내용</th>
+					<th width="15%">작성자</th>
+					<th width="15%">작성일</th>
 				</tr>
 			</thead>
 			<tbody>
