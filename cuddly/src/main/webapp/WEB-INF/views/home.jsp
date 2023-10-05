@@ -60,7 +60,7 @@
 			<div class="swiper-wrapper">
 				<!-- Slides -->
 				<div class="swiper-slide">
-					<img src="/images/main.png" width="100%"
+					<img src="/images/main1.png" width="100%"
 						height="100%">
 				</div>
 				<div class="swiper-slide">

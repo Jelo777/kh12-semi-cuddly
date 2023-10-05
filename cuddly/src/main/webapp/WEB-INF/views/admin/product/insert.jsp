@@ -25,7 +25,7 @@
 	 //품목선택
 	 $("[name=productItem]").blur(function(){
 		 var productItem = $(this).val();
-		 console.log($(this).val());
+		 //console.log($(this).val());
 		 var isValid = productItem != "none";
 		 
 		 $(this).removeClass("success fail");
@@ -101,7 +101,6 @@
 		var regex = /(.*?)\.(jpg|jpeg|png|gif|bmp|pdf)$/;
 		var isResult2 = regex.test($(this).val());
 		var isValid = !isResult1 && isResult2;
-		console.log(isValid);
 	
 		$(this).removeClass("success fail fali2");
 		if(isResult1){
@@ -122,7 +121,7 @@
 		 var regex = /(.*?)\.(jpg|jpeg|png|gif|bmp|pdf)$/;
 		var isResult2 = regex.test($(this).val());
 		var isValid = !isResult1 && isResult2;
-		console.log(isValid);		
+		//console.log(isValid);		
 		
 		$(this).removeClass("success fail fali2");
 		if(isResult1){
