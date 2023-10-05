@@ -27,7 +27,7 @@ $(function(){
 </script>
 <div class="container w-400">
 	<div class="row">
-		<h2 class="mt-30">${memberDto.memberId}님의 회원정보</h2>
+		<h2 class="mv-30">${memberDto.memberId}님의 회원정보</h2>
 	</div>
 
 	<div class="row">
@@ -70,7 +70,7 @@ $(function(){
 							
 							<c:choose>
 								<c:when test="${memberDto.memberLevel =='브론즈'}">
-									<select name="memberLevel" class="form-input find-input" style="width:80px; height:30px; padding-left:15px">
+									<select name="memberLevel" class="form-input find-input" style="width:100px; height:30px; padding-left:15px">
 										<option value="브론즈" selected>브론즈</option>
 										<option value="실버">실버</option>
 										<option value="골드">골드</option>
@@ -79,7 +79,7 @@ $(function(){
 								</c:when>
 								
 								<c:when test="${memberDto.memberLevel =='실버'}">
-									<select name="memberLevel" class="form-input find-input" style="width:80px; height:30px; padding-left:15px">
+									<select name="memberLevel" class="form-input find-input" style="width:100px; height:30px; padding-left:15px">
 										<option value="브론즈">브론즈</option>
 										<option value="실버" selected>실버</option>
 										<option value="골드">골드</option>
@@ -88,7 +88,7 @@ $(function(){
 								</c:when>
 								
 								<c:when test="${memberDto.memberLevel =='골드'}">
-									<select name="memberLevel" class="form-input find-input" style="width:80px; height:30px; padding-left:15px">
+									<select name="memberLevel" class="form-input find-input" style="width:100px; height:30px; padding-left:15px">
 										<option value="브론즈">브론즈</option>
 										<option value="실버">실버</option>
 										<option value="골드" selected>골드</option>
@@ -97,7 +97,7 @@ $(function(){
 								</c:when>
 								
 								<c:when test="${memberDto.memberLevel =='관리자'}">
-									<select name="memberLevel" class="form-input find-input" style="width:80px; height:30px; padding-left:15px">
+									<select name="memberLevel" class="form-input find-input" style="width:100px; height:30px; padding-left:15px">
 										<option value="브론즈">브론즈</option>
 										<option value="실버">실버</option>
 										<option value="골드" >골드</option>
@@ -107,7 +107,7 @@ $(function(){
 							</c:choose>
 					</td>
 							<td>
-								<button class="popUpOpen btn btn-positive btn-small">수정</button>
+								<button class="popUpOpen btn btn-positive btn-small" style="width:60px">수정</button>
 							<td>
 					</form>
 				</tr>
