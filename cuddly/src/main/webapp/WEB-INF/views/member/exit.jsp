@@ -4,16 +4,14 @@
 <jsp:include page="/WEB-INF/views/template/mypageHeader.jsp"></jsp:include>
 <form action="exit" method="post" autocomplete="off">
 	<div class="container w-300">
+
 		<div class="row">
-			<h1>탈퇴</h1>
-		</div>
-		<div class="row">
-			<h2>정말 삭제할거냐?</h2>
+			<h2>정말 탈퇴하시겠습니까?</h2>
 		</div>
 		
 		
 		<div class="row">
-			<input class="form-input w-100" type="text" name="memberPw" placeholder="비밀번호 입력">
+			<input class="form-input w-100" type="password" name="memberPw" placeholder="비밀번호 입력">
 			
 		</div>
 		<div class="row">

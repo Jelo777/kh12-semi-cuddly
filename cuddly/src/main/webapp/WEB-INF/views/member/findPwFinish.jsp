@@ -4,7 +4,7 @@
 
 	<div class="container w-400">
 		<div class="row">
-			<h1>이메일로 비밀번호 보내드렸습니다~</h1>
+			<h1>이메일로 비밀번호가 전송되었습니다</h1>
 		</div>
 		<div class="row">
 			<a type="link" href="/cuddly/member/login">

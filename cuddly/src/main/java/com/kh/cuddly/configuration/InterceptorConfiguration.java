@@ -6,6 +6,7 @@ import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import com.kh.cuddly.interceptor.AdminInterceptor;
+import com.kh.cuddly.interceptor.CartInterceptor;
 import com.kh.cuddly.interceptor.MemberInterceptor;
 import com.kh.cuddly.interceptor.ProductDefenderInterceptor;
 import com.kh.cuddly.interceptor.ReviewInterceptor;
@@ -25,19 +26,25 @@ public class InterceptorConfiguration implements WebMvcConfigurer{
 	@Autowired
 	private ReviewInterceptor reviewInterceptor;
 	
+	@Autowired
+	private CartInterceptor cartInterceptor;
+	
 	public void addInterceptors(InterceptorRegistry registry) {
 		//관리자 아닐 때 차단
 		registry.addInterceptor(adminInterceptor)
 		.addPathPatterns(
 				"/cuddly/admin/**",
-				"/cuddly/faq/edit",//관리자만 공지사항 작성 수정 가능
-				"/cuddly/faq/write"
+				"/cuddly/faq/edit",//관리자만 공지사항 작성 수정 삭제 가능
+				"/cuddly/faq/write",
+				"/cuddly/faq/delete"
 				);
 		//비로그인일 때 차단
 		registry.addInterceptor(memberInterceptor)
 		.addPathPatterns(
-				"/cuddly/member/**"
-				
+				"/cuddly/member/**",
+				"/cuddly/orders/list",
+				"/cuddly/review/memberList",
+				"/cuddly/qna/memberList"
 				)
 		.excludePathPatterns(
 				"/cuddly/member/join",
@@ -61,7 +68,21 @@ public class InterceptorConfiguration implements WebMvcConfigurer{
 		registry.addInterceptor(reviewInterceptor)
 				.addPathPatterns(
 						"/cuddly/review/write"
+//						"/cuddly/review/edit"
 						);
+		
+		//자기 장바구니에 없는 물건 구매 차단
+		registry.addInterceptor(cartInterceptor)
+				.addPathPatterns(
+						"/cuddly/orders/insert"
+						);
+		
+		
+		
+		
+		
+		
+		
 	}
 
 }

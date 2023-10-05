@@ -4,7 +4,7 @@
 
 <div class="container w-300">
 	<div class="row">
-		<h1>잘가라 안붙잡는다</h1>
+		<h1>그동안 cuddly 홈페이지를 사용해주셔서 감사합니다</h1>
 	</div>
 	
 	<div class="row">
