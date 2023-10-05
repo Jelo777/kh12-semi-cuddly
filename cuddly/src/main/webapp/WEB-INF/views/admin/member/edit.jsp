@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
   
 <jsp:include page="/WEB-INF/views/template/adminHeader.jsp"></jsp:include>
 
@@ -26,7 +27,7 @@ $(function(){
 </script>
 <div class="container w-400">
 	<div class="row">
-		<h2>${memberDto.memberId}님의 회원정보</h2>
+		<h2 class="mt-30">${memberDto.memberId}님의 회원정보</h2>
 	</div>
 
 	<div class="row">
@@ -69,7 +70,7 @@ $(function(){
 							
 							<c:choose>
 								<c:when test="${memberDto.memberLevel =='브론즈'}">
-									<select name="memberLevel">
+									<select name="memberLevel" class="form-input find-input" style="width:80px; height:30px; padding-left:15px">
 										<option value="브론즈" selected>브론즈</option>
 										<option value="실버">실버</option>
 										<option value="골드">골드</option>
@@ -78,7 +79,7 @@ $(function(){
 								</c:when>
 								
 								<c:when test="${memberDto.memberLevel =='실버'}">
-									<select name="memberLevel">
+									<select name="memberLevel" class="form-input find-input" style="width:80px; height:30px; padding-left:15px">
 										<option value="브론즈">브론즈</option>
 										<option value="실버" selected>실버</option>
 										<option value="골드">골드</option>
@@ -87,7 +88,7 @@ $(function(){
 								</c:when>
 								
 								<c:when test="${memberDto.memberLevel =='골드'}">
-									<select name="memberLevel">
+									<select name="memberLevel" class="form-input find-input" style="width:80px; height:30px; padding-left:15px">
 										<option value="브론즈">브론즈</option>
 										<option value="실버">실버</option>
 										<option value="골드" selected>골드</option>
@@ -96,7 +97,7 @@ $(function(){
 								</c:when>
 								
 								<c:when test="${memberDto.memberLevel =='관리자'}">
-									<select name="memberLevel">
+									<select name="memberLevel" class="form-input find-input" style="width:80px; height:30px; padding-left:15px">
 										<option value="브론즈">브론즈</option>
 										<option value="실버">실버</option>
 										<option value="골드" >골드</option>
@@ -105,7 +106,9 @@ $(function(){
 								</c:when>						
 							</c:choose>
 					</td>
-							<td><button class="popUpOpen">수정</button><td>
+							<td>
+								<button class="popUpOpen btn btn-positive btn-small">수정</button>
+							<td>
 					</form>
 				</tr>
 			
@@ -138,50 +141,61 @@ $(function(){
 
 	<div class="container w-500">
 		<div class="row">
-			<h1>구매내역</h1>
+			<h2 class="mt-30">구매내역</h2>
 		</div>
 			
-<c:choose>
-	<c:when test="${not empty ordersList}">
-		<c:forEach var="ordersAdminDto" items="${ordersList}" varStatus="loop">
-			<c:if test="${loop.index == 0 || ordersAdminDto.ordersNo != ordersList[loop.index - 1].ordersNo}">
-			<div class="float-container card">
+			<c:choose>
+				<c:when test="${not empty ordersList}">
+					<c:forEach var="ordersAdminDto" items="${ordersList}" varStatus="loop">
+					<c:if test="${loop.index == 0 || ordersAdminDto.ordersNo != ordersList[loop.index - 1].ordersNo}">
 		
-				<div class="row left">
-					<span>주문일 : ${ordersAdminDto.ordersDate}</span>
-					<span>(주문번호 : ${ordersAdminDto.ordersNo})</span>
-				</div>
-				
-				<div class="float-left w-25">
-					<img src="/cuddly/image/product/main?productNo=${ordersAdminDto.productNo}"  width="100" height="100">
-				</div>	
-				
-				<div class="row left">
-					<span>상품명 : ${ordersAdminDto.productName}</span>
-				</div>
-				
-				<div class="row left">
-						<span>크리에이터 : ${ordersAdminDto.creatorName}</span>
-				</div>
-				
-				<div class="row left">
-						<span>수량 : ${ordersAdminDto.ordersDetailCount}</span>
-						<span>옵션 : ${ordersAdminDto.productOptionName}</span>
-				</div>
-				
-				
-				<div class="row left">
-					<span>구매금액 : ${ordersAdminDto.ordersDetailPrice}</span>
-				</div>		
-				
-				<c:if test="${ordersAdminDto.ordersCount > 1}">
-					<div class="row right">
-						<span>외 ${ordersAdminDto.ordersCount - 1}건</span>
-						<a href="ordersDetailList?ordersNo=${ordersAdminDto.ordersNo}"><span>주문상세보기</span></a>
+					<div class="float-container card mv-10">
+						<div class="float-left mb-10">
+							<span class="ms-10">주문일 : ${ordersAdminDto.ordersDate}</span>
+							<span>(주문번호 : ${ordersAdminDto.ordersNo})</span>
+						</div>
+						<div class="float-right">
+							<c:if test="${ordersAdminDto.ordersCount > 1}">
+								<div class="row right">
+									<span class="me-10">외 ${ordersAdminDto.ordersCount - 1}건</span>
+								<a href="ordersDetailList?ordersNo=${ordersAdminDto.ordersNo}"><span>주문상세보기</span></a>
+							</div>
+						</c:if>
 					</div>
-				</c:if>
 				
-			</div>
+				<hr class="w-95">
+				
+					<div class="flex-container">
+						<div class="w-25">
+							<img src="/cuddly/image/product/main?productNo=${ordersAdminDto.productNo}"  
+									width="100" height="100" class="image image-round">
+						</div>	
+				
+						<div class="w-75">
+							<div class="row left">
+								<span class="productName">${ordersAdminDto.productName}</span>
+							</div>
+				
+							<div class="float-container">
+								<div class="float-left">
+									<span class="creatorName">${ordersAdminDto.creatorName}</span>
+								</div>
+				
+								<div class="float-right">
+									<span class="optionName">옵션 : ${ordersAdminDto.productOptionName}</span>
+									<span class="optionName me-10">수량 : ${ordersAdminDto.ordersDetailCount}</span>
+								</div>
+							</div>
+				
+							<div class="row right">
+								<span class="productPrice me-10">
+									<fmt:formatNumber value="${ordersAdminDto.ordersDetailPrice}" pattern="#,###원"></fmt:formatNumber>
+								</span>
+							</div>		
+						</div>
+					</div>
+				</div>
+					
 			</c:if>
 		</c:forEach>
 	</c:when>
@@ -194,10 +208,10 @@ $(function(){
 	
 </c:choose>
 		
+				</div>
 		</div>
 				
-		</div>
-	</div>
+
 	
 <div id="modal" class="backdrop">
 	<div class="modal-container w-300">
