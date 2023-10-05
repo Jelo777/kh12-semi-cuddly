@@ -267,7 +267,7 @@
 		else
 			price = $(".price").text(bronzePrice + "원");
 
-		$(".price-btn").click(function(e) {
+		$(".price-btn").hover(function(e) {
 			$(".gold").text("골드 : " + goldPrice + "원");
 			$(".silver").text("실버 : " + silverPrice + "원");
 			$(".bronze").text("브론즈 : " + bronzePrice + "원");
