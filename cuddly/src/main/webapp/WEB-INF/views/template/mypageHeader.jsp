@@ -79,7 +79,7 @@ $(document).ready(function() {
 	
 	         <div class="row">
         		<input type="checkbox" style="display:none;" id="sidebar-toggle">
-        		<div class="sidebar">
+        		<div class="sidebar" style="padding-right:10px">
 	        		<div class="row right me-10">
 	        		
 	        			<a class="link" href="/cuddly/member/mypage">

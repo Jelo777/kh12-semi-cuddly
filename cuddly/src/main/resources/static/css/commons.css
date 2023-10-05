@@ -83,6 +83,7 @@
 .mv-50 { margin:50px 0px; }
 
 .mt-5 {margin-top: 5px;}
+.mt-8 { margin-top: 8px; }
 .mt-10 { margin-top: 10px; }
 .mt-20 { margin-top: 20px; }
 .mt-30 { margin-top: 30px; }
@@ -395,6 +396,13 @@ table {
     border-color: #BEADFA;
     background-color: white;
     color: #BEADFA;
+}
+
+.count-box{
+	background-color: #FFFEFC;
+	border-radius: 2em;
+	border: 1px solid #BEADFA;
+	height: 40px;
 }
 
 

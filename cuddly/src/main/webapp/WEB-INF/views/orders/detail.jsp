@@ -18,17 +18,25 @@
     
    <c:forEach var="detail" items="${ordersDetailDto}">
    		<div class="card mt-30">
-			<div class="row left">
-				<span class="ms-20">주문 날짜: ${detail.ordersDate}</span>
-			</div>
-			<div class="row right">
-								<c:if test="${!detail.reviewEx}">
-									<a href="/cuddly/review/write?productNo=${detail.productNo}" class="link" style="font-weight: bold; color:#BEADFA">
-									리뷰쓰기</a>
-								</c:if>
-					</div>	
+   		
+   			<div class="float-container">
+				<div class="float-left">
+					<div class="row">
+						<span class=" ms-20">주문일: ${detail.ordersDate}</span>
+					</div>
+				</div>
+				<div class="float-right me-20">
+				<div class="row">
+					<c:if test="${!detail.reviewEx}">
+						<a href="/cuddly/review/write?productNo=${detail.productNo}" class="link" 
+									style="font-weight: bold; color:#BEADFA">리뷰쓰기</a>
+					</c:if>
+				</div>	
+			</div>	
 			
-   			<div class="row flex-container">
+			<hr class="w-95">
+			
+   			<div class=" flex-container">
    				
 				<div class="w-25">
 					<a href="/cuddly/product/detail?productNo=${detail.productNo}">
@@ -58,7 +66,8 @@
    				</div>
    				
    			</div>
-						
+		</div>
+			
 		</div>
 	</c:forEach>
 </div>
@@ -66,9 +75,6 @@
 				<span class="productPrice">총 주문 가격: <fmt:formatNumber value="${total}" pattern="#,###원" /></span>
 			</div>
 
-     
-       
-   
 </body>
 </html>
 <jsp:include page="/WEB-INF/views/template/mypageFooter.jsp"></jsp:include>

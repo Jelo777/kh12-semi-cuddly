@@ -104,7 +104,8 @@ function addOption(){
 			
         		<div class="w-60">
         	<div class="row">
-            	<select name="productOptionNo" class="form-input find-input w-100" style="width:390px" onchange="changeOption(this);">
+            	<select name="productOptionNo" class="form-input find-input w-100" 
+            					style="width:380px; padding-left:10px" onchange="changeOption(this);">
                 	<option>옵션선택</option>
                 	<c:forEach var="productOptionDto" items="${list}">
                 			<option value="${productOptionDto.productOptionNo}">${productOptionDto.productOptionName}</option>
@@ -115,9 +116,12 @@ function addOption(){
         	
         	<div class="w-20">
         	<div class="row">
-            	<button type="button" class="editMinus">-</button>
-            		<input name="productOptionStock" id="optionValue" type="text" class="editNumBox" min="0" value="0" size="1em">
-            	<button type="button" class="editPlus">+</button>
+        	<div class="count-box mh-10">
+            	<button type="button" class="editMinus" style="border:none; background-color: #FFFEFC">-</button>
+            		<input name="productOptionStock" id="optionValue" type="text" 
+            					class="editNumBox mt-8 center" min="0" value="0" size="1em" style="border:none; background-color: #FFFEFC">
+            	<button type="button" class="editPlus" style="border:none; background-color: #FFFEFC">+</button>
+            	</div>
             	</div>
         	</div>
         	
@@ -136,15 +140,20 @@ function addOption(){
 	<div class="flex-container">
 		<div class=" w-60">
         	<div class="row">
-            	<input class="form-input find-input" style="width:390px" type="text" name="productOptionName" placeholder="  옵션입력">
+            	<input class="form-input find-input" style="width:380px; padding-left:10px" 
+            					type="text" name="productOptionName" placeholder="옵션입력">
         	</div>
       	</div>
         
-        <div class=" w-20">
+        <div class="w-20">
+        	
         	<div class="row">
-            	<button type="button" class="insertMinus">-</button>
-            		<input type="text" class="insertNumBox" name="productOptionStock" min="0" value="0" size="1em">
-            	<button type="button" class="insertPlus">+</button>
+        	<div class="count-box mh-10">
+ 				
+            	<button type="button" class="insertMinus" style="border:none; background-color: #FFFEFC">-</button>
+            		<input type="text" class="insertNumBox mt-8 center" name="productOptionStock" min="0" value="0" size="1em" style="border:none; background-color: #FFFEFC">
+            	<button type="button" class="insertPlus" style="border:none; background-color: #FFFEFC">+</button>
+        	</div>
         	</div>
         </div>
         
