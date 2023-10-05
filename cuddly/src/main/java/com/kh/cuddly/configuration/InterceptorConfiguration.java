@@ -9,7 +9,8 @@ import com.kh.cuddly.interceptor.AdminInterceptor;
 import com.kh.cuddly.interceptor.CartInterceptor;
 import com.kh.cuddly.interceptor.MemberInterceptor;
 import com.kh.cuddly.interceptor.ProductDefenderInterceptor;
-import com.kh.cuddly.interceptor.ReviewInterceptor;
+import com.kh.cuddly.interceptor.ReviewWriteInterceptor;
+import com.kh.cuddly.interceptor.ReviewOwnerInterceptor;
 
 @Configuration
 public class InterceptorConfiguration implements WebMvcConfigurer{
@@ -24,10 +25,13 @@ public class InterceptorConfiguration implements WebMvcConfigurer{
 	private ProductDefenderInterceptor productDefenderInterceptor;
 	
 	@Autowired
-	private ReviewInterceptor reviewInterceptor;
+	private ReviewWriteInterceptor reviewWriteInterceptor;
 	
 	@Autowired
 	private CartInterceptor cartInterceptor;
+	
+	@Autowired
+	private ReviewOwnerInterceptor reviewOwnerInterceptor;
 	
 	public void addInterceptors(InterceptorRegistry registry) {
 		//관리자 아닐 때 차단
@@ -65,17 +69,23 @@ public class InterceptorConfiguration implements WebMvcConfigurer{
 						"/cuddly/review/write"
 						);
 		//자기가 구매하지 않은 상품 리뷰 차단
-		registry.addInterceptor(reviewInterceptor)
+		registry.addInterceptor(reviewWriteInterceptor)
 				.addPathPatterns(
 						"/cuddly/review/write"
-//						"/cuddly/review/edit"
 						);
 		
+		//자기가 쓰지 않은 리뷰 수정 삭제 차단
+		registry.addInterceptor(reviewOwnerInterceptor)
+				.addPathPatterns(
+						"/cuddly/review/edit",
+						"/cuddly/review/delete"
+						);
 		//자기 장바구니에 없는 물건 구매 차단
 		registry.addInterceptor(cartInterceptor)
 				.addPathPatterns(
 						"/cuddly/orders/insert"
 						);
+		
 		
 		
 		
