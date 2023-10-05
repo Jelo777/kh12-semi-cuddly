@@ -56,19 +56,43 @@ public class OrdersDaoImpl implements OrdersDao{
 		    };
 		jdbcTemplate.update(sql, data);
 	}
-
+	
+	
+	
+	
+// 뭔가 이상해서 내 맘대로 수정
+//	@Override
+//	public OrdersDto selectOne(String memberId) {
+//	    String sql =  "SELECT m.member_name, m.member_contact, m.member_email " +
+//                "FROM orders o " +
+//                "JOIN member m ON o.member_id = m.member_id " +
+//                "WHERE o.orders_no = ?";
+//	    Object[] data = {memberId};
+//	    List<OrdersDto> list = jdbcTemplate.query(sql, ordersMapper, data);
+//	    return list.isEmpty() ? null : list.get(0);
+//	}
+//	
 	@Override
 	public OrdersDto selectOne(String memberId) {
-	    String sql =  "SELECT m.member_name, m.member_contact, m.member_email " +
-                "FROM orders o " +
-                "JOIN member m ON o.member_id = m.member_id " +
-                "WHERE o.orders_no = ?";
-	    Object[] data = {memberId};
-	    List<OrdersDto> list = jdbcTemplate.query(sql, ordersMapper, data);
-	    return list.isEmpty() ? null : list.get(0);
+		String sql =  "SELECT m.member_name, m.member_contact, m.member_email " +
+				"FROM orders o " +
+				"JOIN member m ON o.member_id = m.member_id " +
+				"WHERE m.member_id = ?";
+		Object[] data = {memberId};
+		List<OrdersDto> list = jdbcTemplate.query(sql, ordersMapper, data);
+		return list.isEmpty() ? null : list.get(0);
 	}
 
 
+	
+	
+	
+	
+	
+	
+	
+	
+	
 
 	@Override
 	public List<OrdersDto> selectList() {
@@ -136,7 +160,15 @@ public class OrdersDaoImpl implements OrdersDao{
 		return jdbcTemplate.queryForObject(sql, int.class,data);
 	}
 	
-	
+	@Override
+	public OrderDetailJoinDto selectOneByProductNo(String memberId, int productNo) {
+		String sql="select * from detail_order where member_id=? and product_no =?";
+		
+		Object[] data= {memberId,productNo};
+		List<OrderDetailJoinDto>list=jdbcTemplate.query(sql,orderDetailjoinMapper,data);
+		
+		return list.isEmpty() ? null: list.get(0);
+	}
 	
 }
 
