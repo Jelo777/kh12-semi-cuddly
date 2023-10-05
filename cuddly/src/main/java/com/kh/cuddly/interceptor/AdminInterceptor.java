@@ -15,9 +15,15 @@ import com.kh.cuddly.error.AuthorityException;
  */
 @Component
 public class AdminInterceptor implements HandlerInterceptor{
+	
+
+	
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
+		
+		
+		
 		//HttpSession에 있는 level 항목이 관리자인지 확인하여 통과 또는 차단
 		HttpSession session = request.getSession();
 		String level = (String) session.getAttribute("level");

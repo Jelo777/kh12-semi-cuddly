@@ -7,6 +7,8 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import com.kh.cuddly.interceptor.AdminInterceptor;
 import com.kh.cuddly.interceptor.CartInterceptor;
+import com.kh.cuddly.interceptor.FaqDefenderInterceptor;
+import com.kh.cuddly.interceptor.FaqOwnerInterceptor;
 import com.kh.cuddly.interceptor.MemberInterceptor;
 import com.kh.cuddly.interceptor.ProductDefenderInterceptor;
 import com.kh.cuddly.interceptor.ReviewWriteInterceptor;
@@ -33,15 +35,37 @@ public class InterceptorConfiguration implements WebMvcConfigurer{
 	@Autowired
 	private ReviewOwnerInterceptor reviewOwnerInterceptor;
 	
+	@Autowired
+	private FaqOwnerInterceptor faqOwnerInterceptor;
+	
+	@Autowired
+	private FaqDefenderInterceptor faqDefenderInterceptor;
+	
+	
+	
 	public void addInterceptors(InterceptorRegistry registry) {
-		//관리자 아닐 때 차단
+		//관리자 아닐 때 관리자 페이지 차단
 		registry.addInterceptor(adminInterceptor)
-		.addPathPatterns(
-				"/cuddly/admin/**",
+				.addPathPatterns(
+				"/cuddly/admin/**"
+
+				);
+		//관리자 아닐 때 faq 기능 차단
+		registry.addInterceptor(faqOwnerInterceptor)
+				.addPathPatterns(
 				"/cuddly/faq/edit",//관리자만 공지사항 작성 수정 삭제 가능
 				"/cuddly/faq/write",
-				"/cuddly/faq/delete"
+				"/cuddly/faq/delete"	
 				);
+		//없는 공지사항 상세,faq 기능들 차단
+		registry.addInterceptor(faqDefenderInterceptor)
+				.addPathPatterns(
+				"/cuddly/faq/detail",
+				"/cuddly/faq/edit",
+				"/cuddly/faq/write",
+				"/cuddly/faq/delete"	
+						
+						);
 		//비로그인일 때 차단
 		registry.addInterceptor(memberInterceptor)
 		.addPathPatterns(
