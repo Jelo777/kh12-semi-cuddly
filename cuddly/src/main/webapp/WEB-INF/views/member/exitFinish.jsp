@@ -1,10 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
+<jsp:include page="/WEB-INF/views/template/mypageHeader.jsp"></jsp:include>
 
-<div class="container w-300">
+<div class="container w-400">
 	<div class="row">
-		<h1>잘가라 안붙잡는다</h1>
+		<h2 class="mv-50">회원탈퇴가 완료되었습니다.</h2>
 	</div>
 	
 	<div class="row">
@@ -12,4 +12,4 @@
 	</div>
 </div>
 
-<jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
+<jsp:include page="/WEB-INF/views/template/mypageFooter.jsp"></jsp:include>
