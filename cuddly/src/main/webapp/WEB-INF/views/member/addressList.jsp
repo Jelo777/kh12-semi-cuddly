@@ -259,7 +259,7 @@
 				</div>
 				
 	            <div class="row">
-	                <button type="submit" class="btn btn-positive w-100">등록하기</button>
+	                <button type="submit" class="btn btn-positive w-100 write">등록하기</button>
 	                <button type="button" class="btn btn-negative w-100">취소하기</button>
 	            </div>
 	            
