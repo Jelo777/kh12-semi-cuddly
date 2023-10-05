@@ -114,7 +114,21 @@ public class CartDaoImpl implements CartDao {
 			
 			return jdbcTemplate.queryForObject(sql, int.class,data);
 		}
-		
+	
+//	@Override
+//	public CartDto selectOneByMemberId(String memberId,int cartNo) {
+//		String sql="select * from cart where member_id=? and cart_no=?";
+//		Object[]data= {memberId,cartNo};
+//		List<CartDto> list=jdbcTemplate.query(sql, cartMapper, data);
+//		return list.isEmpty() ? null: list.get(0);
+//	}
+	@Override
+	public List<CartDto> CartListByMemberId(String memberId) {
+		String sql="select * from cart "
+				+ "where member_id=? ";
+		Object[]data= {memberId};
+		return jdbcTemplate.query(sql,cartMapper,data);
+	}
 	
 }
 

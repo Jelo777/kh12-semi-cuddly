@@ -3,7 +3,7 @@
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 	<div class="container w-400">
 		<div class="row">
-			<h1>이메일로 아이디 보내드렸습니다~</h1>
+			<h1>이메일로 아이디가 전송되었습니다</h1>
 		</div>
 		<div class="row">
 			<a type="link" href="/cuddly/member/login">

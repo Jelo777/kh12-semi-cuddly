@@ -13,7 +13,7 @@ import com.kh.cuddly.dto.OrderDetailJoinDto;
 import com.kh.cuddly.error.AuthorityException;
 
 @Component
-public class ReviewInterceptor implements HandlerInterceptor{
+public class ReviewWriteInterceptor implements HandlerInterceptor{
 	
 	@Autowired
 	private OrdersDao ordersDao;

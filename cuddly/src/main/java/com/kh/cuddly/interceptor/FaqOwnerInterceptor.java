@@ -10,7 +10,7 @@ import org.springframework.web.servlet.HandlerInterceptor;
 import com.kh.cuddly.error.AuthorityException;
 
 @Component
-public class FaqInterceptor implements HandlerInterceptor{
+public class FaqOwnerInterceptor implements HandlerInterceptor{
 	
 	@Override
 	public boolean preHandle(

@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 
 <jsp:include page="/WEB-INF/views/template/adminHeader.jsp"></jsp:include>
 
@@ -37,17 +38,17 @@ $(function(){
 
 </script>
 
-<div class="container w-800">
+<div class="container w-900">
 	
 	<div class="row">
-		<h2>회원관리</h2>
+		<h2 class="mv-30">회원관리</h2>
 	</div>
 	
-	<form action="list" method="post" autocomplete="off">
-		<div class="row">
+	<div class="row right">
+		<form action="list" method="post" autocomplete="off">
 			<c:choose>
 				<c:when test="${vo.type == 'member_id'}">
-					<select class="form-input" name="type">
+					<select class="form-input find-input" style="width:200px" name="type">
 						<option>선택</option>
 						<option value="member_id" selected>아이디</option>
 						<option value="member_name">이름</option>
@@ -57,7 +58,7 @@ $(function(){
 				</c:when>
 					
 				<c:when test="${vo.type == 'member_name'}">
-					<select class="form-input" name="type">
+					<select class="form-input underline-input" style="width:150px; padding-left:50px;" name="type">
 						<option>선택</option>
 						<option value="member_id">아이디</option>
 						<option value="member_name" selected>이름</option>
@@ -67,7 +68,7 @@ $(function(){
 				</c:when>
 				
 				<c:when test="${vo.type == 'member_contact'}">
-					<select class="form-input" name="type">
+					<select class="form-input underline-input" style="width:150px; padding-left:50px;" name="type">
 						<option>선택</option>
 						<option value="member_id">아이디</option>
 						<option value="member_name">이름</option>
@@ -77,7 +78,7 @@ $(function(){
 				</c:when>
 					
 				<c:when test="${vo.type == 'member_level'}">
-					<select class="form-input" name="type">
+					<select class="form-input underline-input" style="width:150px; padding-left:50px;" name="type">
 						<option>선택</option>
 						<option value="member_id">아이디</option>
 						<option value="member_name">이름</option>
@@ -87,7 +88,7 @@ $(function(){
 				</c:when>
 				
 				<c:otherwise>
-					<select class="form-input" name="type">
+					<select class="form-input underline-input" style="width:150px; padding-left:50px;" name="type">
 						<option>선택</option>
 						<option value="member_id">아이디</option>
 						<option value="member_name">이름</option>
@@ -99,19 +100,20 @@ $(function(){
 			
 		<c:choose>
 			<c:when test="${vo.keyword != null}">
-				<input id="kw" class="form-input" type="text" name="keyword" value="${vo.keyword}"> 
+				<input id="kw" class="form-input underline-input" type="text" name="keyword" value="${vo.keyword}" style="width:300px;"> 
 			</c:when>
 			<c:otherwise>
-				<input id="kw" class="form-input" type="text" name="keyword" placeholder="검색어 입력"> 
+				<input id="kw" class="form-input underline-input" type="text" name="keyword" 
+							placeholder="검색어 입력" style="width:300px; padding-left:10px"> 
 			</c:otherwise>
 		</c:choose>	
 			
 				<button class="btn btn-positive search-btn">검색</button>
-		</div>
-	</form>
+		</form>
+	</div>
 	
 	<div class="row">
-		<table class="table table-stripe">
+		<table class="table table-slit">
 			<thead>
 				<tr>
 					<th>아이디</th>
@@ -142,10 +144,14 @@ $(function(){
 								<td>${memberListDto.memberContact}</td>
 								<td>${memberListDto.memberEmail}</td>
 								<td>${memberListDto.memberLevel}</td>
-								<td>${memberListDto.memberTotalprice}</td>
+								<td>
+									<fmt:formatNumber value="${memberListDto.memberTotalprice}" pattern="#,###원" ></fmt:formatNumber>
+								</td>
 								<td>${memberListDto.memberJoin}</td>
 								<td>
-									<a class="link" href="edit?memberId=${memberListDto.memberId}"><button>보기</button></a>
+									<a class="link" href="edit?memberId=${memberListDto.memberId}">
+										<button class="btn btn-positive btn-small">보기</button>	
+									</a>
 								</td>
 							</tr>
 						</c:forEach>

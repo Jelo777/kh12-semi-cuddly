@@ -553,8 +553,8 @@
 		<table class="table table-slit table-hover">
 			<thead>
 				<tr>
-					<th width="10%">답변상태</th>
-					<th width="6%">문의내용</th>
+					<th width="15%">답변상태</th>
+					<th>문의내용</th>
 					<th width="15%">작성자</th>
 					<th width="15%">작성일</th>
 				</tr>
@@ -565,18 +565,18 @@
 						<td><c:choose>
 								<c:when test="${qnaListDto.qnaAnswer==null}">
 								답변미완료
-							</c:when>
+								</c:when>
 								<c:otherwise>
 								답변완료
-							</c:otherwise>
+								</c:otherwise>
 							</c:choose></td>
-						<td>${qnaListDto.qnaContent}</td>
+						<td class="left">${qnaListDto.qnaContent}</td>
 						<td>${qnaListDto.memberId}</td>
 						<td>${qnaListDto.qnaDate}</td>
 					</tr>
 					<c:if test="${qnaListDto.qnaAnswer!=null}">
 						<tr class="qna-answer">
-							<td colspan="4">${qnaListDto.qnaAnswer}</td>
+							<td colspan="4" class="left" style="padding-left:150px">${qnaListDto.qnaAnswer}</td>
 						</tr>
 					</c:if>
 				</c:forEach>

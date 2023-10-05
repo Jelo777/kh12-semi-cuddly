@@ -283,6 +283,7 @@ a.link,
 a.link:visited{
 	text-decoration: none;
 	color: #2d3436;
+	border: white;
 }
 a.link:hover
 {
@@ -371,7 +372,7 @@ table {
 
 /*작은 버튼*/
 .btn.btn-small{
-	font-size: 12px;
+	font-size: 11px;
 	padding: 0.4em 1em;
     color: white;
 }
@@ -481,7 +482,21 @@ input::file-selector-button{
 	border: 1px solid #BEADFA;
 	color: white;
 }
-	
+
+
+.textbox {
+	font-size: 14px;
+    line-height: 1; 
+    color:gray; 
+    padding:3px;
+   line-height: 1; 
+   box-shadow: 0 0 0 1px gray; 
+   width:440px; 
+   height:40px; 
+   overflow-x:hidden;
+   overflow-y:scroll;
+
+ }
 
 /***********************진행중********************************************/
 
@@ -580,8 +595,9 @@ textarea.form-input.fixed {
     border: 1px solid #2d3436;
 }
 
+
 .table > thead > tr > th{
-	background-color: rgb(238, 232, 250);
+	background-color:#FFFEFC;
 }
 /*
     확장 스타일 - 마우스 반응 테이블
@@ -615,7 +631,11 @@ textarea.form-input.fixed {
 }
 
 .table.table-slit > tbody > tr :not(tr:last-child) {
-    border-bottom: 1px dotted #C2C2C2;
+    border-bottom: 0.5px solid #C2C2C2;
+}
+
+.table.table-slit > tbody > tr > td > button {
+    border: white;
 }
 
 

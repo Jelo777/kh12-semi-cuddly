@@ -43,7 +43,7 @@
                     success:function(response){
                         //console.log(response);
                         //이미지의 src를 바꾸는 코드
-                        $(".now").attr("src", "http://localhost:8080/restfile/download?attachNo="+response.attachNo);
+                        $(".no").attr("src", "http://localhost:8080/restfile/download?attachNo="+response.attachNo);
                     },
                 });
             });
@@ -111,7 +111,7 @@
 		<div class="w-40 me-10">
 			<c:choose>
 				<c:when test="${reviewDto.image}">
-					<img class="now image image-round" src="/cuddly/image/review/image?reviewNo=${reviewDto.reviewNo}" 
+					<img class="no image image-round" src="/cuddly/image/review/image?reviewNo=${reviewDto.reviewNo}" 
 									width="200" height="200">
 				</c:when>
 				<c:otherwise>

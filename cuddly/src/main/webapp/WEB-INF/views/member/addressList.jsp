@@ -33,11 +33,7 @@
 	    $("button.btn-negative.w-100").click(function () {
 	        $(".position-center").hide(); // 배송지 등록 폼 감추기
 	    });
-// 	    //등록하기 버튼을 클릭했을 때
-// 	    $("button.btn-positive.w-100").click(function () {
-// 	        $(".position-center").hide(); // 배송지 등록 폼 감추기
-// 	    });
-		
+
 		
  <!--배송지 등록할 때 체크박스 하면 Y 아니면 N 가지는 구문  -->
  
@@ -47,22 +43,12 @@
  		$(document).on("change", $(".checkbox"), function(e){
  			if($(e.target).prop("checked")){
 				$("[name=addressDefault]").prop("value","Y");
-				console.log("Y");
 			}
 			else{
 				$("[name=addressDefault]").prop("value","N");
-				console.log("N");
 			}
  		});
-// 		$(".checkbox").change(function(){
-// 			if($(this).prop("checked")){
-// 				$("[name=addressDefault]").prop("value","Y");
-// 			}
-// 			else{
-// 				$("[name=addressDefault]").prop("value","N");
-// 			}
-// 		});
-		
+ 		
 	$(".address-insert-form").submit(function(e){
 		//this == e.target == 폼(form)
 		
@@ -259,7 +245,7 @@
 				</div>
 				
 	            <div class="row">
-	                <button type="submit" class="btn btn-positive w-100">등록하기</button>
+	                <button type="submit" class="btn btn-positive w-100 write">등록하기</button>
 	                <button type="button" class="btn btn-negative w-100">취소하기</button>
 	            </div>
 	            

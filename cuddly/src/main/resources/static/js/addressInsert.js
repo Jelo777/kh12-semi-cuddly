@@ -57,8 +57,9 @@ $(function(){
 //    });
 
     //-form 전송할 때는 beforeunload 이벤트를 제거
-    $(".address-insert-form").submit(function(e){
+    $(".write").click(function(e){
         $(".form-input").blur();
+        
         
         if(!status.ok()){
             e.preventDefault();
