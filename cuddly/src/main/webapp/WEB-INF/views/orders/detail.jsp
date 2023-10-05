@@ -19,8 +19,14 @@
    <c:forEach var="detail" items="${ordersDetailDto}">
    		<div class="card mt-30">
 			<div class="row left">
-				<span class="ms-20">주문 날짜: ${detail.ordersDate}</<span>
+				<span class="ms-20">주문 날짜: ${detail.ordersDate}</span>
 			</div>
+			<div class="row right">
+								<c:if test="${!detail.reviewEx}">
+									<a href="/cuddly/review/write?productNo=${detail.productNo}" class="link" style="font-weight: bold; color:#BEADFA">
+									리뷰쓰기</a>
+								</c:if>
+					</div>	
 			
    			<div class="row flex-container">
    				

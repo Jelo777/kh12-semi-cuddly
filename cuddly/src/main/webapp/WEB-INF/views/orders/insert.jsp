@@ -241,7 +241,7 @@
 		</div>
 		<hr>
 		<div class="row left">
-			<label>상품 가격:</label>${product.cartPrice}
+			<label>상품 가격:</label>${product.productPrice}
 		</div>
 		</div>
 		</div>

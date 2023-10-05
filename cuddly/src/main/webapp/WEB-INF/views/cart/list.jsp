@@ -23,7 +23,7 @@
 	<script>
 		$(function() {
 			//전체선택과 개별체크박스에 대한 이벤트 구현
-			
+			recalculateTotal();
 			
 			
 			$(".btn").click(function(e){
@@ -111,9 +111,15 @@
 						function() {
 							var price = $(this).closest(".row").find(".price")
 									.data("cart-price");
+							
+							var count = $(this).closest(".row").find(".count")
+										.data("count");
 							//각 항목에 대한 가격을 개별적으로 적용하려면 루프 내에서 현재 항목을 기준으로 DOM을 탐색하여 
 							//해당 항목과 관련된 가격을 선택해야 하기 때문에 (this) 사용
-							total += price;
+							
+							var p = price * count;
+							
+							total += p;
 						});
 
 				$(".total").text(total);
@@ -154,7 +160,7 @@
 								<div class="left felx-container"> 크리에이터 : ${cart.creatorName}</div>
 								<div class="right count" data-count="${cart.cartCount}">옵션 : ${cart.productOptionName} / 수량: ${cart.cartCount}</div></div>
 								<div class="row left">
-									가격 : <label class="price" data-cart-price="${cart.cartPrice}"><fmt:formatNumber value="${cart.cartPrice}" pattern="#,###원" /></label>
+									가격 : <label class="price" data-cart-price="${cart.productPrice}"><fmt:formatNumber value="${cart.productPrice}" pattern="#,###원" /></label>
 								</div>
 								<div class="row right">추가 날짜 : ${cart.cartDate}</div>
 								<div class="row right stock" data-stock="${cart.productOptionStock}">

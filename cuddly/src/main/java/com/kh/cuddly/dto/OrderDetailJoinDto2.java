@@ -21,5 +21,6 @@ public class OrderDetailJoinDto2 {
 	private boolean two;
 	private boolean reviewEx;
 	private int ordersPrice;
+	private int productPrice;
 
 }
