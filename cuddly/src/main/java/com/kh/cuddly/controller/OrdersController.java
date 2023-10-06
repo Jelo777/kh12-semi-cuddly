@@ -219,9 +219,13 @@ public class OrdersController {
 		    if(!memberDto.getMemberLevel().equals("관리자")) {
 		    	if(resultPrice>=50000) {
 		    		memberDto.setMemberLevel("실버");
+		    		session.removeAttribute("level");
+		    		session.setAttribute("level", memberDto.getMemberLevel());
 		    	}
 		    	if(resultPrice>=100000) {
 		    		memberDto.setMemberLevel("골드");
+		    		session.removeAttribute("level");
+		    		session.setAttribute("level", memberDto.getMemberLevel());
 		    	}
 		    }
 		    
