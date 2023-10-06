@@ -9,7 +9,9 @@
 
 <div class="container w-900">
 	<div class="row">
-		<a class="link" href="list"><h2>FAQ</h2></a>
+		<a class="link" href="list">
+			<h2 class="mv-30">FAQ</h2>
+		</a>
 		<h3>${param.category}</h3>
 	</div>
 	<br>
@@ -25,25 +27,23 @@
 	</c:if>
 
 
-
 	<div class="row left">
-		<a class="link" href="list?category=공지사항">공지사항</a> <a class="link"
-			href="list?category=주문결제">주문결제</a> <a class="link"
-			href="list?category=회원정보">회원정보</a> <a class="link"
-			href="list?category=기타">기타</a>
+		<a class="link" href="list?category=공지사항">공지사항</a>
+		<a class="link" href="list?category=주문결제">주문결제</a>
+		<a class="link" href="list?category=회원정보">회원정보</a>
+		<a class="link" href="list?category=기타">기타</a>
 	</div>
-
 
 
 	<div class="row">
 		<table class="table table-slit table-hover">
 			<thead>
 				<tr>
-					<th>no</th>
+					<th width="10%">no</th>
 					<th>title</th>
-					<th>writer</th>
-					<th>date</th>
-					<th>category</th>
+					<th width="15%">writer</th>
+					<th width="15%">date</th>
+					<th width="15%">category</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -52,8 +52,8 @@
 						<td>${faqDto.faqNo}</td>
 
 						<td align="left">
-							<!-- 제목을 누르면 상세페이지로 이동 --> <a class="link"
-							href="detail?faqNo=${faqDto.faqNo}"> ${faqDto.faqTitle} </a>
+							<!-- 제목을 누르면 상세페이지로 이동 -->
+							<a class="link" href="detail?faqNo=${faqDto.faqNo}"> ${faqDto.faqTitle} </a>
 						</td>
 
 						<td>관리자</td>
@@ -104,8 +104,8 @@
 	<form action="list" method="get">
 		<div class="row search-container">
 			<input type="search" name="keyword" required placeholder="검색어 입력"
-				value="${param.keyword}">
-			<button type="submit">검색</button>
+				value="${param.keyword}" class="form-input find-input ps-20">
+			<button type="submit" class="btn btn-positive">검색</button>
 		</div>
 	</form>
 
