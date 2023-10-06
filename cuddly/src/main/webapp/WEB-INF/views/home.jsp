@@ -65,12 +65,12 @@
 				</div>
 				<div class="swiper-slide">
 					<a href="/cuddly/product/list?creator=조코딩">
-					<img src="/images/main2.jpg" width="100%"
+					<img src="/images/main2.png" width="100%"
 						height="100%"></a>
 				</div>
 				<div class="swiper-slide">
 					<a href="/cuddly/product/list?creator=케인TV">
-					<img src="/images/main3.jpg" width="100%"
+					<img src="/images/main3.png" width="100%"
 						height="100%"></a>
 				</div>
 			</div>
