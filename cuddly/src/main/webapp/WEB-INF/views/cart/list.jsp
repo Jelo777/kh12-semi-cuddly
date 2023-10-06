@@ -107,9 +107,8 @@
 							//각 항목에 대한 가격을 개별적으로 적용하려면 루프 내에서 현재 항목을 기준으로 DOM을 탐색하여 
 							//해당 항목과 관련된 가격을 선택해야 하기 때문에 (this) 사용
 							
-							var p = price * count;
 							
-							total += p;
+							total += price;
 						});
 
 				$(".total").text(total);
@@ -159,8 +158,8 @@
 									</div>
 								</div>
 								<div class="row left">
-									<span class="ms-10">가격 : <label class="price" data-cart-price="${cart.productPrice}">
-											<fmt:formatNumber value="${cart.productPrice}" pattern="#,###원" /></label></span>
+									<span class="ms-10">가격 : <label class="price" data-cart-price="${cart.cartPrice}">
+											<fmt:formatNumber value="${cart.cartPrice}" pattern="#,###원" /></label></span>
 								</div>
 								<div class="row right">
 									<span class="me-10">추가 날짜 : ${cart.cartDate}</span>
