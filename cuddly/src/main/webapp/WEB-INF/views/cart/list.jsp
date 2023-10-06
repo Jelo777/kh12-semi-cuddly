@@ -159,7 +159,7 @@
 									</div>
 								</div>
 								<div class="row left">
-									<span class="ms-10">가격 : <label class="price" data-cart-price="${cart.productPrice}">
+									<span class="ms-10">가격 : <label class="price" data-cart-price="${cart.cartPrice}">
 											<fmt:formatNumber value="${cart.cartPrice}" pattern="#,###원" /></label></span>
 								</div>
 								<div class="row right">
