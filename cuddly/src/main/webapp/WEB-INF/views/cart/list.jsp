@@ -160,7 +160,7 @@
 								</div>
 								<div class="row left">
 									<span class="ms-10">가격 : <label class="price" data-cart-price="${cart.productPrice}">
-											<fmt:formatNumber value="${cart.productPrice}" pattern="#,###원" /></label></span>
+											<fmt:formatNumber value="${cart.cartPrice}" pattern="#,###원" /></label></span>
 								</div>
 								<div class="row right">
 									<span class="me-10">추가 날짜 : ${cart.cartDate}</span>
