@@ -33,7 +33,7 @@
 						<td>상품명 : ${adminProductListDto.productName}</td>
 					</tr>
 					<tr>
-						<td>크리에이터명 : ${adminProductListDto.creatorName}</td>
+						<td>크리에이터 : ${adminProductListDto.creatorName}</td>
 					</tr>
 					<tr>
 						<td>등록일 : ${adminProductListDto.productDate}</td>
