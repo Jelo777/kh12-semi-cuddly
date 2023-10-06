@@ -231,7 +231,7 @@
 				<hr class="w-95">
 				<div class="row right">
 <%-- 			<span class="me-10 productPrice">${product.cartPrice}원</span> --%>
-					<span class="me-10 productPrice"><fmt:formatNumber value="${product.productPrice}" pattern="#,###원" /></span>
+					<span class="me-10 productPrice"><fmt:formatNumber value="${product.cartPrice}" pattern="#,###원" /></span>
 				</div>
 			</div>
 		</div>

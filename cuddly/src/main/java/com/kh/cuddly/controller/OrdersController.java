@@ -96,13 +96,13 @@ public class OrdersController {
 	    
 	    for (int No : cartNo) {
 	        OrdersProductDto ordersProductDto = ordersDao.viewProduct(No);
-	        int price = ordersProductDto.getProductPrice();
-	        int count = ordersProductDto.getCartCount();
-	        int x = price * count;
+//	        int price = ordersProductDto.getProductPrice();
+//	        int count = ordersProductDto.getCartCount();
+//	        int x = price * count;
+//	        
+//	        total =total + x; 
 	        
-	        total =total + x; 
-	        
-//	        total += ordersProductDto.getCartPrice();
+	        total += ordersProductDto.getCartPrice();
 	        
 	        dtoList.add(ordersProductDto); 
 	    }
