@@ -62,7 +62,6 @@ public class InterceptorConfiguration implements WebMvcConfigurer{
 				.addPathPatterns(
 				"/cuddly/faq/detail",
 				"/cuddly/faq/edit",
-				"/cuddly/faq/write",
 				"/cuddly/faq/delete"	
 						
 						);
