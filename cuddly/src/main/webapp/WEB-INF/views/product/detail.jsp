@@ -391,7 +391,7 @@
 				<form id="orderForm" action="/cuddly/orders/cartInsert">
 					<input type="hidden" name="productNo" value="${productDto.productNo}">
 					<div class="row">
-						<select id="optionSelect" class="form-input find-input ms-20" style="width:430px">
+						<select id="optionSelect" class="form-input find-input ms-20 ps-20" style="width:430px">
 							<option>  옵션 선택</option>
 							<c:forEach var="optionList" items="${optionList}">
 								<option class="select" value="${optionList.productOptionNo}" data-stock="${optionList.productOptionStock }">
