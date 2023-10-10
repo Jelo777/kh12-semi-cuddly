@@ -75,7 +75,7 @@
 			</div>
 			</div>
 			<c:choose>
-			<c:when test="${reviewDto.memberId == sessionScope.name}">
+			<c:when test="${reviewDto.memberId == sessionScope.name && sessionScope.name != null}">
 				<div class="row">
 					<a href="/cuddly/review/edit?reviewNo=${reviewDto.reviewNo}" class="btn btn-positive btn-small">수정하기</a>
 					<a href="/cuddly/review/delete?reviewNo=${reviewDto.reviewNo}" class="btn btn-negative btn-small">삭제하기</a>

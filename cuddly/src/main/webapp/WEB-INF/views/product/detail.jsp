@@ -9,14 +9,10 @@
 	var count = 0;
 
 	function addSelectedOption() {
-		
-		
-		
+
 		var optionSelect = $("#optionSelect");
 		var cartCount = $("#cartCount");
 		var selectedOptions = $("#selectedOptions");
-		
-		
 
 		// 옵션 선택 여부 확인
 		if (optionSelect.val() === "옵션 선택" || cartCount.val() === "") {
@@ -27,31 +23,25 @@
 			cartCount.val(stock);
 			return;
 		}
-		
+
 		var selectedOption = optionSelect.find(":selected");
 		var stock = selectedOption.data("stock");
-		
+
 		var selectedCount = cartCount.val();
-		
-		
-		if(selectedCount>stock){
-			
+
+		if (selectedCount > stock) {
+
 			$(this).addClass("fail");
 			$(".fail3-feedback").css("display", "block");
 			cartCount.val(stock);
 			return;
-		}
-		else if(selectedCount<=0){
+		} else if (selectedCount <= 0) {
 			$("#cartCount").addClass("fail");
 			return;
-			
+
 		}
-		
+
 		selectedOption.removeData("stock").data("stock", stock - selectedCount);
-			
-		
-		
-		
 
 		var selectedOptionText = optionSelect.find(":selected").text();
 		var selectedOptionDiv = $("<div class='optionList'></div>");
@@ -66,7 +56,6 @@
 		selectedOptionDiv.append(optionItem);
 
 		optionItem.data("index", count);
-
 
 		for (var i = 0; i < count; i++) {
 
@@ -92,16 +81,13 @@
 		$(".fail-feedback").css("display", "none");
 		$(".fail2-feedback").css("display", "none");
 		$(".fail3-feedback").css("display", "none");
-		
-		
+
 	}
 
 	$(function() {
 
 		var params = new URLSearchParams(location.search);
 		var productNo = params.get("productNo");
-		
-
 
 		$.ajax({
 			url : "/cuddly/rest/wishlist/check",
@@ -121,65 +107,47 @@
 				$(".fa-heart").next("span").text(response.count);
 			}
 		});
-		
-		
-		  $("#optionSelect").change(function() {
-			  
-			  $("#cartCount").val("1");
-			  $("#cartCount").removeClass("fail");
-			  $(".form-input").removeClass("fail")
-			  $(".fail3-feedback").css("display", "none");
-			  $(".fail-feedback").css("display", "none");
-				$(".fail2-feedback").css("display", "none");
-		        var selectedOption = $(this).find(":selected");
-		        var optionStock = selectedOption.data("stock");
 
-						        
-		        if (optionStock !== undefined && optionStock !== null) {
-		            $("#cartCount").attr("max", optionStock);
-		            $("#cartCount").attr("min", 1);
-		            
-		            
-		            
-		            
-		        } else {
-		            $("#cartCount").removeAttr("max");
-		        }
-		        
-		        
-		        
-		    });
-		  
-		  
-		  
-		  
-		  $("#cartCount").change(function(){
-			  
-				  $(this).removeClass("fail");
-				  $(".form-input").removeClass("fail")
-				  $(".fail3-feedback").css("display", "none");
-				  $(".fail-feedback").css("display", "none");
-					$(".fail2-feedback").css("display", "none");
-			  	var optionSelect = $("#optionSelect");
-				var selectedOption = optionSelect.find(":selected");
-				var stock = selectedOption.data("stock");
-			  
-			  if($(this).val()>stock){
-	 				
-				  $(this).addClass("fail");
-				  $(".fail3-feedback").css("display", "block");
-				  
-			  }
-				
-				
-			  
-			  
-			  
-		  })
-		  
-		  
-		
-		
+		$("#optionSelect").change(function() {
+
+			$("#cartCount").val("1");
+			$("#cartCount").removeClass("fail");
+			$(".form-input").removeClass("fail")
+			$(".fail3-feedback").css("display", "none");
+			$(".fail-feedback").css("display", "none");
+			$(".fail2-feedback").css("display", "none");
+			var selectedOption = $(this).find(":selected");
+			var optionStock = selectedOption.data("stock");
+
+			if (optionStock !== undefined && optionStock !== null) {
+				$("#cartCount").attr("max", optionStock);
+				$("#cartCount").attr("min", 1);
+
+			} else {
+				$("#cartCount").removeAttr("max");
+			}
+
+		});
+
+		$("#cartCount").change(function() {
+
+			$(this).removeClass("fail");
+			$(".form-input").removeClass("fail")
+			$(".fail3-feedback").css("display", "none");
+			$(".fail-feedback").css("display", "none");
+			$(".fail2-feedback").css("display", "none");
+			var optionSelect = $("#optionSelect");
+			var selectedOption = optionSelect.find(":selected");
+			var stock = selectedOption.data("stock");
+
+			if ($(this).val() > stock) {
+
+				$(this).addClass("fail");
+				$(".fail3-feedback").css("display", "block");
+
+			}
+
+		})
 
 		$(".fa-heart").click(
 				function() {
@@ -206,25 +174,24 @@
 				});
 
 		$("[name=action]").click(function(e) {
-			
+
 			$("#cartCount").removeClass("fail");
-			
+
 			var a = $(".hiddenSelect").val() == null;
-			
+
 			$("#cartCount").attr("type", "text");
-			
+
 			if ($(".hiddenSelect").val() == null) {
 				$("#cartCount").removeClass("fail");
 				$(".fail3-feedback").css("display", "none");
 				$("#cartCount").val("1");
 				$(".fail2-feedback").css("display", "block");
 				e.preventDefault();
-			} 
-		
+			}
+
 			else if ($(this).val() == "cart") {
 				var userConfirmed = confirm("장바구니로 이동하시겠습니까?");
-				
-				
+
 				if (!userConfirmed) {
 					/*  $(document).ready(function() {
 						 $("[name=action]").val("cancel")
@@ -237,38 +204,46 @@
 
 				}
 			}
-			
 
 		});
 
-		$(document).on("click", ".option-remove", function(e) {
-			 $(".form-input").removeClass("fail")
-			$("#cartCount").removeClass("fail");
-			$(".fail3-feedback").css("display", "none");
-			$(".fail-feedback").css("display", "none");
-			$(".fail2-feedback").css("display", "none");
-			$("#cartCount").val("1");  
+		$(document)
+				.on(
+						"click",
+						".option-remove",
+						function(e) {
+							$(".form-input").removeClass("fail")
+							$("#cartCount").removeClass("fail");
+							$(".fail3-feedback").css("display", "none");
+							$(".fail-feedback").css("display", "none");
+							$(".fail2-feedback").css("display", "none");
+							$("#cartCount").val("1");
 
-			 var index = $(this).data("index") - 1;
-			  var removedOptionNo = $("[name='cartList[" + index + "].optionNo']").val();
-			  var removedCount = $("[name='cartList[" + index + "].cartCount']").val();
-			  
-			  var selectedOption = $("#optionSelect option[value='" + removedOptionNo + "']");
-			  var currentStock = selectedOption.data("stock");
+							var index = $(this).data("index") - 1;
+							var removedOptionNo = $(
+									"[name='cartList[" + index + "].optionNo']")
+									.val();
+							var removedCount = $(
+									"[name='cartList[" + index
+											+ "].cartCount']").val();
 
-			  selectedOption.removeData("stock").data("stock", currentStock + parseInt(removedCount));
+							var selectedOption = $("#optionSelect option[value='"
+									+ removedOptionNo + "']");
+							var currentStock = selectedOption.data("stock");
 
-			  $(this).closest(".optionList").remove();
+							selectedOption.removeData("stock").data("stock",
+									currentStock + parseInt(removedCount));
 
-			$("[name='cartList[" + index + "].optionNo']").remove();
-			$("[name='cartList[" + index + "].cartCount']").remove();
-			
-			count--;
-			
-			
+							$(this).closest(".optionList").remove();
 
+							$("[name='cartList[" + index + "].optionNo']")
+									.remove();
+							$("[name='cartList[" + index + "].cartCount']")
+									.remove();
 
-		});
+							count--;
+
+						});
 
 	});
 </script>
@@ -308,7 +283,7 @@
 	$(function() {
 		$(".qna-write-form").hide();//문의작성란 숨겨놓기
 		$(".qna-answer").hide();//문의답변 숨겨놓기
-		
+
 		$(".qna-list").click(function() {
 			$(this).next(".qna-answer").show();
 		});
@@ -320,16 +295,12 @@
 	});
 </script>
 <style>
-.price-by-level,
-.price-btn {
+.price-by-level, .price-btn {
 	background-color: white;
 	border: 2px solid #BEADFA;
 	border-radius: 0.3em;
 	padding: 5px;
 }
-
-
-
 </style>
 
 <input id="memberLevel" type="hidden" value="${sessionScope.level}">
@@ -373,7 +344,7 @@
 					<label class="level bronze etcFontSize">브론즈</label>
 				</div>
 			</div>
-			
+
 			<hr class="w-95 right">
 
 			<div class="row left">
@@ -383,55 +354,61 @@
 				<span class="ms-20">등록일 : ${productDto.productDate}</span>
 			</div>
 			<div class="row left">
-				<span class="ms-20"><i class="fa-solid fa-star yellow"></i> <fmt:formatNumber value="${reviewAvg}" pattern="0.0"/></span>
+				<span class="ms-20"><i class="fa-solid fa-star yellow"></i> <fmt:formatNumber
+						value="${reviewAvg}" pattern="0.0" /></span>
 			</div>
-			
+
 			<hr class="w-95 right">
-			
-				<form id="orderForm" action="/cuddly/orders/cartInsert">
-					<input type="hidden" name="productNo" value="${productDto.productNo}">
-					<div class="row">
-						<select id="optionSelect" class="form-input find-input ms-20 ps-20" style="width:430px">
-							<option>  옵션 선택</option>
-							<c:forEach var="optionList" items="${optionList}">
-								<option class="select" value="${optionList.productOptionNo}" data-stock="${optionList.productOptionStock }">
-									<c:choose>
+
+			<form id="orderForm" action="/cuddly/orders/cartInsert">
+				<input type="hidden" name="productNo"
+					value="${productDto.productNo}">
+				<div class="row">
+					<select id="optionSelect" class="form-input find-input ms-20 ps-20"
+						style="width: 430px">
+						<option>옵션 선택</option>
+						<c:forEach var="optionList" items="${optionList}">
+							<option class="select" value="${optionList.productOptionNo}"
+								data-stock="${optionList.productOptionStock }">
+								<c:choose>
 									<c:when test="${optionList.productOptionStock<=0}">
 									${optionList.productOptionName}<span> (품절)</span>
 									</c:when>
 									<c:otherwise>
 									${optionList.productOptionName}
 									</c:otherwise>
-									</c:choose>
-								</option>
-							</c:forEach>
-						</select>
-						<div class="fail-feedback left ms-40 mt-5">옵션을 선택하세요</div>
-					</div>
-					
-					<div class="row flex-container left">
-						<input type="number" min="1" id="cartCount"
-							class="cartCount form-input find-input w-50 ms-20 center" value="1">
-						<button class="btn btn-more w-100 ms-10" type="button" onclick="addSelectedOption();"
-							name="add">옵션추가</button>
-					</div>
-						<div class="fail3-feedback left ms-40" style="display: none; color:#d63031">선택할 수 있는 수량을 넘었습니다.</div>	
-					
-						<div id="selectedOptions" class="left ms-20"></div>
-						
-					<div class="fail2-feedback">옵션을 최소 하나이상 추가해주세요</div>
-					
-					<hr class="w-95 right">
-					
-					<div class="row">
-						<button class="btn btn-positive w-95 ms-20" name="action" value="order"
-							type="submit">주문</button>
-					</div>
-					<div class="row">
-						<button class="btn btn-positive btn-cart w-95 ms-20" name="action"
-							value="cart" type="submit">장바구니</button>
-					</div>
-				</form>
+								</c:choose>
+							</option>
+						</c:forEach>
+					</select>
+					<div class="fail-feedback left ms-40 mt-5">옵션을 선택하세요</div>
+				</div>
+
+				<div class="row flex-container left">
+					<input type="number" min="1" id="cartCount"
+						class="cartCount form-input find-input w-50 ms-20 center"
+						value="1">
+					<button class="btn btn-more w-100 ms-10" type="button"
+						onclick="addSelectedOption();" name="add">옵션추가</button>
+				</div>
+				<div class="fail3-feedback left ms-40"
+					style="display: none; color: #d63031">선택할 수 있는 수량을 넘었습니다.</div>
+
+				<div id="selectedOptions" class="left ms-20"></div>
+
+				<div class="fail2-feedback">옵션을 최소 하나이상 추가해주세요</div>
+
+				<hr class="w-95 right">
+
+				<div class="row">
+					<button class="btn btn-positive w-95 ms-20" name="action"
+						value="order" type="submit">주문</button>
+				</div>
+				<div class="row">
+					<button class="btn btn-positive btn-cart w-95 ms-20" name="action"
+						value="cart" type="submit">장바구니</button>
+				</div>
+			</form>
 		</div>
 	</div>
 
@@ -460,7 +437,8 @@
 	<div class="row left" id="reviewList">
 		<h2 class="mt-30">리뷰</h2>
 	</div>
-	<div class="flex-container form-input form-underline underline-input mb-10">
+	<div
+		class="flex-container form-input form-underline underline-input mb-10">
 
 		<h3 class="col-3">
 			<a class="link" href="#productDetail">상품상세</a>
@@ -483,36 +461,41 @@
 				</div>
 				<div class="float-container">
 					<div class="float-left mv-10">${reviewListDto.memberId}</div>
-					<div class="float-right mv-10"><span class="star-rating">
-                        <c:forEach var="i" begin="1" end="${reviewListDto.reviewGrade}">
-                            <i class="fas fa-star yellow"></i>
-                        </c:forEach>
-                        <c:forEach var="i" begin="1" end="${5-reviewListDto.reviewGrade}">
-                        	<i class="far fa-star yellow"></i>
-                        </c:forEach>
-                    </span></div>
+					<div class="float-right mv-10">
+						<span class="star-rating"> <c:forEach var="i" begin="1"
+								end="${reviewListDto.reviewGrade}">
+								<i class="fas fa-star yellow"></i>
+							</c:forEach> <c:forEach var="i" begin="1"
+								end="${5-reviewListDto.reviewGrade}">
+								<i class="far fa-star yellow"></i>
+							</c:forEach>
+						</span>
+					</div>
 				</div>
-				
+
 				<div class="row left">${reviewListDto.reviewContent}</div>
-				 <c:if test="${reviewListDto.memberId == sessionScope.name}">
-				<div class="row left">
-					<a href="/cuddly/review/edit?reviewNo=${reviewListDto.reviewNo}" class="btn btn-positive btn-small">수정하기</a>
-					<a href="/cuddly/review/delete?reviewNo=${reviewListDto.reviewNo}" class="btn btn-negative btn-small">삭제하기</a>
-				</div>
-			</c:if>
+				<c:if test="${reviewListDto.memberId == sessionScope.name && sessionScope.name!=null}">
+					<div class="row left">
+						<a href="/cuddly/review/edit?reviewNo=${reviewListDto.reviewNo}"
+							class="btn btn-positive btn-small">수정하기</a> <a
+							href="/cuddly/review/delete?reviewNo=${reviewListDto.reviewNo}"
+							class="btn btn-negative btn-small">삭제하기</a>
+					</div>
+				</c:if>
 			</div>
 			<div class="w-20 me-10 mb-10">
 				<img
 					src="/cuddly/image/review/image?reviewNo=${reviewListDto.reviewNo}"
-					onerror="this.style.display='none'" alt=''
-					width="150px" height="150px" class="image image-round">
+					onerror="this.style.display='none'" alt='' width="150px"
+					height="150px" class="image image-round">
 			</div>
 		</div>
 	</c:forEach>
 
-	
 
-	<div class="flex-container form-input form-underline underline-input mb-10">
+
+	<div
+		class="flex-container form-input form-underline underline-input mb-10">
 		<h3 class="col-3">
 			<a class="link" href="#productDetail">상품상세</a>
 		</h3>
@@ -523,7 +506,7 @@
 			<a class="link" href="#qnaList"><label class="purple">상품문의</label></a>
 		</h3>
 	</div>
-	
+
 	<div class="float-container">
 		<div class="float-left" id="qnaList">
 			<h2 class="mt-30">Q&A</h2>
@@ -548,7 +531,7 @@
 			</div>
 		</form>
 	</div>
-	
+
 	<div class="row">
 		<table class="table table-slit table-hover">
 			<thead>
@@ -576,7 +559,7 @@
 					</tr>
 					<c:if test="${qnaListDto.qnaAnswer!=null}">
 						<tr class="qna-answer">
-							<td colspan="4" class="left" style="padding-left:150px">${qnaListDto.qnaAnswer}</td>
+							<td colspan="4" class="left" style="padding-left: 150px">${qnaListDto.qnaAnswer}</td>
 						</tr>
 					</c:if>
 				</c:forEach>
