@@ -15,7 +15,7 @@
 		</div>
 		
 		<div class="flat-left w-25 col-3">
-			<img src="/cuddly/image/product/main?productNo=${ordersDetailDto.productNo}"  width="100" height="100">
+			<img src="${pageContext.request.contextPath}/image/product/main?productNo=${ordersDetailDto.productNo}"  width="100" height="100">
 		</div>
 		
 		<div class="row left">

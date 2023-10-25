@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @CrossOrigin
 @RestController
-@RequestMapping("/cuddly/rest/product")
+@RequestMapping("/rest/product")
 public class ProductRestController {
 
 }

@@ -23,7 +23,7 @@ $(function(){
 		}
 		else{
 			$.ajax({
-				url : "http://localhost:8080/cuddly/admin/member/list",
+				url : window.contextPath+"/admin/member/list",
 				method : "post",
 				data : $("form").serialize(),
 				success : function(response){

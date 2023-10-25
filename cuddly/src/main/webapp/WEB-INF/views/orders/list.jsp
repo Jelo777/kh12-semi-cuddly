@@ -38,12 +38,12 @@ $(function(){
 				<div class="float-right me-20">
 							<c:choose>
 								<c:when test="${detail.two}">
-									<a href="/cuddly/orders/detail?ordersNo=${detail.ordersNo}" class="link" style="font-weight: bold; color:#BEADFA">
+									<a href="${pageContext.request.contextPath}/orders/detail?ordersNo=${detail.ordersNo}" class="link" style="font-weight: bold; color:#BEADFA">
 										외 ${detail.orderCount}건 더보기</a>
 								</c:when>
 							<c:otherwise>
 								<c:if test="${!detail.reviewEx}">
-									<a href="/cuddly/review/write?productNo=${detail.productNo}" class="link" style="font-weight: bold; color:#BEADFA">
+									<a href="${pageContext.request.contextPath}/review/write?productNo=${detail.productNo}" class="link" style="font-weight: bold; color:#BEADFA">
 									리뷰쓰기</a>
 								</c:if>
 							</c:otherwise>
@@ -55,8 +55,8 @@ $(function(){
 			
 			<div class="row flex-container">
 				<div class="w-25">
-					<a href="/cuddly/product/detail?productNo=${detail.productNo}">
-						<img src="/cuddly/image/product/main?productNo=${detail.productNo}" 
+					<a href="${pageContext.request.contextPath}/product/detail?productNo=${detail.productNo}">
+						<img src="${pageContext.request.contextPath}/image/product/main?productNo=${detail.productNo}" 
 									width="150" height="150" class="image image-round ms-10">
 					</a>
 				</div>

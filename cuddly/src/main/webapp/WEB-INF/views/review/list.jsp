@@ -24,7 +24,7 @@
 			<div class="row">
 				<c:choose>
 					<c:when test="${reviewDto.image}">
-						<img src="/cuddly/image/review/image?reviewNo=${reviewDto.reviewNo}" 
+						<img src="${pageContext.request.contextPath}/image/review/image?reviewNo=${reviewDto.reviewNo}" 
 									width="250" height="250" class="image image-round">
 					</c:when>
 					<c:otherwise>
@@ -56,8 +56,8 @@
 	
 			<div class="row flex-container">
 				<div class="w-40">
-					<a href="/cuddly/product/detail?productNo=${reviewDto.productNo}">
-						<img src="/cuddly/image/product/main?productNo=${reviewDto.productNo}" 
+					<a href="${pageContext.request.contextPath}/product/detail?productNo=${reviewDto.productNo}">
+						<img src="${pageContext.request.contextPath}/image/product/main?productNo=${reviewDto.productNo}" 
 										width="100" height="100"  class="img image image-round">
 					</a>
 				</div>
@@ -77,8 +77,8 @@
 			<c:choose>
 			<c:when test="${reviewDto.memberId == sessionScope.name && sessionScope.name != null}">
 				<div class="row">
-					<a href="/cuddly/review/edit?reviewNo=${reviewDto.reviewNo}" class="btn btn-positive btn-small">수정하기</a>
-					<a href="/cuddly/review/delete?reviewNo=${reviewDto.reviewNo}" class="btn btn-negative btn-small">삭제하기</a>
+					<a href="${pageContext.request.contextPath}/review/edit?reviewNo=${reviewDto.reviewNo}" class="btn btn-positive btn-small">수정하기</a>
+					<a href="${pageContext.request.contextPath}/review/delete?reviewNo=${reviewDto.reviewNo}" class="btn btn-negative btn-small">삭제하기</a>
 				</div>
 			</c:when>
 			<c:otherwise>

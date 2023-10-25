@@ -43,7 +43,7 @@ import com.kh.cuddly.dto.ProductOptionDto;
 
 
 @Controller
-@RequestMapping("/cuddly/orders")
+@RequestMapping("/orders")
 public class OrdersController {
 	
 	
@@ -165,7 +165,7 @@ public class OrdersController {
 ////		}
 //		
 //		
-//		return "redirect:/cuddly/orders/detail?ordersNo="+ordersNo;
+//		return "redirect:/orders/detail?ordersNo="+ordersNo;
 //	}
 	
 	@PostMapping("/insert")
@@ -244,7 +244,7 @@ public class OrdersController {
 	    
 	    
 
-	    return "redirect:/cuddly/orders/detail?ordersNo=" + ordersNo;
+	    return "redirect:/orders/detail?ordersNo=" + ordersNo;
 	}
 	
 	@RequestMapping("/cartInsert")
@@ -255,7 +255,7 @@ public class OrdersController {
 		String memberLevel = (String) session.getAttribute("level");
 
 		if(memberId==null) {
-			return "redirect:/cuddly/member/login";
+			return "redirect:/member/login";
 		}
 		
 		else {
@@ -298,16 +298,16 @@ public class OrdersController {
 	    }
 
 	    if ("order".equals(action)) {
-	        return "redirect:/cuddly/orders/insert?" + cartNoParams.toString();
+	        return "redirect:/orders/insert?" + cartNoParams.toString();
 	    } else if ("cart".equals(action)) {
-	        return "redirect:/cuddly/orders/cartList?memberId="+memberId;
+	        return "redirect:/orders/cartList?memberId="+memberId;
 	    } else if("cancel".equals(action)) {
 	    	
-	    	return "redirect:/cuddly/product/detail?productNo=" + productNo;
+	    	return "redirect:/product/detail?productNo=" + productNo;
 	    }
 	    
 	    else {
-	        return "redirect:/cuddly/orders/insert?" + cartNoParams.toString();
+	        return "redirect:/orders/insert?" + cartNoParams.toString();
 	    }
 		}
 	}
@@ -335,7 +335,7 @@ public class OrdersController {
 		
 		}
 		
-		 return "redirect:/cuddly/orders/cartList?memberId"+memberId;
+		 return "redirect:/orders/cartList?memberId"+memberId;
 	}
 	
 	
@@ -367,7 +367,7 @@ public class OrdersController {
 		
 		String memberId = (String) session.getAttribute("name");
 		if(memberId==null) {
-			return "redirect:/cuddly/member/login";
+			return "redirect:/member/login";
 		}
 		
 		int count = cartDao.countList(vo,memberId);
@@ -429,7 +429,7 @@ public class OrdersController {
 		addressDao.insert(addressDto);
 		
 		
-		return "redirect:/cuddly"; 
+		return "redirect:/"; 
 		
 		
 	}

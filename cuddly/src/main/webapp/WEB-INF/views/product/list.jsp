@@ -10,7 +10,7 @@
 	<c:if test="${creatorDto!=null}">
 	<div class="row">
 		<img class="image image-circle"
-			src="/cuddly/image/creator?creatorNo=${creatorDto.creatorNo}"
+			src="${pageContext.request.contextPath}/image/creator?creatorNo=${creatorDto.creatorNo}"
 			onerror="this.src='https://dummyimage.com/200x200/000/fff;'"
 			width="200" height="200">
 		<h1 class="mv-20">${creatorDto.creatorName}</h1>
@@ -49,7 +49,7 @@
 				<table class="m-20 left">
 					<tr>
 						<td>
-							<img src="/cuddly/image/product/main?productNo=${productListDto.productNo}"
+							<img src="${pageContext.request.contextPath}/image/product/main?productNo=${productListDto.productNo}"
 										onerror="this.src='https://dummyimage.com/200x200/000/fff;'" 
 										width="200"	height="200" class="image image-round">
 						</td>

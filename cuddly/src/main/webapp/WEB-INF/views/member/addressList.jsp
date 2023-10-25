@@ -61,7 +61,7 @@
 		 $("[name=addressDefault]").val(isDefault ? "Y" : "N");
 		
 		$.ajax({
-			url:"/cuddly/rest/address/insert",
+			url:window.contextPath+"/rest/address/insert",
 			method:"post",
 			data :$(e.target).serialize(),
 			success:function(response){
@@ -91,7 +91,7 @@
 		
 		$.ajax({
 			
-			url:"/cuddly/rest/address/list",
+			url:window.contextPath+"/rest/address/list",
 			method:"post",
 // 			data:{memberId:memberId},//필요없는거같은디
 			success:function(response){
@@ -128,7 +128,7 @@
 						
 						var addressNo = $(e.target).attr("data-address-no");
 						$.ajax({
-							url:"/cuddly/rest/address/delete",
+							url:window.contextPath+"/rest/address/delete",
 							method:"post",
 							data:{addressNo : addressNo},
 							success:function(response){

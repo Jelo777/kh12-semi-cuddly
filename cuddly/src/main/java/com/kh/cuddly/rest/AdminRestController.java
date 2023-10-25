@@ -15,7 +15,7 @@ import com.kh.cuddly.dto.ProductOptionDto;
 import com.kh.cuddly.dto.QnaDto;
 
 @RestController
-@RequestMapping("/cuddly/rest/admin")
+@RequestMapping("/rest/admin")
 public class AdminRestController {
 
 	@Autowired

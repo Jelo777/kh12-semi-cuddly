@@ -47,7 +47,7 @@ function addOption(){
 	var formData = $("#edit").serialize();
 	
 	$.ajax({
-        url:'/cuddly/rest/admin/product/option/insert',
+        url:window.contextPath+'/rest/admin/product/option/insert',
         method : 'POST', 
         data : formData, 
         dataType: 'text',
@@ -79,7 +79,7 @@ function addOption(){
 	<div class="container w-200">
 		
 		<div class="row">
-			<img src="/cuddly/image/product/main?productNo=${productDto.productNo}" 
+			<img src="${pageContext.request.contextPath}/image/product/main?productNo=${productDto.productNo}" 
 							width="200" height="200" class="image image-round">
 		</div>
 		

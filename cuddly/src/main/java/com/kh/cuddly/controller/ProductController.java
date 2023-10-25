@@ -25,7 +25,7 @@ import com.kh.cuddly.dto.QnaDto;
 import com.kh.cuddly.dto.ReviewDto;
 
 @Controller
-@RequestMapping("/cuddly/product")
+@RequestMapping("/product")
 public class ProductController {
 	
 	@Autowired

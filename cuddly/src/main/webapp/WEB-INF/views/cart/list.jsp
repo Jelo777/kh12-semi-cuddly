@@ -30,7 +30,7 @@
 			
 				else if($(this).val()=="delete"){
 					 // 현재 폼의 action을 변경
-				    $(this).closest("form").attr("action", "/cuddly/orders/delete");
+				    $(this).closest("form").attr("action", "/orders/delete");
 
 				    // 폼을 제출
 				    $(this).closest("form").submit();
@@ -139,8 +139,8 @@
 										value="${cart.cartNo}" class="check-item">
 							</div>
 							<div class="w-25 flex-container align-center">
-								<a href="/cuddly/product/detail?productNo=${cart.productNo}">
-									<img src="/cuddly/image/product/main?productNo=${cart.productNo}"
+								<a href="${pageContext.request.contextPath}/product/detail?productNo=${cart.productNo}">
+									<img src="${pageContext.request.contextPath}/image/product/main?productNo=${cart.productNo}"
 													width="150" height="150" class="image image-round">
 								</a>
 								
@@ -187,7 +187,7 @@
 	<div class="row page-navigator mv-30">
     <!-- 이전 버튼 -->
     <c:if test="${!vo.first}">
-        <a href="/cuddly/orders/cartList?${vo.getPrevQueryString()}"> <i
+        <a href="${pageContext.request.contextPath}/orders/cartList?${vo.getPrevQueryString()}"> <i
             class="fa-solid fa-angle-left"></i>
         </a>
     </c:if>
@@ -199,14 +199,14 @@
                 <a class="on">${i}</a>
             </c:when>
             <c:otherwise>
-                <a href="/cuddly/orders/cartList?${vo.getQueryString(i)}">${i}</a>
+                <a href="${pageContext.request.contextPath}/orders/cartList?${vo.getQueryString(i)}">${i}</a>
             </c:otherwise>
         </c:choose>
     </c:forEach>
 
     <!-- 다음 버튼 -->
     <c:if test="${!vo.last}">
-        <a href="/cuddly/orders/cartList?${vo.getNextQueryString()}"> <i
+        <a href="${pageContext.request.contextPath}/orders/cartList?${vo.getNextQueryString()}"> <i
             class="fa-solid fa-angle-right"></i>
         </a>
     </c:if>

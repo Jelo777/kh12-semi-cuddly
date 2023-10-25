@@ -7,7 +7,7 @@
 			<h1>이메일로 비밀번호가 전송되었습니다</h1>
 		</div>
 		<div class="row">
-			<a type="link" href="/cuddly/member/login">
+			<a type="link" href="${pageContext.request.contextPath}/member/login">
 				<button type="submit" class="btn btn-positive w-100">로그인 하러가기</button>
 			</a>
 		</div>

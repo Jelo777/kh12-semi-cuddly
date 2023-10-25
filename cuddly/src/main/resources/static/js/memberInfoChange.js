@@ -32,7 +32,7 @@ $(function(){
 //	    $(e.target).removeClass("success fail fail2");
 //	    if(isValid){
 //	        $.ajax({
-//	            url:"http://localhost:8080/cuddly/rest/member/emailCheck",
+//	            url:window.contextPath+"/rest/member/emailCheck",
 //	            method:"post",
 //	            data :{memberEmail:$(e.target).val()},
 //	            success:function(response){

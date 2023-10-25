@@ -27,7 +27,7 @@ import com.kh.cuddly.dto.ReviewInfoDto;
 
 
 @Controller
-@RequestMapping("/cuddly/review")
+@RequestMapping("/review")
 public class ReviewController {
 	
 	@Autowired
@@ -85,7 +85,7 @@ public class ReviewController {
 		}
 		
 		
-		return "redirect:/cuddly/review/memberList?memberId="+memberId;
+		return "redirect:/review/memberList?memberId="+memberId;
 
 	}
 	
@@ -145,7 +145,7 @@ public class ReviewController {
 		}
 		reviewDao.delete(reviewNo);	//리뷰 + 이미지연결정보 삭제
 		
-		return "redirect:/cuddly/review/memberList?memberId="+memberId;
+		return "redirect:/review/memberList?memberId="+memberId;
 		
 	}
 	
@@ -209,7 +209,7 @@ public class ReviewController {
 		}
 		
 		
-		return "redirect:/cuddly/review/memberList?="+reviewDto.getMemberId();
+		return "redirect:/review/memberList?="+reviewDto.getMemberId();
 		
 		
 	}

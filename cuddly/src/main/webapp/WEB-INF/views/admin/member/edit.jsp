@@ -167,7 +167,7 @@ $(function(){
 				
 					<div class="flex-container">
 						<div class="w-25">
-							<img src="/cuddly/image/product/main?productNo=${ordersAdminDto.productNo}"  
+							<img src="${pageContext.request.contextPath}/image/product/main?productNo=${ordersAdminDto.productNo}"  
 									width="100" height="100" class="image image-round">
 						</div>	
 				

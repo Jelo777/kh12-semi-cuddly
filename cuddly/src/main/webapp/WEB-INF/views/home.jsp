@@ -60,17 +60,17 @@
 			<div class="swiper-wrapper">
 				<!-- Slides -->
 				<div class="swiper-slide">
-					<img src="/images/main1.png" width="100%"
+					<img src="${pageContext.request.contextPath}/images/main1.png" width="100%"
 						height="100%">
 				</div>
 				<div class="swiper-slide">
-					<a href="/cuddly/product/list?creator=조코딩">
+					<a href="${pageContext.request.contextPath}/product/list?creator=조코딩">
 					<img src="/images/main2.png" width="100%"
 						height="100%"></a>
 				</div>
 				<div class="swiper-slide">
-					<a href="/cuddly/product/list?creator=케인TV">
-					<img src="/images/main3.png" width="100%"
+					<a href="${pageContext.request.contextPath}/product/list?creator=케인TV">
+					<img src="${pageContext.request.contextPath}/images/main3.png" width="100%"
 						height="100%"></a>
 				</div>
 			</div>
@@ -93,12 +93,12 @@
 		<h2 class=" mt-50">신상품</h2>
 	</div>
 	<c:forEach var="productListDto" items="${sortByNew}" end="3">
-		<a class="link" href="cuddly/product/detail?productNo=${productListDto.productNo}">
+		<a class="link" href="${pageContext.request.contextPath}/product/detail?productNo=${productListDto.productNo}">
 			<div class="inline-flex-container allow-wrap left mh-10">
 				<table class="">
 					<tr>
 						<td><img
-							src="/cuddly/image/product/main?productNo=${productListDto.productNo}"
+							src="${pageContext.request.contextPath}/image/product/main?productNo=${productListDto.productNo}"
 							onerror="this.src='https://dummyimage.com/200x200/000/fff;'"
 							width="200" height="200"
 							class="image image-round"></td>
@@ -126,7 +126,7 @@
 	</c:forEach>
 	<div class="row">
 		<a class="link"
-			href="cuddly/product/list?${vo.getQueryStringNew()}">
+			href="${pageContext.request.contextPath}/product/list?${vo.getQueryStringNew()}">
 			<h3 class="btn btn-more">신상품 더보기</h3>
 		</a>
 	</div>
@@ -135,12 +135,12 @@
 		<h2 class=" mt-50">베스트상품</h2>
 	</div>
 	<c:forEach var="productListDto" items="${sortByBest}" end="3">
-		<a class="link" href="cuddly/product/detail?productNo=${productListDto.productNo}">
+		<a class="link" href="${pageContext.request.contextPath}/product/detail?productNo=${productListDto.productNo}">
 			<div class="inline-flex-container allow-wrap left mh-10">
 				<table class="">
 					<tr>
 						<td><img
-							src="/cuddly/image/product/main?productNo=${productListDto.productNo}"
+							src="${pageContext.request.contextPath}/image/product/main?productNo=${productListDto.productNo}"
 							onerror="this.src='https://dummyimage.com/200x200/000/fff;'"
 							width="200" height="200"
 							class="image image-round"></td>
@@ -168,7 +168,7 @@
 	</c:forEach>
 	<div class="row">
 		<a class="link"
-			href="cuddly/product/list?${vo.getQueryStringPopular()}">
+			href="${pageContext.request.contextPath}/product/list?${vo.getQueryStringPopular()}">
 			<h3 class="btn btn-more">베스트상품 더보기</h3>
 		</a>
 	</div>

@@ -90,7 +90,7 @@
 		var productNo = params.get("productNo");
 
 		$.ajax({
-			url : "/cuddly/rest/wishlist/check",
+			url : window.contextPath+"/rest/wishlist/check",
 			method : "post",
 			data : {
 				productNo : productNo
@@ -152,7 +152,7 @@
 		$(".fa-heart").click(
 				function() {
 					$.ajax({
-						url : "/cuddly/rest/wishlist/action",
+						url : window.contextPath+"/rest/wishlist/action",
 						method : "post",
 						data : {
 							productNo : productNo
@@ -311,7 +311,7 @@
 		<div class="col-2">
 			<div class="row">
 				<img
-					src="/cuddly/image/product/main?productNo=${productDto.productNo}"
+					src="${pageContext.request.contextPath}/image/product/main?productNo=${productDto.productNo}"
 					width="100%" height="100%" class="image image-round">
 			</div>
 		</div>
@@ -360,7 +360,7 @@
 
 			<hr class="w-95 right">
 
-			<form id="orderForm" action="/cuddly/orders/cartInsert">
+			<form id="orderForm" action="${pageContext.request.contextPath}/orders/cartInsert">
 				<input type="hidden" name="productNo"
 					value="${productDto.productNo}">
 				<div class="row">
@@ -428,7 +428,7 @@
 
 	<div class="row">
 		<img
-			src="/cuddly/image/product/detail?productNo=${productDto.productNo}"
+			src="${pageContext.request.contextPath}/image/product/detail?productNo=${productDto.productNo}"
 			width="100%" height="100%">
 	</div>
 
@@ -476,16 +476,16 @@
 				<div class="row left">${reviewListDto.reviewContent}</div>
 				<c:if test="${reviewListDto.memberId == sessionScope.name && sessionScope.name!=null}">
 					<div class="row left">
-						<a href="/cuddly/review/edit?reviewNo=${reviewListDto.reviewNo}"
+						<a href="${pageContext.request.contextPath}/review/edit?reviewNo=${reviewListDto.reviewNo}"
 							class="btn btn-positive btn-small">수정하기</a> <a
-							href="/cuddly/review/delete?reviewNo=${reviewListDto.reviewNo}"
+							href="${pageContext.request.contextPath}/review/delete?reviewNo=${reviewListDto.reviewNo}"
 							class="btn btn-negative btn-small">삭제하기</a>
 					</div>
 				</c:if>
 			</div>
 			<div class="w-20 me-10 mb-10">
 				<img
-					src="/cuddly/image/review/image?reviewNo=${reviewListDto.reviewNo}"
+					src="${pageContext.request.contextPath}/image/review/image?reviewNo=${reviewListDto.reviewNo}"
 					onerror="this.style.display='none'" alt='' width="150px"
 					height="150px" class="image image-round">
 			</div>
@@ -519,7 +519,7 @@
 	</div>
 
 	<div class="row qna-write-form">
-		<form action="/cuddly/qna/write" method="post">
+		<form action="${pageContext.request.contextPath}/qna/write" method="post">
 			<input type="hidden" name="productNo" value="${productDto.productNo}">
 			<input type="hidden" name="memberId" value="${sessionScope.name}">
 			<div class="row">

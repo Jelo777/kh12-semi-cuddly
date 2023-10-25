@@ -7,7 +7,7 @@
  <h1>전체 문의글</h1>
  <c:forEach var="qnaDto" items="${list}">
 <div>
-	<a href="/cuddly/product/detail?productNo=${qnaDto.productNo}"><button type="button"><img src="/cuddly/image/product/main?productNo=${qnaDto.productNo}" width="200" height="200"></button></a><br><br>
+	<a href="${pageContext.request.contextPath}/product/detail?productNo=${qnaDto.productNo}"><button type="button"><img src="${pageContext.request.contextPath}/image/product/main?productNo=${qnaDto.productNo}" width="200" height="200"></button></a><br><br>
 	작성자 : ${qnaDto.memberId}	<br><br>
 	문의 내용 : ${qnaDto.qnaContent} <br><br>
 	

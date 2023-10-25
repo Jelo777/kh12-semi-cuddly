@@ -24,7 +24,7 @@ $(function(){
          
          else {
              $.ajax({
-                 url: "/cuddly/rest/admin/qna/answer/update",
+                 url: window.contextPath+"/rest/admin/qna/answer/update",
                  method: "post",
                  data: qnaForm.serialize(),
                  success: function (response) {
@@ -44,7 +44,7 @@ function update(e){
 	var value = $(e).serialize();
 	
 	$.ajax({
-		url:"/cuddly/rest/admin/qna/answer/update",
+		url:window.contextPath+"/rest/admin/qna/answer/update",
 		method:"post",
 		data : value,
 		success:function(response){
@@ -71,8 +71,8 @@ function update(e){
 		<div class="flex-container card mb-20">
 	
 			<div class="w-25">
-				<a href="/cuddly/product/detail?productNo=${qnaDto.productNo}">
-					<img src = "/cuddly/image/product/main?productNo=${qnaDto.productNo}" 
+				<a href="${pageContext.request.contextPath}/product/detail?productNo=${qnaDto.productNo}">
+					<img src = "${pageContext.request.contextPath}/image/product/main?productNo=${qnaDto.productNo}" 
 								width="120" height="120" class="image image-round mh-10 mt-30">
 				</a>
 			</div>
