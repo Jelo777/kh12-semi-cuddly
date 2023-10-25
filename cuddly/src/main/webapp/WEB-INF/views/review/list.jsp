@@ -28,7 +28,7 @@
 									width="250" height="250" class="image image-round">
 					</c:when>
 					<c:otherwise>
-						<img src="https://dummyimage.com/250x250/000/fff" class="image image-round">
+						<img src="/images/reviewImage.png" width="250" height="250" class="image image-round">
 					</c:otherwise>
 				</c:choose>
 			</div>

@@ -21,7 +21,7 @@
 						<img src="${pageContext.request.contextPath}/image/review/image?reviewNo=${reviewDto.reviewNo}" width="150" height="150" class="image image-round ms-10">
 					</c:when>
 					<c:otherwise>
-						<img src="https://dummyimage.com/150x150/000/fff" class="image image-round ms-10">
+						<img src="/images/reviewImage.png" width="150" height="150" class="image image-round ms-10">
 					</c:otherwise>
 				</c:choose>
 			</div>
