@@ -44,7 +44,7 @@ $("[name=join]").click(function() {
 			$(".btn-send").find("span").text("이메일로 보내는 중 입니다");
 			
 			$.ajax({
-				url:"http://localhost:8080/cuddly/rest/cert/send",
+				url:window.contextPath+"/rest/cert/send",
 				method:"post",
 				data:{certEmail:email},
 				success: function(){
@@ -68,7 +68,7 @@ $("[name=join]").click(function() {
 //			if(email.length==0 || number.length ==0 ) return;
 			
 			$.ajax({
-				url:"http://localhost:8080/cuddly/rest/cert/check",
+				url:window.contextPath+"/rest/cert/check",
 				method : "post",
 				data:{
 					certEmail:email,
@@ -119,7 +119,7 @@ $("[name=join]").click(function() {
         $(e.target).removeClass("success fail fail2");
         if(isValid){//형식이 유효하다면
           $.ajax({
-            url:"http://localhost:8080/cuddly/rest/member/idCheck",
+            url:window.contextPath+"/rest/member/idCheck",
             method:"post",
             // data : {memberId : e.target.value},
             data :{memberId:$(e.target).val()},
@@ -205,7 +205,7 @@ $("[name=join]").click(function() {
 	    $(e.target).removeClass("success fail fail2");
 	    if(isValid){
 	        $.ajax({
-	            url:"http://localhost:8080/cuddly/rest/member/emailCheck",
+	            url:window.contextPath+"/rest/member/emailCheck",
 	            method:"post",
 	            data :{memberEmail:$(e.target).val()},
 	            success:function(response){

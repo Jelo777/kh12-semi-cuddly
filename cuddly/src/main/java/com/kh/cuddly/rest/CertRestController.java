@@ -21,7 +21,7 @@ import com.kh.cuddly.dto.CertDto;
 
 @CrossOrigin
 @RestController
-@RequestMapping("/cuddly/rest/cert")
+@RequestMapping("/rest/cert")
 public class CertRestController {
 
 	@Autowired

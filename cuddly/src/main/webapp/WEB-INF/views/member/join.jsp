@@ -10,7 +10,7 @@
         <div class="center w-400">
 
             <div class="row">
-				<img src="/images/cuddlys.png" class="mt-40">
+				<img src="${pageContext.request.contextPath}/images/cuddlys.png" class="mt-40">
 			</div>
             
             <div class="row left">

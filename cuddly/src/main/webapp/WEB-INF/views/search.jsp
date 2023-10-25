@@ -20,11 +20,11 @@
 				<h2>크리에이터</h2>
 			</div>
 			<c:forEach var="creatorListDto" items="${creatorList}">
-			<a class="link" href="product/list?creator=${creatorListDto.creatorName}">
+			<a class="link" href="${pageContext.request.contextPath}/product/list?creator=${creatorListDto.creatorName}">
 				<div claa="col-4">
 					<div class="row">
 						<img class="image image-circle"
-							src="/cuddly/image/creator?creatorNo=${creatorListDto.creatorNo}"
+							src="${pageContext.request.contextPath}/image/creator?creatorNo=${creatorListDto.creatorNo}"
 							onerror="this.src='https://dummyimage.com/200x200/000/fff;'"
 							width="200" height="200" />
 					</div>
@@ -39,12 +39,12 @@
 			</div>
 			<c:forEach var="productListDto" items="${productList}" end="3">
 				<a class="link"
-					href="product/detail?productNo=${productListDto.productNo}">
+					href="${pageContext.request.contextPath}/product/detail?productNo=${productListDto.productNo}">
 					<div class="inline-flex-container allow-wrap left">
 						<table class="">
 							<tr>
 								<td><img
-									src="/cuddly/image/product/main?productNo=${productListDto.productNo}"
+									src="${pageContext.request.contextPath}/image/product/main?productNo=${productListDto.productNo}"
 									onerror="this.src='https://dummyimage.com/200x200/000/fff;'"
 									width="200" height="200"></td>
 							</tr>
@@ -65,7 +65,7 @@
 				</a>
 			</c:forEach>
 			<div class="row">
-				<a href="product/list?${vo.getQueryStringNew()}">
+				<a href="${pageContext.request.contextPath}/product/list?${vo.getQueryStringNew()}">
 				<label class="btn">검색상품 더보기</label>
 				</a>
 			</div>

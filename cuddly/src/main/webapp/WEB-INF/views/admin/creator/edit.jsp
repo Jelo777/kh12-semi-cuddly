@@ -29,7 +29,7 @@
 					form.append("attach", input.files[0]);
 
 					$.ajax({
-						url : "http://localhost:8080/restfile/upload",
+						url : window.contextPath+"/restfile/upload",
 						method : "post",
 						processData : false,
 						contentType : false,
@@ -39,7 +39,7 @@
 							//이미지의 src를 바꾸는 코드
 							$(".preview-image").attr(
 									"src",
-									"http://localhost:8080/restfile/download?attachNo="
+									window.contextPath+"/restfile/download?attachNo="
 											+ response.attachNo);
 						},
 					});
@@ -51,7 +51,7 @@
 
 	<div class="row">
 		<img class="image image-circle"
-			src="/cuddly/image/creator?creatorNo=${creatorDto.creatorNo}"
+			src="${pageContext.request.contextPath}/image/creator?creatorNo=${creatorDto.creatorNo}"
 			onerror="this.style.display='none';" width="200" height="200">
 		<h1 class="mv-20">${creatorDto.creatorName}</h1>
 	</div>

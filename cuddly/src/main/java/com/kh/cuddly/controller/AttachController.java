@@ -21,7 +21,7 @@ import com.kh.cuddly.dao.ReviewDao;
 import com.kh.cuddly.dto.AttachDto;
 
 @Controller
-@RequestMapping("cuddly/image")
+@RequestMapping("/image")
 public class AttachController {
 
 	@Autowired

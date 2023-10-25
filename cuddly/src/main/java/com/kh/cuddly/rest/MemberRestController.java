@@ -12,7 +12,7 @@ import com.kh.cuddly.dto.MemberDto;
 
 @CrossOrigin
 @RestController
-@RequestMapping("/cuddly/rest/member")
+@RequestMapping("/rest/member")
 public class MemberRestController {
 	
 	@Autowired

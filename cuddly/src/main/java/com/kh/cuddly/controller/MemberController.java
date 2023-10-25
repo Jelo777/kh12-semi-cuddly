@@ -18,7 +18,7 @@ import com.kh.cuddly.dao.WishlistDao;
 import com.kh.cuddly.dto.MemberDto;
 
 @Controller
-@RequestMapping("/cuddly/member")
+@RequestMapping("/member")
 public class MemberController {
 	
 	@Autowired
@@ -63,7 +63,7 @@ public class MemberController {
 			
 			session.setAttribute("name", findDto.getMemberId());
 			session.setAttribute("level", findDto.getMemberLevel());
-			return "redirect:/cuddly";
+			return "redirect:/";
 		}
 		else {
 			return "redirect:login?error";
@@ -73,7 +73,7 @@ public class MemberController {
 	public String logout(HttpSession session) {
 		session.removeAttribute("name");
 		session.removeAttribute("level");
-		return "redirect:/cuddly";
+		return "redirect:/";
 	}
 	@RequestMapping("/mypage")
 	public String mypage(HttpSession session, Model model) {
@@ -239,7 +239,7 @@ public class MemberController {
 	public String wishlist(HttpSession session, Model model) {
 		String memberId = (String) session.getAttribute("name");
 		if(memberId==null) {
-			return "redirect:/cuddly/member/login";
+			return "redirect:/member/login";
 		}
 		
 		model.addAttribute("wishlistList", wishlistDao.wishlistByMemberId(memberId));

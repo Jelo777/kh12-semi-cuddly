@@ -211,7 +211,7 @@
 					<input type="hidden" name="details[${loop.index}].optionNo"
 									value="${product.productOptionNo}">
 					<input type="hidden" name="cartNo" value="${product.cartNo}">
-					<img src="/cuddly/image/product/main?productNo=${product.productNo}"
+					<img src="${pageContext.request.contextPath}/image/product/main?productNo=${product.productNo}"
 									width="150" height="150" class="image image-round ms-10"> 
 					<input type="hidden" name="details[${loop.index}].productNo" value="${product.productNo}">
 				</div>
@@ -309,7 +309,7 @@
 			
 		</c:forEach>
 				<button type="button" class="btn btn-exit btn-negative mt-30">나가기</button>
-				<a href="/cuddly/member/address/list">
+				<a href="${pageContext.request.contextPath}/member/address/list">
 					<button class="btn btn-positive">배송지 추가</button>
 				</a>
 	</div>

@@ -14,7 +14,7 @@ import com.kh.cuddly.dto.WishlistDto;
 
 @CrossOrigin
 @RestController
-@RequestMapping("/cuddly/rest/wishlist")
+@RequestMapping("/rest/wishlist")
 public class WishlistRestController {
 
 	@Autowired

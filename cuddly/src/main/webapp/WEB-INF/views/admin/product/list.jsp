@@ -17,12 +17,12 @@
 		</a>
 	</div>
 	<c:forEach var="adminProductListDto" items="${list}">
-		<a class="link" href="/cuddly/product/detail?productNo=${adminProductListDto.productNo}">
+		<a class="link" href="${pageContext.request.contextPath}/product/detail?productNo=${adminProductListDto.productNo}">
 			<div class="inline-flex-container allow-wrap left">
 				<table class="">
 					<tr>
 						<td>
-							<img src="/cuddly/image/product/main?productNo=${adminProductListDto.productNo}" 
+							<img src="${pageContext.request.contextPath}/image/product/main?productNo=${adminProductListDto.productNo}" 
 											width="200" height="200" class="image image-round">
 						</td>
 					</tr>

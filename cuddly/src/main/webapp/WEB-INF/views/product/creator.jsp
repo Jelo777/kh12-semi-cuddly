@@ -15,7 +15,7 @@
 				<a class="link" href="list?creator=${creatorListDto.creatorName}">
 					<div class="row">
 						<img class="image image-circle mh-24"
-							src="/cuddly/image/creator?creatorNo=${creatorListDto.creatorNo}"
+							src="${pageContext.request.contextPath}/image/creator?creatorNo=${creatorListDto.creatorNo}"
 							onerror="this.src='https://dummyimage.com/200x200/000/fff;'"
 							width="200" height="200">
 					</div>
@@ -26,7 +26,7 @@
 				<c:if test="${sessionScope.level=='관리자'}">
 					<div class="row">
 						<a
-							href="/cuddly/admin/creator/edit?creatorNo=${creatorListDto.creatorNo}">
+							href="${pageContext.request.contextPath}/admin/creator/edit?creatorNo=${creatorListDto.creatorNo}">
 							<label class="btn btn-positive">이미지관리</label>
 						</a>
 					</div>

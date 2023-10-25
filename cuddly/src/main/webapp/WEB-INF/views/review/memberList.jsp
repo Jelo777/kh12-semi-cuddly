@@ -18,7 +18,7 @@
 			<div class="row w-25">
 				<c:choose>
 					<c:when test="${reviewDto.image}">
-						<img src="/cuddly/image/review/image?reviewNo=${reviewDto.reviewNo}" width="150" height="150" class="image image-round ms-10">
+						<img src="${pageContext.request.contextPath}/image/review/image?reviewNo=${reviewDto.reviewNo}" width="150" height="150" class="image image-round ms-10">
 					</c:when>
 					<c:otherwise>
 						<img src="https://dummyimage.com/150x150/000/fff" class="image image-round ms-10">
@@ -44,7 +44,7 @@
 			<div class="row left">
 				<span class="ms-20">리뷰 내용 : ${reviewDto.reviewContent}</span>
 			</div>
-	<!--<div class="row"><a href="/cuddly/product/detail?productNo=${reviewDto.productNo}"><img src="/cuddly/image/product/main?productNo=${reviewDto.productNo}" width="100" height="100"></a>
+	<!--<div class="row"><a href="${pageContext.request.contextPath}/product/detail?productNo=${reviewDto.productNo}"><img src="${pageContext.request.contextPath}/image/product/main?productNo=${reviewDto.productNo}" width="100" height="100"></a>
 	</div>
 	<div class="row">
 	크리에이터:${reviewDto.creatorName}
@@ -55,10 +55,10 @@
 	<br>
 	<br>
 	<div class="row right">
-		<a href="/cuddly/review/edit?reviewNo=${reviewDto.reviewNo}" class="link">
+		<a href="${pageContext.request.contextPath}/review/edit?reviewNo=${reviewDto.reviewNo}" class="link">
 			<button class="btn btn-positive btn-small">수정하기</button>
 		</a>
-		<a href="/cuddly/review/delete?reviewNo=${reviewDto.reviewNo}" class="link">
+		<a href="${pageContext.request.contextPath}/review/delete?reviewNo=${reviewDto.reviewNo}" class="link">
 			<button class="btn btn-negative btn-small me-10">삭제하기</button>
 		</a>
 	</div>

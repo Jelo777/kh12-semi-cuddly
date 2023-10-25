@@ -7,9 +7,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.kh.cuddly.VO.PaginationVO;
@@ -17,7 +15,7 @@ import com.kh.cuddly.dao.QnaDao;
 import com.kh.cuddly.dto.QnaDto;
 
 @Controller
-@RequestMapping("/cuddly/qna")
+@RequestMapping("/qna")
 public class QnaController {
 	
 	@Autowired
@@ -28,7 +26,7 @@ public class QnaController {
 		int qnaNo = qnaDao.sequence();
 		qnaDto.setQnaNo(qnaNo);
 		qnaDao.insert(qnaDto);
-		return "redirect:/cuddly/product/detail?productNo="+qnaDto.getProductNo() + "#qnaList";
+		return "redirect:/product/detail?productNo="+qnaDto.getProductNo() + "#qnaList";
 	}
 	
 //	@GetMapping("/change")
@@ -49,7 +47,7 @@ public class QnaController {
 		
 		qnaDao.update(qnaDto);
 		
-		return "redirect:/cuddly/qna/memberList?memberId="+qnaDto.getMemberId();
+		return "redirect:/qna/memberList?memberId="+qnaDto.getMemberId();
 		
 	}
 	
@@ -60,7 +58,7 @@ public class QnaController {
 		
 		qnaDao.delete(qnaNo);
 		
-		return "redirect:/cuddly/qna/memberList?memberId="+memberId;
+		return "redirect:/qna/memberList?memberId="+memberId;
 		
 	}
 	

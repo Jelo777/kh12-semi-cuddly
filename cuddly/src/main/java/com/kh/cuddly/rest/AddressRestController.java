@@ -17,7 +17,7 @@ import com.kh.cuddly.dto.AddressDto;
 
 @CrossOrigin
 @RestController
-@RequestMapping("/cuddly/rest/address")
+@RequestMapping("/rest/address")
 public class AddressRestController {
 
 	@Autowired

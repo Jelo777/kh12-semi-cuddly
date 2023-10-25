@@ -8,7 +8,7 @@
 	</div>
 	
 	<div class="row">
-		<a href="/cuddly"><button class="btn btn-positive w-100">홈으로</button></a>
+		<a href="${pageContext.request.contextPath}/"><button class="btn btn-positive w-100">홈으로</button></a>
 	</div>
 </div>
 

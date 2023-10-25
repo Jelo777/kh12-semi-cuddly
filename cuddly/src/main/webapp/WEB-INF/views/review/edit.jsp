@@ -35,7 +35,7 @@
                 form.append("attach", input.files[0]);
 
                 $.ajax({
-                    url:"http://localhost:8080/restfile/upload",
+                    url:window.contextPath+"/restfile/upload",
                     method:"post",
                     processData:false,
                     contentType:false,
@@ -43,7 +43,7 @@
                     success:function(response){
                         //console.log(response);
                         //이미지의 src를 바꾸는 코드
-                        $(".no").attr("src", "http://localhost:8080/restfile/download?attachNo="+response.attachNo);
+                        $(".no").attr("src", window.contextPath+"/restfile/download?attachNo="+response.attachNo);
                     },
                 });
             });
@@ -71,8 +71,8 @@
 <div class="container w-600">
 	<div class="flex-container card mv-30">
 		<div class="w-25 flex-container align-center ms-10 mb-10">
-			<a href="/cuddly/product/detail?productNo=${productDto.productNo}">
-				<img class="now" src="/cuddly/image/product/main?productNo=${productDto.productNo}"
+			<a href="${pageContext.request.contextPath}/product/detail?productNo=${productDto.productNo}">
+				<img class="now" src="${pageContext.request.contextPath}/image/product/main?productNo=${productDto.productNo}"
 							width="150" height="150" class="image image-round">
 			</a>
 		</div>
@@ -111,11 +111,11 @@
 		<div class="w-40 me-10">
 			<c:choose>
 				<c:when test="${reviewDto.image}">
-					<img class="no image image-round" src="/cuddly/image/review/image?reviewNo=${reviewDto.reviewNo}" 
+					<img class="no image image-round" src="${pageContext.request.contextPath}/image/review/image?reviewNo=${reviewDto.reviewNo}" 
 									width="200" height="200">
 				</c:when>
 				<c:otherwise>
-					<img class="now image image-round" src="/images/reviewImage.png" width="200" height="200">
+					<img class="now image image-round" src="${pageContext.request.contextPath}/images/reviewImage.png" width="200" height="200">
 				</c:otherwise>
 			</c:choose>
 		</div>

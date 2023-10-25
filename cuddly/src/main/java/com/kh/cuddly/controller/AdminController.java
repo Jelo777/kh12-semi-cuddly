@@ -40,7 +40,7 @@ import com.kh.cuddly.dto.ProductOptionDto;
 import com.kh.cuddly.dto.QnaDto;
 
 @Controller
-@RequestMapping("/cuddly/admin")
+@RequestMapping("/admin")
 public class AdminController {
 
 	@Autowired
@@ -166,7 +166,7 @@ public class AdminController {
 			productDao.connectDetail(productNo, attachNo);//상세이미지 등록
 			}
 
-		return "redirect:/cuddly/admin/product/list";
+		return "redirect:/admin/product/list";
 	}
 
 
@@ -297,7 +297,7 @@ public class AdminController {
 		
 			creatorDao.connect(attachNo, creatorNo);//크리에이터_이미지
 		}
-		return "redirect:/cuddly/product/creator";
+		return "redirect:/product/creator";
 	}
 	
 	

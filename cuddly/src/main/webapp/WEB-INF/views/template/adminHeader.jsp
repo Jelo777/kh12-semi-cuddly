@@ -8,7 +8,7 @@
 <title>CUDDLY</title>
 
 <!-- favicon 설정 -->
-<link rel="shortcut icon" href="/images/favicon.ico">
+<link rel="shortcut icon" href="${pageContext.request.contextPath}/images/favicon.ico">
 
 <!-- css 파일을 불러오는 코드 -->
 <!-- 아이콘 사용을 위한 Font Awesome 6 CDN -->
@@ -22,11 +22,11 @@
 	href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap"
 	rel="stylesheet">
 
-<link rel="stylesheet" type="text/css" href="/css/reset.css">
-<link rel="stylesheet" type="text/css" href="/css/layout.css">
-<link rel="stylesheet" type="text/css" href="/css/commons.css">
-<link rel="stylesheet" type="text/css" href="/css/layout-sidebar.css">
-<!-- <link rel="stylesheet" type="text/css" href="/css/test.css"> -->
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/reset.css">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/layout.css">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/commons.css">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/layout-sidebar.css">
+<!-- <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/test.css"> -->
 
 <style>
 	.sidebar{	
@@ -53,6 +53,10 @@
 		width: 400px;
 	}
 </style>
+
+<script>
+	window.contextPath = "${pageContext.request.contextPath}";
+</script>
 
 <!-- jquery cdn -->
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
@@ -81,7 +85,7 @@ $(document).ready(function() {
         		<div class="sidebar" style="padding-right:10px">
 	        		<div class="row right">
 
-	        			<a class="link" href="/cuddly/member/mypage">
+	        			<a class="link" href="${pageContext.request.contextPath}/member/mypage">
 							<i class="fa-solid fa-circle-user fa-2x"></i>
 						</a>	
 							
@@ -90,14 +94,14 @@ $(document).ready(function() {
 	        		</div>
         		
 	        		<div class="row">
-		            	<img src="/images/cuddlys.png" width="200" height="45">
+		            	<img src="${pageContext.request.contextPath}/images/cuddlys.png" width="200" height="45">
 	            	</div>
         			
         			<div class="row left ms-20 mt-30">
 	        			<c:choose>
 		        			<c:when test="${sessionScope.name==null}">
 		        				<h3 class="mv-30 ms-20">
-		        					<a class="link" href="/cuddly/member/login">로그인이 필요해요!</a>
+		        					<a class="link" href="${pageContext.request.contextPath}/member/login">로그인이 필요해요!</a>
 		        				</h3>
 		        			</c:when>
 							<c:otherwise>
@@ -108,7 +112,7 @@ $(document).ready(function() {
         			
        				<div class="row left ms-20 mt-30">
         				<h2 class="ms-30">
-        					<a class="link" href="/cuddly">홈</a>
+        					<a class="link" href="${pageContext.request.contextPath}/">홈</a>
         				</h2>
         			</div>
         			
@@ -116,7 +120,7 @@ $(document).ready(function() {
         			
         			<div class="row left ms-20 mt-30">
         				<h2 class="ms-30">
-        					<a class="link" href="/cuddly/product/creator">크리에이터</a>
+        					<a class="link" href="${pageContext.request.contextPath}/product/creator">크리에이터</a>
         				</h2>
         			</div>
         			
@@ -124,23 +128,23 @@ $(document).ready(function() {
         			
         			<div class="row left ms-20 mt-30">
         				<h2 class="ms-30">
-        					<a class="link" href="/cuddly/product/list">전체상품</a>
+        					<a class="link" href="${pageContext.request.contextPath}/product/list">전체상품</a>
         				</h2>
         				<div class="row left">
 							<h3 class="mt-10 ms-30">
-                            	<a class="link" href="/cuddly/product/list?item=패션"> - 패션</a>
+                            	<a class="link" href="${pageContext.request.contextPath}/product/list?item=패션"> - 패션</a>
                             </h3>
                             <h3 class="mt-10 ms-30">
-                            	<a class="link" href="/cuddly/product/list?item=문구/오피스"> - 문구/오피스</a>
+                            	<a class="link" href="${pageContext.request.contextPath}/product/list?item=문구/오피스"> - 문구/오피스</a>
                             </h3>
                             <h3 class="mt-10 ms-30">
-                            	<a class="link" href="/cuddly/product/list?item=홈데코/리빙"> - 홈데코/리빙</a>
+                            	<a class="link" href="${pageContext.request.contextPath}/product/list?item=홈데코/리빙"> - 홈데코/리빙</a>
                             </h3>
                             <h3 class="mt-10 ms-30">
-                            	<a class="link" href="/cuddly/product/list?item=폰악세서리"> - 폰악세서리</a>
+                            	<a class="link" href="${pageContext.request.contextPath}/product/list?item=폰악세서리"> - 폰악세서리</a>
                             </h3>
                             <h3 class="mt-10 ms-30">
-                            	<a class="link" href="/cuddly/product/list?item=기타"> - 기타</a>
+                            	<a class="link" href="${pageContext.request.contextPath}/product/list?item=기타"> - 기타</a>
                             </h3>
                         </div>
         			</div>
@@ -149,7 +153,7 @@ $(document).ready(function() {
         			
         			<div class="row left ms-20 mt-30">
         				<h2 class="ms-30">
-        					<a class="link" href="/cuddly/review/list">리뷰</a>
+        					<a class="link" href="${pageContext.request.contextPath}/review/list">리뷰</a>
         				</h2>
         			</div>
         			
@@ -157,7 +161,7 @@ $(document).ready(function() {
         			
         			<div class="row left ms-20 mt-30">
         				<h2 class="ms-30">
-        					<a class="link" href="/cuddly/faq/list">공지사항</a>
+        					<a class="link" href="${pageContext.request.contextPath}/faq/list">공지사항</a>
         				</h2>
         			</div>
         			
@@ -175,12 +179,12 @@ $(document).ready(function() {
             
             <div class="w-100 center">
             	<div class="row">
-            	<a href="/cuddly">
-            		<img src="/images/cuddlyb.png" width="300" height="62" class="mb-20"><br>
+            	<a href="${pageContext.request.contextPath}/">
+            		<img src="${pageContext.request.contextPath}/images/cuddlyb.png" width="300" height="62" class="mb-20"><br>
             	</a>
             	</div>
             	<div class="row">
-            		<form action="/cuddly/search">
+            		<form action="${pageContext.request.contextPath}/search">
 						<input class="form-input find-input ps-20" name="keyword" placeholder="찾으시는 상품 혹은 크리에이터를 입력하세요.">
 						<button class="btn btn-positive">검색</button>
 					</form>
@@ -190,14 +194,14 @@ $(document).ready(function() {
             <div class="center w-20">
 		        <div class="etc mt-20">
 
-					<a class="link" href="/cuddly/member/mypage/wishlist">
+					<a class="link" href="${pageContext.request.contextPath}/member/mypage/wishlist">
 						<i class="fa-brands fa-gratipay fa-2x headerIcon"></i> 
 					</a>
-					<a class="link" href="/cuddly/orders/cartList">
+					<a class="link" href="${pageContext.request.contextPath}/orders/cartList">
 						<i class="fa-solid fa-cart-shopping fa-2x headerIcon"></i>
 					</a>
 					
-					<a class="link" href="/cuddly/member/mypage"> 
+					<a class="link" href="${pageContext.request.contextPath}/member/mypage"> 
 						<i class="fa-solid fa-circle-user fa-2x headerIcon"></i>
 					</a>
 				</div>
@@ -207,24 +211,24 @@ $(document).ready(function() {
 	<nav>
 		<nav>
 			<ul class="menu left">
-				<li class="center"><a href="/cuddly/product/creator">크리에이터</a></li>
+				<li class="center"><a href="${pageContext.request.contextPath}/product/creator">크리에이터</a></li>
 				<li class="center">
-					<a href="/cuddly/product/list">전체상품</a>
+					<a href="${pageContext.request.contextPath}/product/list">전체상품</a>
 					<ul>
-						<li><a href="/cuddly/product/list?item=패션">패션</a></li>
-						<li><a href="/cuddly/product/list?item=문구/오피스">문구/오피스</a></li>
-						<li><a href="/cuddly/product/list?item=홈데코/리빙">홈데코/리빙</a></li>
-						<li><a href="/cuddly/product/list?item=폰악세서리">폰악세서리</a></li>
-						<li><a href="/cuddly/product/list?item=기타">기타</a></li>
+						<li><a href="${pageContext.request.contextPath}/product/list?item=패션">패션</a></li>
+						<li><a href="${pageContext.request.contextPath}/product/list?item=문구/오피스">문구/오피스</a></li>
+						<li><a href="${pageContext.request.contextPath}/product/list?item=홈데코/리빙">홈데코/리빙</a></li>
+						<li><a href="${pageContext.request.contextPath}/product/list?item=폰악세서리">폰악세서리</a></li>
+						<li><a href="${pageContext.request.contextPath}/product/list?item=기타">기타</a></li>
 					</ul>
 				</li>
-				<li class="center"><a href="/cuddly/review/list">리뷰</a></li>
-				<li class="center"><a href="/cuddly/faq/list">FAQ</a></li>
+				<li class="center"><a href="${pageContext.request.contextPath}/review/list">리뷰</a></li>
+				<li class="center"><a href="${pageContext.request.contextPath}/faq/list">FAQ</a></li>
 
 				<%-- 관리자인 경우 추가 메뉴 출력 --%>
 				<c:if test="${sessionScope.level == '관리자'}">
 					<li class="menu-right">
-						<a href="/cuddly/admin/product/list">관리자메뉴</a>
+						<a href="${pageContext.request.contextPath}/admin/product/list">관리자메뉴</a>
 					</li>
 				</c:if>
 			</ul>
@@ -246,17 +250,17 @@ $(document).ready(function() {
 				
 				<div class="row left">
 					<h3 class="ms-20">
-						<a href="/cuddly/admin/product/list" class="link">상품관리</a>
+						<a href="${pageContext.request.contextPath}/admin/product/list" class="link">상품관리</a>
 					</h3>
 				</div>
 				<div class="row left">
 					<h3 class="ms-20">
-						<a href="/cuddly/admin/qna/list" class="link">상품문의</a>
+						<a href="${pageContext.request.contextPath}/admin/qna/list" class="link">상품문의</a>
 					</h3>
 				</div>
 				<div class="row left">
 					<h3 class="ms-20">
-						<a href="/cuddly/admin/member/list" class="link">회원관리</a>
+						<a href="${pageContext.request.contextPath}/admin/member/list" class="link">회원관리</a>
 					</h3>
 				</div>
 				

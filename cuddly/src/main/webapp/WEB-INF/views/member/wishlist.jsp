@@ -9,12 +9,12 @@
 	</div>
 	
 	<c:forEach var="wishlistListDto" items="${wishlistList}">
-		<a class="link" href="/cuddly/product/detail?productNo=${wishlistListDto.productNo}">
+		<a class="link" href="${pageContext.request.contextPath}/product/detail?productNo=${wishlistListDto.productNo}">
 			<div class="inline-flex-container allow-wrap left">
 				<table class="mh-10 mb-20">
 					<tr>
 						<td>
-						<img src="/cuddly/admin/image?productNo=${wishlistListDto.productNo}"
+						<img src="${pageContext.request.contextPath}/image/product/main?productNo=${wishlistListDto.productNo}"
 							width="200" height="200" class="image image-round"></td>
 					</tr>
 <!-- 					<tr> -->

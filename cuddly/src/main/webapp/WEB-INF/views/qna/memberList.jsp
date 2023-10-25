@@ -26,7 +26,7 @@
 			console.log("확인")
 			
 			 $.ajax({
-                 url: "/cuddly/rest/qna/change",
+                 url: window.contextPath+"/rest/qna/change",
                  method: "post",
                  data: realForm.serialize(),
                  success: function (response) {
@@ -68,8 +68,8 @@
  		<div class="flex-container">
  		
 			<div class="col-3">
-				<a href="/cuddly/product/detail?productNo=${qnaDto.productNo}">
-					<img src="/cuddly/image/product/main?productNo=${qnaDto.productNo}" 
+				<a href="${pageContext.request.contextPath}/product/detail?productNo=${qnaDto.productNo}">
+					<img src="${pageContext.request.contextPath}/image/product/main?productNo=${qnaDto.productNo}" 
 							width="150" height="150" class="image image-round mv-20">
 				</a>
 			</div>
@@ -96,7 +96,7 @@
 		<br>
 		<div class="row right link">
 			<button class="qna-write btn btn-positive btn-small">수정하기</button>
-			<a href="/cuddly/qna/delete?qnaNo=${qnaDto.qnaNo}"
+			<a href="${pageContext.request.contextPath}/qna/delete?qnaNo=${qnaDto.qnaNo}"
 					class="btn btn-negative btn-small me-10">삭제하기</a>
 		</div>
 	

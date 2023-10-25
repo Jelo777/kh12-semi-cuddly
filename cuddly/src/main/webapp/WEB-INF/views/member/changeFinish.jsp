@@ -7,10 +7,10 @@
 			<h2 class="mv-50">변경 완료!</h2>
 		</div>
 	<div class="row">
-		<a href="/cuddly"><button class="btn btn-positive w-100">메인페이지</button></a>
+		<a href="${pageContext.request.contextPath}/"><button class="btn btn-positive w-100">메인페이지</button></a>
 	</div>
 	<div class="row">
-		<a href="/cuddly/member/mypage"><button class="btn btn-positive w-100">마이페이지</button></a>
+		<a href="${pageContext.request.contextPath}/member/mypage"><button class="btn btn-positive w-100">마이페이지</button></a>
 	</div>
 	</div>
 

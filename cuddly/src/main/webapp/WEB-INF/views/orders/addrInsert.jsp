@@ -2,8 +2,8 @@
     pageEncoding="UTF-8"%>
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
  
- <script src="/js/address.js"></script>
- <script src="/js/addressOrdersInsert.js"></script>
+ <script src="${pageContext.request.contextPath}/js/address.js"></script>
+ <script src="${pageContext.request.contextPath}/js/addressOrdersInsert.js"></script>
  
  <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
  

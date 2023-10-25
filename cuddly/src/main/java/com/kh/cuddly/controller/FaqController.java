@@ -21,7 +21,7 @@ import com.kh.cuddly.error.NoTargetException;
 
 
 @Controller
-@RequestMapping("/cuddly/faq")
+@RequestMapping("/faq")
 public class FaqController {
 	
 	@Autowired

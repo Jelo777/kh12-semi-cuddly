@@ -14,7 +14,7 @@ import com.kh.cuddly.dao.ProductDao;
 import com.kh.cuddly.dto.CreatorDto;
 import com.kh.cuddly.dto.ProductListDto;
 
-@RequestMapping("/cuddly")
+@RequestMapping("/")
 @Controller
 public class HomeController {
 	
