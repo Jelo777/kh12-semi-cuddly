@@ -84,7 +84,7 @@
 				<span class="ms-10">가격 : <label class="price">${productDto.productPrice}원</label></span>
 			</div>		
 			<div class="right mt-40 me-10">
-				<h1>
+				<h1> 
 					<span class="star-rating">
     					<c:forEach var="i" begin="1" end="${reviewDto.reviewGrade}">
     						<i class="star fas fa-star yellow fa-2x" data-rating="${i}"></i>
