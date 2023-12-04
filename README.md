@@ -22,7 +22,7 @@
 
 
 ### 역할 및 담당
-- <a href="https://github.com/Jelo777">진서영</a>
+- <a href="https://github.com/Jelo777">김준희</a>
 	- 조장, 깃저장소
 	- UI 피그마 디자인 및 총괄
 	- 상품리스트(정렬, 검색기능)
