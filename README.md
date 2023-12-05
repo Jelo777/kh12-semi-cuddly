@@ -5,6 +5,7 @@
 - `한줄 소개`: 크리에이터 굿즈 쇼핑몰
 - `팀원`: 김준희, 곽선미, 박진희, 유다은, 위재민
 - `배포 링크`: https://www.sysout.co.kr/cuddly
+- `발표 자료`: [프레젠테이션.pptx](https://1drv.ms/p/s!Au5dXjT2Y21etGjY1RcCF9IaxAg7)
 - `테스트 계정`
 	- 관리자: adminuser1 / Adminuser1!
 	- 골드: testuser1 / Testuser1!
